@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../redux/reducer';
-import { Control, createControl } from '../../../redux/contorlSlice';
+import { Control, createControl } from '../ControlSlice';
 import produce from 'immer';
 
 export function NewControl() {

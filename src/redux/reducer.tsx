@@ -1,4 +1,4 @@
-import courseReducer from './contorlSlice'
+import courseReducer from '../pages/Controls/ControlSlice'
 import { combineReducers } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
