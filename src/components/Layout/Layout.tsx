@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Layout, Menu } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
-import { Route, Switch, Link, Redirect } from "react-router-dom";
-import InsightsPage from "../../pages/Insights/InsightsPage";
-import { ControlsPage } from "../../pages/Controls/ControlsPage";
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import { Routes } from "./Routes";
 
@@ -21,7 +19,6 @@ export function PageLayout() {
     const homePage = '/insights';
     const currentPath = window.location.pathname;
     let defaultSelectedKey = currentPath.length < 1 ? homePage : currentPath;
-    const [selectedNavItem, setSelectedNavItem] = useState(defaultSelectedKey)
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
