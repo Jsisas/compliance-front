@@ -3,7 +3,7 @@ import { Layout, Menu } from 'antd'
 import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import { Routes } from "./Routes";
+import { Routes } from "../../pages/Routes";
 
 const { Content, Footer, Sider } = Layout;
 

@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { AssigneeSearch } from '../../components/AssigneeSearch/AssigneeSearch';
-import { Typography, Table, Button } from 'antd';
+import { Typography, Table, Button, Row, Col } from 'antd';
 import { RootState } from '../../redux/reducer';
 import { selectAllControls } from '../../redux/Control/ControlSlice';
 import { fetchAllControls } from '../../redux/Control/ControlService';
 import { PlusOutlined } from '@ant-design/icons';
 import { ColumnProps } from 'antd/lib/table';
+import { Link } from 'react-router-dom';
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 
 export function ControlsPage() {
     const controls = useSelector((state: RootState) => selectAllControls(state));
@@ -58,10 +59,27 @@ export function ControlsPage() {
 
     return (
         <>
-            <h1>Controls Page</h1>
-            <Text type="secondary">Assignees</Text>
-            <AssigneeSearch />
-            <Table dataSource={controls} columns={columns} rowKey="id" />
+            <Row gutter={[16, 16]}>
+                <Col xs={{ span: 24 }} lg={{ span: 24 }}>
+                    <Title>Controls Page</Title>
+                </Col>
+            </Row>
+            <Row gutter={[16, 32]} justify={"space-between"} align={"bottom"}>
+                <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                    <Text type="secondary">Assignees</Text>
+                    <AssigneeSearch />
+                </Col>
+                <Col xs={{ span: 12 }} lg={{ span: 2 }}>
+                    <Link to="/controls/new"><Button type={'primary'} style={{ float: "right" }}>Add Control</Button></Link>
+                </Col>
+            </Row>
+            <Row>
+                <Col xs={{ span: 24 }} lg={{ span: 24 }}>
+                    <Table dataSource={controls} columns={columns} rowKey="id" scroll={{ x: 240 }} />
+                </Col>
+            </Row>
+
+
         </>
     );
 }
