@@ -32,8 +32,8 @@ export function AssigneeSearch() {
                 notFoundContent={false ? <Spin size="small" /> : null}
                 filterOption={false}
                 style={{ width: '100%' }}
-                onSelect={(value, option) => {
-                    onSelect(value, option)
+                onSelect={(value) => {
+                    onSelect(value)
                 }
                 }
                 value={selectedUsers.map(user => { return user.id })}
