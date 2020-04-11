@@ -1,0 +1,78 @@
+{
+    "source": "mockoon:1.7.0",
+    "data": [
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 9,
+                "name": "Alfred App API",
+                "endpointPrefix": "api",
+                "latency": 0,
+                "port": 8080,
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "Get all users",
+                        "method": "get",
+                        "endpoint": "users",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "[\n  {\n    \"id\": 1,\n    \"fname\": \"John\",\n    \"lname\": \"Snow\"\n  },\n  {\n    \"id\": 2,\n    \"fname\": \"Daenerys\",\n    \"lname\": \"Targaryen\"\n  }\n]",
+                                "latency": 50,
+                                "statusCode": "200",
+                                "label": "Success",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "Get all users",
+                        "method": "get",
+                        "endpoint": "controls",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "[\n  {\n    \"id\": 1,\n    \"title\": \"John\",\n    \"category\": \"POLICY\",\n    \"status\": \"IMPLEMENTED\",\n    \"tasks\": []\n  },\n  {\n    \"id\": 2,\n    \"title\": \"Daenerys\",\n    \"category\": \"PROCEDURE\",\n    \"status\": \"NOT_IMPLEMENTED\",\n    \"tasks\": []\n  }\n]",
+                                "latency": 50,
+                                "statusCode": "200",
+                                "label": "Success",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": []
+                            }
+                        ],
+                        "enabled": true
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "http://localhost:3000",
+                "https": false,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            }
+        }
+    ]
+}
