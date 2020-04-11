@@ -1,16 +1,13 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../redux/reducer';
-import { Control, createControl, selectAllControls } from '../../../redux/Control/ControlSlice';
+import { Control, createControl, selectAllControls, ControlCategory } from '../../../redux/Control/ControlSlice';
 import produce from 'immer';
 
 export function NewControl() {
     const controls = useSelector((state: RootState) => selectAllControls(state));
     const dispatch = useDispatch();
-    const [newControl, setNewContorl] = useState<Control>({
-        id: -1,
-        title: ""
-    });
+    const [newControl, setNewContorl] = useState<Control>({} as Control);
 
     const handleCreateNewContorl = (e: FormEvent<HTMLButtonElement>): void => {
         e.preventDefault();
