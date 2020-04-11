@@ -11,8 +11,6 @@ const { Text } = Typography;
 export function ControlsPage() {
     const controls = useSelector((state: RootState) => selectAllControls(state));
 
-    console.log(controls)
-
     return (
         <>
             <h1>Controls Page</h1>

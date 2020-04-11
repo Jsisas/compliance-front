@@ -14,11 +14,8 @@ export function AssigneeSearch() {
 
     useEffect(() => { dispatch(fetchAllUsers()) }, [dispatch])
 
-    function onSelect(value: number, option?: any) {
+    function onSelect(value: number) {
         const user = allUsers.find(user => user.id === value);
-        console.log(value)
-        console.log(allUsers)
-        console.log(user)
         if (user) {
             setSelectedUsers([...selectedUsers, user])
         }
