@@ -1,11 +1,11 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../redux/reducer';
-import { Control, createControl } from '../ControlSlice';
+import { Control, createControl, selectAllControls } from '../../../redux/Control/ControlSlice';
 import produce from 'immer';
 
 export function NewControl() {
-    const controls = useSelector((state: RootState) => state.course);
+    const controls = useSelector((state: RootState) => selectAllControls(state));
     const dispatch = useDispatch();
     const [newControl, setNewContorl] = useState<Control>({
         id: -1,
@@ -18,7 +18,7 @@ export function NewControl() {
         if (!newControl.title.length) return;
 
         const controlWithId = produce(newControl, (draft: Control) => {
-            let id = Math.max(...controls.map(o => o.id), 0);
+            let id = Math.max(...controls.map((o: Control) => o.id), 0);
             if (id < 1) {
                 id = 1;
             }

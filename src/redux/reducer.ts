@@ -1,8 +1,10 @@
-import courseReducer from '../pages/Controls/ControlSlice'
+import controlReducer from './Control/ControlSlice'
+import userReducer from './User/UserSlice'
 import { combineReducers } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
-    course: courseReducer,
+    user: userReducer,
+    control: controlReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
