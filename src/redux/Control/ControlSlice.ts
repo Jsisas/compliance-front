@@ -27,7 +27,7 @@ const controlsAdapter = createEntityAdapter<Control>({
 });
 
 const controlInitialState: EntityState<Control> = controlsAdapter.getInitialState();
-const controlSelectors = controlsAdapter.getSelectors((state: RootState) => state.control)
+const controlSelectors = controlsAdapter.getSelectors((state: RootState) => state.control.entities)
 
 export const selectAllControls = controlSelectors.selectAll;
 export const selectControlById = controlSelectors.selectById;
@@ -39,21 +39,22 @@ export const deleteOneControl = (controlId: number, state: EntityState<Control>)
 
 const ControlSlice = createSlice({
     name: 'control',
-    initialState: controlInitialState,
+    initialState: { entities: controlInitialState, loading: true },
     reducers: {
         createControl(state, { payload }: PayloadAction<Control>) {
-            createOneControl(payload, state);
+            createOneControl(payload, state.entities);
         },
         editControl(state, { payload }: PayloadAction<Control>) {
-            updateOneControl(payload, state)
+            updateOneControl(payload, state.entities)
         },
         deleteControl(state, { payload }: PayloadAction<Control>) {
-            deleteOneControl(payload.id, state)
+            deleteOneControl(payload.id, state.entities)
         },
     },
     extraReducers: builder => {
         builder.addCase(fetchAllControls.fulfilled, (state, action) => {
-            controlsAdapter.setAll(state, action.payload);
+            state.loading = false;
+            controlsAdapter.setAll(state.entities, action.payload);
         })
     }
 })

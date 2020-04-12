@@ -14,6 +14,8 @@ const { Text, Title } = Typography;
 
 export function ControlsPage() {
     const controls = useSelector((state: RootState) => selectAllControls(state));
+    const isControlsLoading = useSelector((state: RootState) => state.control.loading)
+
     const dispatch = useDispatch();
     useEffect(() => { dispatch(fetchAllControls()) }, [dispatch])
     let columns: ColumnProps<any>[] = [];
@@ -75,7 +77,7 @@ export function ControlsPage() {
             </Row>
             <Row>
                 <Col xs={{ span: 24 }} lg={{ span: 24 }}>
-                    <Table dataSource={controls} columns={columns} rowKey="id" scroll={{ x: 240 }} />
+                    <Table dataSource={controls} columns={columns} rowKey="id" scroll={{ x: 240 }} loading={isControlsLoading} />
                 </Col>
             </Row>
 

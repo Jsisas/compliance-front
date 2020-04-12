@@ -40,16 +40,16 @@ export function NewControlPage() {
     return (
         <>
             <Row gutter={[16, 16]} align={"middle"}>
-                <Col xs={{ span: 1 }} lg={{ span: 1 }} >
+                <Col xs={2} xl={1} >
                     <Link to="/controls"><LeftOutlined style={{ fontSize: '24px', float: 'right' }} /></Link>
                 </Col>
-                <Col xs={{ span: 23 }} lg={{ span: 6 }}>
-                    <Title style={{ marginBottom: 0 }}>Controls Page</Title>
+                <Col xs={20} xl={20}>
+                    <Title style={{ marginBottom: 0 }}>Add Control</Title>
                 </Col>
             </Row>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Row gutter={[16, 16]}>
-                    <Col xs={{ span: 24 }} lg={{ span: 8, offset: 1 }}>
+                    <Col xs={{ span: 23, offset: 1 }} lg={{ span: 8, offset: 1 }}>
                         <Text type={"secondary"}>Title</Text>
                         <Controller
                             as={Input}
@@ -61,7 +61,7 @@ export function NewControlPage() {
                 </Row>
 
                 <Row gutter={[16, 16]}>
-                    <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+                    <Col xs={{ span: 23, offset: 1 }} lg={{ span: 8, offset: 1 }}>
                         <Text type={"secondary"}>Description</Text>
                         <Controller
                             as={TextArea}
@@ -73,7 +73,7 @@ export function NewControlPage() {
                 </Row>
 
                 <Row gutter={[16, 16]}>
-                    <Col xs={{ span: 24 }} lg={{ span: 4 }}>
+                    <Col xs={{ span: 23, offset: 1 }} lg={{ span: 3, offset: 1 }}>
                         <Text type={"secondary"} style={{ display: 'block' }}>Start date</Text>
                         <Controller
                             as={DatePicker}
@@ -82,7 +82,7 @@ export function NewControlPage() {
                             defaultValue={false}
                         />
                     </Col>
-                    <Col xs={{ span: 24 }} lg={{ span: 4 }}>
+                    <Col xs={{ span: 24, offset: 1 }} sm={{ span: 4 }} lg={{ span: 5 }} >
                         <Text type={"secondary"} style={{ display: 'block' }}>Category</Text>
                         <Controller
                             as={Radio.Group}
@@ -95,7 +95,16 @@ export function NewControlPage() {
                     </Col>
                 </Row>
 
-                <Button type={"primary"}>Submit</Button>
+                <Row gutter={[16, 16]}>
+                    <Col xs={{ span: 8, offset: 1 }} sm={{ span: 4 }} md={{ span: 3, offset: 1 }} lg={{ span: 2, offset: 1 }}>
+                        <Button type={"primary"}>Submit</Button>
+                    </Col>
+                    <Col xs={{ span: 8 }} sm={{ span: 4 }} md={{ span: 3 }} lg={{ span: 2 }}>
+                        <Link to="/controls"><Button>Discard</Button></Link>
+                    </Col>
+                </Row>
+
+
             </form>
         </>
     )

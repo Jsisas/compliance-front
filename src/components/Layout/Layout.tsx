@@ -41,12 +41,11 @@ export function PageLayout() {
                 </Menu>
             </Sider>
             <Layout style={{ background: "#fff" }}>
-                <Content style={{ margin: '24px 16px 0', background: "#fff" }}>
+                <Content style={{ background: "#fff" }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                         <Routes></Routes>
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center', background: "#fff" }}>Ant Design ©2018 Created by Ant UED</Footer>
             </Layout>
         </Layout>
     )
