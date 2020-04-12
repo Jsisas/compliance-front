@@ -46,7 +46,7 @@ export function NewControlPage() {
             </Row>
 
             <Row gutter={[16, 16]} align={"middle"}>
-                <Col xs={2} xl={{ span: 8, offset: 1 }} >
+                <Col xl={{ span: 14, offset: 1 }} md={{ span: 18, offset: 1 }} sm={{ span: 24, offset: 1 }} xs={{ span: 24, offset: 1 }} >
                     <Form layout="vertical" onFinish={onFinish}>
                         <Form.Item
                             name="title"
@@ -69,7 +69,7 @@ export function NewControlPage() {
 
 
                         <Row gutter={[16, 16]} align={"middle"}>
-                            <Col xs={2} xl={{ span: 8 }} >
+                            <Col lg={{ span: 8 }} md={{ span: 8 }} sm={{ span: 8 }} xs={{ span: 24 }} >
                                 <Form.Item
                                     label="Start date"
                                     name="isoStartDate"
@@ -78,7 +78,7 @@ export function NewControlPage() {
                                     <DatePicker />
                                 </Form.Item>
                             </Col>
-                            <Col xs={2} xl={{ span: 12 }} >
+                            <Col lg={{ span: 16 }} md={{ span: 16 }} sm={{ span: 16 }} xs={{ span: 24 }} >
                                 <Form.Item
                                     label="Category"
                                     name="category"
