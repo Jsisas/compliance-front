@@ -20,8 +20,10 @@ export interface Control {
     category: ControlCategory,
     isoStartDate: string,
     status: ControlStatus,
-    tasks: Task[];
     assignees: User[];
+    connections: {
+        tasks: Task[];
+    }
 }
 
 const controlsAdapter = createEntityAdapter<Control>({
