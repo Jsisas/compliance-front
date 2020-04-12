@@ -2,6 +2,7 @@ import { RootState } from '../reducer';
 import { createSlice, PayloadAction, createEntityAdapter, EntityState } from "@reduxjs/toolkit";
 import { fetchAllControls } from './ControlService';
 import { Task } from '../Task/TaskSlice';
+import { User } from '../User/UserSlice';
 
 export enum ControlStatus {
     NOT_IMPLEMENTED,
@@ -20,6 +21,7 @@ export interface Control {
     isoStartDate: string,
     status: ControlStatus,
     tasks: Task[];
+    assignees: User[];
 }
 
 const controlsAdapter = createEntityAdapter<Control>({

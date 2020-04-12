@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import { Routes } from "../../pages/Routes";
 
-const { Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 const Logo = styled.div`
     display: flex;

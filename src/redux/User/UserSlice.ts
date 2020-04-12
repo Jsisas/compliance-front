@@ -1,7 +1,7 @@
+import { createEntityAdapter, createSlice, EntityState, PayloadAction } from '@reduxjs/toolkit';
+
 import { RootState } from '../reducer';
-import { createSlice, PayloadAction, createEntityAdapter, EntityState } from "@reduxjs/toolkit";
 import { fetchAllUsers } from './UserService';
-import { Task } from '../Task/TaskSlice';
 
 export enum UserStatus {
     NOT_IMPLEMENTED,

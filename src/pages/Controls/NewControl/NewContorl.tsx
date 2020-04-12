@@ -1,15 +1,14 @@
 import { LeftOutlined } from '@ant-design/icons';
 import { Button, Col, DatePicker, Form, Input, Radio, Row, Typography } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import produce from 'immer';
-import React, { useState } from 'react';
+import { Moment } from 'moment';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { UserSearch } from '../../../components/AssigneeSearch/AssigneeSearch';
-import { Control, ControlCategory, selectAllControls, createControl } from '../../../redux/Control/ControlSlice';
+import { Control, ControlCategory, createControl, selectAllControls } from '../../../redux/Control/ControlSlice';
 import { RootState } from '../../../redux/reducer';
-import { Moment } from 'moment';
 
 const { Title } = Typography;
 
