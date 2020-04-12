@@ -18,7 +18,7 @@ export interface Control {
     id: number,
     title: string,
     category: ControlCategory,
-    isoStartDate: string,
+    startDate: string,
     status: ControlStatus,
     assignees: User[];
     connections: {

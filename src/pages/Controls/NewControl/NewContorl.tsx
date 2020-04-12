@@ -1,5 +1,5 @@
 import { LeftOutlined } from '@ant-design/icons';
-import { Button, Col, DatePicker, Form, Input, Radio, Row, Typography } from 'antd';
+import { Button, Col, DatePicker, Form, Input, Radio, Row, Typography, notification } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { Moment } from 'moment';
 import React from 'react';
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { UserSearch } from '../../../components/AssigneeSearch/AssigneeSearch';
 import { Control, ControlCategory, createControl, selectAllControls } from '../../../redux/Control/ControlSlice';
 import { RootState } from '../../../redux/reducer';
+import { notifySucess } from '../../../util/NotificationUtil';
 
 const { Title } = Typography;
 
@@ -17,10 +18,11 @@ export function NewControlPage() {
     const dispatch = useDispatch();
 
     function handleCreateNewControl(data: Control): void {
-        data.isoStartDate = (data.isoStartDate as unknown as Moment).toISOString()
+        data.startDate = (data.startDate as unknown as Moment).toISOString()
         data.id = getControlId();
         console.log(data);
         dispatch(createControl(data));
+        notifySucess("Add Control", "Adding a control was successful!")
     }
 
     function getControlId(): number {
@@ -72,7 +74,7 @@ export function NewControlPage() {
                             <Col lg={{ span: 8 }} md={{ span: 8 }} sm={{ span: 8 }} xs={{ span: 24 }} >
                                 <Form.Item
                                     label="Start date"
-                                    name="isoStartDate"
+                                    name="startDate"
                                     rules={[{ required: true, message: 'Please add start date!' }]}
                                 >
                                     <DatePicker />
