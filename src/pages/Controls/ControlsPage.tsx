@@ -63,21 +63,21 @@ export function ControlsPage() {
     return (
         <>
             <Row gutter={[16, 16]}>
-                <Col xs={{ span: 24 }} lg={{ span: 24 }}>
+                <Col xs={24} lg={24}>
                     <Title>Controls Page</Title>
                 </Col>
             </Row>
             <Row gutter={[16, 32]} justify={"space-between"} align={"bottom"}>
-                <Col xs={{ span: 12 }} sm={8} lg={{ span: 6 }}>
+                <Col xs={12} sm={8} lg={6}>
                     <Text type="secondary">Assignees</Text>
                     <UserSearch />
                 </Col>
-                <Col xs={{ span: 12 }} sm={6} md={6} lg={{ span: 4 }}>
+                <Col xs={12} sm={12} md={6} lg={4} xl={3} xxl={2}>
                     <Link to="/controls/new"><Button type={'primary'} style={{ width: '100%' }}>Add Control</Button></Link>
                 </Col>
             </Row>
             <Row>
-                <Col xs={{ span: 24 }} lg={{ span: 24 }}>
+                <Col xs={24} lg={24}>
                     <Table dataSource={controls} columns={columns} rowKey="id" scroll={{ x: 240 }} loading={isControlsLoading} />
                 </Col>
             </Row>
