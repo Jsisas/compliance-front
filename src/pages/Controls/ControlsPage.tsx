@@ -9,6 +9,7 @@ import { fetchAllControls } from '../../redux/Control/ControlService';
 import { PlusOutlined } from '@ant-design/icons';
 import { ColumnProps } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
+import { lowerCameltoUpperCamel } from '../../util/StringUtil';
 
 const { Text, Title } = Typography;
 
@@ -28,7 +29,7 @@ export function ControlsPage() {
         Object.keys(controls[0]).forEach(function (key, i) {
             if (key === 'tasks') {
                 columns.push({
-                    title: key,
+                    title: lowerCameltoUpperCamel(key),
                     dataIndex: key,
                     key: key,
                     render: (text: any, record: any) => {
@@ -50,7 +51,7 @@ export function ControlsPage() {
                 });
             } else if (key !== 'id' && key !== 'assignee') {
                 columns.push({
-                    title: key,
+                    title: lowerCameltoUpperCamel(key),
                     dataIndex: key,
                     key: key,
                 });
