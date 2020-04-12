@@ -40,7 +40,7 @@ export function PageLayout() {
                     </Menu.Item>
                 </Menu>
             </Sider>
-            <Layout style={{ background: "#fff" }}>
+            <Layout style={{ background: "#fff", minWidth: '340px' }}>
                 <Content style={{ background: "#fff" }}>
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                         <Routes></Routes>

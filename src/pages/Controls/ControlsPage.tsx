@@ -68,12 +68,12 @@ export function ControlsPage() {
                 </Col>
             </Row>
             <Row gutter={[16, 32]} justify={"space-between"} align={"bottom"}>
-                <Col xs={{ span: 12 }} lg={{ span: 6 }}>
+                <Col xs={{ span: 12 }} sm={8} lg={{ span: 6 }}>
                     <Text type="secondary">Assignees</Text>
                     <UserSearch />
                 </Col>
-                <Col xs={{ span: 12 }} lg={{ span: 2 }}>
-                    <Link to="/controls/new"><Button type={'primary'}>Add Control</Button></Link>
+                <Col xs={{ span: 12 }} sm={6} md={6} lg={{ span: 4 }}>
+                    <Link to="/controls/new"><Button type={'primary'} style={{ width: '100%' }}>Add Control</Button></Link>
                 </Col>
             </Row>
             <Row>
