@@ -4,7 +4,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import { Moment } from 'moment';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { UserSearch } from '../../../components/AssigneeSearch/AssigneeSearch';
 import { Control, ControlCategory, createControl, selectAllControls } from '../../../redux/Control/ControlSlice';
@@ -16,6 +16,7 @@ const { Title } = Typography;
 export function NewControlPage() {
     const controls = useSelector((state: RootState) => selectAllControls(state));
     const dispatch = useDispatch();
+    const routeHistory = useHistory();
 
     function handleCreateNewControl(data: Control): void {
         data.startDate = (data.startDate as unknown as Moment).toISOString()
@@ -23,6 +24,7 @@ export function NewControlPage() {
         console.log(data);
         dispatch(createControl(data));
         notifySucess("Add Control", "Adding a control was successful!")
+        routeHistory.push("/controls")
     }
 
     function getControlId(): number {
