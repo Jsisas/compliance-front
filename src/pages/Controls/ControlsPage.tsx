@@ -73,7 +73,7 @@ export function ControlsPage() {
                     <UserSearch />
                 </Col>
                 <Col xs={{ span: 12 }} lg={{ span: 2 }}>
-                    <Link to="/controls/new"><Button type={'primary'} style={{ float: "right" }}>Add Control</Button></Link>
+                    <Link to="/controls/new"><Button type={'primary'}>Add Control</Button></Link>
                 </Col>
             </Row>
             <Row>
