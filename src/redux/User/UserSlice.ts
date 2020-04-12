@@ -1,11 +1,22 @@
 import { RootState } from '../reducer';
 import { createSlice, PayloadAction, createEntityAdapter, EntityState } from "@reduxjs/toolkit";
 import { fetchAllUsers } from './UserService';
+import { Task } from '../Task/TaskSlice';
+
+export enum UserStatus {
+    NOT_IMPLEMENTED,
+    IMPLEMENTED
+}
+
+export enum UserCategory {
+    POLICY,
+    PROCEDURE
+}
 
 export interface User {
     id: number,
     fname: string,
-    lname: string,
+    lname: string
 }
 
 const usersAdapter = createEntityAdapter<User>({
@@ -14,7 +25,7 @@ const usersAdapter = createEntityAdapter<User>({
 });
 
 const userInitialState: EntityState<User> = usersAdapter.getInitialState();
-const userSelectors = usersAdapter.getSelectors((state: RootState) => state.user)
+const userSelectors = usersAdapter.getSelectors((state: RootState) => state.user.entities)
 
 export const selectAllUsers = userSelectors.selectAll;
 export const selectUserById = userSelectors.selectById;
@@ -26,21 +37,22 @@ export const deleteOneUser = (userId: number, state: EntityState<User>) => users
 
 const UserSlice = createSlice({
     name: 'user',
-    initialState: userInitialState,
+    initialState: { entities: userInitialState, loading: false },
     reducers: {
         createUser(state, { payload }: PayloadAction<User>) {
-            createOneUser(payload, state);
+            usersAdapter.addOne(state.entities, payload)
         },
         editUser(state, { payload }: PayloadAction<User>) {
-            updateOneUser(payload, state)
+            updateOneUser(payload, state.entities)
         },
         deleteUser(state, { payload }: PayloadAction<User>) {
-            deleteOneUser(payload.id, state)
+            deleteOneUser(payload.id, state.entities)
         },
     },
     extraReducers: builder => {
         builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
-            usersAdapter.setAll(state, action.payload);
+            state.loading = false;
+            usersAdapter.setAll(state.entities, action.payload);
         })
     }
 })

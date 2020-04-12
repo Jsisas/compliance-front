@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { AssigneeSearch } from '../../components/AssigneeSearch/AssigneeSearch';
+import { UserSearch } from '../../components/AssigneeSearch/AssigneeSearch';
 import { Typography, Table, Button, Row, Col } from 'antd';
 import { RootState } from '../../redux/reducer';
 import { selectAllControls } from '../../redux/Control/ControlSlice';
@@ -48,7 +48,7 @@ export function ControlsPage() {
                         }
                     }
                 });
-            } else if (key !== 'id') {
+            } else if (key !== 'id' && key !== 'assignee') {
                 columns.push({
                     title: key,
                     dataIndex: key,
@@ -69,7 +69,7 @@ export function ControlsPage() {
             <Row gutter={[16, 32]} justify={"space-between"} align={"bottom"}>
                 <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                     <Text type="secondary">Assignees</Text>
-                    <AssigneeSearch />
+                    <UserSearch />
                 </Col>
                 <Col xs={{ span: 12 }} lg={{ span: 2 }}>
                     <Link to="/controls/new"><Button type={'primary'} style={{ float: "right" }}>Add Control</Button></Link>

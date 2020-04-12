@@ -17,6 +17,7 @@ export interface Control {
     id: number,
     title: string,
     category: ControlCategory,
+    isoStartDate: string,
     status: ControlStatus,
     tasks: Task[];
 }
@@ -39,10 +40,10 @@ export const deleteOneControl = (controlId: number, state: EntityState<Control>)
 
 const ControlSlice = createSlice({
     name: 'control',
-    initialState: { entities: controlInitialState, loading: true },
+    initialState: { entities: controlInitialState, loading: false },
     reducers: {
         createControl(state, { payload }: PayloadAction<Control>) {
-            createOneControl(payload, state.entities);
+            controlsAdapter.addOne(state.entities, payload)
         },
         editControl(state, { payload }: PayloadAction<Control>) {
             updateOneControl(payload, state.entities)
