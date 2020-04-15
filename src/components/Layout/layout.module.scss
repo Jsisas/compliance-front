@@ -1,0 +1,16 @@
+@import "./../../theme.scss";
+
+.extraExtraLightGrey {
+  background: $extra-extra-light-grey;
+}
+
+.white {
+  background: $white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+}

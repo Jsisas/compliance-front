@@ -96,8 +96,9 @@ export function ControlsPage() {
             dataSource={controls}
             columns={columns}
             rowKey="id"
-            scroll={{ x: 240 }}
+            scroll={controls.length < 1 ? { x: undefined } : { x: 340 }}
             loading={isControlsLoading}
+            style={{ width: "100%" }}
           />
         </Col>
       </Row>
