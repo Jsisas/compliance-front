@@ -18,7 +18,9 @@ export function PageLayout() {
 
     const homePage = '/insights';
     const currentPath = window.location.pathname;
-    let defaultSelectedKey = currentPath.length < 1 ? homePage : currentPath;
+    let defaultSelectedKey = currentPath.length < 2 ? homePage : currentPath;
+
+    console.log(defaultSelectedKey);
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
