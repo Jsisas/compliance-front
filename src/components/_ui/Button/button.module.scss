@@ -1,0 +1,32 @@
+@import "./../../../theme.scss";
+
+.primary {
+  border-radius: 4px;
+  border-color: unset;
+  background: $success-color;
+
+  &:hover {
+    background: $success-color-hover;
+    border-color: unset;
+  }
+}
+
+.primary-disabled {
+  background: $success-color;
+}
+
+.secondary {
+  border-radius: 4px;
+  background: $white;
+  border: 1px solid $light-grey;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  color: $text-color;
+
+  &:hover {
+    color: $text-color;
+    border-color: $dark-grey;
+    background: $white;
+  }
+}
