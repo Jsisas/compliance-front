@@ -19,29 +19,29 @@ export interface Requirement {
 }
 
 const requirementAdapter = createEntityAdapter<Requirement>({
-    selectId: control => control.id,
+    selectId: requirement => requirement.id,
     sortComparer: (a, b) => {
         return a.name.localeCompare(b.name)
     }
 });
 
-const controlInitialState: EntityState<Requirement> = requirementAdapter.getInitialState();
+const requirementInitialState: EntityState<Requirement> = requirementAdapter.getInitialState();
 const requirementSelector = requirementAdapter.getSelectors((state: RootState) => state.requirement.entities)
 
 export const selectAllRequirements = requirementSelector.selectAll;
 export const selectRequirementById = requirementSelector.selectById;
 export const setRequirements = (requirement: Requirement[], state: EntityState<Requirement>) => requirementAdapter.setAll(state, requirement);
-export const createOneRequirement = (control: Requirement, state: EntityState<Requirement>) => requirementAdapter.addOne(state, control);
-export const updateOneRequirement = (control: Requirement, state: EntityState<Requirement>) => requirementAdapter.updateOne(state, {
-    id: control.id,
-    changes: control
+export const createOneRequirement = (requirement: Requirement, state: EntityState<Requirement>) => requirementAdapter.addOne(state, requirement);
+export const updateOneRequirement = (requirement: Requirement, state: EntityState<Requirement>) => requirementAdapter.updateOne(state, {
+    id: requirement.id,
+    changes: requirement
 });
-export const deleteOneRequirement = (controlId: number, state: EntityState<Requirement>) => requirementAdapter.removeOne(state, controlId);
+export const deleteOneRequirement = (requirementId: number, state: EntityState<Requirement>) => requirementAdapter.removeOne(state, requirementId);
 
 
 const RequirementSlice = createSlice({
-    name: 'control',
-    initialState: {entities: controlInitialState, loading: false},
+    name: 'requirement',
+    initialState: {entities: requirementInitialState, loading: false},
     reducers: {
         createRequirement(state, {payload}: PayloadAction<Requirement>) {
             requirementAdapter.addOne(state.entities, payload)

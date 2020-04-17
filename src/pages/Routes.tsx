@@ -1,6 +1,6 @@
 import { Switch, Redirect, Route } from "react-router-dom";
 import React from "react";
-import { NewControlPage } from "./Controls/NewControl/NewContorl";
+import { NewControlPage } from "./Controls/NewControl/NewControl";
 import RegulationsPage from "./Regulations/RegulationsPage";
 import { ControlsPage } from "./Controls/ControlsPage";
 import {RequirementsPage} from "./Regulations/Requirements/RequirementsPage";

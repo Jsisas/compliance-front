@@ -4,27 +4,27 @@ import {fetchRegulationRequirements} from './RegulationRequirementService';
 import {Requirement} from "../Requirement/RequirementSlice";
 
 const regulationAdapter = createEntityAdapter<Requirement>({
-    selectId: control => control.id,
+    selectId: regulationRequirement => regulationRequirement.id,
     sortComparer: (a, b) => {
         console.log(a)
         return a.name.localeCompare(b.name)
     }
 });
 
-const controlInitialState: EntityState<Requirement> = regulationAdapter.getInitialState();
-const controlSelectors = regulationAdapter.getSelectors((state: RootState) => state.regulationRequirements.entities)
+const regulationRequirementInitialState: EntityState<Requirement> = regulationAdapter.getInitialState();
+const regulationRequirementSelectors = regulationAdapter.getSelectors((state: RootState) => state.regulationRequirements.entities)
 
-export const selectAllRegulationRequirements = controlSelectors.selectAll;
-export const updateOneRegulation = (control: Requirement, state: EntityState<Requirement>) => regulationAdapter.updateOne(state, {
-    id: control.id,
-    changes: control
+export const selectAllRegulationRequirements = regulationRequirementSelectors.selectAll;
+export const updateOneRegulation = (regulationRequirement: Requirement, state: EntityState<Requirement>) => regulationAdapter.updateOne(state, {
+    id: regulationRequirement.id,
+    changes: regulationRequirement
 });
-export const deleteOneRegulation = (controlId: number, state: EntityState<Requirement>) => regulationAdapter.removeOne(state, controlId);
+export const deleteOneRegulation = (regulationRequirementId: number, state: EntityState<Requirement>) => regulationAdapter.removeOne(state, regulationRequirementId);
 
 
 const RegulationRequirementSlice = createSlice({
-    name: 'control',
-    initialState: {entities: controlInitialState, loading: false},
+    name: 'regulationRequirement',
+    initialState: {entities: regulationRequirementInitialState, loading: false},
     reducers: {
         createRegulation(state, {payload}: PayloadAction<Requirement>) {
             regulationAdapter.addOne(state.entities, payload)

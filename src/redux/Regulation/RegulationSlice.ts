@@ -7,32 +7,32 @@ export interface Regulation {
     name: string,
     covered_requirement_count: number,
     requirement_count: number,
-    without_control_requirement_count: number,
-    failing_control_count: number
+    without_regulation_requirement_count: number,
+    failing_regulation_count: number
 }
 
 const regulationAdapter = createEntityAdapter<Regulation>({
-    selectId: control => control.id,
+    selectId: regulation => regulation.id,
     sortComparer: (a, b) => a.name.localeCompare(b.name)
 });
 
-const controlInitialState: EntityState<Regulation> = regulationAdapter.getInitialState();
-const controlSelectors = regulationAdapter.getSelectors((state: RootState) => state.regulation.entities)
+const regulationInitialState: EntityState<Regulation> = regulationAdapter.getInitialState();
+const regulationSelectors = regulationAdapter.getSelectors((state: RootState) => state.regulation.entities)
 
-export const selectAllRegulations = controlSelectors.selectAll;
-export const selectRegulationById = controlSelectors.selectById;
+export const selectAllRegulations = regulationSelectors.selectAll;
+export const selectRegulationById = regulationSelectors.selectById;
 export const setRegulations = (regulation: Regulation[], state: EntityState<Regulation>) => regulationAdapter.setAll(state, regulation);
-export const createOneRegulation = (control: Regulation, state: EntityState<Regulation>) => regulationAdapter.addOne(state, control);
-export const updateOneRegulation = (control: Regulation, state: EntityState<Regulation>) => regulationAdapter.updateOne(state, {
-    id: control.id,
-    changes: control
+export const createOneRegulation = (regulation: Regulation, state: EntityState<Regulation>) => regulationAdapter.addOne(state, regulation);
+export const updateOneRegulation = (regulation: Regulation, state: EntityState<Regulation>) => regulationAdapter.updateOne(state, {
+    id: regulation.id,
+    changes: regulation
 });
-export const deleteOneRegulation = (controlId: number, state: EntityState<Regulation>) => regulationAdapter.removeOne(state, controlId);
+export const deleteOneRegulation = (regulationId: number, state: EntityState<Regulation>) => regulationAdapter.removeOne(state, regulationId);
 
 
 const RegulationSlice = createSlice({
-    name: 'control',
-    initialState: {entities: controlInitialState, loading: false},
+    name: 'regulation',
+    initialState: {entities: regulationInitialState, loading: false},
     reducers: {
         createRegulation(state, {payload}: PayloadAction<Regulation>) {
             regulationAdapter.addOne(state.entities, payload)
