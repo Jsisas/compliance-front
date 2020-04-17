@@ -27,7 +27,6 @@ export function NewControlPage() {
   function handleCreateNewControl(data: Control): void {
     data.startDate = ((data.startDate as unknown) as Moment).toISOString();
     data.id = getControlId();
-    console.log(data);
     dispatch(createControl(data));
     notifySucess("Add Control", "Adding a control was successful!");
     routeHistory.push("/controls");

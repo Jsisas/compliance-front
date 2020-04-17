@@ -21,8 +21,6 @@ export function RequirementsPage() {
         (state: RootState) => state.regulationRequirements.loading
     );
 
-    console.log(requirements)
-
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchRegulationRequirements(Number(id)));
