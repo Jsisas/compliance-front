@@ -3,7 +3,7 @@ import {Col, Row, Table, Typography} from "antd";
 import Button from "../../components/_ui/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/reducer";
-import {selectAllRegulations} from "../../redux/Regulation/RegulationSlice";
+import {Regulation, selectAllRegulations} from "../../redux/Regulation/RegulationSlice";
 import {ColumnProps} from "antd/lib/table";
 import {fetchAllRegulations} from "../../redux/Regulation/RegulationService";
 import {lowerCameltoUpperCamel} from "../../util/StringUtil";
@@ -64,6 +64,10 @@ export default function RegulationsPage() {
         });
     }
 
+    function onRowClick(record: Regulation){
+        console.log(record.id)
+    }
+
     return (
         <>
             <Row gutter={[16, 16]} justify={"space-between"}>
@@ -77,6 +81,11 @@ export default function RegulationsPage() {
             <Row gutter={[16, 16]} justify={"space-between"}>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                     <Table
+                        onRow={(record: Regulation) => {
+                            return {
+                                onClick: event => onRowClick(record)
+                            }
+                        }}
                         dataSource={regulations}
                         columns={columns}
                         rowKey="id"
