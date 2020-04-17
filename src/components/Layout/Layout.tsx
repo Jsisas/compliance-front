@@ -20,16 +20,16 @@ export function PageLayout() {
                 className={styles.extraExtraLightGrey}
             >
                 <div className={styles.logo}>
-                    <Link to="/insights" onClick={() => setSelectedKey('/insights')}><Logo/></Link>
+                    <Link to="/regulations" onClick={() => setSelectedKey('/regulations')}><Logo/></Link>
                 </div>
                 <Menu
                     mode="inline"
                     selectedKeys={[selectedKey]}
                     className={styles.extraExtraLightGrey}
                 >
-                    <Menu.Item key={"/insights"} onClick={() => setSelectedKey('/insights')}>
+                    <Menu.Item key={"/regulations"} onClick={() => setSelectedKey('/regulations')}>
                         <UserOutlined/>
-                        <Link to="/insights" className="nav-text">
+                        <Link to="/regulations" className="nav-text">
                             Insights
                         </Link>
                     </Menu.Item>

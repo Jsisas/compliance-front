@@ -12,7 +12,11 @@ import {WarningFilled} from "@ant-design/icons/lib";
 
 const {Title} = Typography;
 
-export default function RegulationsPage() {
+interface RegulationPageProps {
+    history: any;
+}
+
+export default function RegulationsPage(props: RegulationPageProps) {
     const regulations = useSelector((state: RootState) => selectAllRegulations(state));
     const isTableLoading = useSelector(
         (state: RootState) => state.regulation.loading
@@ -35,6 +39,15 @@ export default function RegulationsPage() {
                         return text + '%'
                     }
                 });
+            } else if (key === "name") {
+                columns.push({
+                    title: lowerCameltoUpperCamel(key),
+                    dataIndex: key,
+                    key: key,
+                    render: (text: any) => {
+                        return <span className={themeStyles.textBold}>{text}</span>
+                    }
+                });
             } else if (key === "requirementCount" || key === 'withoutControlRequirementCount') {
                 columns.push({
                     title: lowerCameltoUpperCamel(key),
@@ -50,11 +63,10 @@ export default function RegulationsPage() {
                     dataIndex: key,
                     key: key,
                     render: (text: any) => {
-                        return <span className={themeStyles.errorTextColor}><WarningFilled /> {text}</span>
+                        return <span className={themeStyles.errorTextColor}><WarningFilled/> {text}</span>
                     }
                 });
-            }
-            else if (key !== "id") {
+            } else if (key !== "id") {
                 columns.push({
                     title: lowerCameltoUpperCamel(key),
                     dataIndex: key,
@@ -64,8 +76,8 @@ export default function RegulationsPage() {
         });
     }
 
-    function onRowClick(record: Regulation){
-        console.log(record.id)
+    function onRowClick(record: Regulation) {
+        props.history.push(`/regulations/${record.id}/requirements`)
     }
 
     return (
@@ -83,7 +95,7 @@ export default function RegulationsPage() {
                     <Table
                         onRow={(record: Regulation) => {
                             return {
-                                onClick: event => onRowClick(record)
+                                onClick: event => onRowClick(record),
                             }
                         }}
                         dataSource={regulations}
@@ -92,6 +104,7 @@ export default function RegulationsPage() {
                         scroll={regulations.length < 1 ? {x: undefined} : {x: 340}}
                         loading={isTableLoading}
                         style={{width: "100%"}}
+                        className={themeStyles.antTableMousePointer}
                     />
                 </Col>
             </Row>
