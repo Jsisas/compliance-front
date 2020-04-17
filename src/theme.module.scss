@@ -19,3 +19,19 @@ $dark-grey: #b9babb;
 $light-grey: #dcdddd;
 $extra-light-grey: #f5f5f5;
 $extra-extra-light-grey: #f9f9f9;
+
+.primaryTextColor{
+  color: $primary-color;
+}
+
+.primaryBackgroundColor{
+  background-color: $primary-color;
+}
+
+.errorTextColor{
+  color: $error-color;
+}
+
+.errorBackgroundColor{
+  background-color: $error-color;
+}

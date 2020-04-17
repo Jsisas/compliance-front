@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Layout, Menu} from "antd";
 import {UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";

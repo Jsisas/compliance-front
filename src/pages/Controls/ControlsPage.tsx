@@ -31,7 +31,7 @@ export function ControlsPage() {
   }
 
   if (controls.length > 0) {
-    Object.keys(controls[0]).forEach(function (key, i) {
+    Object.keys(controls[0]).forEach((key, i) => {
       if (key === "tasks") {
         columns.push({
           title: lowerCameltoUpperCamel(key),
@@ -91,7 +91,7 @@ export function ControlsPage() {
         </Col>
       </Row>
       <Row>
-        <Col xs={24} lg={24}>
+        <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
           <Table
             dataSource={controls}
             columns={columns}
