@@ -1,0 +1,13 @@
+@import "./../../theme.module";
+
+
+
+.addTaskButton{
+  span{
+    margin-right: 16px;
+  }
+
+  button > span {
+    margin: 0 auto;
+  }
+}

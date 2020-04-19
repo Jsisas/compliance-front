@@ -5,13 +5,13 @@ import {Task} from '../Task/TaskSlice';
 import {User} from '../User/UserSlice';
 
 export enum ControlStatus {
-    NOT_IMPLEMENTED,
-    IMPLEMENTED
+    NOT_IMPLEMENTED = "Not implemented",
+    IMPLEMENTED = "Implemented"
 }
 
 export enum ControlCategory {
-    POLICY,
-    PROCEDURE
+    POLICY = "Policy",
+    PROCEDURE = "Procedure"
 }
 
 export interface Control {

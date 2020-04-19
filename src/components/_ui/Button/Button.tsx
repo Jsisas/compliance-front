@@ -1,13 +1,12 @@
-import React, { ReactNode } from "react";
-import { Button as AntdButton } from "antd";
+import React, {ReactNode} from "react";
+import {Button as AntdButton} from "antd";
 import styles from "./button.module.scss";
-import { CSSProperties } from "styled-components";
+import {CSSProperties} from "styled-components";
 
 export interface ButtonProp {
   type: "primary" | "secondary";
   style?: CSSProperties;
   children?: ReactNode;
-  icon?: ReactNode;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   htmlType?: "button" | "submit" | "reset" | undefined;
 }

@@ -7,12 +7,10 @@ import themeStyles from "../../../theme.module.scss";
 import {ColumnProps} from "antd/lib/table";
 import {Link, useParams} from "react-router-dom";
 import {Requirement} from "../../../redux/Requirement/RequirementSlice";
-import {concatStyles} from "../../../util/StyleUtil";
 import {DownOutlined, LeftOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {selectAllRegulations, selectRegulationById} from "../../../redux/Regulation/RegulationSlice";
 import {fetchAllRegulations} from "../../../redux/Regulation/RegulationService";
 import Button from "../../../components/_ui/Button/Button";
-import styles from "./requirementsPage.module.scss";
 
 const {Title} = Typography;
 

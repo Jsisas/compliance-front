@@ -1,12 +1,10 @@
 import React, {useState} from "react";
-import {Col, Dropdown, Layout, Menu} from "antd";
+import {Dropdown, Layout, Menu} from "antd";
 import {UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import {Routes} from "../../pages/Routes";
 import {ReactComponent as Logo} from "./../../assets/logo/small_logo.svg";
 import styles from "./layout.module.scss";
-import Button from "../_ui/Button/Button";
-import {DownOutlined} from "@ant-design/icons/lib";
 
 const {Content, Sider} = Layout;
 
