@@ -110,6 +110,9 @@ export function RequirementsPage() {
             <Menu.Item key={1}>
                 <span>Requirements without control ({selectedRegulation?.requirements.filter(x => x.controls.length < 1).length})</span>
             </Menu.Item>
+            <Menu.Item key={1}>
+                <span>Requirements with failing controls ({selectedRegulation?.requirements.filter(x => x.controls.some(y => y.tasks.some(u => new Date(u.dueDate) < new Date()))).length})</span>
+            </Menu.Item>
         </Menu>
     );
 
@@ -137,15 +140,15 @@ export function RequirementsPage() {
                         }
                     />
                 </Col>
-                <Col xs={{span: 6}}>
+                <Col xs={{span: 2}}>
                     <Dropdown overlay={allRegulationsDropDown}>
                         <span className={themeStyles.cursorPointerOnHover}>{selectedRegulation?.name} <DownOutlined
                             style={{fontSize: '14px'}}/></span>
                     </Dropdown>
                 </Col>
-                <Col xs={{span: 6}}>
+                <Col xs={{span: 3}}>
                     <Dropdown overlay={requirementsFilterDropdown}>
-                        <span className={themeStyles.cursorPointerOnHover}>{selectedRegulation?.name} <DownOutlined
+                        <span className={themeStyles.cursorPointerOnHover}>All requirements <DownOutlined
                             style={{fontSize: '14px'}}/></span>
                     </Dropdown>
                 </Col>
