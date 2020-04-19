@@ -1,15 +1,31 @@
 import React, {useState} from "react";
-import {Layout, Menu} from "antd";
+import {Col, Dropdown, Layout, Menu} from "antd";
 import {UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import {Routes} from "../../pages/Routes";
 import {ReactComponent as Logo} from "./../../assets/logo/small_logo.svg";
 import styles from "./layout.module.scss";
+import Button from "../_ui/Button/Button";
+import {DownOutlined} from "@ant-design/icons/lib";
 
 const {Content, Sider} = Layout;
 
 export function PageLayout() {
     const [selectedKey, setSelectedKey] = useState(window.location.pathname)
+
+    const connectControlDropdown = (
+        <Menu>
+            <Menu.Item key="Settings">
+                Settings
+            </Menu.Item>
+            <Menu.Item key="Account">
+                Account
+            </Menu.Item>
+            <Menu.Item key="Log out">
+                Log out
+            </Menu.Item>
+        </Menu>
+    )
 
     return (
         <Layout style={{minHeight: "100vh"}}>
@@ -40,6 +56,12 @@ export function PageLayout() {
                         </Link>
                     </Menu.Item>
                 </Menu>
+                <div className={styles.profile}>
+                    <Dropdown overlay={connectControlDropdown} trigger={['click']}>
+                            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar"/>
+                    </Dropdown>
+                    <Link to={"/"}>Joosep Sisas</Link>
+                </div>
             </Sider>
             <Layout
                 style={{background: "#fff", minWidth: "340px"}}
