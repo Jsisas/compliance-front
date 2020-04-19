@@ -2,24 +2,29 @@ import {RootState} from '../reducer';
 import {createEntityAdapter, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
 import {Control} from "../Control/ControlSlice";
 import {fetchAllRequirements} from "./RequirementService";
+import {Regulation} from "../Regulation/RegulationSlice";
 
 export interface RequirementChapter {
     id: string,
-    chapterRef: string,
+    chapterNumber: string,
     name: string
 }
 
 export interface Requirement {
-    id: number,
-    name: string,
-    chapter: RequirementChapter,
+    id: string,
+    title: string,
+    description: string,
+    chapterName: string,
+    chapterNumber: string,
+    paragraphNumber: string,
+    regulations: Regulation,
     controls: Control[],
 }
 
 const requirementAdapter = createEntityAdapter<Requirement>({
     selectId: requirement => requirement.id,
     sortComparer: (a, b) => {
-        return a.name.localeCompare(b.name)
+        return a.title.localeCompare(b.title)
     }
 });
 
@@ -34,7 +39,7 @@ export const updateOneRequirement = (requirement: Requirement, state: EntityStat
     id: requirement.id,
     changes: requirement
 });
-export const deleteOneRequirement = (requirementId: number, state: EntityState<Requirement>) => requirementAdapter.removeOne(state, requirementId);
+export const deleteOneRequirement = (requirementId: string, state: EntityState<Requirement>) => requirementAdapter.removeOne(state, requirementId);
 
 
 const RequirementSlice = createSlice({

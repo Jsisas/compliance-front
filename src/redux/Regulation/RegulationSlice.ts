@@ -4,15 +4,15 @@ import {fetchAllRegulations} from './RegulationService';
 import {Requirement} from "../Requirement/RequirementSlice";
 
 export interface Regulation {
-    id: number,
-    name: string,
+    id: string,
+    title: string,
     requirements: Requirement[]
 }
 
 const regulationAdapter = createEntityAdapter<Regulation>({
     selectId: regulation => regulation.id,
     sortComparer: (a, b) => {
-        return a.name.localeCompare(b.name)
+        return a.title.localeCompare(b.title)
     }
 });
 
@@ -27,7 +27,7 @@ export const updateOneRegulation = (regulation: Regulation, state: EntityState<R
     id: regulation.id,
     changes: regulation
 });
-export const deleteOneRegulation = (regulationId: number, state: EntityState<Regulation>) => regulationAdapter.removeOne(state, regulationId);
+export const deleteOneRegulation = (regulationId: string, state: EntityState<Regulation>) => regulationAdapter.removeOne(state, regulationId);
 
 
 const RegulationSlice = createSlice({

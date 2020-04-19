@@ -11,7 +11,6 @@ import {ColumnProps} from "antd/lib/table";
 import {Link} from "react-router-dom";
 import Button from "../../components/_ui/Button/Button";
 import style from './controlsPage.module.scss';
-import themeStyles from "../../theme.module.scss";
 import {Task} from "../../redux/Task/TaskSlice";
 
 const {Text, Title} = Typography;
@@ -38,7 +37,7 @@ export function ControlsPage() {
             dataIndex: "name",
             key: "id",
             render: (text: any, record: Control) => {
-                return <span>{record.name}</span>
+                return <span>{record.title}</span>
             }
         });
         columns.push({

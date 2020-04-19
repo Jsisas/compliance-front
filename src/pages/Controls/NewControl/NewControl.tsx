@@ -3,42 +3,25 @@ import {Col, DatePicker, Form, Input, Radio, Row, Typography} from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import {Moment} from "moment";
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Link, useHistory} from "react-router-dom";
 
 import {UserSearch} from "../../../components/AssigneeSearch/AssigneeSearch";
-import {
-    Control,
-    ControlCategory,
-    createControl,
-    selectAllControls,
-} from "../../../redux/Control/ControlSlice";
-import {RootState} from "../../../redux/reducer";
+import {Control, ControlCategory, createControl,} from "../../../redux/Control/ControlSlice";
 import {notifySucess} from "../../../util/NotificationUtil";
 import Button from "../../../components/_ui/Button/Button";
 
 const {Title} = Typography;
 
 export function NewControlPage() {
-    const controls = useSelector((state: RootState) => selectAllControls(state));
     const dispatch = useDispatch();
     const routeHistory = useHistory();
 
     function handleCreateNewControl(data: Control): void {
         data.startDate = ((data.startDate as unknown) as Moment).toISOString();
-        data.id = getControlId();
         dispatch(createControl(data));
         notifySucess("Add Control", "Adding a control was successful!");
         routeHistory.push("/controls");
-    }
-
-    function getControlId(): number {
-        let id = Math.max(...controls.map((o: Control) => o.id), 0) + 1;
-        if (id < 1) {
-            return 1;
-        } else {
-            return id;
-        }
     }
 
     const onFinish = (values: any) => handleCreateNewControl(values);

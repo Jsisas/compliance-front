@@ -3,6 +3,7 @@ import {createSlice, PayloadAction, createEntityAdapter, EntityState} from "@red
 import {fetchAllControls} from './ControlService';
 import {Task} from '../Task/TaskSlice';
 import {User} from '../User/UserSlice';
+import {Requirement} from "../Requirement/RequirementSlice";
 
 export enum ControlStatus {
     NOT_IMPLEMENTED = "Not implemented",
@@ -15,18 +16,19 @@ export enum ControlCategory {
 }
 
 export interface Control {
-    id: number,
-    name: string,
+    id: string,
+    title: string,
     category: ControlCategory,
     startDate: string,
     status: ControlStatus,
     assignees: User[];
     tasks: Task[];
+    requirements: Requirement[]
 }
 
 const controlsAdapter = createEntityAdapter<Control>({
     selectId: control => control.id,
-    sortComparer: (a, b) => a.name.localeCompare(b.name)
+    sortComparer: (a, b) => a.title.localeCompare(b.title)
 });
 
 const controlInitialState: EntityState<Control> = controlsAdapter.getInitialState();
@@ -40,7 +42,7 @@ export const updateOneControl = (control: Control, state: EntityState<Control>) 
     id: control.id,
     changes: control
 });
-export const deleteOneControl = (controlId: number, state: EntityState<Control>) => controlsAdapter.removeOne(state, controlId);
+export const deleteOneControl = (controlId: string, state: EntityState<Control>) => controlsAdapter.removeOne(state, controlId);
 
 
 const ControlSlice = createSlice({

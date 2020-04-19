@@ -1,4 +1,5 @@
 import { User } from "../User/UserSlice";
+import {Control} from "../Control/ControlSlice";
 
 export enum TaskType {
     MAINTENANCE,
@@ -28,11 +29,12 @@ export interface Comment {
 export interface Task {
     id: number,
     title: string,
-    status: TaskType,
+    state: TaskType,
     description: string,
-    type: TaskType,
+    kind: TaskType,
     assignee: User,
-    dueDate: Date,
+    dueAt: Date,
     files: TaskFile[],
     comments: Comment[]
+    control: Control[]
 }

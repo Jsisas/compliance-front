@@ -51,8 +51,8 @@ export function RequirementsPage() {
         }
 
         return filteredRequirements.filter(item => {
-            return item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                item.controls.findIndex(x => x.name.toLowerCase().includes(searchTerm.toLowerCase())) > -1
+            return item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.controls.findIndex(x => x.title.toLowerCase().includes(searchTerm.toLowerCase())) > -1
         })
     }
 
@@ -62,7 +62,7 @@ export function RequirementsPage() {
             dataIndex: "name",
             key: "title",
             render: (text: any, record: Requirement) => {
-                return <span className={themeStyles.textBold}>{record.name}</span>
+                return <span className={themeStyles.textBold}>{record.title}</span>
             }
         });
         columns.push({
@@ -70,7 +70,7 @@ export function RequirementsPage() {
             dataIndex: "regulation",
             key: "Regulation",
             render: (text: any, record: Requirement) => {
-                return <span>{selectedRegulation?.name}</span>
+                return <span>{selectedRegulation?.title}</span>
             }
         });
         columns.push({
@@ -78,7 +78,7 @@ export function RequirementsPage() {
             dataIndex: "Chapter name",
             key: "Chapter name",
             render: (text: any, record: Requirement) => {
-                return <span>{record.chapter.name}</span>
+                return <span>{record.chapterName}</span>
             }
         });
         columns.push({
@@ -86,7 +86,7 @@ export function RequirementsPage() {
             dataIndex: "Chapter reference",
             key: "Chapter reference",
             render: (text: any, record: Requirement) => {
-                return <span>{record.chapter.chapterRef}</span>
+                return <span>{record.chapterNumber}</span>
             }
         });
         columns.push({
@@ -94,11 +94,11 @@ export function RequirementsPage() {
             dataIndex: "Controls",
             key: "Controls",
             render: (text: any, record: Requirement) => {
-                return record.controls.map(control =>
+                return record.controls?.map(control =>
                     <Tag
                         key={control.id}
-                        className={control.tasks.some(x => new Date(x.dueDate) < new Date()) ? themeStyles.errorTag : themeStyles.primaryTag}>
-                        {control.name}
+                        className={control.tasks.some(x => new Date(x.dueAt) < new Date()) ? themeStyles.errorTag : themeStyles.primaryTag}>
+                        {control.title}
                     </Tag>)
             }
         });
@@ -110,11 +110,11 @@ export function RequirementsPage() {
 
 
     function getRequirementsWithoutControl(requirements: Requirement[]) {
-        return requirements.filter(x => x.controls.length < 1)
+        return requirements.filter(x => x.controls?.length < 1)
     }
 
     function getRequirementsWithFailingControl(requirements: Requirement[]) {
-        return requirements.filter(x => x.controls.some(y => y.tasks.some(u => new Date(u.dueDate) < new Date())))
+        return requirements.filter(x => x.controls?.some(y => y.tasks.some(u => new Date(u.dueAt) < new Date())))
     }
 
     const allRegulationsDropDown = (
@@ -122,7 +122,7 @@ export function RequirementsPage() {
             {regulations.map(x => {
                 return (
                     <Menu.Item key={x.id}>
-                        <Link to={`/regulations/${x.id}/requirements`}>{x.name}</Link>
+                        <Link to={`/regulations/${x.id}/requirements`}>{x.title}</Link>
                     </Menu.Item>
                 )
             })}
@@ -188,7 +188,7 @@ export function RequirementsPage() {
                 </Col>
                 <Col xs={{span: 2}} style={{textAlign: "center"}}>
                     <Dropdown overlay={allRegulationsDropDown} trigger={['click']}>
-                        <span className={themeStyles.cursorPointerOnHover}>{selectedRegulation?.name} <DownOutlined
+                        <span className={themeStyles.cursorPointerOnHover}>{selectedRegulation?.title} <DownOutlined
                             style={{fontSize: '14px'}}/></span>
                     </Dropdown>
                 </Col>
