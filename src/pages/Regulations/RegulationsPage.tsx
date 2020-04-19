@@ -9,6 +9,7 @@ import {fetchAllRegulations} from "../../redux/Regulation/RegulationService";
 import themeStyles from './../../theme.module.scss';
 import {CheckCircleOutlined, WarningFilled} from "@ant-design/icons/lib";
 import {concatStyles} from "../../util/StyleUtil";
+import {Link} from "react-router-dom";
 
 const {Title} = Typography;
 
@@ -65,8 +66,11 @@ export default function RegulationsPage(props: RegulationPageProps) {
             dataIndex: "All requirements",
             key: "id",
             render: (text: any, record: Regulation) => {
-                return <span
-                    className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}>{record.requirements.length}</span>
+                return <Link
+                    to={`/regulations/${record.id}/requirements`}
+                    className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}>
+                    {record.requirements.length}
+                </Link>
             }
         });
         columns.push({
@@ -91,10 +95,6 @@ export default function RegulationsPage(props: RegulationPageProps) {
         });
     }
 
-    function onRowClick(record: Regulation) {
-        props.history.push(`/regulations/${record.id}/requirements`)
-    }
-
     return (
         <>
             <Row gutter={[16, 16]} justify={"space-between"}>
@@ -108,18 +108,12 @@ export default function RegulationsPage(props: RegulationPageProps) {
             <Row gutter={[16, 16]} justify={"space-between"}>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                     <Table
-                        onRow={(record: Regulation) => {
-                            return {
-                                onClick: event => onRowClick(record),
-                            }
-                        }}
                         dataSource={regulations}
                         columns={columns}
                         rowKey="id"
                         scroll={regulations.length < 1 ? {x: undefined} : {x: 340}}
                         loading={isTableLoading}
                         style={{width: "100%"}}
-                        className={themeStyles.antTableMousePointer}
                     />
                 </Col>
             </Row>
