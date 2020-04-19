@@ -16,7 +16,7 @@ export enum ControlCategory {
 
 export interface Control {
     id: number,
-    title: string,
+    name: string,
     category: ControlCategory,
     startDate: string,
     status: ControlStatus,
@@ -26,7 +26,7 @@ export interface Control {
 
 const controlsAdapter = createEntityAdapter<Control>({
     selectId: control => control.id,
-    sortComparer: (a, b) => a.title.localeCompare(b.title)
+    sortComparer: (a, b) => a.name.localeCompare(b.name)
 });
 
 const controlInitialState: EntityState<Control> = controlsAdapter.getInitialState();

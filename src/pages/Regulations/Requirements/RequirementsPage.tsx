@@ -34,7 +34,7 @@ export function RequirementsPage() {
     function getFilteredRequirements(searchTerm: string) {
         return selectedRegulation?.requirements.filter(item => {
             return item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                item.controls.findIndex(x => x.title.toLowerCase().includes(searchTerm.toLowerCase())) > -1
+                item.controls.findIndex(x => x.name.toLowerCase().includes(searchTerm.toLowerCase())) > -1
         })
     }
 
@@ -80,7 +80,7 @@ export function RequirementsPage() {
                     <Tag
                         key={control.id}
                         className={concatStyles(themeStyles.primaryLightBackgroundColor, themeStyles.primaryTextColor)}>
-                        {control.title}
+                        {control.name}
                     </Tag>)
             }
         });
