@@ -30,7 +30,7 @@ export function PageLayout() {
                     <Menu.Item key={"/regulations"} onClick={() => setSelectedKey('/regulations')}>
                         <UserOutlined/>
                         <Link to="/regulations" className="nav-text">
-                            Insights
+                            Overview
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/controls" onClick={() => setSelectedKey('/controls')}>

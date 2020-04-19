@@ -5,6 +5,12 @@ export enum TaskType {
     TO_BE_DECIDED
 }
 
+export enum TaskStatus{
+    FAILING,
+    WARNING,
+    OK
+}
+
 export interface TaskFile {
     id: number,
     name: string,
@@ -16,13 +22,13 @@ export interface Comment {
     author: User,
     content: string,
     date: Date,
-    parent?: Comment
+    subComments?: Comment
 }
 
 export interface Task {
     id: number,
     title: string,
-    status: string,
+    status: TaskType,
     description: string,
     type: TaskType,
     assignee: User,

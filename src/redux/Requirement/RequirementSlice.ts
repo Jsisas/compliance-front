@@ -2,7 +2,6 @@ import {RootState} from '../reducer';
 import {createEntityAdapter, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
 import {Control} from "../Control/ControlSlice";
 import {fetchAllRequirements} from "./RequirementService";
-import {Regulation} from "../Regulation/RegulationSlice";
 
 export interface RequirementChapter {
     id: string,
@@ -15,7 +14,6 @@ export interface Requirement {
     name: string,
     chapter: RequirementChapter,
     controls: Control[],
-    regulation: Regulation,
 }
 
 const requirementAdapter = createEntityAdapter<Requirement>({

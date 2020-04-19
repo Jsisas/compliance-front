@@ -1,8 +1,8 @@
-import { RootState } from '../reducer';
-import { createSlice, PayloadAction, createEntityAdapter, EntityState } from "@reduxjs/toolkit";
-import { fetchAllControls } from './ControlService';
-import { Task } from '../Task/TaskSlice';
-import { User } from '../User/UserSlice';
+import {RootState} from '../reducer';
+import {createSlice, PayloadAction, createEntityAdapter, EntityState} from "@reduxjs/toolkit";
+import {fetchAllControls} from './ControlService';
+import {Task} from '../Task/TaskSlice';
+import {User} from '../User/UserSlice';
 
 export enum ControlStatus {
     NOT_IMPLEMENTED,
@@ -21,9 +21,7 @@ export interface Control {
     startDate: string,
     status: ControlStatus,
     assignees: User[];
-    connections: {
-        tasks: Task[];
-    }
+    tasks: Task[];
 }
 
 const controlsAdapter = createEntityAdapter<Control>({
@@ -38,21 +36,24 @@ export const selectAllControls = controlSelectors.selectAll;
 export const selectControlById = controlSelectors.selectById;
 export const setControls = (controls: Control[], state: EntityState<Control>) => controlsAdapter.setAll(state, controls);
 export const createOneControl = (control: Control, state: EntityState<Control>) => controlsAdapter.addOne(state, control);
-export const updateOneControl = (control: Control, state: EntityState<Control>) => controlsAdapter.updateOne(state, { id: control.id, changes: control });
+export const updateOneControl = (control: Control, state: EntityState<Control>) => controlsAdapter.updateOne(state, {
+    id: control.id,
+    changes: control
+});
 export const deleteOneControl = (controlId: number, state: EntityState<Control>) => controlsAdapter.removeOne(state, controlId);
 
 
 const ControlSlice = createSlice({
     name: 'control',
-    initialState: { entities: controlInitialState, loading: false },
+    initialState: {entities: controlInitialState, loading: false},
     reducers: {
-        createControl(state, { payload }: PayloadAction<Control>) {
+        createControl(state, {payload}: PayloadAction<Control>) {
             controlsAdapter.addOne(state.entities, payload)
         },
-        editControl(state, { payload }: PayloadAction<Control>) {
+        editControl(state, {payload}: PayloadAction<Control>) {
             updateOneControl(payload, state.entities)
         },
-        deleteControl(state, { payload }: PayloadAction<Control>) {
+        deleteControl(state, {payload}: PayloadAction<Control>) {
             deleteOneControl(payload.id, state.entities)
         },
     },
@@ -64,5 +65,5 @@ const ControlSlice = createSlice({
     }
 })
 
-export const { createControl, editControl, deleteControl } = ControlSlice.actions
+export const {createControl, editControl, deleteControl} = ControlSlice.actions
 export default ControlSlice.reducer;

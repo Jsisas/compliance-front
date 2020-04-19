@@ -1,37 +1,48 @@
 import * as React from 'react';
-import {useEffect} from 'react';
-import {Col, Row, Table, Tag, Typography} from "antd";
+import {useEffect, useState} from 'react';
+import {Col, Dropdown, Input, Menu, Row, Table, Tag, Typography} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/reducer";
 import themeStyles from "../../../theme.module.scss";
 import {ColumnProps} from "antd/lib/table";
-import {fetchRegulationRequirements} from "../../../redux/RegulationRequirement/RegulationRequirementService";
 import {Link, useParams} from "react-router-dom";
-import {selectAllRegulationRequirements} from './../../../redux/RegulationRequirement/RegulationRequirementSlice'
 import {Requirement} from "../../../redux/Requirement/RequirementSlice";
 import {concatStyles} from "../../../util/StyleUtil";
-import {LeftOutlined} from "@ant-design/icons/lib";
+import {DownOutlined, LeftOutlined, SearchOutlined} from "@ant-design/icons/lib";
+import {selectAllRegulations, selectRegulationById} from "../../../redux/Regulation/RegulationSlice";
+import {fetchAllRegulations} from "../../../redux/Regulation/RegulationService";
 
 const {Title} = Typography;
 
 export function RequirementsPage() {
-    let {id} = useParams();
-    const requirements = useSelector((state: RootState) => selectAllRegulationRequirements(state));
+    let {id} = useParams<{ id: string }>();
+    const selectedRegulation = useSelector((state: RootState) => selectRegulationById(state, id));
+    const regulations = useSelector((state: RootState) => selectAllRegulations(state));
+    const [tableSearchText, setTableSearchText] = useState<string>()
+    const [selectedRequirements, setSelectedRequirements] = useState<Requirement[]>([])
+    let filteredRequirements = getFilteredRequirements(tableSearchText || "");
     const isTableLoading = useSelector(
-        (state: RootState) => state.regulationRequirements.loading
+        (state: RootState) => state.regulation.loading
     );
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchRegulationRequirements(Number(id)));
-    }, [dispatch, id]);
+        dispatch(fetchAllRegulations());
+    }, [dispatch]);
     let columns: ColumnProps<any>[] = [];
 
-    if (requirements.length > 0) {
+    function getFilteredRequirements(searchTerm: string) {
+        return selectedRegulation?.requirements.filter(item => {
+            return item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.controls.findIndex(x => x.title.toLowerCase().includes(searchTerm.toLowerCase())) > -1
+        })
+    }
+
+    if (selectedRegulation !== undefined && selectedRegulation.requirements.length > 0) {
         columns.push({
-            title: "Name",
+            title: "Title",
             dataIndex: "name",
-            key: "Name",
+            key: "title",
             render: (text: any, record: Requirement) => {
                 return <span className={themeStyles.textBold}>{record.name}</span>
             }
@@ -41,7 +52,7 @@ export function RequirementsPage() {
             dataIndex: "regulation",
             key: "Regulation",
             render: (text: any, record: Requirement) => {
-                return <span>{record.regulation.name}</span>
+                return <span>{selectedRegulation?.name}</span>
             }
         });
         columns.push({
@@ -67,6 +78,7 @@ export function RequirementsPage() {
             render: (text: any, record: Requirement) => {
                 return record.controls.map(control =>
                     <Tag
+                        key={control.id}
                         className={concatStyles(themeStyles.primaryLightBackgroundColor, themeStyles.primaryTextColor)}>
                         {control.title}
                     </Tag>)
@@ -74,25 +86,81 @@ export function RequirementsPage() {
         });
     }
 
+    const rowSelection = {
+        onChange: (selectedRowKeys: any, selectedRows: Requirement[]) => setSelectedRequirements(selectedRows),
+    };
+
+    const allRegulationsDropDown = (
+        <Menu>
+            {regulations.map(x => {
+                return (
+                    <Menu.Item key={x.id}>
+                        <Link to={`/regulations/${x.id}/requirements`}>{x.name}</Link>
+                    </Menu.Item>
+                )
+            })}
+        </Menu>
+    );
+
+    const requirementsFilterDropdown = (
+        <Menu>
+            <Menu.Item key={0}>
+                <span>All requirements</span>
+            </Menu.Item>
+            <Menu.Item key={1}>
+                <span>Requirements without control ({selectedRegulation?.requirements.filter(x => x.controls.length < 1).length})</span>
+            </Menu.Item>
+        </Menu>
+    );
+
     return (
         <>
             <Row gutter={[16, 16]} align={"middle"}>
                 <Col xs={2} xl={1}>
                     <Link to="/regulations">
-                        <LeftOutlined style={{ fontSize: "24px", float: "right" }} />
+                        <LeftOutlined style={{fontSize: "24px", float: "right"}}/>
                     </Link>
                 </Col>
-                <Col xs={20} xl={20}>
-                    <Title style={{ marginBottom: 0 }}>Requirements</Title>
+                <Col xs={8} xl={8}>
+                    <Title style={{marginBottom: 0}}>Requirements</Title>
+                </Col>
+            </Row>
+            <Row gutter={[16, 16]} align={"middle"}>
+                <Col xs={{span: 5, offset: 1}}>
+                    <Input
+                        placeholder="Search by requirement or control "
+                        onChange={(event) => {
+                            setTableSearchText(event.target.value)
+                        }}
+                        suffix={
+                            <SearchOutlined />
+                        }
+                    />
+                </Col>
+                <Col xs={{span: 6}}>
+                    <Dropdown overlay={allRegulationsDropDown}>
+                        <span className={themeStyles.cursorPointerOnHover}>{selectedRegulation?.name} <DownOutlined
+                            style={{fontSize: '14px'}}/></span>
+                    </Dropdown>
+                </Col>
+                <Col xs={{span: 6}}>
+                    <Dropdown overlay={requirementsFilterDropdown}>
+                        <span className={themeStyles.cursorPointerOnHover}>{selectedRegulation?.name} <DownOutlined
+                            style={{fontSize: '14px'}}/></span>
+                    </Dropdown>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} justify={"space-between"}>
-                <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+                <Col xs={{span: 23, offset: 1}} sm={{span: 23, offset: 1}} md={{span: 23, offset: 1}}
+                     lg={{span: 23, offset: 1}} xl={{span: 23, offset: 1}} xxl={{span: 23, offset: 1}}>
                     <Table
-                        dataSource={requirements}
+                        rowSelection={{
+                            type: "checkbox",
+                            ...rowSelection,
+                        }}
+                        dataSource={filteredRequirements}
                         columns={columns}
                         rowKey="id"
-                        scroll={requirements.length < 1 ? {x: undefined} : {x: 340}}
                         loading={isTableLoading}
                         style={{width: "100%"}}
                     />

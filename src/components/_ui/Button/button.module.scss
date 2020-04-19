@@ -5,9 +5,13 @@
   border-radius: 4px;
   background: $success-color;
 
-  &:hover {
+  &:hover, &:focus {
     background: $success-color-hover;
     border-color: unset;
+  }
+
+  &:not(:hover){
+    background: $success-color;
   }
 }
 

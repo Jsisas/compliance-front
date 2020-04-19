@@ -26,6 +26,10 @@ $extra-extra-light-grey: #f9f9f9;
   cursor: pointer;
 }
 
+.cursorPointerOnHover:hover {
+  cursor: pointer;
+}
+
 .textBold{
   font-weight: 600;
 }
@@ -40,6 +44,10 @@ $extra-extra-light-grey: #f9f9f9;
 
 .primaryLightBackgroundColor{
   background-color: $primary-color-light;
+}
+
+.successTextColor{
+  color: $success-color;
 }
 
 .errorTextColor{

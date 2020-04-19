@@ -1,19 +1,19 @@
 import {RootState} from '../reducer';
 import {createEntityAdapter, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
 import {fetchAllRegulations} from './RegulationService';
+import {Requirement} from "../Requirement/RequirementSlice";
 
 export interface Regulation {
     id: number,
     name: string,
-    covered_requirement_count: number,
-    requirement_count: number,
-    without_regulation_requirement_count: number,
-    failing_regulation_count: number
+    requirements: Requirement[]
 }
 
 const regulationAdapter = createEntityAdapter<Regulation>({
     selectId: regulation => regulation.id,
-    sortComparer: (a, b) => a.name.localeCompare(b.name)
+    sortComparer: (a, b) => {
+        return a.name.localeCompare(b.name)
+    }
 });
 
 const regulationInitialState: EntityState<Regulation> = regulationAdapter.getInitialState();

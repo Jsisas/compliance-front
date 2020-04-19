@@ -7,6 +7,5 @@ export function concatStyles(...str: string[]){
             classNames = classNames.concat(style).concat(" ")
         }
     })
-    console.log(classNames);
     return classNames;
 }
