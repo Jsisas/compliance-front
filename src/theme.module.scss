@@ -57,3 +57,20 @@ $extra-extra-light-grey: #f9f9f9;
 .errorBackgroundColor{
   background-color: $error-color;
 }
+
+.errorBackgroundColor{
+  background-color: $error-color;
+}
+
+.primaryTag{
+  @extend .primaryLightBackgroundColor;
+  @extend .primaryTextColor;
+  border: none;
+}
+
+.errorTag{
+  @extend .errorTextColor;
+  border: 1px solid #FDBFB9;
+  box-sizing: border-box;
+  border-radius: 4px;
+}

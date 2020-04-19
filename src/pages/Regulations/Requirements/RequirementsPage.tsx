@@ -11,14 +11,25 @@ import {concatStyles} from "../../../util/StyleUtil";
 import {DownOutlined, LeftOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {selectAllRegulations, selectRegulationById} from "../../../redux/Regulation/RegulationSlice";
 import {fetchAllRegulations} from "../../../redux/Regulation/RegulationService";
+import Button from "../../../components/_ui/Button/Button";
+import styles from "./requirementsPage.module.scss";
 
 const {Title} = Typography;
+
+export enum RequirementTableFilter {
+    ALL = "All requirements",
+    WITHOUT_CONTROl = "Requirements without control",
+    WITH_FAILING_CONTROL = "Requirements with failing controls"
+}
 
 export function RequirementsPage() {
     let {id} = useParams<{ id: string }>();
     const selectedRegulation = useSelector((state: RootState) => selectRegulationById(state, id));
     const regulations = useSelector((state: RootState) => selectAllRegulations(state));
+
     const [tableSearchText, setTableSearchText] = useState<string>()
+    const [requirementFilter, setRequirementFilter] = useState<RequirementTableFilter>(RequirementTableFilter.ALL)
+
     const [selectedRequirements, setSelectedRequirements] = useState<Requirement[]>([])
     let filteredRequirements = getFilteredRequirements(tableSearchText || "");
     const isTableLoading = useSelector(
@@ -32,7 +43,16 @@ export function RequirementsPage() {
     let columns: ColumnProps<any>[] = [];
 
     function getFilteredRequirements(searchTerm: string) {
-        return selectedRegulation?.requirements.filter(item => {
+        let filteredRequirements: Requirement[] = [];
+        if (RequirementTableFilter.ALL === requirementFilter) {
+            filteredRequirements = selectedRegulation?.requirements || [];
+        } else if (RequirementTableFilter.WITH_FAILING_CONTROL === requirementFilter) {
+            filteredRequirements = getRequirementsWithFailingControl(selectedRegulation?.requirements || []);
+        } else if (RequirementTableFilter.WITHOUT_CONTROl === requirementFilter) {
+            filteredRequirements = getRequirementsWithoutControl(selectedRegulation?.requirements || []);
+        }
+
+        return filteredRequirements.filter(item => {
             return item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 item.controls.findIndex(x => x.name.toLowerCase().includes(searchTerm.toLowerCase())) > -1
         })
@@ -79,7 +99,7 @@ export function RequirementsPage() {
                 return record.controls.map(control =>
                     <Tag
                         key={control.id}
-                        className={concatStyles(themeStyles.primaryLightBackgroundColor, themeStyles.primaryTextColor)}>
+                        className={control.tasks.some(x => new Date(x.dueDate) < new Date()) ? themeStyles.errorTag : themeStyles.primaryTag}>
                         {control.name}
                     </Tag>)
             }
@@ -89,6 +109,15 @@ export function RequirementsPage() {
     const rowSelection = {
         onChange: (selectedRowKeys: any, selectedRows: Requirement[]) => setSelectedRequirements(selectedRows),
     };
+
+
+    function getRequirementsWithoutControl(requirements: Requirement[]) {
+        return requirements.filter(x => x.controls.length < 1)
+    }
+
+    function getRequirementsWithFailingControl(requirements: Requirement[]) {
+        return requirements.filter(x => x.controls.some(y => y.tasks.some(u => new Date(u.dueDate) < new Date())))
+    }
 
     const allRegulationsDropDown = (
         <Menu>
@@ -104,17 +133,36 @@ export function RequirementsPage() {
 
     const requirementsFilterDropdown = (
         <Menu>
-            <Menu.Item key={0}>
-                <span>All requirements</span>
+            <Menu.Item key={RequirementTableFilter.ALL}>
+                <span
+                    onClick={() => setRequirementFilter(RequirementTableFilter.ALL)}>{RequirementTableFilter.ALL}</span>
             </Menu.Item>
-            <Menu.Item key={1}>
-                <span>Requirements without control ({selectedRegulation?.requirements.filter(x => x.controls.length < 1).length})</span>
+            <Menu.Item key={RequirementTableFilter.WITHOUT_CONTROl}>
+                <span onClick={() => setRequirementFilter(RequirementTableFilter.WITHOUT_CONTROl)}>
+                    {RequirementTableFilter.WITHOUT_CONTROl}
+                    ({getRequirementsWithoutControl(selectedRegulation?.requirements || []).length})
+                </span>
             </Menu.Item>
-            <Menu.Item key={1}>
-                <span>Requirements with failing controls ({selectedRegulation?.requirements.filter(x => x.controls.some(y => y.tasks.some(u => new Date(u.dueDate) < new Date()))).length})</span>
+            <Menu.Item key={RequirementTableFilter.WITH_FAILING_CONTROL}>
+                <span
+                    onClick={() => setRequirementFilter(RequirementTableFilter.WITH_FAILING_CONTROL)}>
+                    {RequirementTableFilter.WITH_FAILING_CONTROL}
+                    ({getRequirementsWithFailingControl(selectedRegulation?.requirements || []).length})
+                </span>
             </Menu.Item>
         </Menu>
     );
+
+    const connectControlDropdown = (
+        <Menu>
+            <Menu.Item key="New Control">
+                New Control
+            </Menu.Item>
+            <Menu.Item key="Attach Control">
+                Attach existing control
+            </Menu.Item>
+        </Menu>
+    )
 
     return (
         <>
@@ -136,21 +184,32 @@ export function RequirementsPage() {
                             setTableSearchText(event.target.value)
                         }}
                         suffix={
-                            <SearchOutlined />
+                            <SearchOutlined/>
                         }
                     />
                 </Col>
-                <Col xs={{span: 2}}>
-                    <Dropdown overlay={allRegulationsDropDown}>
+                <Col xs={{span: 2}} style={{textAlign: "center"}}>
+                    <Dropdown overlay={allRegulationsDropDown} trigger={['click']}>
                         <span className={themeStyles.cursorPointerOnHover}>{selectedRegulation?.name} <DownOutlined
                             style={{fontSize: '14px'}}/></span>
                     </Dropdown>
                 </Col>
-                <Col xs={{span: 3}}>
-                    <Dropdown overlay={requirementsFilterDropdown}>
-                        <span className={themeStyles.cursorPointerOnHover}>All requirements <DownOutlined
+                <Col xs={{span: 5}}>
+                    <Dropdown overlay={requirementsFilterDropdown} trigger={['click']}>
+                        <span className={themeStyles.cursorPointerOnHover}>{requirementFilter} <DownOutlined
                             style={{fontSize: '14px'}}/></span>
                     </Dropdown>
+                </Col>
+                <Col xs={{span: 2, offset: 5}}>
+                    <span>{selectedRequirements.length} selected</span>
+                </Col>
+                <Col xs={{span: 3}}>
+                    <Dropdown overlay={connectControlDropdown} trigger={['click']}>
+                        <Button type="primary">Connect control <DownOutlined style={{fontSize: '14px'}}/></Button>
+                    </Dropdown>
+                </Col>
+                <Col xs={{span: 1}}>
+                    <Button type="secondary">...</Button>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} justify={"space-between"}>
