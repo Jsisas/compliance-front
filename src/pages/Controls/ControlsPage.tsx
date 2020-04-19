@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 
 import {useDispatch, useSelector} from "react-redux";
 import {UserSearch} from "../../components/AssigneeSearch/AssigneeSearch";
-import {Col, Row, Table, Typography} from "antd";
+import {Col, Row, Table, Tag, Typography} from "antd";
 import {RootState} from "../../redux/reducer";
 import {Control, selectAllControls} from "../../redux/Control/ControlSlice";
 import {fetchAllControls} from "../../redux/Control/ControlService";
@@ -11,6 +11,8 @@ import {ColumnProps} from "antd/lib/table";
 import {Link} from "react-router-dom";
 import Button from "../../components/_ui/Button/Button";
 import style from './controlsPage.module.scss';
+import themeStyles from "../../theme.module.scss";
+import {Task} from "../../redux/Task/TaskSlice";
 
 const {Text, Title} = Typography;
 
@@ -68,22 +70,22 @@ export function ControlsPage() {
             dataIndex: "tasks",
             key: "id",
             render: (text: any, record: any) => {
-                if (!text || text.length < 1) {
-                    return (
-                        <div className={style.addTaskButton}>
-                            <span className={"controls-table-action-span"}>No tasks</span>
-                            <Button type="primary" onClick={() => addTask(record, text)}>
-                                <PlusOutlined/>
-                            </Button>
-                        </div>
-                    );
-                } else {
-                    return (
-                        <>
-                            <span className={"controls-table-action-span"}>{text}</span>
-                        </>
-                    );
-                }
+                return (
+                    <div className={style.addTaskButton}>
+                        {record.tasks.length < 1 ? "No tasks" : record.tasks.map((task: Task) => {
+                            return (
+                                <Tag
+                                    key={task.id}
+                                    className={style.primaryTag}>
+                                    {task.title}
+                                </Tag>
+                            )
+                        })}
+                        <Button type="primary" onClick={() => addTask(record, text)}>
+                            <PlusOutlined/>
+                        </Button>
+                    </div>
+                );
             }
         });
     }
