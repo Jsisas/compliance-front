@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import {Col, Row, Table, Typography} from "antd";
-import Button from "../../components/_ui/Button/Button";
+import {Col, Row, Table} from "antd";
+import AlButton from "../../components/_ui/AlButton/AlButton";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/reducer";
 import {Regulation, selectAllRegulations} from "../../redux/Regulation/RegulationSlice";
@@ -10,8 +10,7 @@ import themeStyles from './../../theme.module.scss';
 import {CheckCircleOutlined, WarningFilled} from "@ant-design/icons/lib";
 import {concatStyles} from "../../util/StyleUtil";
 import {Link} from "react-router-dom";
-
-const {Title} = Typography;
+import {AlTitle} from "../../components/_ui/AlTitle/AlTitle";
 
 interface RegulationPageProps {
     history: any;
@@ -99,10 +98,10 @@ export default function RegulationsPage(props: RegulationPageProps) {
         <>
             <Row gutter={[16, 16]} justify={"space-between"}>
                 <Col xs={24} sm={16} md={10} lg={16} xl={16} xxl={16}>
-                    <Title>Regulations Page</Title>
+                    <AlTitle>Regulations Page</AlTitle>
                 </Col>
                 <Col xs={24} sm={8} md={5} lg={5} xl={4} xxl={3}>
-                    <Button type='primary' style={{width: '100%'}}>Add regulations</Button>
+                    <AlButton type='primary' style={{width: '100%'}}>Add regulations</AlButton>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} justify={"space-between"}>

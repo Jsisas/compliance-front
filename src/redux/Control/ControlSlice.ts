@@ -23,7 +23,8 @@ export interface Control {
     status: ControlStatus,
     assignees: User[];
     tasks: Task[];
-    requirements: Requirement[]
+    requirements: Requirement[];
+    description: string;
 }
 
 const controlsAdapter = createEntityAdapter<Control>({

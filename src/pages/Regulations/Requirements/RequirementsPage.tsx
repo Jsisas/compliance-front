@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {Col, Dropdown, Input, Menu, Row, Table, Tag, Typography} from "antd";
+import {Col, Dropdown, Input, Menu, Row, Table, Tag} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/reducer";
 import themeStyles from "../../../theme.module.scss";
@@ -10,10 +10,9 @@ import {Requirement, selectAllRequirements} from "../../../redux/Requirement/Req
 import {DownOutlined, LeftOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {selectAllRegulations, selectRegulationById} from "../../../redux/Regulation/RegulationSlice";
 import {fetchAllRegulations} from "../../../redux/Regulation/RegulationService";
-import Button from "../../../components/_ui/Button/Button";
+import AlButton from "../../../components/_ui/AlButton/AlButton";
 import {fetchAllRequirements} from "../../../redux/Requirement/RequirementService";
-
-const {Title} = Typography;
+import {AlTitle} from "../../../components/_ui/AlTitle/AlTitle";
 
 export enum RequirementTableFilter {
     ALL = "All requirements",
@@ -174,7 +173,7 @@ export function RequirementsPage() {
                     </Link>
                 </Col>
                 <Col xs={8} xl={8}>
-                    <Title style={{marginBottom: 0}}>Requirements</Title>
+                    <AlTitle style={{marginBottom: 0}}>Requirements</AlTitle>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} align={"middle"}>
@@ -206,11 +205,11 @@ export function RequirementsPage() {
                 </Col>
                 <Col xs={{span: 16, offset: 1}} sm={{span: 8, offset: 0}} md={6} lg={5} xl={4}>
                     <Dropdown overlay={connectControlDropdown} trigger={['click']}>
-                        <Button type="primary" style={{width: '100%'}}>Connect control <DownOutlined style={{fontSize: '14px'}}/></Button>
+                        <AlButton type="primary" style={{width: '100%'}}>Connect control <DownOutlined style={{fontSize: '14px'}}/></AlButton>
                     </Dropdown>
                 </Col>
                 <Col xs={6} sm={3} md={2} xl={2}>
-                    <Button type="secondary" style={{float: 'right'}}>...</Button>
+                    <AlButton type="secondary" style={{float: 'right'}}>...</AlButton>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} justify={"space-between"}>

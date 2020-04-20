@@ -5,6 +5,7 @@ import RegulationsPage from "./Regulations/RegulationsPage";
 import { ControlsPage } from "./Controls/ControlsPage";
 import {RequirementsPage} from "./Regulations/Requirements/RequirementsPage";
 import {TasksPage} from "./Tasks/TasksPage";
+import {ControlsDetails} from "./Controls/ControlsDetails/ControlsDetails";
 
 export function Routes() {
     return (
@@ -14,6 +15,7 @@ export function Routes() {
             <Route exact path="/regulations/:id/requirements" component={RequirementsPage} />
 
             <Route exact path="/controls" component={ControlsPage} />
+            <Route exact path="/controls/:id" component={ControlsDetails} />
             <Route exact path="/controls/new" component={NewControlPage} />
 
             <Route exact path="/tasks" component={TasksPage} />

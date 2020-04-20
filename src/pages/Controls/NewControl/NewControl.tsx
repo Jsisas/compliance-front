@@ -1,5 +1,5 @@
 import {LeftOutlined} from "@ant-design/icons";
-import {Col, DatePicker, Form, Input, Radio, Row, Typography} from "antd";
+import {Col, DatePicker, Form, Input, Radio, Row} from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import {Moment} from "moment";
 import React from "react";
@@ -9,9 +9,8 @@ import {Link, useHistory} from "react-router-dom";
 import {UserSearch} from "../../../components/AssigneeSearch/AssigneeSearch";
 import {Control, ControlCategory, createControl,} from "../../../redux/Control/ControlSlice";
 import {notifySucess} from "../../../util/NotificationUtil";
-import Button from "../../../components/_ui/Button/Button";
-
-const {Title} = Typography;
+import AlButton from "../../../components/_ui/AlButton/AlButton";
+import {AlTitle} from "../../../components/_ui/AlTitle/AlTitle";
 
 export function NewControlPage() {
     const dispatch = useDispatch();
@@ -35,7 +34,7 @@ export function NewControlPage() {
                     </Link>
                 </Col>
                 <Col xs={20} xl={20}>
-                    <Title style={{marginBottom: 0}}>Add Control</Title>
+                    <AlTitle style={{marginBottom: 0}}>Add Control</AlTitle>
                 </Col>
             </Row>
 
@@ -112,9 +111,9 @@ export function NewControlPage() {
                             </Col>
                         </Row>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">
+                            <AlButton type="primary" htmlType="submit">
                                 Submit
-                            </Button>
+                            </AlButton>
                         </Form.Item>
                     </Form>
                 </Col>

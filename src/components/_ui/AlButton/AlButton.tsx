@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import {Button as AntdButton} from "antd";
-import styles from "./button.module.scss";
+import styles from "./alButton.module.scss";
 import {CSSProperties} from "styled-components";
 
 export interface ButtonProp {
@@ -11,7 +11,7 @@ export interface ButtonProp {
   htmlType?: "button" | "submit" | "reset" | undefined;
 }
 
-export default function Button(props: ButtonProp) {
+export default function AlButton(props: ButtonProp) {
   function onButtonClick(e: React.MouseEvent<HTMLElement, MouseEvent>): void {
     if (props.onClick) {
       props.onClick(e);
