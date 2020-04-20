@@ -32,7 +32,7 @@ export function TasksPage() {
             dataIndex: "title",
             key: "id",
             render: (text: any, record: Task) => {
-                return <span className={themeStyles.textBold}>{record.title}</span>
+                return <span>{record.title}</span>
             }
         });
         columns.push({
@@ -65,7 +65,7 @@ export function TasksPage() {
         <>
             <Row gutter={[16, 16]} justify={"space-between"}>
                 <Col xs={24} sm={16} md={10} lg={16} xl={16} xxl={16}>
-                    <Title>Regulations Page</Title>
+                    <Title>Tasks Page</Title>
                 </Col>
                 <Col xs={24} sm={7} md={5} lg={4} xl={3} xxl={2}>
                     <Button type='primary' style={{width: '100%'}}>Add task</Button>

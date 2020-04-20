@@ -71,7 +71,7 @@ export function ControlsPage() {
             render: (text: any, record: any) => {
                 return (
                     <div className={style.addTaskButton}>
-                        {record.tasks.length < 1 ? "No tasks" : record.tasks.map((task: Task) => {
+                        {record.tasks?.length < 1 ? "No tasks" : record.tasks?.map((task: Task) => {
                             return (
                                 <Tag
                                     key={task.id}
