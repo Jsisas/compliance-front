@@ -111,7 +111,7 @@ export default function RegulationsPage(props: RegulationPageProps) {
                         dataSource={regulations}
                         columns={columns}
                         rowKey="id"
-                        scroll={regulations.length < 1 ? {x: undefined} : {x: 340}}
+                        scroll={regulations.length < 1 ? {x: undefined} : {x: 'auto'}}
                         loading={isTableLoading}
                         style={{width: "100%"}}
                     />

@@ -80,10 +80,19 @@ export function ControlsPage() {
                                 </Tag>
                             )
                         })}
-                        <Button type="primary" onClick={() => addTask(record, text)}>
-                            <PlusOutlined/>
-                        </Button>
                     </div>
+                );
+            }
+        });
+        columns.push({
+            title: "",
+            dataIndex: "addTask",
+            key: "id",
+            render: (text: any, record: any) => {
+                return (
+                    <Button type="primary" onClick={() => addTask(record, text)}>
+                        <PlusOutlined style={{fontSize: '24px', fontWeight: 700}}/>
+                    </Button>
                 );
             }
         });

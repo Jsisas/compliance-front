@@ -28,9 +28,13 @@
   line-height: 20px;
   color: $text-color;
 
-  &:hover {
+  &:hover, &:focus {
     color: $text-color;
     border-color: $dark-grey;
     background: $white;
+  }
+
+  &:not(:hover){
+    border-color: $light-grey;
   }
 }

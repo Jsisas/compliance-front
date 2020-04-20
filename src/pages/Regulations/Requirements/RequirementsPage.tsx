@@ -178,7 +178,7 @@ export function RequirementsPage() {
                 </Col>
             </Row>
             <Row gutter={[16, 16]} align={"middle"}>
-                <Col xs={{span: 5, offset: 1}}>
+                <Col xs={{span: 24, offset: 1}} sm={{span: 8, offset: 1}} md={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
                     <Input
                         placeholder="Search by requirement or control "
                         onChange={(event) => {
@@ -189,28 +189,28 @@ export function RequirementsPage() {
                         }
                     />
                 </Col>
-                <Col xs={{span: 2}} style={{textAlign: "center"}}>
+                <Col xs={{span: 6, offset: 1}} sm={3} md={2} xl={2}>
                     <Dropdown overlay={allRegulationsDropDown} trigger={['click']}>
                         <span className={themeStyles.cursorPointerOnHover}>{selectedRegulation?.title} <DownOutlined
                             style={{fontSize: '14px'}}/></span>
                     </Dropdown>
                 </Col>
-                <Col xs={{span: 5}}>
+                <Col xs={17} sm={7} md={5} lg={5} xl={4}>
                     <Dropdown overlay={requirementsFilterDropdown} trigger={['click']}>
                         <span className={themeStyles.cursorPointerOnHover}>{requirementFilter} <DownOutlined
                             style={{fontSize: '14px'}}/></span>
                     </Dropdown>
                 </Col>
-                <Col xs={{span: 2, offset: 5}}>
+                <Col xs={{span: 24, offset: 1}} sm={{span: 4, offset: 0}} md={{span: 3, offset: 0}} lg={{span: 3, offset: 0}} xl={{span: 2, offset: 3}}>
                     <span>{selectedRequirements.length} selected</span>
                 </Col>
-                <Col xs={{span: 3}}>
+                <Col xs={{span: 16, offset: 1}} sm={{span: 8, offset: 0}} md={6} lg={5} xl={4}>
                     <Dropdown overlay={connectControlDropdown} trigger={['click']}>
-                        <Button type="primary">Connect control <DownOutlined style={{fontSize: '14px'}}/></Button>
+                        <Button type="primary" style={{width: '100%'}}>Connect control <DownOutlined style={{fontSize: '14px'}}/></Button>
                     </Dropdown>
                 </Col>
-                <Col xs={{span: 1}}>
-                    <Button type="secondary">...</Button>
+                <Col xs={6} sm={3} md={2} xl={2}>
+                    <Button type="secondary" style={{float: 'right'}}>...</Button>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} justify={"space-between"}>
@@ -221,6 +221,7 @@ export function RequirementsPage() {
                             type: "checkbox",
                             ...rowSelection,
                         }}
+                        scroll={regulations.length < 1 ? {x: undefined} : {x: 'auto'}}
                         dataSource={filteredRequirements}
                         columns={columns}
                         rowKey="id"
