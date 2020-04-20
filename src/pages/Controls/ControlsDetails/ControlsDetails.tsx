@@ -13,6 +13,7 @@ import themeStyles from "../../../theme.module.scss";
 import {fetchAllTasks} from "../../../redux/Task/TaskService";
 import {selectTaskByControlId, Task} from "../../../redux/Task/TaskSlice";
 import {ColumnProps} from "antd/lib/table";
+import {User} from "../../../redux/User/UserSlice";
 
 const {Title, Text} = Typography;
 
@@ -95,6 +96,41 @@ export function ControlsDetails() {
                     <AlButton type={'secondary'} style={{marginRight: '8px', float: 'right'}} ><EditOutlined/></AlButton>
                 </Col>
             </Row>
+            <Row gutter={[16, 16]} style={{height: '100px'}}>
+                <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}} lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
+                    <Row gutter={[16, 16]} >
+                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                            <Text type={'secondary'}>Status</Text>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                            <Text type={'secondary'}>Start date</Text>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                            <Text type={'secondary'}>Assignee</Text>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                            <Text type={'secondary'}>Category</Text>
+                        </Col>
+                    </Row>
+                    <Row gutter={[16, 16]}>
+                        <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}} lg={{span: 17, offset: 1}} xl={{span: 2, offset: 1}}>
+                            <Text>{control?.status}</Text>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                            <Text>{control?.startDate}</Text>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                            <Text>{control?.assignees?.map((user: User) => <span>{user.fname}</span>)}</Text>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={17} xl={2}>
+                            <Text>{control?.category}</Text>
+                        </Col>
+                    </Row>
+                </Col>
+                <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}} lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
+                    <AlConnectedItems data={control}/>
+                </Col>
+            </Row>
             <Row gutter={[16, 16]}>
                 <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
                     <Table
@@ -104,11 +140,7 @@ export function ControlsDetails() {
                         scroll={tasks.length < 1 ? {x: undefined} : {x: 340}}
                         loading={isTableLoading}
                         style={{width: "100%"}}
-                        className={themeStyles.antTableMousePointer}
                     />
-                </Col>
-                <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}} lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
-                    <AlConnectedItems data={control}/>
                 </Col>
             </Row>
 
