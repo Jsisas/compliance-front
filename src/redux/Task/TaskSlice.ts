@@ -36,5 +36,5 @@ export interface Task {
     dueAt: Date,
     files: TaskFile[],
     comments: Comment[]
-    control: Control[]
+    control: Control
 }

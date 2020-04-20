@@ -14,10 +14,10 @@ export interface Requirement {
     id: string,
     title: string,
     description: string,
-    chapterName: string,
-    chapterNumber: string,
-    paragraphNumber: string,
-    regulations: Regulation,
+    chapter_name: string,
+    chapter_number: string,
+    paragraph_number: string,
+    regulations: Regulation[],
     controls: Control[],
 }
 

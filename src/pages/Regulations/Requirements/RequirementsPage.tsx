@@ -6,11 +6,12 @@ import {RootState} from "../../../redux/reducer";
 import themeStyles from "../../../theme.module.scss";
 import {ColumnProps} from "antd/lib/table";
 import {Link, useParams} from "react-router-dom";
-import {Requirement} from "../../../redux/Requirement/RequirementSlice";
+import {Requirement, selectAllRequirements} from "../../../redux/Requirement/RequirementSlice";
 import {DownOutlined, LeftOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {selectAllRegulations, selectRegulationById} from "../../../redux/Regulation/RegulationSlice";
 import {fetchAllRegulations} from "../../../redux/Regulation/RegulationService";
 import Button from "../../../components/_ui/Button/Button";
+import {fetchAllRequirements} from "../../../redux/Requirement/RequirementService";
 
 const {Title} = Typography;
 
@@ -24,6 +25,7 @@ export function RequirementsPage() {
     let {id} = useParams<{ id: string }>();
     const selectedRegulation = useSelector((state: RootState) => selectRegulationById(state, id));
     const regulations = useSelector((state: RootState) => selectAllRegulations(state));
+    const requirements = useSelector((state: RootState) => selectAllRequirements(state));
 
     const [tableSearchText, setTableSearchText] = useState<string>()
     const [requirementFilter, setRequirementFilter] = useState<RequirementTableFilter>(RequirementTableFilter.ALL)
@@ -37,17 +39,18 @@ export function RequirementsPage() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchAllRegulations());
+        dispatch(fetchAllRequirements())
     }, [dispatch]);
     let columns: ColumnProps<any>[] = [];
 
     function getFilteredRequirements(searchTerm: string) {
-        let filteredRequirements: Requirement[] = [];
+        let filteredRequirements: Requirement[] = requirements.filter((x) => x.regulations.some((y) => y.id === selectedRegulation?.id));
         if (RequirementTableFilter.ALL === requirementFilter) {
-            filteredRequirements = selectedRegulation?.requirements || [];
+            filteredRequirements = requirements.filter((x) => x.regulations.some((y) => y.id === selectedRegulation?.id)) || [];
         } else if (RequirementTableFilter.WITH_FAILING_CONTROL === requirementFilter) {
-            filteredRequirements = getRequirementsWithFailingControl(selectedRegulation?.requirements || []);
+            filteredRequirements = getRequirementsWithFailingControl(filteredRequirements || []);
         } else if (RequirementTableFilter.WITHOUT_CONTROl === requirementFilter) {
-            filteredRequirements = getRequirementsWithoutControl(selectedRegulation?.requirements || []);
+            filteredRequirements = getRequirementsWithoutControl(filteredRequirements || []);
         }
 
         return filteredRequirements.filter(item => {
@@ -78,7 +81,7 @@ export function RequirementsPage() {
             dataIndex: "Chapter name",
             key: "Chapter name",
             render: (text: any, record: Requirement) => {
-                return <span>{record.chapterName}</span>
+                return <span>{record.chapter_name}</span>
             }
         });
         columns.push({
@@ -86,7 +89,7 @@ export function RequirementsPage() {
             dataIndex: "Chapter reference",
             key: "Chapter reference",
             render: (text: any, record: Requirement) => {
-                return <span>{record.chapterNumber}</span>
+                return <span>{record.chapter_number}</span>
             }
         });
         columns.push({
@@ -97,7 +100,7 @@ export function RequirementsPage() {
                 return record.controls?.map(control =>
                     <Tag
                         key={control.id}
-                        className={control.tasks.some(x => new Date(x.dueAt) < new Date()) ? themeStyles.errorTag : themeStyles.primaryTag}>
+                        className={control.tasks?.some(x => new Date(x.dueAt) < new Date()) ? themeStyles.errorTag : themeStyles.primaryTag}>
                         {control.title}
                     </Tag>)
             }
