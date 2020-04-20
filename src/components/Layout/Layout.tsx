@@ -10,6 +10,7 @@ const {Content, Sider} = Layout;
 
 export function PageLayout() {
     const [selectedKey, setSelectedKey] = useState(window.location.pathname)
+    const [isCollapsed, setCollapsed] = useState(false)
 
     const connectControlDropdown = (
         <Menu>
@@ -32,6 +33,7 @@ export function PageLayout() {
                 collapsedWidth="0"
                 theme={"light"}
                 className={styles.extraExtraLightGrey}
+                onCollapse={((collapsed, type) => setCollapsed(collapsed))}
             >
                 <div className={styles.logo}>
                     <Link to="/regulations" onClick={() => setSelectedKey('/regulations')}><Logo/></Link>
@@ -40,6 +42,7 @@ export function PageLayout() {
                     mode="inline"
                     selectedKeys={[selectedKey]}
                     className={styles.extraExtraLightGrey}
+
                 >
                     <Menu.Item key={"/regulations"} onClick={() => setSelectedKey('/regulations')}>
                         <UserOutlined/>
@@ -60,7 +63,7 @@ export function PageLayout() {
                         </Link>
                     </Menu.Item>
                 </Menu>
-                <div className={styles.profile}>
+                <div className={styles.profile} style={{display: (isCollapsed ? 'none' : ''), width: '175px'}}>
                     <Dropdown overlay={connectControlDropdown} trigger={['click']}>
                             <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar"/>
                     </Dropdown>
