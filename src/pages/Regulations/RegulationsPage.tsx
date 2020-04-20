@@ -30,12 +30,12 @@ export default function RegulationsPage(props: RegulationPageProps) {
     let columns: ColumnProps<any>[] = [];
 
     function getRegulationFailingRequirementsPercentage(regulation: Regulation) {
-        const a = regulation.requirements?.filter(x => x.controls?.some(y => y.tasks.some(u => new Date(u.dueAt) < new Date())));
+        const a = regulation.requirements?.filter(x => x.controls?.some(y => y.tasks.some(u => new Date(u.due_at) < new Date())));
         return a?.length * 100 / regulation.requirements?.length || 0;
     }
 
     function getRegulationFailingControlsCount(regulation: Regulation) {
-        const a = regulation.requirements?.map(x => x.controls?.map(y => y.tasks.filter(u => new Date(u.dueAt) < new Date()))).concat([]).flat(2)
+        const a = regulation.requirements?.map(x => x.controls?.map(y => y.tasks.filter(u => new Date(u.due_at) < new Date()))).concat([]).flat(2)
         return a?.length || 0;
     }
 

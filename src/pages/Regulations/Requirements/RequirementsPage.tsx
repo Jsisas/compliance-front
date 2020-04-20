@@ -100,7 +100,7 @@ export function RequirementsPage() {
                 return record.controls?.map(control =>
                     <Tag
                         key={control.id}
-                        className={control.tasks?.some(x => new Date(x.dueAt) < new Date()) ? themeStyles.errorTag : themeStyles.primaryTag}>
+                        className={control.tasks?.some(x => new Date(x.due_at) < new Date()) ? themeStyles.errorTag : themeStyles.primaryTag}>
                         {control.title}
                     </Tag>)
             }
@@ -117,7 +117,7 @@ export function RequirementsPage() {
     }
 
     function getRequirementsWithFailingControl(requirements: Requirement[]) {
-        return requirements.filter(x => x.controls?.some(y => y.tasks.some(u => new Date(u.dueAt) < new Date())))
+        return requirements.filter(x => x.controls?.some(y => y.tasks.some(u => new Date(u.due_at) < new Date())))
     }
 
     const allRegulationsDropDown = (

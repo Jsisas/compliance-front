@@ -4,6 +4,7 @@ import { NewControlPage } from "./Controls/NewControl/NewControl";
 import RegulationsPage from "./Regulations/RegulationsPage";
 import { ControlsPage } from "./Controls/ControlsPage";
 import {RequirementsPage} from "./Regulations/Requirements/RequirementsPage";
+import {TasksPage} from "./Tasks/TasksPage";
 
 export function Routes() {
     return (
@@ -14,6 +15,8 @@ export function Routes() {
 
             <Route exact path="/controls" component={ControlsPage} />
             <Route exact path="/controls/new" component={NewControlPage} />
+
+            <Route exact path="/tasks" component={TasksPage} />
 
         </Switch>
     )

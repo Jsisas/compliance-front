@@ -53,6 +53,12 @@ export function PageLayout() {
                             Controls
                         </Link>
                     </Menu.Item>
+                    <Menu.Item key="/tasks" onClick={() => setSelectedKey('/tasks')}>
+                        <VideoCameraOutlined/>
+                        <Link to="/tasks" className="nav-text">
+                            Tasks
+                        </Link>
+                    </Menu.Item>
                 </Menu>
                 <div className={styles.profile}>
                     <Dropdown overlay={connectControlDropdown} trigger={['click']}>
