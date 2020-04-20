@@ -27,13 +27,14 @@ export function PageLayout() {
     )
 
     return (
-        <Layout style={{minHeight: "100vh"}}>
+        <Layout >
             <Sider
                 breakpoint="lg"
                 collapsedWidth="0"
                 theme={"light"}
                 className={styles.extraExtraLightGrey}
                 onCollapse={((collapsed, type) => setCollapsed(collapsed))}
+                style={{minHeight: "100vh"}}
             >
                 <div className={styles.logo}>
                     <Link to="/regulations" onClick={() => setSelectedKey('/regulations')}><Logo/></Link>
