@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {Col, Row} from "antd";
-import {AlText} from "../AlText/AlText";
+import {Col, Row, Typography} from "antd";
 import {Link} from "react-router-dom";
 import {Regulation} from "../../../redux/Regulation/RegulationSlice";
 import {Task} from "../../../redux/Task/TaskSlice";
@@ -8,6 +7,8 @@ import {Requirement} from "../../../redux/Requirement/RequirementSlice";
 import {Control} from "../../../redux/Control/ControlSlice";
 import {lowerCameltoUpperCamel, shortenStringLength} from "../../../util/StringUtil";
 import styles from './alConnectedItems.module.scss';
+
+const {Text} = Typography;
 
 interface AlConnectedItemsProps {
     data?: Regulation | Requirement | Control | Task;
@@ -35,7 +36,7 @@ export function AlConnectedItems(props: AlConnectedItemsProps) {
             <Col xs={24} className={styles.connectedItem}>
                 <Row gutter={[16, 16]}>
                     <Col xs={24}>
-                        <AlText bold={'semi-bold'}>Connected items</AlText>
+                        <Text style={{fontWeight: 600}}>Connected items</Text>
                     </Col>
                 </Row>
 
@@ -45,7 +46,7 @@ export function AlConnectedItems(props: AlConnectedItemsProps) {
                             <div key={key}>
                                 <Row gutter={[16, 0]}>
                                     <Col xs={24}>
-                                        <AlText type={'secondary'}>{lowerCameltoUpperCamel(key)}</AlText>
+                                        <Text type={'secondary'}>{lowerCameltoUpperCamel(key)}</Text>
                                     </Col>
                                 </Row>
                                 <Row gutter={[16, 16]}>
@@ -53,7 +54,7 @@ export function AlConnectedItems(props: AlConnectedItemsProps) {
                                         {value.map((x) => {
                                             return (
                                                 <Link key={x.id}
-                                                    to={`/${key}/${x.id}`}>{shortenStringLength(lowerCameltoUpperCamel(x.title), 50)}z</Link>
+                                                      to={`/${key}/${x.id}`}>{shortenStringLength(lowerCameltoUpperCamel(x.title), 50)}z</Link>
                                             )
                                         })
                                         }

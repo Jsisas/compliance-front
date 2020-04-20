@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect} from 'react';
-import {Col, Row, Table} from "antd";
+import {Col, Row, Table, Typography} from "antd";
 import AlButton from "../../components/_ui/AlButton/AlButton";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/reducer";
@@ -9,7 +9,8 @@ import {selectAllTasks, Task} from "../../redux/Task/TaskSlice";
 import {fetchAllTasks} from "../../redux/Task/TaskService";
 import 'moment/locale/et';
 import {date, dateFormat} from "../../util/DateUtil";
-import {AlTitle} from "../../components/_ui/AlTitle/AlTitle";
+
+const {Title} = Typography;
 
 export function TasksPage() {
     const tasks = useSelector((state: RootState) => selectAllTasks(state));
@@ -62,7 +63,7 @@ export function TasksPage() {
         <>
             <Row gutter={[16, 16]} justify={"space-between"}>
                 <Col xs={24} sm={16} md={10} lg={16} xl={16} xxl={16}>
-                    <AlTitle>Tasks Page</AlTitle>
+                    <Title>Tasks Page</Title>
                 </Col>
                 <Col xs={24} sm={7} md={5} lg={4} xl={3} xxl={2}>
                     <AlButton type='primary' style={{width: '100%'}}>Add task</AlButton>

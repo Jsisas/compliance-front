@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {Col, Dropdown, Input, Menu, Row, Table, Tag} from "antd";
+import {Col, Dropdown, Input, Menu, Row, Table, Tag, Typography} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/reducer";
 import themeStyles from "../../../theme.module.scss";
@@ -12,7 +12,8 @@ import {selectAllRegulations, selectRegulationById} from "../../../redux/Regulat
 import {fetchAllRegulations} from "../../../redux/Regulation/RegulationService";
 import AlButton from "../../../components/_ui/AlButton/AlButton";
 import {fetchAllRequirements} from "../../../redux/Requirement/RequirementService";
-import {AlTitle} from "../../../components/_ui/AlTitle/AlTitle";
+
+const {Title} = Typography;
 
 export enum RequirementTableFilter {
     ALL = "All requirements",
@@ -173,7 +174,7 @@ export function RequirementsPage() {
                     </Link>
                 </Col>
                 <Col xs={8} xl={8}>
-                    <AlTitle style={{marginBottom: 0}}>Requirements</AlTitle>
+                    <Title style={{marginBottom: 0}}>Requirements</Title>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} align={"middle"}>

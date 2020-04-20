@@ -1,5 +1,5 @@
 import {LeftOutlined} from "@ant-design/icons";
-import {Col, DatePicker, Form, Input, Radio, Row} from "antd";
+import {Col, DatePicker, Form, Input, Radio, Row, Typography} from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import {Moment} from "moment";
 import React from "react";
@@ -10,7 +10,8 @@ import {UserSearch} from "../../../components/AssigneeSearch/AssigneeSearch";
 import {Control, ControlCategory, createControl,} from "../../../redux/Control/ControlSlice";
 import {notifySucess} from "../../../util/NotificationUtil";
 import AlButton from "../../../components/_ui/AlButton/AlButton";
-import {AlTitle} from "../../../components/_ui/AlTitle/AlTitle";
+
+const {Title} = Typography;
 
 export function NewControlPage() {
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export function NewControlPage() {
                     </Link>
                 </Col>
                 <Col xs={20} xl={20}>
-                    <AlTitle style={{marginBottom: 0}}>Add Control</AlTitle>
+                    <Title style={{marginBottom: 0}}>Add Control</Title>
                 </Col>
             </Row>
 

@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 
 import {useDispatch, useSelector} from "react-redux";
 import {UserSearch} from "../../components/AssigneeSearch/AssigneeSearch";
-import {Col, Row, Table, Tag} from "antd";
+import {Col, Row, Table, Tag, Typography} from "antd";
 import {RootState} from "../../redux/reducer";
 import {Control, selectAllControls} from "../../redux/Control/ControlSlice";
 import {fetchAllControls} from "../../redux/Control/ControlService";
@@ -13,8 +13,8 @@ import AlButton from "../../components/_ui/AlButton/AlButton";
 import style from './controlsPage.module.scss';
 import {Task} from "../../redux/Task/TaskSlice";
 import themeStyles from './../../theme.module.scss';
-import {AlTitle} from "../../components/_ui/AlTitle/AlTitle";
-import {AlText} from "../../components/_ui/AlText/AlText";
+
+const {Title, Text} = Typography;
 
 interface ControlsPageProps {
     history: any[];
@@ -107,12 +107,12 @@ export function ControlsPage(props: ControlsPageProps) {
         <>
             <Row gutter={[16, 16]}>
                 <Col xs={24} lg={24}>
-                    <AlTitle>Controls Page</AlTitle>
+                    <Title>Controls Page</Title>
                 </Col>
             </Row>
             <Row gutter={[16, 32]} justify={"space-between"} align={"bottom"}>
                 <Col xs={12} sm={8} lg={6}>
-                    <AlText type="secondary">Assignees</AlText>
+                    <Text type="secondary">Assignees</Text>
                     <UserSearch/>
                 </Col>
                 <Col xs={12} sm={12} md={6} lg={4} xl={3} xxl={2}>
