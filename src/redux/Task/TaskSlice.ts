@@ -1,7 +1,8 @@
 import {Control} from "../Control/ControlSlice";
-import {createEntityAdapter, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
+import {createEntityAdapter, createSelector, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../reducer";
 import {fetchAllTasks} from "../Task/TaskService";
+import {User} from "../User/UserSlice";
 
 export enum TaskType {
     MAINTENANCE,
@@ -34,7 +35,7 @@ export interface Task {
     state: TaskType,
     description: string,
     kind: TaskType,
-    assignee: Task,
+    assignee: User,
     due_at: Date,
     files: TaskFile[],
     comments: Comment[]
@@ -55,7 +56,12 @@ export const setTasks = (tasks: Task[], state: EntityState<Task>) => tasksAdapte
 export const createOneTask = (task: Task, state: EntityState<Task>) => tasksAdapter.addOne(state, task);
 export const updateOneTask = (task: Task, state: EntityState<Task>) => tasksAdapter.updateOne(state, { id: task.id, changes: task });
 export const deleteOneTask = (taskId: number, state: EntityState<Task>) => tasksAdapter.removeOne(state, taskId);
-
+export const selectTaskByControlId = (state: any, controlId: string) => {
+    return createSelector(
+        [selectAllTasks],
+        (items: Task[]) => items.filter(task => task.control.id === controlId)
+    )(state)
+}
 
 const TaskSlice = createSlice({
     name: 'task',

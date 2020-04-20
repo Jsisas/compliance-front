@@ -7,3 +7,8 @@ export function lowerCameltoUpperCamel(str: string): string {
 export function capitalize(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export function shortenStringLength(str: string, length: number) {
+    let trimmedString = str.substr(0, length);
+    return trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+}
