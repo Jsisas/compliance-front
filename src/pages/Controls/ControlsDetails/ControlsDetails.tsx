@@ -5,15 +5,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/reducer";
 import {selectControlById} from "../../../redux/Control/ControlSlice";
 import {fetchAllControls} from "../../../redux/Control/ControlService";
-import {Col, Row, Table, Typography} from "antd";
+import {Col, Row, Table, Typography, Divider} from "antd";
 import {EditOutlined, EllipsisOutlined, LeftOutlined} from "@ant-design/icons/lib";
 import AlButton from "../../../components/_ui/AlButton/AlButton";
 import {AlConnectedItems} from "../../../components/_ui/AlConnectedItems/AlConnectedItems";
-import themeStyles from "../../../theme.module.scss";
 import {fetchAllTasks} from "../../../redux/Task/TaskService";
 import {selectTaskByControlId, Task} from "../../../redux/Task/TaskSlice";
 import {ColumnProps} from "antd/lib/table";
 import {User} from "../../../redux/User/UserSlice";
+import styles from './controlDetails.module.scss'
 
 const {Title, Text} = Typography;
 
@@ -96,7 +96,7 @@ export function ControlsDetails() {
                     <AlButton type={'secondary'} style={{marginRight: '8px', float: 'right'}} ><EditOutlined/></AlButton>
                 </Col>
             </Row>
-            <Row gutter={[16, 16]} style={{height: '100px'}}>
+            <Row gutter={[16, 16]} style={{height: '75px'}}>
                 <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}} lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
                     <Row gutter={[16, 16]} >
                         <Col xs={24} sm={24} md={24} lg={24} xl={2}>
@@ -133,6 +133,12 @@ export function ControlsDetails() {
             </Row>
             <Row gutter={[16, 16]}>
                 <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
+                    <Divider className={styles.divider}/>
+                    <Title level={3} style={{paddingBottom: 0, marginBottom: 0}}>Tasks</Title>
+                </Col>
+            </Row>
+            <Row gutter={[16, 16]}>
+                <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
                     <Table
                         dataSource={tasks}
                         columns={columns}
@@ -140,10 +146,11 @@ export function ControlsDetails() {
                         scroll={tasks.length < 1 ? {x: undefined} : {x: 340}}
                         loading={isTableLoading}
                         style={{width: "100%"}}
+                        className={styles.tableHeader}
                     />
                 </Col>
             </Row>
 
         </>
     );
-};
+}

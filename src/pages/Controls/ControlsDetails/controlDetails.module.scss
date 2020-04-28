@@ -1,4 +1,30 @@
+@import "./../../../theme.module.scss";
+
+$tableHeaderBorderRadius: 4px;
+
 .flexCol{
   display: flex;
   justify-content: end;
+}
+
+.divider{
+  margin-top: 0;
+  background-color: $light-grey;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.tableHeader thead > tr > th{
+  background: $light-grey;
+  padding: 8px 16px;
+  
+  &:first-child {
+    border-top-left-radius: $tableHeaderBorderRadius !important;
+    border-bottom-left-radius: $tableHeaderBorderRadius !important;
+  }
+
+  &:last-child {
+    border-top-right-radius: $tableHeaderBorderRadius !important;
+    border-bottom-right-radius: $tableHeaderBorderRadius !important;
+  }
 }
