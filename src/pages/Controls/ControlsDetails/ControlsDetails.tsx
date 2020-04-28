@@ -14,11 +14,17 @@ import {selectTaskByControlId, Task} from "../../../redux/Task/TaskSlice";
 import {ColumnProps} from "antd/lib/table";
 import {User} from "../../../redux/User/UserSlice";
 import styles from './controlDetails.module.scss'
+import themeStyle from './../../../theme.module.scss';
+
 import {AddTaskModule} from '../../../components/AddTaskModal/AddTaskModal';
+import {concatStyles} from "../../../util/StyleUtil";
 
 const {Title, Text} = Typography;
 
-export function ControlsDetails() {
+interface ControlsDetailsProps {
+    history: any[];
+}
+export function ControlsDetails(props: ControlsDetailsProps) {
     let {id} = useParams<{ id: string }>();
     const control = useSelector((state: RootState) => selectControlById(state, id));
     const tasks: Task[] = useSelector((state: RootState) => selectTaskByControlId(state, id))
@@ -159,8 +165,13 @@ export function ControlsDetails() {
                         scroll={tasks.length < 1 ? {x: undefined} : {x: 340}}
                         loading={isTableLoading}
                         style={{width: "100%"}}
-                        className={styles.tableHeader}
+                        className={concatStyles(styles.tableHeader, themeStyle.antTableMousePointer)}
                         pagination={false}
+                        onRow={(record) => {
+                            return {
+                                onClick: () => {props.history.push("/tasks/" + record.id)},
+                            };
+                        }}
                     />
                 </Col>
             </Row>

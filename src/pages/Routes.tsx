@@ -7,6 +7,7 @@ import {RequirementsPage} from "./Regulations/Requirements/RequirementsPage";
 import {TasksPage} from "./Tasks/TasksPage";
 import {ControlsDetails} from "./Controls/ControlsDetails/ControlsDetails";
 import {NotFoundPage} from "./NotFound/NotFoundPage";
+import {TaskDetail} from "./Tasks/TaskDetail/TaskDetail";
 
 export function Routes() {
     return (
@@ -20,6 +21,7 @@ export function Routes() {
             <Route exact path="/controls/new" component={NewControlPage} />
 
             <Route exact path="/tasks" component={TasksPage} />
+            <Route exact path="/tasks/:id" component={TaskDetail} />
             <Route component={NotFoundPage} />
         </Switch>
     )
