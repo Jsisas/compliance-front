@@ -19,7 +19,7 @@ export interface Control {
     id: string,
     title: string,
     category: ControlCategory,
-    startDate: string,
+    startDate: Date,
     status: ControlStatus,
     assignees: User[];
     tasks: Task[];

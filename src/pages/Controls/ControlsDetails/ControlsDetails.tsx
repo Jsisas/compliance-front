@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/reducer";
 import {selectControlById} from "../../../redux/Control/ControlSlice";
 import {fetchAllControls} from "../../../redux/Control/ControlService";
-import {Col, Row, Table, Typography, Divider} from "antd";
+import {Col, Row, Table, Typography, Divider, Modal} from "antd";
 import {EditOutlined, EllipsisOutlined, LeftOutlined} from "@ant-design/icons/lib";
 import AlButton from "../../../components/_ui/AlButton/AlButton";
 import {AlConnectedItems} from "../../../components/_ui/AlConnectedItems/AlConnectedItems";
@@ -14,6 +14,7 @@ import {selectTaskByControlId, Task} from "../../../redux/Task/TaskSlice";
 import {ColumnProps} from "antd/lib/table";
 import {User} from "../../../redux/User/UserSlice";
 import styles from './controlDetails.module.scss'
+import {AddTaskModule} from '../../../components/AddTaskModal/AddTaskModal';
 
 const {Title, Text} = Typography;
 
@@ -21,9 +22,14 @@ export function ControlsDetails() {
     let {id} = useParams<{ id: string }>();
     const control = useSelector((state: RootState) => selectControlById(state, id));
     const tasks: Task[] = useSelector((state: RootState) => selectTaskByControlId(state, id))
+    const [isAddTaskModalVisible, setAddTaskModalVisible] = useState(false)
     const isTableLoading = useSelector(
         (state: RootState) => state.task.loading
     );
+
+    function toggleModal() {
+        setAddTaskModalVisible(!isAddTaskModalVisible);
+    }
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -72,9 +78,9 @@ export function ControlsDetails() {
             );
         }
     });
-
     return (
         <>
+            <AddTaskModule control={control!} isVisible={isAddTaskModalVisible} onCancel={toggleModal}/>
             <Row gutter={[16, 16]} align={"middle"}>
                 <Col xs={1} xl={1}>
                     <Link to="/controls">
@@ -91,14 +97,17 @@ export function ControlsDetails() {
                     <Text
                         type={"secondary"}>{control?.description || "When an employee leaves the company, their authorizations are revoked in the company’s access provisioning software on the last day of their employment contract."}</Text>
                 </Col>
-                <Col xs={{span: 24}} sm={{span: 6, offset: 1}} md={{span: 4, offset: 3}} lg={{span: 4, offset: 3}} xl={{span: 3, offset: 5}}>
+                <Col xs={{span: 24}} sm={{span: 6, offset: 1}} md={{span: 4, offset: 3}} lg={{span: 4, offset: 3}}
+                     xl={{span: 3, offset: 5}}>
                     <AlButton type={'secondary'} style={{float: 'right'}}><EllipsisOutlined/></AlButton>
-                    <AlButton type={'secondary'} style={{marginRight: '8px', float: 'right'}} ><EditOutlined/></AlButton>
+                    <AlButton type={'secondary'}
+                              style={{marginRight: '8px', float: 'right'}}><EditOutlined/></AlButton>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} style={{height: '75px'}}>
-                <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}} lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
-                    <Row gutter={[16, 16]} >
+                <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
+                     lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
+                    <Row gutter={[16, 16]}>
                         <Col xs={24} sm={24} md={24} lg={24} xl={2}>
                             <Text type={'secondary'}>Status</Text>
                         </Col>
@@ -113,32 +122,36 @@ export function ControlsDetails() {
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
-                        <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}} lg={{span: 17, offset: 1}} xl={{span: 2, offset: 1}}>
+                        <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
+                             lg={{span: 17, offset: 1}} xl={{span: 2, offset: 1}}>
                             <Text>{control?.status}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={24} xl={2}>
                             <Text>{control?.startDate}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={24} xl={2}>
-                            <Text>{control?.assignees?.map((user: User) => <span>{user.fname}</span>)}</Text>
+                            <Text>{control?.assignees?.map((user: User) => <span>{user.fname || ""}</span>)}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={17} xl={2}>
                             <Text>{control?.category}</Text>
                         </Col>
                     </Row>
                 </Col>
-                <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}} lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
+                <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
+                     lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
                     <AlConnectedItems data={control}/>
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
-                <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
+                <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}}
+                     xl={{span: 17, offset: 1}}>
                     <Divider className={styles.divider}/>
                     <Title level={3} style={{paddingBottom: 0, marginBottom: 0}}>Tasks</Title>
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
-                <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
+                <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}}
+                     xl={{span: 17, offset: 1}}>
                     <Table
                         dataSource={tasks}
                         columns={columns}
@@ -147,10 +160,16 @@ export function ControlsDetails() {
                         loading={isTableLoading}
                         style={{width: "100%"}}
                         className={styles.tableHeader}
+                        pagination={false}
                     />
                 </Col>
             </Row>
-
+            <Row gutter={[16, 16]}>
+                <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}}
+                     xl={{span: 17, offset: 1}}>
+                    <AlButton type="primary" onClick={toggleModal}>Add task</AlButton>
+                </Col>
+            </Row>
         </>
     );
 }

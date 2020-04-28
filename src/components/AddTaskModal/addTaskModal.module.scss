@@ -1,0 +1,13 @@
+@import './../../theme.module.scss';
+
+.addTaskModalContent {
+  border-top: 1px solid $light-grey !important;
+  background-color: $extra-light-grey;
+  border-top: #000;
+  padding: 12px 14px;
+}
+
+.modalCloseButton{
+  font-size: 12px;
+  color: $text-color;
+}

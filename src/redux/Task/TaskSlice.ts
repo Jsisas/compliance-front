@@ -3,10 +3,11 @@ import {createEntityAdapter, createSelector, createSlice, EntityState, PayloadAc
 import {RootState} from "../reducer";
 import {fetchAllTasks} from "../Task/TaskService";
 import {User} from "../User/UserSlice";
+import {Moment} from "moment";
 
 export enum TaskType {
-    MAINTENANCE,
-    TO_BE_DECIDED
+    MAINTENANCE = "Maintenance",
+    TO_BE_DECIDED = "To be decided"
 }
 
 export enum TaskStatus{
@@ -30,7 +31,7 @@ export interface Comment {
 }
 
 export interface Task {
-    id: number,
+    id: string,
     title: string,
     state: TaskType,
     description: string,
@@ -53,13 +54,12 @@ const taskSelectors = tasksAdapter.getSelectors((state: RootState) => state.task
 export const selectAllTasks = taskSelectors.selectAll;
 export const selectTaskById = taskSelectors.selectById;
 export const setTasks = (tasks: Task[], state: EntityState<Task>) => tasksAdapter.setAll(state, tasks);
-export const createOneTask = (task: Task, state: EntityState<Task>) => tasksAdapter.addOne(state, task);
 export const updateOneTask = (task: Task, state: EntityState<Task>) => tasksAdapter.updateOne(state, { id: task.id, changes: task });
-export const deleteOneTask = (taskId: number, state: EntityState<Task>) => tasksAdapter.removeOne(state, taskId);
+export const deleteOneTask = (taskId: string, state: EntityState<Task>) => tasksAdapter.removeOne(state, taskId);
 export const selectTaskByControlId = (state: any, controlId: string) => {
     return createSelector(
         [selectAllTasks],
-        (items: Task[]) => items.filter(task => task.control.id === controlId)
+        (items: Task[]) => items.filter(task => (task.control.id || null) === controlId)
     )(state)
 }
 

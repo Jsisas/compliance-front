@@ -1,6 +1,9 @@
 @import "../../../theme.module";
 
 .primary {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
   border: none;
   border-radius: 4px;
   background: $success-color;

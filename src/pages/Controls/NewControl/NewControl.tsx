@@ -18,7 +18,7 @@ export function NewControlPage() {
     const routeHistory = useHistory();
 
     function handleCreateNewControl(data: Control): void {
-        data.startDate = ((data.startDate as unknown) as Moment).toISOString();
+        data.startDate = new Date(((data.startDate as any) as Moment).toISOString());
         dispatch(createControl(data));
         notifySucess("Add Control", "Adding a control was successful!");
         routeHistory.push("/controls");
