@@ -6,7 +6,8 @@ import {User} from "../User/UserSlice";
 
 export enum TaskType {
     MAINTENANCE = "Maintenance",
-    TO_BE_DECIDED = "To be decided"
+    AUDIT = "Audit",
+    REVIEW = "Review"
 }
 
 export enum TaskStatus{

@@ -75,8 +75,11 @@ export function AddTaskModule(props: AddTaskProps) {
                                         <Radio key={TaskType.MAINTENANCE} value={TaskType.MAINTENANCE}>
                                             {TaskType.MAINTENANCE}
                                         </Radio>
-                                        <Radio key={TaskType.TO_BE_DECIDED} value={TaskType.TO_BE_DECIDED}>
-                                            {TaskType.TO_BE_DECIDED}
+                                        <Radio key={TaskType.AUDIT} value={TaskType.AUDIT}>
+                                            {TaskType.AUDIT}
+                                        </Radio>
+                                        <Radio key={TaskType.REVIEW} value={TaskType.REVIEW}>
+                                            {TaskType.REVIEW}
                                         </Radio>
                                     </Radio.Group>
                                 </Form.Item>
