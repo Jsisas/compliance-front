@@ -24,12 +24,27 @@ export function AlConnectedItems(props: AlConnectedItemsProps) {
 
     if (props.data !== undefined) {
         Object.entries(props.data).forEach(([key, value]) => {
-            if (Array.isArray(value) && value.length > 0 && (typeof value[0] === 'object')) {
+            if (Array.isArray(value) && value.length > 0 && (typeof value[0] === 'object') || (typeof value === "object")) {
                 values[key] = value;
             }
         });
     }
 
+    function getLink(value: any, key: string){
+        if(Array.isArray(value)){
+            return value.map((x) => {
+                return (
+                    <Link key={x.id}
+                          to={`/${key}/${x.id}`}>{shortenStringLength(lowerCameltoUpperCamel(x.title), 50)}z</Link>
+                )
+            })
+        }else if(typeof value === "object") {
+            return (
+                <Link key={value.id}
+                      to={`/${key}/${value.id}`}>{shortenStringLength(lowerCameltoUpperCamel(value.title), 50)}z</Link>
+            )
+        }
+    }
 
     return (
         <>
@@ -51,13 +66,7 @@ export function AlConnectedItems(props: AlConnectedItemsProps) {
                                 </Row>
                                 <Row gutter={[16, 16]}>
                                     <Col xs={24}>
-                                        {value.map((x) => {
-                                            return (
-                                                <Link key={x.id}
-                                                      to={`/${key}/${x.id}`}>{shortenStringLength(lowerCameltoUpperCamel(x.title), 50)}z</Link>
-                                            )
-                                        })
-                                        }
+                                        {getLink(value, key)}
                                     </Col>
                                 </Row>
                             </div>

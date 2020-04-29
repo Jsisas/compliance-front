@@ -53,18 +53,19 @@ export function TaskDetail(props: TaskDetailsProps) {
                         <LeftOutlined style={{fontSize: "24px", float: "right"}}/>
                     </Link>
                 </Col>
-                <Col xs={22} xl={23}>
+                <Col xs={{span: 10}} sm={10} md={10} lg={{span: 10}}
+                     xl={{span: 10}}>
                     <Title style={{marginBottom: 0}}>{task?.title}</Title>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} align={"bottom"}>
-                <Col xs={{span: 23, offset: 1}} sm={{span: 16, offset: 1}} md={{span: 16, offset: 1}}
-                     lg={{span: 16, offset: 1}} xl={{span: 15, offset: 1}}>
+                <Col xs={{span: 10, offset: 1}} sm={10} md={10} lg={{span: 10, offset: 1}}
+                     xl={{span: 10, offset: 1}}>
                     <Text
                         type={"secondary"}>{task?.description || "When an employee leaves the company, their authorizations are revoked in the company’s access provisioning software on the last day of their employment contract."}</Text>
                 </Col>
-                <Col xs={{span: 24}} sm={{span: 6, offset: 1}} md={{span: 4, offset: 3}} lg={{span: 4, offset: 3}}
-                     xl={{span: 3, offset: 5}}>
+                <Col xs={{span: 24}} sm={{span: 6, offset: 6}} md={{span: 4, offset: 8}} lg={{span: 4, offset: 8}}
+                     xl={{span: 3, offset: 10}}>
                     <AlButton type={'secondary'} style={{float: 'right'}}><EllipsisOutlined/></AlButton>
                     <AlButton type={'secondary'}
                               style={{marginRight: '8px', float: 'right'}}><EditOutlined/></AlButton>
