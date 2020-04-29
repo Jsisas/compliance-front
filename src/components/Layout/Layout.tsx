@@ -9,7 +9,9 @@ import styles from "./layout.module.scss";
 const {Content, Sider} = Layout;
 
 export function PageLayout() {
-    const [selectedKey, setSelectedKey] = useState(window.location.pathname)
+    const homePage = "/regulations";
+    const selectedHomePage = window.location.pathname === "/" ? homePage : window.location.pathname;
+    const [selectedKey, setSelectedKey] = useState(selectedHomePage)
     const [isCollapsed, setCollapsed] = useState(false)
 
     const connectControlDropdown = (

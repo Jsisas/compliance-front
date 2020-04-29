@@ -1,8 +1,6 @@
 import * as React from 'react';
-import {Button, Result, Typography} from 'antd';
+import {Result} from 'antd';
 import AlButton from "../../components/_ui/AlButton/AlButton";
-
-const {Title} = Typography;
 
 export function NotFoundPage(props: any) {
     return (

@@ -8,7 +8,7 @@ export interface ButtonProp {
   style?: CSSProperties;
   children?: ReactNode;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  htmlType?: "button" | "submit" | "reset" | undefined;
+  htmlType?: "button" | "submit" | "reset";
 }
 
 export default function AlButton(props: ButtonProp) {

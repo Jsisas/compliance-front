@@ -1,14 +1,13 @@
 import * as React from 'react';
-import {Button, Typography, Modal, Col, Form, Input, Row, DatePicker, Radio, Select} from 'antd';
+import {Col, DatePicker, Form, Input, Modal, Radio, Row, Select, Typography} from 'antd';
 import styles from './addTaskModal.module.scss';
-import {Control, ControlCategory, createControl} from '../../redux/Control/ControlSlice';
+import {Control} from '../../redux/Control/ControlSlice';
 import {CloseOutlined} from "@ant-design/icons/lib";
 import TextArea from "antd/lib/input/TextArea";
 import {UserSearch} from "../AssigneeSearch/AssigneeSearch";
 import AlButton from "../_ui/AlButton/AlButton";
 import {createTask, Task, TaskType} from "../../redux/Task/TaskSlice";
 import {useDispatch} from "react-redux";
-import {useHistory} from "react-router-dom";
 import {Moment} from "moment";
 import {notifySucess} from "../../util/NotificationUtil";
 import {v4} from "uuid";
@@ -24,7 +23,6 @@ interface AddTaskProps {
 
 export function AddTaskModule(props: AddTaskProps) {
     const dispatch = useDispatch();
-    const routeHistory = useHistory();
 
     function handleCreateNewControl(data: Task): void {
         data.id = v4()

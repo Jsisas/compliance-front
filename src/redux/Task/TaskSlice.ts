@@ -3,7 +3,6 @@ import {createEntityAdapter, createSelector, createSlice, EntityState, PayloadAc
 import {RootState} from "../reducer";
 import {fetchAllTasks} from "../Task/TaskService";
 import {User} from "../User/UserSlice";
-import {Moment} from "moment";
 
 export enum TaskType {
     MAINTENANCE = "Maintenance",

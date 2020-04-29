@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/reducer";
 import {selectControlById} from "../../../redux/Control/ControlSlice";
 import {fetchAllControls} from "../../../redux/Control/ControlService";
-import {Col, Row, Table, Typography, Divider, Modal} from "antd";
+import {Col, Row, Table, Typography, Divider} from "antd";
 import {EditOutlined, EllipsisOutlined, LeftOutlined} from "@ant-design/icons/lib";
 import AlButton from "../../../components/_ui/AlButton/AlButton";
 import {AlConnectedItems} from "../../../components/_ui/AlConnectedItems/AlConnectedItems";
