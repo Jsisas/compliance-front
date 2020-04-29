@@ -2,16 +2,16 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {Col, Dropdown, Input, Menu, Row, Table, Tag, Typography} from "antd";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../redux/reducer";
-import themeStyles from "../../../theme.module.scss";
+import {RootState} from "../../redux/reducer";
+import themeStyles from "../../theme.module.scss";
 import {ColumnProps} from "antd/lib/table";
 import {Link, useParams} from "react-router-dom";
-import {Requirement, selectAllRequirements} from "../../../redux/Requirement/RequirementSlice";
+import {Requirement, selectAllRequirements} from "../../redux/Requirement/RequirementSlice";
 import {DownOutlined, LeftOutlined, SearchOutlined} from "@ant-design/icons/lib";
-import {selectAllRegulations, selectRegulationById} from "../../../redux/Regulation/RegulationSlice";
-import {fetchAllRegulations} from "../../../redux/Regulation/RegulationService";
-import AlButton from "../../../components/_ui/AlButton/AlButton";
-import {fetchAllRequirements} from "../../../redux/Requirement/RequirementService";
+import {selectAllRegulations, selectRegulationById} from "../../redux/Regulation/RegulationSlice";
+import {fetchAllRegulations} from "../../redux/Regulation/RegulationService";
+import AlButton from "../../components/_ui/AlButton/AlButton";
+import {fetchAllRequirements} from "../../redux/Requirement/RequirementService";
 
 const {Title} = Typography;
 

@@ -2,17 +2,17 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../redux/reducer";
+import {RootState} from "../../redux/reducer";
 import {Col, Row, Typography, Upload} from "antd";
 import {EditOutlined, EllipsisOutlined, InboxOutlined, LeftOutlined} from "@ant-design/icons/lib";
-import AlButton from "../../../components/_ui/AlButton/AlButton";
-import {AlConnectedItems} from "../../../components/_ui/AlConnectedItems/AlConnectedItems";
-import {fetchAllTasks} from "../../../redux/Task/TaskService";
-import {selectTaskById} from "../../../redux/Task/TaskSlice";
+import AlButton from "../../components/_ui/AlButton/AlButton";
+import {AlConnectedItems} from "../../components/_ui/AlConnectedItems/AlConnectedItems";
+import {fetchAllTasks} from "../../redux/Task/TaskService";
+import {selectTaskById} from "../../redux/Task/TaskSlice";
 import styles from './taskDetails.module.scss'
-import {date, dateFormat} from "../../../util/DateUtil";
-import {AddLink, AddLinkModal} from "../../../components/modals/AddLinkModal/AddLinkModal";
-import {AlComment} from "../../../components/_ui/AlComment/AlComment";
+import {date, dateFormat} from "../../util/DateUtil";
+import {AddLink, AddLinkModal} from "../../components/modals/AddLinkModal/AddLinkModal";
+import {AlComment} from "../../components/_ui/AlComment/AlComment";
 import TextArea from "antd/lib/input/TextArea";
 
 const {Title, Text} = Typography;

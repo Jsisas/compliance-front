@@ -6,10 +6,10 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {Link, useHistory} from "react-router-dom";
 
-import {UserSearch} from "../../../components/AssigneeSearch/AssigneeSearch";
-import {Control, ControlCategory, createControl,} from "../../../redux/Control/ControlSlice";
-import {notifySucess} from "../../../util/NotificationUtil";
-import AlButton from "../../../components/_ui/AlButton/AlButton";
+import {UserSearch} from "../../components/AssigneeSearch/AssigneeSearch";
+import {Control, ControlCategory, createControl,} from "../../redux/Control/ControlSlice";
+import {notifySucess} from "../../util/NotificationUtil";
+import AlButton from "../../components/_ui/AlButton/AlButton";
 
 const {Title} = Typography;
 
