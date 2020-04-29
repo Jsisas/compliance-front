@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {Col, DatePicker, Form, Input, Modal, Radio, Row, Select, Typography} from 'antd';
 import styles from './addTaskModal.module.scss';
-import {Control} from '../../redux/Control/ControlSlice';
+import {Control} from '../../../redux/Control/ControlSlice';
 import {CloseOutlined} from "@ant-design/icons/lib";
 import TextArea from "antd/lib/input/TextArea";
-import {UserSearch} from "../AssigneeSearch/AssigneeSearch";
-import AlButton from "../_ui/AlButton/AlButton";
-import {createTask, Task, TaskType} from "../../redux/Task/TaskSlice";
+import {UserSearch} from "../../AssigneeSearch/AssigneeSearch";
+import AlButton from "../../_ui/AlButton/AlButton";
+import {createTask, Task, TaskType} from "../../../redux/Task/TaskSlice";
 import {useDispatch} from "react-redux";
 import {Moment} from "moment";
-import {notifySucess} from "../../util/NotificationUtil";
+import {notifySucess} from "../../../util/NotificationUtil";
 import {v4} from "uuid";
 
 const {Title, Text} = Typography

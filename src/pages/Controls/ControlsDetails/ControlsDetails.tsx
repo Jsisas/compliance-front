@@ -16,7 +16,7 @@ import {User} from "../../../redux/User/UserSlice";
 import styles from './controlDetails.module.scss'
 import themeStyle from './../../../theme.module.scss';
 
-import {AddTaskModule} from '../../../components/AddTaskModal/AddTaskModal';
+import {AddTaskModule} from '../../../components/modals/AddTaskModal/AddTaskModal';
 import {concatStyles} from "../../../util/StyleUtil";
 
 const {Title, Text} = Typography;
