@@ -12,6 +12,8 @@ import {selectTaskById} from "../../../redux/Task/TaskSlice";
 import styles from './taskDetails.module.scss'
 import {date, dateFormat} from "../../../util/DateUtil";
 import {AddLink, AddLinkModal} from "../../../components/modals/AddLinkModal/AddLinkModal";
+import {AlComment} from "../../../components/_ui/AlComment/AlComment";
+import TextArea from "antd/lib/input/TextArea";
 
 const {Title, Text} = Typography;
 const { Dragger } = Upload;
@@ -136,6 +138,21 @@ export function TaskDetail(props: TaskDetailsProps) {
                             <AlButton type="link" className={styles.buttonPadding} onClick={() => setAddLinkModalVisible(!isAddLinkModalVisible)}>add link</AlButton>
                         </div>
                     </Dragger>
+                </Col>
+            </Row>
+            <Row gutter={[16, 16]}>
+                <Col xs={{span: 10, offset: 1}} sm={10} md={10} lg={{span: 10, offset: 1}}
+                     xl={{span: 10, offset: 1}}>
+                    <Text>Comment</Text>
+                    <TextArea placeholder="Add comment"/>
+                </Col>
+            </Row>
+            <Row gutter={[16, 16]}>
+                <Col xs={{span: 10, offset: 1}} sm={10} md={10} lg={{span: 10, offset: 1}}
+                     xl={{span: 10, offset: 1}}>
+                    <AlComment>
+                        <AlComment />
+                    </AlComment>
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
