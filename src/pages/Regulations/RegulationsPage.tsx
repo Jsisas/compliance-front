@@ -41,8 +41,8 @@ export default function RegulationsPage(props: RegulationPageProps) {
     }
 
     function getRegulationRequirementsWithoutControl(regulation: Regulation) {
-        const a = regulation.requirements?.filter(x => x.controls?.length < 1);
-        return a?.length || 0;
+        const a = regulation.requirements?.filter(x => (x.controls?.length || 0) < 1);
+        return a.length;
     }
 
     if (regulations.length > 0) {

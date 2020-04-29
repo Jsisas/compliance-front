@@ -6,6 +6,7 @@ import {Requirement} from "../Requirement/RequirementSlice";
 export interface Regulation {
     id: string,
     title: string,
+    description: string;
     requirements: Requirement[]
 }
 
