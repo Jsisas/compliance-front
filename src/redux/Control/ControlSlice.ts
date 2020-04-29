@@ -6,8 +6,10 @@ import {User} from '../User/UserSlice';
 import {Requirement} from "../Requirement/RequirementSlice";
 
 export enum ControlStatus {
-    NOT_IMPLEMENTED = "Not implemented",
-    IMPLEMENTED = "Implemented"
+    IN_DESIGN = "In design",
+    IMPLEMENTED = "Implemented",
+    FAILING = "Failing",
+    OK = "Ok",
 }
 
 export enum ControlCategory {
