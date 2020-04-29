@@ -4,7 +4,7 @@ import TextArea from "antd/lib/input/TextArea";
 import {Moment} from "moment";
 import React from "react";
 import {useDispatch} from "react-redux";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import {UserSearch} from "../../components/AssigneeSearch/AssigneeSearch";
 import {Control, ControlCategory, createControl,} from "../../redux/Control/ControlSlice";
@@ -13,7 +13,10 @@ import AlButton from "../../components/_ui/AlButton/AlButton";
 
 const {Title} = Typography;
 
-export function NewControlPage() {
+interface NewControlProps {
+    history: any;
+}
+export function NewControlPage(props: NewControlProps) {
     const dispatch = useDispatch();
     const routeHistory = useHistory();
 
@@ -30,9 +33,9 @@ export function NewControlPage() {
         <>
             <Row gutter={[16, 16]} align={"middle"}>
                 <Col xs={2} xl={1}>
-                    <Link to="/controls">
+                    <AlButton type="link" onClick={() => props.history.goBack()}>
                         <LeftOutlined style={{fontSize: "24px", float: "right"}}/>
-                    </Link>
+                    </AlButton>
                 </Col>
                 <Col xs={20} xl={20}>
                     <Title style={{marginBottom: 0}}>Add Control</Title>

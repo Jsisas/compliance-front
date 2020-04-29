@@ -8,7 +8,7 @@ export function AlComment(props: AlCommentProps) {
     return (
         <Comment
             actions={[<span key="comment-nested-reply-to">Reply to</span>]}
-            author={<a>Han Solo</a>}
+            author={<span>Han Solo</span>}
             avatar={
                 <Avatar
                     src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
@@ -25,4 +25,4 @@ export function AlComment(props: AlCommentProps) {
             {props.children}
         </Comment>
     );
-};
+}

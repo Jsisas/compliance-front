@@ -6,12 +6,16 @@ import {RootState} from "../../redux/reducer";
 import themeStyles from "../../theme.module.scss";
 import {ColumnProps} from "antd/lib/table";
 import {Link, useParams} from "react-router-dom";
-import {Requirement, selectAllRequirements} from "../../redux/Requirement/RequirementSlice";
+import {editRequirement, Requirement, selectAllRequirements} from "../../redux/Requirement/RequirementSlice";
 import {DownOutlined, LeftOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {selectAllRegulations, selectRegulationById} from "../../redux/Regulation/RegulationSlice";
 import {fetchAllRegulations} from "../../redux/Regulation/RegulationService";
 import AlButton from "../../components/_ui/AlButton/AlButton";
 import {fetchAllRequirements} from "../../redux/Requirement/RequirementService";
+import {SearchControlModal} from "../../components/modals/SearchControlModal/SearchControlModal";
+import {Control} from "../../redux/Control/ControlSlice";
+import {notifyError} from "../../util/NotificationUtil";
+import produce, {Draft} from "immer";
 
 const {Title} = Typography;
 
@@ -23,12 +27,15 @@ export enum RequirementTableFilter {
 
 export function RequirementsPage() {
     let {id} = useParams<{ id: string }>();
+
+    const [tableSearchText, setTableSearchText] = useState<string>()
+    const [requirementFilter, setRequirementFilter] = useState<RequirementTableFilter>(RequirementTableFilter.ALL)
+    const [isSearchControlModalVisible, setSearchControlModalVisible] = useState(false)
+
     const selectedRegulation = useSelector((state: RootState) => selectRegulationById(state, id));
     const regulations = useSelector((state: RootState) => selectAllRegulations(state));
     const requirements = useSelector((state: RootState) => selectAllRequirements(state));
 
-    const [tableSearchText, setTableSearchText] = useState<string>()
-    const [requirementFilter, setRequirementFilter] = useState<RequirementTableFilter>(RequirementTableFilter.ALL)
 
     const [selectedRequirements, setSelectedRequirements] = useState<Requirement[]>([])
     let filteredRequirements = getFilteredRequirements(tableSearchText || "");
@@ -154,19 +161,44 @@ export function RequirementsPage() {
         </Menu>
     );
 
+    function onAttachControlClick() {
+        if(selectedRequirements.length > 0){
+            setSearchControlModalVisible(!isSearchControlModalVisible)
+        }else{
+            notifyError("Attach control", "Can not attach a control if no requirement is selected")
+        }
+    }
+
     const connectControlDropdown = (
         <Menu>
             <Menu.Item key="New Control">
-                New Control
+                <Link to="/controls/new">New control</Link>
             </Menu.Item>
-            <Menu.Item key="Attach Control">
+            <Menu.Item key="Attach Control" onClick={onAttachControlClick}>
                 Attach existing control
             </Menu.Item>
         </Menu>
     )
 
+    function attachExistingControlToSelectedRequirements(control: Control) {
+        setTimeout(() => {
+            setSearchControlModalVisible(false);
+            selectedRequirements.forEach(requirement => {
+                const tmpRequirement = produce(requirement, (draft: Draft<Requirement>) => {
+                    draft.controls.push(control)
+                })
+                dispatch(editRequirement(tmpRequirement))
+            })
+        }, 300)
+    }
+
     return (
         <>
+            <SearchControlModal
+                onSelect={(control: Control) => attachExistingControlToSelectedRequirements(control)}
+                isVisible={isSearchControlModalVisible}
+                onCancel={() => setSearchControlModalVisible(false)}
+            />
             <Row gutter={[16, 16]} align={"middle"}>
                 <Col xs={2} xl={1}>
                     <Link to="/regulations">
