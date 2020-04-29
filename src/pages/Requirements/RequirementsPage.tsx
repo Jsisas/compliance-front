@@ -6,7 +6,11 @@ import {RootState} from "../../redux/reducer";
 import themeStyles from "../../theme.module.scss";
 import {ColumnProps} from "antd/lib/table";
 import {Link, useParams} from "react-router-dom";
-import {editRequirement, Requirement, selectAllRequirements} from "../../redux/Requirement/RequirementSlice";
+import {
+    updateRequirement,
+    Requirement,
+    selectAllRequirements,
+} from "../../redux/Requirement/RequirementSlice";
 import {DownOutlined, LeftOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {selectAllRegulations, selectRegulationById} from "../../redux/Regulation/RegulationSlice";
 import {fetchAllRegulations} from "../../redux/Regulation/RegulationService";
@@ -16,6 +20,7 @@ import {SearchControlModal} from "../../components/modals/SearchControlModal/Sea
 import {Control} from "../../redux/Control/ControlSlice";
 import {notifyError} from "../../util/NotificationUtil";
 import produce, {Draft} from "immer";
+import { setTmpRequirements } from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
 
 const {Title} = Typography;
 
@@ -169,10 +174,18 @@ export function RequirementsPage() {
         }
     }
 
+    function onNewControlClick() {
+        if(selectedRequirements.length > 0){
+            dispatch(setTmpRequirements(selectedRequirements))
+        }else{
+            notifyError("Attach control", "Can not attach a control if no requirement is selected")
+        }
+    }
+
     const connectControlDropdown = (
         <Menu>
             <Menu.Item key="New Control">
-                <Link to="/controls/new">New control</Link>
+                <Link to="/controls/new" onClick={onNewControlClick}>New control</Link>
             </Menu.Item>
             <Menu.Item key="Attach Control" onClick={onAttachControlClick}>
                 Attach existing control
@@ -187,7 +200,7 @@ export function RequirementsPage() {
                 const tmpRequirement = produce(requirement, (draft: Draft<Requirement>) => {
                     draft.controls.push(control)
                 })
-                dispatch(editRequirement(tmpRequirement))
+                dispatch(updateRequirement(tmpRequirement))
             })
         }, 300)
     }

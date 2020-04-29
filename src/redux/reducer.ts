@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
     control: controlReducer,
     regulation: regulationReducer,
     requirement: requirementReducer,
+    tmpRequirement: requirementReducer,
     task: taskReducer,
 });
 

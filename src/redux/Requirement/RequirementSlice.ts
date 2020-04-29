@@ -46,10 +46,10 @@ const RequirementSlice = createSlice({
     name: 'requirement',
     initialState: {entities: requirementInitialState, loading: false},
     reducers: {
-        createRequirement(state, {payload}: PayloadAction<Requirement>) {
+        createTmpRequirement(state, {payload}: PayloadAction<Requirement>) {
             requirementAdapter.addOne(state.entities, payload)
         },
-        editRequirement(state, {payload}: PayloadAction<Requirement>) {
+        updateRequirement(state, {payload}: PayloadAction<Requirement>) {
             updateOneRequirement(payload, state.entities)
         },
         deleteRequirement(state, {payload}: PayloadAction<Requirement>) {
@@ -64,6 +64,6 @@ const RequirementSlice = createSlice({
     }
 })
 
-export const {createRequirement, editRequirement, deleteRequirement} = RequirementSlice.actions
+export const {createTmpRequirement, updateRequirement, deleteRequirement} = RequirementSlice.actions
 export default RequirementSlice.reducer;
 
