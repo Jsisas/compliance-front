@@ -4,6 +4,38 @@ import {RootState} from "../reducer";
 import {fetchAllTasks} from "../Task/TaskService";
 import {User} from "../User/UserSlice";
 
+export enum Weekday {
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY,
+    SUNDAY
+}
+
+export enum Quarter {
+    FIRST,
+    SECOND,
+    THIRD,
+    FOURTH,
+}
+
+export enum Month {
+    JANUARY,
+    FEBRUARY,
+    MARCH,
+    APRIL,
+    MAY,
+    JUNE,
+    JULY,
+    AUGUST,
+    SEPTEMBER,
+    OCTOBER,
+    NOVEMBER,
+    DECEMBER
+}
+
 export enum TaskType {
     MAINTENANCE = "Maintenance",
     AUDIT = "Audit",
@@ -22,6 +54,43 @@ export interface TaskFile {
     downloadUrl: string,
 }
 
+export enum TaskFrequencyType {
+    ONE_TIME = "One-time task",
+    RECURRING = "Recurring task",
+}
+
+export enum TaskFrequencyTypeRecurrence {
+    WEEKLY = "Weekly",
+    MONTHLY = "Monthly",
+    QUARTERLY = "Quarterly",
+    ANNUAL = "Annual",
+}
+
+export interface WeeklyTaskFrequency {
+    type: TaskFrequencyType,
+    recurrence: TaskFrequencyTypeRecurrence;
+    weekDay: Weekday;
+}
+
+export interface MonthlyTaskFrequency {
+    type: TaskFrequencyType,
+    recurrence: TaskFrequencyTypeRecurrence;
+    weekDay: number;
+    week: number;
+}
+
+export interface QuarterlyTaskFrequency {
+    type: TaskFrequencyType,
+    recurrence: TaskFrequencyTypeRecurrence;
+    quarter: Quarter;
+}
+
+export interface AnnualTaskFrequency {
+    type: TaskFrequencyType,
+    recurrence: TaskFrequencyTypeRecurrence;
+    month: Month;
+}
+
 export interface Comment {
     id: number,
     author: Task,
@@ -36,6 +105,7 @@ export interface Task {
     state: TaskType,
     description: string,
     kind: TaskType,
+    frequency: WeeklyTaskFrequency | MonthlyTaskFrequency | QuarterlyTaskFrequency | AnnualTaskFrequency;
     assignee: User,
     due_at: Date,
     files: TaskFile[],
