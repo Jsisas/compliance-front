@@ -8,7 +8,9 @@ import TextArea from "antd/lib/input/TextArea";
 import {UserSearch} from "../../AssigneeSearch/AssigneeSearch";
 import AlButton from "../../_ui/AlButton/AlButton";
 import {
-    createTask, Month, Quarter,
+    createTask,
+    Month,
+    Quarter,
     Task,
     TaskFrequencyType,
     TaskFrequencyTypeRecurrence,
@@ -163,7 +165,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                     </Select>
                                 </Form.Item>
                                 }
-                                {(taskRecurrence === TaskFrequencyTypeRecurrence.WEEKLY && taskFrequency === TaskFrequencyType.RECURRING || taskRecurrence === TaskFrequencyTypeRecurrence.MONTHLY && taskFrequency === TaskFrequencyType.RECURRING) &&
+                                {((taskRecurrence === TaskFrequencyTypeRecurrence.WEEKLY && taskFrequency === TaskFrequencyType.RECURRING) || (taskRecurrence === TaskFrequencyTypeRecurrence.MONTHLY && taskFrequency === TaskFrequencyType.RECURRING)) &&
                                 <Form.Item
                                     name="weekDay"
                                     label="Weekday"

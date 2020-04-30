@@ -11,7 +11,6 @@ import {Control, ControlCategory, createControl,} from "../../redux/Control/Cont
 import {notifySucess} from "../../util/NotificationUtil";
 import AlButton from "../../components/_ui/AlButton/AlButton";
 import {RootState} from "../../redux/reducer";
-import {selectAllRegulations} from "../../redux/Regulation/RegulationSlice";
 import {selectAllTmpRequirements} from "../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice";
 import {Requirement, updateRequirement} from "../../redux/Requirement/RequirementSlice";
 import produce, {Draft} from "immer";

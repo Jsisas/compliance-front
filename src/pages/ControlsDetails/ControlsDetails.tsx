@@ -8,7 +8,6 @@ import {fetchAllControls} from "../../redux/Control/ControlService";
 import {Col, Row, Table, Typography, Divider} from "antd";
 import {EditOutlined, EllipsisOutlined, LeftOutlined} from "@ant-design/icons/lib";
 import AlButton from "../../components/_ui/AlButton/AlButton";
-import {AlConnectedItems} from "../../components/_ui/AlConnectedItems/AlConnectedItems";
 import {fetchAllTasks} from "../../redux/Task/TaskService";
 import {selectTaskByControlId, Task} from "../../redux/Task/TaskSlice";
 import {ColumnProps} from "antd/lib/table";

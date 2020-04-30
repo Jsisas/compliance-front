@@ -1,12 +1,9 @@
 import * as React from 'react';
 import {Col, Row, Typography} from "antd";
 import {Link} from "react-router-dom";
-import {Regulation} from "../../redux/Regulation/RegulationSlice";
 import {Task} from "../../redux/Task/TaskSlice";
-import {Requirement} from "../../redux/Requirement/RequirementSlice";
-import {Control} from "../../redux/Control/ControlSlice";
-import {lowerCameltoUpperCamel, shortenStringLength} from "../../util/StringUtil";
-import styles from './contorlConnectedItems.module.scss';
+import {shortenStringLength} from "../../util/StringUtil";
+import styles from './taskConnectedItems.module.scss';
 
 const {Text} = Typography;
 
