@@ -14,6 +14,8 @@ import {AddLink, AddLinkModal} from "../../components/modals/AddLinkModal/AddLin
 import {AlComment} from "../../components/_ui/AlComment/AlComment";
 import TextArea from "antd/lib/input/TextArea";
 import {TaskConnectedItems} from "../../components/TaskConnectedItems/TaskConnectedItems";
+import {notifyError} from "../../util/NotificationUtil";
+import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
 
 const {Title, Text} = Typography;
 const { Dragger } = Upload;
@@ -49,9 +51,7 @@ export function TaskDetail(props: TaskDetailsProps) {
         <>
             <Row gutter={[16, 16]} align={"middle"}>
                 <Col xs={1} xl={1}>
-                    <AlButton type="link" onClick={() => props.history.goBack()}>
-                        <LeftOutlined style={{fontSize: "24px", float: "right"}}/>
-                    </AlButton>
+                    <AlBackArrow history={props.history}/>
                 </Col>
                 <Col xs={{span: 10}} sm={10} md={10} lg={{span: 10}}
                      xl={{span: 10}}>
@@ -84,7 +84,7 @@ export function TaskDetail(props: TaskDetailsProps) {
                         <Col xs={24} sm={24} md={24} lg={24} xl={3}>
                             <Text type={'secondary'}>Type</Text>
                         </Col>
-                        <Col xs={24} sm={24} md={24} lg={24} xl={6}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={7}>
                             <Text type={'secondary'}>Due date</Text>
                         </Col>
                     </Row>
@@ -151,17 +151,17 @@ export function TaskDetail(props: TaskDetailsProps) {
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
+                <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}}
+                     xl={{span: 17, offset: 1}}>
+                    <AlButton type="primary" onClick={() => notifyError("Not implemented", "This feature is not implemented")}>Add comment</AlButton>
+                </Col>
+            </Row>
+            <Row gutter={[16, 16]}>
                 <Col xs={{span: 10, offset: 1}} sm={10} md={10} lg={{span: 10, offset: 1}}
                      xl={{span: 10, offset: 1}}>
                     <AlComment>
                         <AlComment />
                     </AlComment>
-                </Col>
-            </Row>
-            <Row gutter={[16, 16]}>
-                <Col xs={{span: 24, offset: 1}} sm={24} md={24} lg={{span: 17, offset: 1}}
-                     xl={{span: 17, offset: 1}}>
-                    <AlButton type="primary" onClick={addTask}>Add task</AlButton>
                 </Col>
             </Row>
         </>

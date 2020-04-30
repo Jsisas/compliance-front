@@ -21,6 +21,7 @@ import {Control} from "../../redux/Control/ControlSlice";
 import {notifyError} from "../../util/NotificationUtil";
 import produce, {Draft} from "immer";
 import { setTmpRequirements } from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
+import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
 
 const {Title} = Typography;
 
@@ -30,7 +31,7 @@ export enum RequirementTableFilter {
     WITH_FAILING_CONTROL = "Requirements with failing controls"
 }
 
-export function RequirementsPage() {
+export function RequirementsPage(props: any) {
     let {id} = useParams<{ id: string }>();
 
     const [tableSearchText, setTableSearchText] = useState<string>()
@@ -214,9 +215,7 @@ export function RequirementsPage() {
             />
             <Row gutter={[16, 16]} align={"middle"}>
                 <Col xs={2} xl={1}>
-                    <Link to="/regulations">
-                        <LeftOutlined style={{fontSize: "24px", float: "right"}}/>
-                    </Link>
+                    <AlBackArrow history={props.history}/>
                 </Col>
                 <Col xs={8} xl={8}>
                     <Title style={{marginBottom: 0}}>Requirements</Title>

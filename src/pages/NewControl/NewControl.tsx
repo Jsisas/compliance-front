@@ -14,6 +14,7 @@ import {RootState} from "../../redux/reducer";
 import {selectAllTmpRequirements} from "../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice";
 import {Requirement, updateRequirement} from "../../redux/Requirement/RequirementSlice";
 import produce, {Draft} from "immer";
+import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
 
 const {Title} = Typography;
 
@@ -49,9 +50,7 @@ export function NewControlPage(props: NewControlProps) {
         <>
             <Row gutter={[16, 16]} align={"middle"}>
                 <Col xs={2} xl={1}>
-                    <AlButton type="link" onClick={() => props.history.goBack()}>
-                        <LeftOutlined style={{fontSize: "24px", float: "right"}}/>
-                    </AlButton>
+                    <AlBackArrow history={props.history}/>
                 </Col>
                 <Col xs={20} xl={20}>
                     <Title style={{marginBottom: 0}}>Add Control</Title>

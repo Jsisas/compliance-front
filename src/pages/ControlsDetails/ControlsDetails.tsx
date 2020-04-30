@@ -18,6 +18,7 @@ import themeStyle from '../../theme.module.scss';
 import {AddTaskModule} from '../../components/modals/AddTaskModal/AddTaskModal';
 import {concatStyles} from "../../util/StyleUtil";
 import {ControlConnectedItems} from "../../components/ControlConnectedItems/ControlConnectedItems";
+import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
 
 const {Title, Text} = Typography;
 
@@ -89,9 +90,7 @@ export function ControlsDetails(props: ControlsDetailsProps) {
             <AddTaskModule control={control!} isVisible={isAddTaskModalVisible} onCancel={toggleModal}/>
             <Row gutter={[16, 16]} align={"middle"}>
                 <Col xs={1} xl={1}>
-                    <Link to="/controls">
-                        <LeftOutlined style={{fontSize: "24px", float: "right"}}/>
-                    </Link>
+                    <AlBackArrow history={props.history}/>
                 </Col>
                 <Col xs={22} xl={23}>
                     <Title style={{marginBottom: 0}}>{control?.title}</Title>
