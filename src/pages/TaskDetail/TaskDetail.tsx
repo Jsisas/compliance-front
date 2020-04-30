@@ -19,7 +19,7 @@ const {Title, Text} = Typography;
 const { Dragger } = Upload;
 
 interface TaskDetailsProps {
-    history: any[];
+    history: any;
 }
 
 export function TaskDetail(props: TaskDetailsProps) {
@@ -49,9 +49,9 @@ export function TaskDetail(props: TaskDetailsProps) {
         <>
             <Row gutter={[16, 16]} align={"middle"}>
                 <Col xs={1} xl={1}>
-                    <Link to="/controls">
+                    <AlButton type="link" onClick={() => props.history.goBack()}>
                         <LeftOutlined style={{fontSize: "24px", float: "right"}}/>
-                    </Link>
+                    </AlButton>
                 </Col>
                 <Col xs={{span: 10}} sm={10} md={10} lg={{span: 10}}
                      xl={{span: 10}}>

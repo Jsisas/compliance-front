@@ -10,10 +10,11 @@ import {fetchAllTasks} from "../../redux/Task/TaskService";
 import 'moment/locale/et';
 import {date, dateFormat} from "../../util/DateUtil";
 import {AddTaskModule} from "../../components/modals/AddTaskModal/AddTaskModal";
+import themeStyles from './../../theme.module.scss';
 
 const {Title} = Typography;
 
-export function TasksPage() {
+export function TasksPage(props: any) {
     const tasks = useSelector((state: RootState) => selectAllTasks(state));
     const [isAddTaskModalVisible, setAddTaskModalVisible] = useState(false)
     const isTableLoading = useSelector(
@@ -79,12 +80,18 @@ export function TasksPage() {
             <Row gutter={[16, 16]} justify={"space-between"}>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                     <Table
+                        onRow={(record) => {
+                            return {
+                                onClick: () => {props.history.push("/tasks/" + record.id)},
+                            };
+                        }}
                         dataSource={tasks}
                         columns={columns}
                         rowKey="id"
                         scroll={tasks.length < 1 ? {x: undefined} : {x: 'auto'}}
                         loading={isTableLoading}
                         style={{width: "100%"}}
+                        className={themeStyles.antTableMousePointer}
                     />
                 </Col>
             </Row>

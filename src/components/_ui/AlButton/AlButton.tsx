@@ -8,7 +8,7 @@ export interface ButtonProp {
   type: "primary" | "secondary" | "link";
   style?: CSSProperties;
   children?: ReactNode;
-  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClick?: any;
   htmlType?: "button" | "submit" | "reset";
   className?: string | "";
 }
