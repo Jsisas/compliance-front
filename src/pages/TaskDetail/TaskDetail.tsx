@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/reducer";
 import {Col, Row, Typography, Upload} from "antd";
-import {EditOutlined, EllipsisOutlined, InboxOutlined, LeftOutlined} from "@ant-design/icons/lib";
+import {EditOutlined, EllipsisOutlined, InboxOutlined} from "@ant-design/icons/lib";
 import AlButton from "../../components/_ui/AlButton/AlButton";
 import {fetchAllTasks} from "../../redux/Task/TaskService";
 import {selectTaskById} from "../../redux/Task/TaskSlice";
@@ -33,10 +33,6 @@ export function TaskDetail(props: TaskDetailsProps) {
     useEffect(() => {
         dispatch(fetchAllTasks());
     }, [dispatch]);
-
-    function addTask() {
-        console.log("Task added")
-    }
 
     function toggleModal() {
         setAddLinkModalVisible(!isAddLinkModalVisible);

@@ -6,12 +6,8 @@ import {RootState} from "../../redux/reducer";
 import themeStyles from "../../theme.module.scss";
 import {ColumnProps} from "antd/lib/table";
 import {Link, useParams} from "react-router-dom";
-import {
-    updateRequirement,
-    Requirement,
-    selectAllRequirements,
-} from "../../redux/Requirement/RequirementSlice";
-import {DownOutlined, LeftOutlined, SearchOutlined} from "@ant-design/icons/lib";
+import {Requirement, selectAllRequirements, updateRequirement,} from "../../redux/Requirement/RequirementSlice";
+import {DownOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {selectAllRegulations, selectRegulationById} from "../../redux/Regulation/RegulationSlice";
 import {fetchAllRegulations} from "../../redux/Regulation/RegulationService";
 import AlButton from "../../components/_ui/AlButton/AlButton";
@@ -20,7 +16,7 @@ import {SearchControlModal} from "../../components/modals/SearchControlModal/Sea
 import {Control} from "../../redux/Control/ControlSlice";
 import {notifyError} from "../../util/NotificationUtil";
 import produce, {Draft} from "immer";
-import { setTmpRequirements } from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
+import {setTmpRequirements} from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
 import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
 
 const {Title} = Typography;
