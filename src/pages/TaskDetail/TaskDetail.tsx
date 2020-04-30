@@ -14,6 +14,7 @@ import {date, dateFormat} from "../../util/DateUtil";
 import {AddLink, AddLinkModal} from "../../components/modals/AddLinkModal/AddLinkModal";
 import {AlComment} from "../../components/_ui/AlComment/AlComment";
 import TextArea from "antd/lib/input/TextArea";
+import {TaskConnectedItems} from "../../components/TaskConnectedItems/ControlConnectedItems";
 
 const {Title, Text} = Typography;
 const { Dragger } = Upload;
@@ -106,7 +107,9 @@ export function TaskDetail(props: TaskDetailsProps) {
                 </Col>
                 <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
                      lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
-                    <AlConnectedItems data={task}/>
+                    {task != null &&
+                        <TaskConnectedItems task={task}/>
+                    }
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>

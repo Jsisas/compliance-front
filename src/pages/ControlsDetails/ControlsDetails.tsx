@@ -18,6 +18,7 @@ import themeStyle from '../../theme.module.scss';
 
 import {AddTaskModule} from '../../components/modals/AddTaskModal/AddTaskModal';
 import {concatStyles} from "../../util/StyleUtil";
+import {ControlConnectedItems} from "../../components/ControlConnectedItems/ControlConnectedItems";
 
 const {Title, Text} = Typography;
 
@@ -145,7 +146,9 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                 </Col>
                 <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
                      lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
-                    <AlConnectedItems data={control}/>
+                    {control != null &&
+                        <ControlConnectedItems control={control}/>
+                    }
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>
