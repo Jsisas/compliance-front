@@ -83,7 +83,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                         {required: true, message: "Please choose task type"},
                                     ]}
                                 >
-                                    <Radio.Group>
+                                    <Radio.Group defaultValue={TaskType.MAINTENANCE}>
                                         <Radio key={TaskType.MAINTENANCE} value={TaskType.MAINTENANCE}>
                                             {TaskType.MAINTENANCE}
                                         </Radio>
@@ -122,9 +122,10 @@ export function AddTaskModule(props: AddTaskProps) {
                                         },
                                     ]}
                                 >
-                                    <Select placeholder="Select task duration">
-                                        <Option value="30">30 minutes</Option>
-                                        <Option value="60">1 hour</Option>
+                                    <Select placeholder="Select task duration" defaultValue={15}>
+                                        <Option value={15}>15 minutes</Option>
+                                        <Option value={30}>30 minutes</Option>
+                                        <Option value={60}>1 hour</Option>
                                     </Select>
                                 </Form.Item>
                                 <Form.Item
