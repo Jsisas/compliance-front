@@ -9,6 +9,7 @@ import {RootState} from "../../redux/reducer";
 import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
 import {ControlForm} from "../../components/ControlForm/ControlForm";
 import {fetchControlById} from "../../redux/Control/ControlService";
+import {ControlConnectedItems} from "../../components/ControlConnectedItems/ControlConnectedItems";
 
 const {Title} = Typography;
 
@@ -45,7 +46,15 @@ export function EditControlPage(props: NewControlProps) {
                     <Title style={{marginBottom: 0}}>Edit Control</Title>
                 </Col>
             </Row>
-            <ControlForm onFinish={handleEditControl} control={control}/>
+            <Row gutter={[16, 16]} align={"top"} justify={"space-between"}>
+                <Col xs={2} xl={{span: 10, offset: 1}}>
+                    <ControlForm onFinish={handleEditControl} control={control}/>
+                </Col>
+                <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
+                     lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
+                    <ControlConnectedItems requirements={control?.requirements!}/>
+                </Col>
+            </Row>
         </>
     );
 }

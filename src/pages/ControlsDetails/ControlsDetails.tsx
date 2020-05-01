@@ -147,9 +147,7 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                 </Col>
                 <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
                      lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
-                    {control != null &&
-                    <ControlConnectedItems control={control}/>
-                    }
+                    <ControlConnectedItems requirements={control?.requirements!}/>
                 </Col>
             </Row>
             <Row gutter={[16, 16]}>

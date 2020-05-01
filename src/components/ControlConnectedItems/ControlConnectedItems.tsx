@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {Col, Row, Typography} from "antd";
 import {Link} from "react-router-dom";
-import {Control} from "../../redux/Control/ControlSlice";
 import {shortenStringLength} from "../../util/StringUtil";
 import styles from './contorlConnectedItems.module.scss';
+import {Requirement} from "../../redux/Requirement/RequirementSlice";
 
 const {Text} = Typography;
 
 interface TaskConnectedItemsProps {
-    control: Control;
+    requirements: Requirement[];
 }
 
 export function ControlConnectedItems(props: TaskConnectedItemsProps) {
@@ -28,14 +28,14 @@ export function ControlConnectedItems(props: TaskConnectedItemsProps) {
                     </Row>
                     <Row gutter={[16, 16]}>
                         <Col xs={24}>
-                            {
-                                props.control.requirements.map(requirement => {
+                            { (props.requirements != null && props.requirements.length > 0) ?
+                                props.requirements.map(requirement => {
                                     return (
                                         <Link key={requirement.id} to={`/requirements/${requirement.id}`}>
                                             {shortenStringLength(requirement.title, 50)}
                                         </Link>
                                     )
-                                })
+                                }) : <span>No connected requirements</span>
                             }
                         </Col>
                     </Row>

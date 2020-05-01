@@ -15,6 +15,7 @@ import {Requirement, updateRequirement} from "../../redux/Requirement/Requiremen
 import produce, {Draft} from "immer";
 import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
 import {ControlForm} from "../../components/ControlForm/ControlForm";
+import {ControlConnectedItems} from "../../components/ControlConnectedItems/ControlConnectedItems";
 
 const {Title} = Typography;
 
@@ -51,11 +52,20 @@ export function NewControlPage(props: NewControlProps) {
                 <Col xs={2} xl={1}>
                     <AlBackArrow history={props.history}/>
                 </Col>
-                <Col xs={20} xl={20}>
+                <Col xs={15} xl={15}>
                     <Title style={{marginBottom: 0}}>Add Control</Title>
                 </Col>
+
             </Row>
-            <ControlForm onFinish={handleCreateNewControl}/>
+            <Row gutter={[16, 16]} align={"top"} justify={"space-between"}>
+                <Col xs={2} xl={{span: 10, offset: 1}}>
+                    <ControlForm onFinish={handleCreateNewControl}/>
+                </Col>
+                <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
+                     lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
+                    <ControlConnectedItems requirements={selectedRequirements}/>
+                </Col>
+            </Row>
         </>
     );
 }

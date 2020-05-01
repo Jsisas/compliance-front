@@ -14,7 +14,10 @@ const tmpRequirementSelector = tmpRequirementAdapter.getSelectors((state: RootSt
 
 export const selectAllTmpRequirements = tmpRequirementSelector.selectAll;
 export const selectTmpRequirementById = tmpRequirementSelector.selectById;
-export const setTmpRequirementState = (requirement: Requirement[], state: EntityState<Requirement>) => tmpRequirementAdapter.setAll(state, requirement);
+export const setTmpRequirementState = (requirement: Requirement[], state: EntityState<Requirement>) => {
+    tmpRequirementAdapter.removeAll(state)
+    tmpRequirementAdapter.setAll(state, requirement);
+};
 
 const RequirementTmpSlice = createSlice({
     name: 'requirement',
