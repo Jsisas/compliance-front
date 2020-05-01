@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/reducer";
 import {selectControlById} from "../../redux/Control/ControlSlice";
@@ -25,6 +25,7 @@ const {Title, Text} = Typography;
 interface ControlsDetailsProps {
     history: any[];
 }
+
 export function ControlsDetails(props: ControlsDetailsProps) {
     let {id} = useParams<{ id: string }>();
     const control = useSelector((state: RootState) => selectControlById(state, id));
@@ -105,8 +106,10 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                 <Col xs={{span: 24}} sm={{span: 6, offset: 1}} md={{span: 4, offset: 3}} lg={{span: 4, offset: 3}}
                      xl={{span: 3, offset: 5}}>
                     <AlButton type={'secondary'} style={{float: 'right'}}><EllipsisOutlined/></AlButton>
-                    <AlButton type={'secondary'}
-                              style={{marginRight: '8px', float: 'right'}}><EditOutlined/></AlButton>
+                    <Link to={`/controls/edit/${control?.id}`}>
+                        <AlButton type={'secondary'} style={{marginRight: '8px', float: 'right'}}>
+                            <EditOutlined/></AlButton>
+                    </Link>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} style={{height: '75px'}}>
@@ -129,7 +132,7 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                     <Row gutter={[16, 16]}>
                         <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
                              lg={{span: 17, offset: 1}} xl={{span: 2, offset: 1}}>
-                            <Text>{control?.status}</Text>
+                            <Text>{control?.state}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={24} xl={2}>
                             <Text>{control?.startDate}</Text>
@@ -138,14 +141,14 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                             <Text>{control?.assignees?.map((user: User) => <span>{user.fname || ""}</span>)}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={17} xl={2}>
-                            <Text>{control?.category}</Text>
+                            <Text>{control?.kind}</Text>
                         </Col>
                     </Row>
                 </Col>
                 <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
                      lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>
                     {control != null &&
-                        <ControlConnectedItems control={control}/>
+                    <ControlConnectedItems control={control}/>
                     }
                 </Col>
             </Row>
@@ -170,7 +173,9 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                         pagination={false}
                         onRow={(record) => {
                             return {
-                                onClick: () => {props.history.push("/tasks/" + record.id)},
+                                onClick: () => {
+                                    props.history.push("/tasks/" + record.id)
+                                },
                             };
                         }}
                     />

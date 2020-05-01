@@ -7,7 +7,8 @@ import {ApiWrapper} from "../store";
 export const fetchAllUsers = createAsyncThunk(
     'users/fetchAll',
     async () => {
-        const response: AxiosResponse<ApiWrapper<User[]>> = await axios.get(`${API_URL}/users`)
-        return response.data.data
+        //const response: AxiosResponse<ApiWrapper<User[]>> = await axios.get(`${API_URL}/users`)
+        //return response.data.data
+        return []
     }
 )

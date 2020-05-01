@@ -11,3 +11,11 @@ export const fetchAllControls = createAsyncThunk(
         return response.data.data
     }
 )
+
+export const fetchControlById = createAsyncThunk(
+    'controls/fetchById',
+    async (controlId: string) => {
+        const response: AxiosResponse<ApiWrapper<Control>> = await axios.get(`${API_URL}/controls/` + controlId)
+        return response.data.data
+    }
+)

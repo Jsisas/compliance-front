@@ -14,12 +14,14 @@ import {selectAllTmpRequirements} from "../../redux/Requirement/TmpRequirementSl
 import {Requirement, updateRequirement} from "../../redux/Requirement/RequirementSlice";
 import produce, {Draft} from "immer";
 import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
+import {ControlForm} from "../../components/ControlForm/ControlForm";
 
 const {Title} = Typography;
 
 interface NewControlProps {
     history: any;
 }
+
 export function NewControlPage(props: NewControlProps) {
     const dispatch = useDispatch();
     const routeHistory = useHistory();
@@ -30,7 +32,7 @@ export function NewControlPage(props: NewControlProps) {
         data.startDate = new Date(((data.startDate as any) as Moment).toISOString());
         dispatch(createControl(data));
 
-        if(selectedRequirements.length > 0){
+        if (selectedRequirements.length > 0) {
             selectedRequirements.forEach(requirement => {
                 const updatedRequirement = produce(requirement, (draft: Draft<Requirement>) => {
                     draft.controls.push(data)
@@ -43,8 +45,6 @@ export function NewControlPage(props: NewControlProps) {
         routeHistory.push("/controls");
     }
 
-    const onFinish = (values: any) => handleCreateNewControl(values);
-
     return (
         <>
             <Row gutter={[16, 16]} align={"middle"}>
@@ -55,87 +55,7 @@ export function NewControlPage(props: NewControlProps) {
                     <Title style={{marginBottom: 0}}>Add Control</Title>
                 </Col>
             </Row>
-
-            <Row gutter={[16, 16]} align={"middle"}>
-                <Col
-                    xl={{span: 8, offset: 1}}
-                    md={{span: 18, offset: 1}}
-                    sm={{span: 24, offset: 1}}
-                    xs={{span: 24, offset: 1}}
-                >
-                    <Form layout="vertical" onFinish={onFinish}>
-                        <Form.Item
-                            name="title"
-                            rules={[
-                                {required: true, message: "Please input control title!"},
-                            ]}
-                        >
-                            <Input placeholder="Add title"/>
-                        </Form.Item>
-                        <Form.Item
-                            name="description"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "Please input control description!",
-                                },
-                            ]}
-                        >
-                            <TextArea placeholder="Add description"/>
-                        </Form.Item>
-                        <Form.Item label="Add assignee" name="assignee">
-                            <UserSearch placeholder="Add assignees"/>
-                        </Form.Item>
-
-                        <Row gutter={[16, 16]} align={"middle"}>
-                            <Col
-                                lg={{span: 8}}
-                                md={{span: 8}}
-                                sm={{span: 8}}
-                                xs={{span: 24}}
-                            >
-                                <Form.Item
-                                    label="Start date"
-                                    name="startDate"
-                                    rules={[
-                                        {required: true, message: "Please add start date!"},
-                                    ]}
-                                >
-                                    <DatePicker/>
-                                </Form.Item>
-                            </Col>
-                            <Col
-                                lg={{span: 16}}
-                                md={{span: 16}}
-                                sm={{span: 16}}
-                                xs={{span: 24}}
-                            >
-                                <Form.Item
-                                    label="Category"
-                                    name="category"
-                                    rules={[
-                                        {required: true, message: "Please add start date!"},
-                                    ]}
-                                >
-                                    <Radio.Group>
-                                        <Radio key={ControlCategory.POLICY} value={ControlCategory.POLICY}>
-                                            {ControlCategory.POLICY}
-                                        </Radio>
-                                        <Radio key={ControlCategory.PROCEDURE} value={ControlCategory.PROCEDURE}>
-                                            {ControlCategory.PROCEDURE}
-                                        </Radio>
-                                    </Radio.Group>
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Form.Item>
-                            <AlButton type="primary" htmlType="submit">
-                                Submit
-                            </AlButton>
-                        </Form.Item>
-                    </Form>
-                </Col>
-            </Row>
+            <ControlForm onFinish={handleCreateNewControl}/>
         </>
     );
 }

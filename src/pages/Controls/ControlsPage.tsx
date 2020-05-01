@@ -50,7 +50,7 @@ export function ControlsPage(props: ControlsPageProps) {
             dataIndex: "status",
             key: "id",
             render: (text: any, record: Control) => {
-                return <span>{record.status}</span>
+                return <span>{record.state}</span>
             }
         });
         columns.push({
@@ -58,7 +58,7 @@ export function ControlsPage(props: ControlsPageProps) {
             dataIndex: "category",
             key: "id",
             render: (text: any, record: Control) => {
-                return <span>{record.category}</span>
+                return <span>{record.kind}</span>
             }
         });
         columns.push({

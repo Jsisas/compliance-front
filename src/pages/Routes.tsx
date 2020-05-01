@@ -8,6 +8,7 @@ import {TasksPage} from "./Tasks/TasksPage";
 import {ControlsDetails} from "./ControlsDetails/ControlsDetails";
 import {NotFoundPage} from "./NotFound/NotFoundPage";
 import {TaskDetail} from "./TaskDetail/TaskDetail";
+import {EditControlPage} from "./EditControl/EditControl";
 
 export function Routes() {
     return (
@@ -18,6 +19,7 @@ export function Routes() {
 
             <Route exact path="/controls" component={ControlsPage} />
             <Route exact path="/controls/new" component={NewControlPage} />
+            <Route exact path="/controls/edit/:id" component={EditControlPage} />
             <Route exact path="/controls/:id" component={ControlsDetails} />
 
             <Route exact path="/tasks" component={TasksPage} />
