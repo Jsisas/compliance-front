@@ -21,6 +21,7 @@ interface SearchControlModal {
 export function SearchControlModal(props: SearchControlModal) {
     const allControls = useSelector((state: RootState) => selectAllControls(state))
     const [filteredControls, setFilteredControls] = useState<Control[]>([]);
+    const [selectedControl, setSelectedControl] = useState();
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -29,6 +30,7 @@ export function SearchControlModal(props: SearchControlModal) {
 
     function onSelect(controlId: string){
         const control = allControls.find(control => control.id === controlId);
+        setSelectedControl(control);
         props.onSelect(control);
     }
 
@@ -38,7 +40,7 @@ export function SearchControlModal(props: SearchControlModal) {
 
 
     const children = filteredControls.map((control: Control) => (
-        <Option key={control.id} value={control.id} title={control.title}>
+        <Option key={control.id} value={control.id}>
             {control.title}
         </Option>
     ));
@@ -61,7 +63,11 @@ export function SearchControlModal(props: SearchControlModal) {
                 <div className={styles.addTaskModalContent}>
                     <Row gutter={[16, 16]} align={"middle"}>
                         <Col xs={{span: 24}}>
-                            <AutoComplete style={{ width: "100%" }} onSearch={handleSearch} placeholder="input here" onSelect={(controlId: string) => onSelect(controlId)}>
+                            <AutoComplete style={{ width: "100%" }}
+                                          onSearch={handleSearch}
+                                          placeholder="Search for control"
+                                          onSelect={(controlId: string) => onSelect(controlId)}
+                                          value={selectedControl?.title}>
                                 {children}
                             </AutoComplete>
                         </Col>
