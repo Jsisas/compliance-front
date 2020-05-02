@@ -1,13 +1,9 @@
 import * as React from 'react';
-import {Col, DatePicker, Form, Input, Radio, Row, Typography} from "antd";
-import {AlBackArrow} from "../_ui/AlBackArrow/AlBackArrow";
+import {Col, DatePicker, Form, Input, Radio, Row} from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import {UserSearch} from "../AssigneeSearch/AssigneeSearch";
 import {Control, ControlCategory} from "../../redux/Control/ControlSlice";
 import AlButton from "../_ui/AlButton/AlButton";
-import {User} from "../../redux/User/UserSlice";
-
-const {Title, Text} = Typography;
 
 interface Props {
     onFinish: any;

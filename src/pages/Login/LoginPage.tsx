@@ -6,8 +6,6 @@ import {API_URL} from "../../index";
 import styles from './loginpage.module.scss'
 import AlButton from "../../components/_ui/AlButton/AlButton";
 import {Link} from "react-router-dom";
-import {GoogleOutlined} from "@ant-design/icons/lib";
-import {ReactComponent as GoogleLogo} from "./../../assets/logo/google_logo.svg";
 import {GoogleButton} from "../../components/_ui/GoogleButton/GoogleButton";
 
 const {Title} = Typography;

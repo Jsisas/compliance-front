@@ -1,14 +1,10 @@
-import {Col, DatePicker, Form, Input, Radio, Row, Typography} from "antd";
-import TextArea from "antd/lib/input/TextArea";
+import {Col, Row, Typography} from "antd";
 import {Moment} from "moment";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-
-import {UserSearch} from "../../components/AssigneeSearch/AssigneeSearch";
-import {Control, ControlCategory, createControl,} from "../../redux/Control/ControlSlice";
+import {Control, createControl,} from "../../redux/Control/ControlSlice";
 import {notifySucess} from "../../util/NotificationUtil";
-import AlButton from "../../components/_ui/AlButton/AlButton";
 import {RootState} from "../../redux/reducer";
 import {selectAllTmpRequirements} from "../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice";
 import {Requirement, updateRequirement} from "../../redux/Requirement/RequirementSlice";

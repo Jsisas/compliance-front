@@ -16,10 +16,7 @@ import {SearchControlModal} from "../../components/modals/SearchControlModal/Sea
 import {Control} from "../../redux/Control/ControlSlice";
 import {notifyError} from "../../util/NotificationUtil";
 import produce, {Draft} from "immer";
-import {
-    setTmpRequirements,
-    setTmpRequirementState
-} from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
+import {setTmpRequirements} from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
 import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
 
 const {Title} = Typography;

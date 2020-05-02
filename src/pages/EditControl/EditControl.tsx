@@ -25,7 +25,7 @@ export function EditControlPage(props: NewControlProps) {
 
     useEffect(() => {
         dispatch(fetchControlById(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
 
     function handleEditControl(data: Control): void {
