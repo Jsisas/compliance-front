@@ -7,6 +7,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import configureStore from "./redux/store";
 import { PageLayout } from "./components/Layout/Layout";
 import './index.scss'
+import './util/AxiosUtil'
 
 export const API_URL = process.env.REACT_APP_API_URL;
 

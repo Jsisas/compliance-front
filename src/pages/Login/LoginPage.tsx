@@ -30,9 +30,8 @@ export function LoginPage(props: LoginPageProps) {
                 notifySucess("Log in", "Logging in was successful")
                 history.push("/regulations")
             })
-            .catch((err: any) => {
+            .catch((err: AxiosResponse) => {
                 notifyError("Log in", "Logging in failed")
-                console.log(err)
             })
     }
 

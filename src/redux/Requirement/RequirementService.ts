@@ -3,12 +3,12 @@ import {AxiosResponse} from 'axios';
 import {Requirement} from "./RequirementSlice";
 import {API_URL} from "../../index";
 import {ApiWrapper} from "../store";
-import {apiService} from "../../util/AxiosUtil";
+import axios from 'axios';
 
 export const fetchAllRequirements = createAsyncThunk(
     'requirements/fetchAllByRegulationId',
     async () => {
-        const response: AxiosResponse<ApiWrapper<Requirement[]>> = await apiService.get(`${API_URL}/requirements`)
+        const response: AxiosResponse<ApiWrapper<Requirement[]>> = await axios.get(`${API_URL}/requirements`)
         return response.data.data
     }
 )
