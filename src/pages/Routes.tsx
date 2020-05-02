@@ -9,11 +9,14 @@ import {ControlsDetails} from "./ControlsDetails/ControlsDetails";
 import {NotFoundPage} from "./NotFound/NotFoundPage";
 import {TaskDetail} from "./TaskDetail/TaskDetail";
 import {EditControlPage} from "./EditControl/EditControl";
+import {LoginPage} from "./Login/LoginPage";
 
 export function Routes() {
     return (
         <Switch>
-            <Redirect exact path="/" to='/regulations' />
+            <Redirect exact path="/" to='/login' />
+            <Route exact path="/login" component={LoginPage} />
+
             <Route exact path="/regulations" component={RegulationsPage} />
             <Route exact path="/regulations/:id/requirements" component={RequirementsPage} />
 
