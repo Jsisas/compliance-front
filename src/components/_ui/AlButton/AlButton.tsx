@@ -11,6 +11,7 @@ export interface ButtonProp {
   onClick?: any;
   htmlType?: "button" | "submit" | "reset";
   className?: string | "";
+  disabled?: boolean;
 }
 
 export default function AlButton(props: ButtonProp) {
@@ -45,6 +46,7 @@ export default function AlButton(props: ButtonProp) {
       style={props.style}
       onClick={onButtonClick}
       htmlType={props.htmlType}
+      disabled={props.disabled || false}
     >
       {props.children}
     </AntdButton>
