@@ -14,9 +14,10 @@ export enum UserCategory {
 }
 
 export interface User {
-    id: number,
+    id: string,
     fname: string,
-    lname: string
+    lname: string,
+    authenticated: false;
 }
 
 const usersAdapter = createEntityAdapter<User>({
@@ -32,7 +33,7 @@ export const selectUserById = userSelectors.selectById;
 export const setUsers = (users: User[], state: EntityState<User>) => usersAdapter.setAll(state, users);
 export const createOneUser = (user: User, state: EntityState<User>) => usersAdapter.addOne(state, user);
 export const updateOneUser = (user: User, state: EntityState<User>) => usersAdapter.updateOne(state, { id: user.id, changes: user });
-export const deleteOneUser = (userId: number, state: EntityState<User>) => usersAdapter.removeOne(state, userId);
+export const deleteOneUser = (userId: string, state: EntityState<User>) => usersAdapter.removeOne(state, userId);
 
 
 const UserSlice = createSlice({

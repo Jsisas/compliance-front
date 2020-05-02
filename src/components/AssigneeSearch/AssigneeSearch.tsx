@@ -29,7 +29,7 @@ export function UserSearch(props: UserSearchProps) {
         triggerOnChange();
     }, [selectedUsers, triggerOnChange])
 
-    function onSelect(value: number) {
+    function onSelect(value: string) {
         const user = allUsers.find(user => user.id === value);
         if (user) {
             setSelectedUsers([...selectedUsers, user])
