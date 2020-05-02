@@ -1,35 +1,38 @@
 import * as React from 'react';
 import GoogleLogin, {GoogleLoginResponse, GoogleLoginResponseOffline} from "react-google-login";
-import axios from 'axios';
+import { useHistory } from "react-router-dom";
 import {Typography} from "antd";
-import {API_URL} from "../../index";
 import styles from './loginpage.module.scss'
-import AlButton from "../../components/_ui/AlButton/AlButton";
-import {Link} from "react-router-dom";
 import {GoogleButton} from "../../components/_ui/GoogleButton/GoogleButton";
+import {
+    ApiError,
+    authenticate,
+    Authentication,
+    getUserAuth,
+    setUserAuth
+} from "../../util/AuthUtil";
+import {AxiosResponse} from "axios";
+import {ApiWrapper} from "../../redux/store";
+import {notifyError, notifySucess} from "../../util/NotificationUtil";
 
 const {Title} = Typography;
 
-export function LoginPage() {
+interface LoginPageProps{
+    onAuthChange: any;
+}
+export function LoginPage(props: LoginPageProps) {
+    const history = useHistory();
 
     const successGoogleLogin = (response: GoogleLoginResponse) => {
-        axios.post(`${API_URL}/authorize`,
-            {
-                authorization: {
-                    token: response.tokenId
-                }
-            },
-            {
-
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+        authenticate({token: response.tokenId})
+            .then((response: AxiosResponse<ApiWrapper<Authentication>>) => {
+                setUserAuth(response.data.data);
+                notifySucess("Log in", "Logging in was successful")
+                history.push("/regulations")
             })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(response => {
-                console.log(response)
+            .catch((err: any) => {
+                notifyError("Log in", "Logging in failed")
+                console.log(err)
             })
     }
 
@@ -41,7 +44,6 @@ export function LoginPage() {
         <div className={styles.loginWrapper}>
             <Title>Login</Title>
             <div className={styles.providers}>
-                <Link to="/regulations"><AlButton type="primary">Login</AlButton></Link>
                 <GoogleLogin
                     clientId="633144400818-1ve596vtf5tv4gccgvl7qn8n5nrcjbnv.apps.googleusercontent.com"
                     render={renderProps => (
