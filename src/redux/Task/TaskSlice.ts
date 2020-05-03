@@ -107,7 +107,7 @@ export interface Task {
     kind: TaskType,
     frequency: WeeklyTaskFrequency | MonthlyTaskFrequency | QuarterlyTaskFrequency | AnnualTaskFrequency;
     assignee: User,
-    due_at: Date,
+    due_at: string,
     files: TaskFile[],
     comments: Comment[]
     control: Control

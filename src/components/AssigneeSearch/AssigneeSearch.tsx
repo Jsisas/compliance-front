@@ -59,7 +59,7 @@ export function UserSearch(props: UserSearchProps) {
             >
                 {
                     allUsers.map((d: User) => (
-                        <Option key={d.id} value={d.id}>{d.fname || ""} {d.lname || ""}</Option>
+                        <Option key={d.id} value={d.id}>{d.name}</Option>
                     ))
                 }
             </Select>

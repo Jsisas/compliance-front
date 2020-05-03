@@ -15,14 +15,15 @@ export enum UserCategory {
 
 export interface User {
     id: string,
-    fname: string,
-    lname: string,
-    authenticated: false;
+    email: string,
+    name: string,
+    picture: string,
+    username: string
 }
 
 const usersAdapter = createEntityAdapter<User>({
     selectId: user => user.id,
-    sortComparer: (a, b) => a.fname.localeCompare(b.fname)
+    sortComparer: (a, b) => a.username.localeCompare(b.username)
 });
 
 const userInitialState: EntityState<User> = usersAdapter.getInitialState();

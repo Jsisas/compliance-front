@@ -62,7 +62,7 @@ export function ControlsDetails(props: ControlsDetailsProps) {
         key: "id",
         render: (text: any, record: Task) => {
             return (
-                <Text>{record.assignee ? `@${record.assignee?.fname} ${record.assignee?.lname}` : ""}</Text>
+                <Text>{record.assignee ? `@${record.assignee?.name}` : ""}</Text>
             );
         }
     });
@@ -138,7 +138,7 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                             <Text>{control?.startDate}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={24} xl={2}>
-                            <Text>{control?.assignees?.map((user: User) => <span>{user.fname || ""}</span>)}</Text>
+                            <Text>{control?.assignees?.map((user: User) => <span>{user.name}</span>)}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={17} xl={2}>
                             <Text>{control?.kind}</Text>

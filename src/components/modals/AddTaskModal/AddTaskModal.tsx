@@ -38,7 +38,7 @@ export function AddTaskModule(props: AddTaskProps) {
 
     function handleCreateNewTask(data: Task): void {
         data.id = v4()
-        data.due_at = ((data.due_at as any) as Moment).toDate();
+        data.due_at = ((data.due_at as any) as Moment).toISOString();
         data.control = props.control || {} as Control;
         dispatch(createTask(data));
         notifySucess("Add task", "Adding a task was successful");
@@ -171,7 +171,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                     label="Weekday"
                                     rules={[
                                         {
-                                            required: true,
+                                            required: false,
                                             message: "Please select week day",
                                         },
                                     ]}
@@ -193,7 +193,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                     label="Week"
                                     rules={[
                                         {
-                                            required: true,
+                                            required: false,
                                             message: "Please select week number",
                                         },
                                     ]}
@@ -207,7 +207,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                     label="Quarter"
                                     rules={[
                                         {
-                                            required: true,
+                                            required: false,
                                             message: "Please select quarter",
                                         },
                                     ]}
@@ -226,7 +226,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                     label="Annual"
                                     rules={[
                                         {
-                                            required: true,
+                                            required: false,
                                             message: "Please select month",
                                         },
                                     ]}

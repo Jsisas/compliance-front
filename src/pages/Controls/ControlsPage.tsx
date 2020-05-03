@@ -66,7 +66,7 @@ export function ControlsPage(props: ControlsPageProps) {
             dataIndex: "assignees",
             key: "id",
             render: (text: any, record: Control) => {
-                return <span>{record.assignees?.map(x => <span>@{x.fname} {x.lname}</span>)}</span>
+                return <span>{record.assignees?.map(x => <span>@{x.name}</span>)}</span>
             }
         });
         columns.push({

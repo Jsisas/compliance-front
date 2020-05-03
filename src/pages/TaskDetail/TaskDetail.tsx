@@ -90,7 +90,7 @@ export function TaskDetail(props: TaskDetailsProps) {
                             <Text>{task?.state}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={24} xl={2}>
-                            <Text>{task?.assignee?.fname != null ? '@' : ''}{task?.assignee?.fname} {task?.assignee?.lname}</Text>
+                            <Text>{task?.assignee?.name != null ? '@' : ''}{task?.assignee?.name}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={17} xl={3}>
                             <Text>{task?.kind}</Text>
