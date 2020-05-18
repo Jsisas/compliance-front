@@ -11,7 +11,7 @@ import {TaskDetail} from "./TaskDetail/TaskDetail";
 import {EditControlPage} from "./EditControl/EditControl";
 import {LoginPage} from "./Login/LoginPage";
 import {PrivateRoute} from "../components/ProtectedComponent/ProtectedComponent";
-import {isCurrentUserAuthenticated} from "../util/AuthUtil";
+import {AuthUtil} from "../util/AuthUtil";
 
 interface RoutesProps {
     isAuthenticated: boolean;
@@ -22,14 +22,14 @@ export function Routes(props: RoutesProps) {
 
     return (
         <Switch>
-            {!isCurrentUserAuthenticated() ?
+            {!AuthUtil.isCurrentUserAuthenticated() ?
             <Redirect exact path="/" to='/login'/> :
             <Redirect exact path="/" to='/regulations'/>
             }
 
             <Route exact path="/login" component={LoginPage}/>
 
-            <PrivateRoute isAuthenticated={props.isAuthenticated} path={"/regulations"} component={RegulationsPage}/>
+            <PrivateRoute isAuthenticated={props.isAuthenticated} exact path={"/regulations"} component={RegulationsPage}/>
             <PrivateRoute isAuthenticated={props.isAuthenticated} exact path="/regulations/:id/requirements"
                           component={RequirementsPage}/>
 

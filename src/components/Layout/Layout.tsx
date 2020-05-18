@@ -5,7 +5,7 @@ import {UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
 import {Routes} from "../../pages/Routes";
 import {ReactComponent as Logo} from "./../../assets/logo/small_logo.svg";
 import styles from "./layout.module.scss";
-import {getUserAuth, logout} from "../../util/AuthUtil";
+import {AuthUtil} from "../../util/AuthUtil";
 
 const {Content, Sider} = Layout;
 
@@ -15,10 +15,10 @@ export function PageLayout(props: any) {
     const selectedHomePage = history.location.pathname === "/" ? homePage : history.location.pathname;
     const [selectedKey, setSelectedKey] = useState(selectedHomePage)
     const [isCollapsed, setCollapsed] = useState(false)
-    const authentication = getUserAuth();
+    const authentication = AuthUtil.getUserAuth();
 
     function handleLogOut(){
-        logout();
+        AuthUtil.logout()
         history.push("/login")
     }
 

@@ -3,11 +3,19 @@ import {createEntityAdapter, createSlice, EntityState, PayloadAction} from "@red
 import {fetchAllRegulations} from './RegulationService';
 import {Requirement} from "../Requirement/RequirementSlice";
 
+export interface RegulationStatistics {
+    requirements_total: number;
+    requirements_without_control: number;
+    controls_total: number;
+    controls_failing: number;
+}
+
 export interface Regulation {
     id: string,
     title: string,
     description: string;
-    requirements: Requirement[]
+    requirements: Requirement[];
+    statistics: RegulationStatistics;
 }
 
 const regulationAdapter = createEntityAdapter<Regulation>({

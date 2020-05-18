@@ -1,15 +1,12 @@
 import * as React from 'react';
 import GoogleLogin, {GoogleLoginResponse, GoogleLoginResponseOffline} from "react-google-login";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {Typography} from "antd";
 import styles from './loginpage.module.scss'
 import {GoogleButton} from "../../components/_ui/GoogleButton/GoogleButton";
 import {
     ApiError,
-    authenticate,
-    Authentication,
-    getUserAuth,
-    setUserAuth
+    Authentication, AuthUtil,
 } from "../../util/AuthUtil";
 import {AxiosResponse} from "axios";
 import {ApiWrapper} from "../../redux/store";
@@ -17,16 +14,17 @@ import {notifyError, notifySucess} from "../../util/NotificationUtil";
 
 const {Title} = Typography;
 
-interface LoginPageProps{
+interface LoginPageProps {
     onAuthChange: any;
 }
+
 export function LoginPage(props: LoginPageProps) {
     const history = useHistory();
 
     const successGoogleLogin = (response: GoogleLoginResponse) => {
-        authenticate({token: response.tokenId})
+        AuthUtil.authenticate({token: response.tokenId})
             .then((response: AxiosResponse<ApiWrapper<Authentication>>) => {
-                setUserAuth(response.data.data);
+                AuthUtil.setUserAuth(response.data.data);
                 notifySucess("Log in", "Logging in was successful")
                 history.push("/regulations")
             })

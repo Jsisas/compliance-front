@@ -30,21 +30,6 @@ export default function RegulationsPage(props: RegulationPageProps) {
     }, [dispatch]);
     let columns: ColumnProps<any>[] = [];
 
-    function getRegulationFailingRequirementsPercentage(regulation: Regulation) {
-        const a = regulation.requirements?.filter(x => x.controls?.some(y => y.tasks.some(u => new Date(u.due_at) < new Date())));
-        return a?.length * 100 / regulation.requirements?.length || 0;
-    }
-
-    function getRegulationFailingControlsCount(regulation: Regulation) {
-        const a = regulation.requirements?.map(x => x.controls?.map(y => y.tasks.filter(u => new Date(u.due_at) < new Date()))).concat([]).flat(2)
-        return a?.length || 0;
-    }
-
-    function getRegulationRequirementsWithoutControl(regulation: Regulation) {
-        const a = regulation.requirements?.filter(x => (x.controls?.length || 0) < 1);
-        return a.length;
-    }
-
     if (regulations.length > 0) {
         columns.push({
             title: "Title",
@@ -59,7 +44,7 @@ export default function RegulationsPage(props: RegulationPageProps) {
             dataIndex: "requirements covered",
             key: "id",
             render: (text: any, record: Regulation) => {
-                return <span>{getRegulationFailingRequirementsPercentage(record)}%</span>
+                return <span>{Math.round(record.statistics.controls_failing * 100 / record.statistics.requirements_total)}%</span>
             }
         });
         columns.push({
@@ -70,7 +55,7 @@ export default function RegulationsPage(props: RegulationPageProps) {
                 return <Link
                     to={`/regulations/${record.id}/requirements`}
                     className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}>
-                    {record.requirements?.length || 0}
+                    {record.statistics.requirements_total}
                 </Link>
             }
         });
@@ -80,7 +65,7 @@ export default function RegulationsPage(props: RegulationPageProps) {
             key: "id",
             render: (text: any, record: Regulation) => {
                 return <span
-                    className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}>{getRegulationRequirementsWithoutControl(record)}</span>
+                    className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}>{record.statistics.requirements_without_control}</span>
             }
         });
         columns.push({
@@ -88,7 +73,7 @@ export default function RegulationsPage(props: RegulationPageProps) {
             dataIndex: "Controls failing",
             key: "id",
             render: (text: any, record: Regulation) => {
-                const failingCount = getRegulationFailingControlsCount(record);
+                const failingCount = record.statistics.controls_failing;
                 return <span
                     className={failingCount > 0 ? themeStyles.errorTextColor : themeStyles.successTextColor}>{failingCount > 0 ?
                     <WarningFilled/> : <CheckCircleOutlined/>} {failingCount}</span>

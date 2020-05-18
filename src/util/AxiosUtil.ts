@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {createHashHistory} from 'history'
-import {getUserAuth} from "./AuthUtil"; // or createBrowserHistory
+import {AuthUtil} from "./AuthUtil";
 
 const history = createHashHistory()
 
@@ -20,7 +20,7 @@ axios.interceptors.response.use(
 );
 
 axios.interceptors.request.use(function(config) {
-    const token = getUserAuth()?.token;
+    const token = AuthUtil.getUserAuth()?.token;
 
     if ( token != null ) {
         //Back end breaks if token is included
