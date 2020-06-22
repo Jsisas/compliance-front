@@ -78,13 +78,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                 >
                                     <Input placeholder="Add title to the task"/>
                                 </Form.Item>
-                                <Form.Item
-                                    label="Type"
-                                    name="type"
-                                    rules={[
-                                        {required: true, message: "Please choose task type"},
-                                    ]}
-                                >
+                                <Form.Item label="Type" name="type">
                                     <Radio.Group defaultValue={TaskType.MAINTENANCE}>
                                         <Radio key={TaskType.MAINTENANCE} value={TaskType.MAINTENANCE}>
                                             {TaskType.MAINTENANCE}
@@ -114,68 +108,38 @@ export function AddTaskModule(props: AddTaskProps) {
                                     name="assignee">
                                     <UserSearch placeholder="Add assignees"/>
                                 </Form.Item>
-                                <Form.Item
-                                    name="duration"
-                                    label="Duration"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "Please select task duration",
-                                        },
-                                    ]}
-                                >
+                                <Form.Item name="duration" label="Duration">
                                     <Select placeholder="Select task duration" defaultValue={15}>
                                         <Option value={15}>15 minutes</Option>
                                         <Option value={30}>30 minutes</Option>
                                         <Option value={60}>1 hour</Option>
                                     </Select>
                                 </Form.Item>
-                                <Form.Item
-                                    name="frequency"
-                                    label="Frequency"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "Please select task frequency",
-                                        },
-                                    ]}
-                                >
+                                <Form.Item name="frequency" label="Frequency">
                                     <Select placeholder="Select task frequency" defaultValue={taskFrequency}
                                             onSelect={(value) => setTaskFrequency(value)}>
                                         <Option value={TaskFrequencyType.ONE_TIME}>{TaskFrequencyType.ONE_TIME}</Option>
-                                        <Option value={TaskFrequencyType.RECURRING}>{TaskFrequencyType.RECURRING}</Option>
+                                        <Option
+                                            value={TaskFrequencyType.RECURRING}>{TaskFrequencyType.RECURRING}</Option>
                                     </Select>
                                 </Form.Item>
                                 {taskFrequency === TaskFrequencyType.RECURRING &&
-                                <Form.Item
-                                    name="recurrence"
-                                    label="Recurrence"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: "Please select task recurrence",
-                                        },
-                                    ]}
-                                >
-                                    <Select placeholder="Select task recurrence" defaultValue={taskRecurrence} onSelect={(value) => setTaskRecurrence(value)}>
-                                        <Option value={TaskFrequencyTypeRecurrence.WEEKLY}>{TaskFrequencyTypeRecurrence.WEEKLY}</Option>
-                                        <Option value={TaskFrequencyTypeRecurrence.MONTHLY}>{TaskFrequencyTypeRecurrence.MONTHLY}</Option>
-                                        <Option value={TaskFrequencyTypeRecurrence.QUARTERLY}>{TaskFrequencyTypeRecurrence.QUARTERLY}</Option>
-                                        <Option value={TaskFrequencyTypeRecurrence.ANNUAL}>{TaskFrequencyTypeRecurrence.ANNUAL}</Option>
+                                <Form.Item name="recurrence" label="Recurrence">
+                                    <Select placeholder="Select task recurrence" defaultValue={taskRecurrence}
+                                            onSelect={(value) => setTaskRecurrence(value)}>
+                                        <Option
+                                            value={TaskFrequencyTypeRecurrence.WEEKLY}>{TaskFrequencyTypeRecurrence.WEEKLY}</Option>
+                                        <Option
+                                            value={TaskFrequencyTypeRecurrence.MONTHLY}>{TaskFrequencyTypeRecurrence.MONTHLY}</Option>
+                                        <Option
+                                            value={TaskFrequencyTypeRecurrence.QUARTERLY}>{TaskFrequencyTypeRecurrence.QUARTERLY}</Option>
+                                        <Option
+                                            value={TaskFrequencyTypeRecurrence.ANNUAL}>{TaskFrequencyTypeRecurrence.ANNUAL}</Option>
                                     </Select>
                                 </Form.Item>
                                 }
                                 {((taskRecurrence === TaskFrequencyTypeRecurrence.WEEKLY && taskFrequency === TaskFrequencyType.RECURRING) || (taskRecurrence === TaskFrequencyTypeRecurrence.MONTHLY && taskFrequency === TaskFrequencyType.RECURRING)) &&
-                                <Form.Item
-                                    name="weekDay"
-                                    label="Weekday"
-                                    rules={[
-                                        {
-                                            required: false,
-                                            message: "Please select week day",
-                                        },
-                                    ]}
-                                >
+                                <Form.Item name="weekDay" label="Weekday">
                                     <Select placeholder="Select task recurrence" defaultValue={Weekday.MONDAY}>
                                         <Option value={Weekday.MONDAY}>Monday</Option>
                                         <Option value={Weekday.TUESDAY}>Tuesday</Option>
@@ -188,30 +152,17 @@ export function AddTaskModule(props: AddTaskProps) {
                                 </Form.Item>
                                 }
                                 {(taskRecurrence === TaskFrequencyTypeRecurrence.MONTHLY && taskFrequency === TaskFrequencyType.RECURRING) &&
-                                <Form.Item
-                                    name="week"
-                                    label="Week"
-                                    rules={[
-                                        {
-                                            required: false,
-                                            message: "Please select week number",
-                                        },
-                                    ]}
-                                >
-                                    <Input type={"number"} placeholder="Week number" />
+                                <Form.Item name="week" label="Week">
+                                    <Select placeholder="Select week number" defaultValue={Quarter.FIRST}>
+                                        <Option value={Quarter.FIRST}>First</Option>
+                                        <Option value={Quarter.SECOND}>Second</Option>
+                                        <Option value={Quarter.THIRD}>Third</Option>
+                                        <Option value={Quarter.FOURTH}>Fourth</Option>
+                                    </Select>
                                 </Form.Item>
                                 }
                                 {(taskRecurrence === TaskFrequencyTypeRecurrence.QUARTERLY && taskFrequency === TaskFrequencyType.RECURRING) &&
-                                <Form.Item
-                                    name="quarter"
-                                    label="Quarter"
-                                    rules={[
-                                        {
-                                            required: false,
-                                            message: "Please select quarter",
-                                        },
-                                    ]}
-                                >
+                                <Form.Item name="quarter" label="Quarter">
                                     <Select placeholder="Select task recurrence" defaultValue={Quarter.FIRST}>
                                         <Option value={Quarter.FIRST}>First</Option>
                                         <Option value={Quarter.SECOND}>Second</Option>
@@ -221,16 +172,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                 </Form.Item>
                                 }
                                 {(taskRecurrence === TaskFrequencyTypeRecurrence.ANNUAL && taskFrequency === TaskFrequencyType.RECURRING) &&
-                                <Form.Item
-                                    name="annual"
-                                    label="Annual"
-                                    rules={[
-                                        {
-                                            required: false,
-                                            message: "Please select month",
-                                        },
-                                    ]}
-                                >
+                                <Form.Item name="annual" label="Annual">
                                     <Select placeholder="Select task recurrence" defaultValue={Month.JANUARY}>
                                         <Option value={Month.JANUARY}>January</Option>
                                         <Option value={Month.FEBRUARY}>February</Option>
@@ -265,4 +207,4 @@ export function AddTaskModule(props: AddTaskProps) {
             </Modal>
         </>
     );
-};
+}

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Dropdown, Layout, Menu} from "antd";
-import {Link, useLocation, useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
 import {Routes} from "../../pages/Routes";
 import {ReactComponent as Logo} from "./../../assets/logo/small_logo.svg";
@@ -9,7 +9,7 @@ import {AuthUtil} from "../../util/AuthUtil";
 
 const {Content, Sider} = Layout;
 
-export function PageLayout(props: any) {
+export function PageLayout() {
     let history = useHistory();
     const homePage = "/regulations";
     const selectedHomePage = history.location.pathname === "/" ? homePage : history.location.pathname;
@@ -17,7 +17,7 @@ export function PageLayout(props: any) {
     const [isCollapsed, setCollapsed] = useState(false)
     const authentication = AuthUtil.getUserAuth();
 
-    function handleLogOut(){
+    function handleLogOut() {
         AuthUtil.logout()
         history.push("/login")
     }
@@ -44,7 +44,7 @@ export function PageLayout(props: any) {
                 collapsedWidth="0"
                 theme={"light"}
                 className={styles.extraExtraLightGrey}
-                onCollapse={((collapsed, type) => setCollapsed(collapsed))}
+                onCollapse={((collapsed) => setCollapsed(collapsed))}
                 style={{minHeight: "100vh"}}
             >
                 <div className={styles.logo}>

@@ -1,4 +1,4 @@
-import {Regulation, RegulationStatistics} from "./RegulationSlice";
+import {Regulation} from "./RegulationSlice";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios, {AxiosResponse} from 'axios';
 import {API_URL} from "../../index";

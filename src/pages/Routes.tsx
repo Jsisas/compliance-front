@@ -1,4 +1,4 @@
-import {Switch, Redirect, Route, useHistory} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import React from "react";
 import {NewControlPage} from "./NewControl/NewControl";
 import RegulationsPage from "./Regulations/RegulationsPage";
@@ -18,8 +18,6 @@ interface RoutesProps {
 }
 
 export function Routes(props: RoutesProps) {
-    const history = useHistory()
-
     return (
         <Switch>
             {!AuthUtil.isCurrentUserAuthenticated() ?

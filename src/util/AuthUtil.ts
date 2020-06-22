@@ -1,8 +1,6 @@
-import * as React from 'react';
 import axios, {AxiosResponse} from "axios";
 import {API_URL} from "../index";
-import {ApiWrapper} from "../redux/store";
-import {notifyError, notifySucess} from "./NotificationUtil";
+import {notifySucess} from "./NotificationUtil";
 
 export interface AuthRequest {
     token: string;

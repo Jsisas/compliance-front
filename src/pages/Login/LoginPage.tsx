@@ -4,21 +4,14 @@ import {useHistory} from "react-router-dom";
 import {Typography} from "antd";
 import styles from './loginpage.module.scss'
 import {GoogleButton} from "../../components/_ui/GoogleButton/GoogleButton";
-import {
-    ApiError,
-    Authentication, AuthUtil,
-} from "../../util/AuthUtil";
+import {Authentication, AuthUtil,} from "../../util/AuthUtil";
 import {AxiosResponse} from "axios";
 import {ApiWrapper} from "../../redux/store";
 import {notifyError, notifySucess} from "../../util/NotificationUtil";
 
 const {Title} = Typography;
 
-interface LoginPageProps {
-    onAuthChange: any;
-}
-
-export function LoginPage(props: LoginPageProps) {
+export function LoginPage() {
     const history = useHistory();
 
     const successGoogleLogin = (response: GoogleLoginResponse) => {
@@ -28,7 +21,7 @@ export function LoginPage(props: LoginPageProps) {
                 notifySucess("Log in", "Logging in was successful")
                 history.push("/regulations")
             })
-            .catch((err: AxiosResponse) => {
+            .catch(() => {
                 notifyError("Log in", "Logging in failed")
             })
     }
@@ -54,4 +47,4 @@ export function LoginPage(props: LoginPageProps) {
             </div>
         </div>
     );
-};
+}

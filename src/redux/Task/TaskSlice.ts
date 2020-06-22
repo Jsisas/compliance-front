@@ -1,7 +1,7 @@
 import {Control} from "../Control/ControlSlice";
 import {createEntityAdapter, createSelector, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../reducer";
-import {fetchAllTasks} from "../Task/TaskService";
+import {fetchAllTasks} from "./TaskService";
 import {User} from "../User/UserSlice";
 
 export enum Weekday {
@@ -76,7 +76,7 @@ export interface MonthlyTaskFrequency {
     type: TaskFrequencyType,
     recurrence: TaskFrequencyTypeRecurrence;
     weekDay: number;
-    week: number;
+    week: Quarter;
 }
 
 export interface QuarterlyTaskFrequency {
