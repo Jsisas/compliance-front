@@ -124,7 +124,6 @@ export function RequirementsPage(props: any) {
             selectedRowKeysTmp.push(record.id);
         }
         setSelectedRequirementIds(selectedRowKeysTmp);
-        console.log(selectedRequirementIds)
     }
 
     function getRequirementsWithoutControl(requirements: Requirement[]) {
@@ -186,7 +185,7 @@ export function RequirementsPage(props: any) {
     }
 
     function getAllSelectedRequirements(): Requirement[] {
-        return requirements.filter(req => selectedRequirementIds.find(i => req.id == i))
+        return requirements.filter(req => selectedRequirementIds.find(i => req.id === i))
     }
 
     const connectControlDropdown = (
@@ -204,7 +203,7 @@ export function RequirementsPage(props: any) {
         setTimeout(() => {
             setSearchControlModalVisible(false);
             selectedRequirementIds.forEach(requirementId => {
-                let requirement = requirements.find(x => x.id == requirementId);
+                let requirement = requirements.find(x => x.id === requirementId);
                 const tmpRequirement = produce(requirement, (draft: Draft<Requirement>) => {
                     draft.controls.push(control)
                 })

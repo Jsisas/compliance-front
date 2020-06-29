@@ -38,7 +38,7 @@ export function PageLayout() {
 
     return (
         <Layout>
-            {!(history.location.pathname === '/' || history.location.pathname === '/login') &&
+            {!(history.location.pathname === '/login') &&
             <Sider
                 breakpoint="lg"
                 collapsedWidth="0"

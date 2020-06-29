@@ -6,7 +6,6 @@ const history = createHashHistory()
 
 axios.interceptors.response.use(
     (response) => {
-        console.log(response);
         return Promise.resolve(response)
     },
     (error) => {
