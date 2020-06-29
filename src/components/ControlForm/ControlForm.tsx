@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {Col, DatePicker, Form, Input, Radio, Row} from "antd";
-import TextArea from "antd/lib/input/TextArea";
 import {UserSearch} from "../AssigneeSearch/AssigneeSearch";
 import {Control, ControlCategory} from "../../redux/Control/ControlSlice";
 import AlButton from "../_ui/AlButton/AlButton";
+import TextArea from "antd/lib/input/TextArea";
 
 interface Props {
     onFinish: any;
