@@ -253,16 +253,24 @@ export function RequirementsPage(props: any) {
                             style={{fontSize: '14px'}}/></span>
                     </Dropdown>
                 </Col>
-                <Col xs={{span: 24, offset: 1}} sm={{span: 4, offset: 0}} md={{span: 3, offset: 0}} lg={{span: 3, offset: 0}} xl={{span: 2, offset: 3}}>
+                <Col xs={{span: 24, offset: 1}} sm={{span: 4, offset: 0}} md={{span: 3, offset: 0}}
+                     lg={{span: 3, offset: 0}} xl={{span: 2, offset: 3}}>
+                    {selectedRequirementIds.length > 0 &&
                     <span>{selectedRequirementIds.length} selected</span>
+                    }
                 </Col>
                 <Col xs={{span: 16, offset: 1}} sm={{span: 8, offset: 0}} md={6} lg={5} xl={4}>
+                    {selectedRequirementIds.length > 0 &&
                     <Dropdown overlay={connectControlDropdown} trigger={['click']}>
-                        <AlButton type="primary" style={{width: '100%'}}>Connect control <DownOutlined style={{fontSize: '14px'}}/></AlButton>
+                        <AlButton type="primary" style={{width: '100%'}}>Connect control <DownOutlined
+                            style={{fontSize: '14px'}}/></AlButton>
                     </Dropdown>
+                    }
                 </Col>
                 <Col xs={6} sm={3} md={2} xl={2}>
+                    {selectedRequirementIds.length > 0 &&
                     <AlButton type="secondary" style={{float: 'right'}}>...</AlButton>
+                    }
                 </Col>
             </Row>
             <Row gutter={[16, 16]} justify={"space-between"}>
