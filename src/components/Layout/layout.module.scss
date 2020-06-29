@@ -2,6 +2,8 @@
 
 .extraExtraLightGrey {
   background: $extra-extra-light-grey;
+  max-width: 100%;
+  width: auto;
 }
 
 .white {
@@ -26,8 +28,8 @@
     border-radius: 50%;
   }
 
-  a{
+  a {
     color: $text-color;
-    padding: 16px;
+    padding-left: 16px;
   }
 }
