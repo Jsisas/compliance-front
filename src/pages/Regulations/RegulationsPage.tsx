@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import {Col, Row, Table, Typography} from "antd";
-import AlButton from "../../components/_ui/AlButton/AlButton";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/reducer";
 import {Regulation, selectAllRegulations} from "../../redux/Regulation/RegulationSlice";
@@ -10,7 +9,6 @@ import themeStyles from './../../theme.module.scss';
 import {CheckCircleOutlined, WarningFilled} from "@ant-design/icons/lib";
 import {concatStyles} from "../../util/StyleUtil";
 import {Link} from "react-router-dom";
-import {notifyError} from "../../util/NotificationUtil";
 
 const {Title} = Typography;
 
@@ -86,11 +84,6 @@ export default function RegulationsPage(props: RegulationPageProps) {
             <Row gutter={[16, 16]} justify={"space-between"}>
                 <Col xs={24} sm={16} md={10} lg={16} xl={16} xxl={16}>
                     <Title>Regulations Page</Title>
-                </Col>
-                <Col xs={24} sm={8} md={5} lg={5} xl={4} xxl={3}>
-                    <AlButton type='primary' style={{width: '100%'}} onClick={() => notifyError("Not implemented", "Function is not implemented yet")}>
-                        Add regulations
-                    </AlButton>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} justify={"space-between"}>
