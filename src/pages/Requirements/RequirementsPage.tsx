@@ -38,9 +38,9 @@ export function RequirementsPage(props: any) {
     const regulations = useSelector((state: RootState) => selectAllRegulations(state));
     const requirements = useSelector((state: RootState) => selectAllRequirements(state));
 
-
-    const [selectedRequirements, setSelectedRequirements] = useState<Requirement[]>([])
+    const [selectedRequirementIds, setSelectedRequirementIds] = useState<string[]>([])
     let filteredRequirements = getFilteredRequirements(tableSearchText || "");
+
     const isTableLoading = useSelector(
         (state: RootState) => state.regulation.loading
     );
@@ -116,10 +116,16 @@ export function RequirementsPage(props: any) {
         });
     }
 
-    const rowSelection = {
-        onChange: (selectedRowKeys: any, selectedRows: Requirement[]) => setSelectedRequirements(selectedRows),
-    };
-
+    const selectRow = (record: Requirement) => {
+        const selectedRowKeysTmp = [...selectedRequirementIds];
+        if (selectedRowKeysTmp.indexOf(record.id) >= 0) {
+            selectedRowKeysTmp.splice(selectedRowKeysTmp.indexOf(record.id), 1);
+        } else {
+            selectedRowKeysTmp.push(record.id);
+        }
+        setSelectedRequirementIds(selectedRowKeysTmp);
+        console.log(selectedRequirementIds)
+    }
 
     function getRequirementsWithoutControl(requirements: Requirement[]) {
         return requirements.filter(x => x.controls?.length < 1)
@@ -164,19 +170,23 @@ export function RequirementsPage(props: any) {
     );
 
     function onAttachControlClick() {
-        if(selectedRequirements.length > 0){
+        if (selectedRequirementIds.length > 0) {
             setSearchControlModalVisible(!isSearchControlModalVisible)
-        }else{
+        } else {
             notifyError("Attach control", "Can not attach a control if no requirement is selected")
         }
     }
 
     function onNewControlClick() {
-        if(selectedRequirements.length > 0){
-            dispatch(setTmpRequirements(selectedRequirements))
-        }else{
+        if (selectedRequirementIds.length > 0) {
+            dispatch(setTmpRequirements(getAllSelectedRequirements()))
+        } else {
             notifyError("Attach control", "Can not attach a control if no requirement is selected")
         }
+    }
+
+    function getAllSelectedRequirements(): Requirement[] {
+        return requirements.filter(req => selectedRequirementIds.find(i => req.id == i))
     }
 
     const connectControlDropdown = (
@@ -193,11 +203,13 @@ export function RequirementsPage(props: any) {
     function attachExistingControlToSelectedRequirements(control: Control) {
         setTimeout(() => {
             setSearchControlModalVisible(false);
-            selectedRequirements.forEach(requirement => {
+            selectedRequirementIds.forEach(requirementId => {
+                let requirement = requirements.find(x => x.id == requirementId);
                 const tmpRequirement = produce(requirement, (draft: Draft<Requirement>) => {
                     draft.controls.push(control)
                 })
-                dispatch(updateRequirement(tmpRequirement))
+                dispatch(updateRequirement(tmpRequirement!))
+                setSelectedRequirementIds([])
             })
         }, 300)
     }
@@ -242,7 +254,7 @@ export function RequirementsPage(props: any) {
                     </Dropdown>
                 </Col>
                 <Col xs={{span: 24, offset: 1}} sm={{span: 4, offset: 0}} md={{span: 3, offset: 0}} lg={{span: 3, offset: 0}} xl={{span: 2, offset: 3}}>
-                    <span>{selectedRequirements.length} selected</span>
+                    <span>{selectedRequirementIds.length} selected</span>
                 </Col>
                 <Col xs={{span: 16, offset: 1}} sm={{span: 8, offset: 0}} md={6} lg={5} xl={4}>
                     <Dropdown overlay={connectControlDropdown} trigger={['click']}>
@@ -258,9 +270,14 @@ export function RequirementsPage(props: any) {
                      lg={{span: 23, offset: 1}} xl={{span: 23, offset: 1}} xxl={{span: 23, offset: 1}}>
                     <Table
                         rowSelection={{
-                            type: "checkbox",
-                            ...rowSelection,
+                            selectedRowKeys: selectedRequirementIds,
+                            onChange: (selectedRows: any) => setSelectedRequirementIds(selectedRows)
                         }}
+                        onRow={(record) => ({
+                            onClick: () => {
+                                selectRow(record);
+                            },
+                        })}
                         scroll={regulations.length < 1 ? {x: undefined} : {x: 'auto'}}
                         dataSource={filteredRequirements}
                         columns={columns}
