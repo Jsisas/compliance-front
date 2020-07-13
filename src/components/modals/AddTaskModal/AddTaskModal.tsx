@@ -196,7 +196,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                         {required: true, message: "Please add due date!"},
                                     ]}
                                 >
-                                    <DatePicker/>
+                                    <DatePicker style={{width: '100%'}}/>
                                 </Form.Item>
                                 <AlButton type="primary" style={{marginRight: "8px"}} htmlType="submit">Add
                                     task</AlButton>
