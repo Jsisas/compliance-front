@@ -95,7 +95,7 @@ export default function RegulationsPage(props: RegulationPageProps) {
                         scroll={regulations.length < 1 ? {x: undefined} : {x: 'auto'}}
                         loading={isTableLoading}
                         style={{width: "100%"}}
-                        pagination={regulations.length < 11 ? false : undefined}
+                        pagination={{hideOnSinglePage: true}}
                     />
                 </Col>
             </Row>

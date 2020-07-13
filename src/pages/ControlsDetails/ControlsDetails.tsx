@@ -168,7 +168,7 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                         loading={isTableLoading}
                         style={{width: "100%"}}
                         className={concatStyles(styles.tableHeader, themeStyle.antTableMousePointer)}
-                        pagination={tasks.length < 11 ? false : undefined}
+                        pagination={{hideOnSinglePage: true}}
                         onRow={(record) => {
                             return {
                                 onClick: () => {

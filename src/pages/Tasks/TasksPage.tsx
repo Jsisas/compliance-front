@@ -92,7 +92,7 @@ export function TasksPage(props: any) {
                         loading={isTableLoading}
                         style={{width: "100%"}}
                         className={themeStyles.antTableMousePointer}
-                        pagination={tasks.length < 11 ? false : undefined}
+                        pagination={{hideOnSinglePage: true}}
                     />
                 </Col>
             </Row>
