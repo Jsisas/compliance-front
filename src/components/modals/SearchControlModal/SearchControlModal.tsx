@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/reducer";
 import {fetchAllControls} from "../../../redux/Control/ControlService";
 import {stringIncludes} from "../../../util/StringUtil";
+import modalStyles from "../modal.module.scss";
 
 const {Title} = Typography
 const {Option} = Select;
@@ -48,12 +49,12 @@ export function SearchControlModal(props: SearchControlModal) {
     return (
         <>
             <Modal
+                className={modalStyles.modalTop}
                 width={540}
                 visible={props.isVisible}
                 maskClosable={true}
                 onCancel={props.onCancel}
                 footer={null}
-                wrapClassName={styles.modalBody}
                 closeIcon={<CloseOutlined className={styles.modalCloseButton}/>}
                 bodyStyle={{padding: 0}}
             >

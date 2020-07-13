@@ -2,6 +2,7 @@ import * as React from 'react';
 import {useState} from 'react';
 import {Col, DatePicker, Form, Input, Modal, Radio, Row, Select, Typography} from 'antd';
 import styles from './addTaskModal.module.scss';
+import modalStyles from '../modal.module.scss';
 import {Control} from '../../../redux/Control/ControlSlice';
 import {CloseOutlined} from "@ant-design/icons/lib";
 import TextArea from "antd/lib/input/TextArea";
@@ -50,12 +51,12 @@ export function AddTaskModule(props: AddTaskProps) {
     return (
         <>
             <Modal
+                className={modalStyles.modalTop}
                 width={540}
                 visible={props.isVisible}
                 maskClosable={true}
                 onCancel={props.onCancel}
                 footer={null}
-                wrapClassName={styles.modalBody}
                 closeIcon={<CloseOutlined className={styles.modalCloseButton}/>}
                 bodyStyle={{padding: 0}}
             >

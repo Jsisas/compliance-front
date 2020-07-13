@@ -3,6 +3,7 @@ import {Col, Form, Input, Modal, Row} from 'antd';
 import styles from './addLinkModal.module.scss';
 import {CloseOutlined} from "@ant-design/icons/lib";
 import AlButton from "../../_ui/AlButton/AlButton";
+import modalStyles from "../modal.module.scss";
 
 interface AddLinkProps {
     onAdd: any;
@@ -19,11 +20,11 @@ export function AddLinkModal(props: AddLinkProps) {
         <>
             <Modal
                 width={540}
+                className={modalStyles.modalTop}
                 visible={props.isVisible}
                 maskClosable={true}
                 onCancel={props.onCancel}
                 footer={null}
-                wrapClassName={styles.modalBody}
                 closeIcon={<CloseOutlined className={styles.modalCloseButton}/>}
                 bodyStyle={{padding: 0}}
             >
