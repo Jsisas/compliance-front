@@ -137,6 +137,7 @@ export function ControlsPage(props: ControlsPageProps) {
                         scroll={controls.length < 1 ? {x: undefined} : {x: 340}}
                         loading={isControlsLoading}
                         style={{width: "100%"}}
+                        pagination={controls.length < 11 ? false : undefined}
                         className={themeStyles.antTableMousePointer}
                     />
                 </Col>

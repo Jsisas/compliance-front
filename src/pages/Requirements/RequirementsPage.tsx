@@ -291,6 +291,7 @@ export function RequirementsPage(props: any) {
                         rowKey="id"
                         loading={isTableLoading}
                         style={{width: "100%"}}
+                        pagination={filteredRequirements.length < 11 ? false : undefined}
                     />
                 </Col>
             </Row>
