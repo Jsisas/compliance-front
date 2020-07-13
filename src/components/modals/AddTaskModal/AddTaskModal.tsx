@@ -68,7 +68,7 @@ export function AddTaskModule(props: AddTaskProps) {
                 </div>
                 <div className={styles.addTaskModalContent}>
                     <Row gutter={[16, 16]} align={"middle"}>
-                        <Col xs={{span: 24}}>
+                        <Col xs={{span: 24}} className={styles.inputFullWidth}>
                             <Form layout="vertical" onFinish={onFinish}>
                                 <Form.Item
                                     name="title"
@@ -196,7 +196,7 @@ export function AddTaskModule(props: AddTaskProps) {
                                         {required: true, message: "Please add due date!"},
                                     ]}
                                 >
-                                    <DatePicker style={{width: '100%'}}/>
+                                    <DatePicker/>
                                 </Form.Item>
                                 <AlButton type="primary" style={{marginRight: "8px"}} htmlType="submit">Add
                                     task</AlButton>
