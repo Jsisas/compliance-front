@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Dropdown, Layout, Menu} from "antd";
 import {Link, useHistory} from 'react-router-dom'
 import {UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
@@ -12,10 +12,23 @@ const {Content, Sider} = Layout;
 export function PageLayout() {
     let history = useHistory();
     const homePage = "/regulations";
-    const selectedHomePage = history.location.pathname === "/" ? homePage : history.location.pathname;
-    const [selectedKey, setSelectedKey] = useState(selectedHomePage)
+    const [selectedKey, setSelectedKey] = useState(history.location.pathname)
     const [isCollapsed, setCollapsed] = useState(false)
     const authentication = AuthUtil.getUserAuth();
+
+    useEffect(() => {
+        backButtonListener()
+    })
+
+    function backButtonListener() {
+        window.addEventListener("popstate", e => {
+            setSelectedKey(getSelectedKey())
+        });
+    }
+
+    function getSelectedKey() {
+        return window.location.pathname === "/" ? homePage : window.location.pathname;
+    }
 
     function handleLogOut() {
         AuthUtil.logout()
