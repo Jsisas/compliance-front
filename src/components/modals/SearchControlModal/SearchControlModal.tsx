@@ -19,6 +19,12 @@ interface SearchControlModal {
     onSelect: any;
 }
 
+interface ControlOption {
+    key: string;
+    value: string;
+    children: string;
+}
+
 export function SearchControlModal(props: SearchControlModal) {
     const allControls = useSelector((state: RootState) => selectAllControls(state))
     const [filteredControls, setFilteredControls] = useState<Control[]>([]);
@@ -29,8 +35,8 @@ export function SearchControlModal(props: SearchControlModal) {
         dispatch(fetchAllControls());
     }, [dispatch]);
 
-    function onSelect(controlId: string){
-        const control = allControls.find(control => control.id === controlId);
+    function onSelect(controlOption: ControlOption) {
+        const control = allControls.find(control => control.id === controlOption.key);
         setSelectedControl(control);
         props.onSelect(control);
     }
@@ -41,7 +47,7 @@ export function SearchControlModal(props: SearchControlModal) {
 
 
     const children = filteredControls.map((control: Control) => (
-        <Option key={control.id} value={control.id}>
+        <Option key={control.id} value={control.title}>
             {control.title}
         </Option>
     ));
@@ -64,11 +70,10 @@ export function SearchControlModal(props: SearchControlModal) {
                 <div className={styles.addTaskModalContent}>
                     <Row gutter={[16, 16]} align={"middle"}>
                         <Col xs={{span: 24}}>
-                            <AutoComplete style={{ width: "100%" }}
+                            <AutoComplete style={{width: "100%"}}
                                           onSearch={handleSearch}
                                           placeholder="Search for control"
-                                          onSelect={(controlId: string) => onSelect(controlId)}
-                                          value={selectedControl?.title}>
+                                          onSelect={(title: string, controlOption: any) => onSelect(controlOption as ControlOption)}>
                                 {children}
                             </AutoComplete>
                         </Col>
