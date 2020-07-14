@@ -1,5 +1,4 @@
 import {Col, Row, Typography} from "antd";
-import {Moment} from "moment";
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, useParams} from "react-router-dom";
@@ -19,6 +18,7 @@ interface NewControlProps {
 
 export function EditControlPage(props: NewControlProps) {
     let {id} = useParams<{ id: string }>();
+
     const dispatch = useDispatch();
     const routeHistory = useHistory();
     const control = useSelector((state: RootState) => selectControlById(state, id));
@@ -27,12 +27,15 @@ export function EditControlPage(props: NewControlProps) {
         dispatch(fetchControlById(id));
     }, [dispatch, id]);
 
-
     function handleEditControl(data: Control): void {
-        data.id = id;
-        data.startDate = new Date(((data.startDate as any) as Moment).toISOString());
-        dispatch(updateControl(data));
-        notifySucess("Edit Control", "Editing a control was successful!");
+        if(!id) {
+
+        } 
+        else {
+            data.id = id;
+            dispatch(updateControl(data));
+            notifySucess("Edit Control", "Editing a control was successful!");
+        } 
         routeHistory.goBack();
     }
 
@@ -48,7 +51,7 @@ export function EditControlPage(props: NewControlProps) {
             </Row>
             <Row gutter={[16, 16]} align={"top"} justify={"space-between"}>
                 <Col xs={2} xl={{span: 10, offset: 1}}>
-                    <ControlForm onFinish={handleEditControl} control={control}/>
+                    <ControlForm onFinish={handleEditControl}/>
                 </Col>
                 <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
                      lg={{span: 5, offset: 1}} xl={{span: 5, offset: 1}}>

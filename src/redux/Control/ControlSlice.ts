@@ -1,32 +1,32 @@
 import {RootState} from '../reducer';
-import {createSlice, PayloadAction, createEntityAdapter, EntityState} from "@reduxjs/toolkit";
+import {createEntityAdapter, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
 import {fetchAllControls, fetchControlById} from './ControlService';
 import {Task} from '../Task/TaskSlice';
 import {User} from '../User/UserSlice';
 import {Requirement} from "../Requirement/RequirementSlice";
 
 export enum ControlStatus {
-    IN_DESIGN = "In design",
-    IMPLEMENTED = "Implemented",
-    FAILING = "Failing",
-    OK = "Ok",
+    NOT_IMPLEMENTED = "not_implemented",
+    IMPLEMENTED = "implemented",
+    FAILING = "failing",
+    OK = "ok"
 }
 
-export enum ControlCategory {
-    POLICY = "Policy",
-    PROCEDURE = "Procedure"
+export enum ControlType {
+    POLICY = "policy",
+    PROCESS = "process"
 }
 
 export interface Control {
     id: string,
-    title: string,
-    kind: ControlCategory,
-    startDate: Date,
-    state: ControlStatus,
-    assignees: User[];
-    tasks: Task[];
-    requirements: Requirement[];
+    assignee: User;
+    begins_at: string,
     description: string;
+    kind: ControlType,
+    requirements: Requirement[];
+    state: ControlStatus,
+    tasks: Task[];
+    title: string
 }
 
 const controlsAdapter = createEntityAdapter<Control>({
@@ -39,10 +39,14 @@ const controlSelectors = controlsAdapter.getSelectors((state: RootState) => stat
 
 export const selectAllControls = controlSelectors.selectAll;
 export const selectControlById = controlSelectors.selectById;
-const updateOneControl = (control: Control, state: EntityState<Control>) => controlsAdapter.updateOne(state, {
+
+const updateOneControl = (control: Control, state: EntityState<Control>) =>
+{
+    controlsAdapter.updateOne(state, {
     id: control.id,
     changes: control
 });
+}
 
 const ControlSlice = createSlice({
     name: 'control',
@@ -67,7 +71,7 @@ const ControlSlice = createSlice({
             state.loading = false;
         })
         builder.addCase(fetchControlById.fulfilled, (state, action) => {
-            updateOneControl(action.payload, state.entities)
+            controlsAdapter.upsertOne(state.entities, action);
             state.loading = false;
         })
     }

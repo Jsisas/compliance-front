@@ -1,6 +1,6 @@
 import {RootState} from '../reducer';
 import {createEntityAdapter, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
-import {fetchAllRegulations} from './RegulationService';
+import {fetchAllRegulations, fetchRegulationById} from './RegulationService';
 import {Requirement} from "../Requirement/RequirementSlice";
 
 export interface RegulationStatistics {
@@ -57,6 +57,10 @@ const RegulationSlice = createSlice({
         builder.addCase(fetchAllRegulations.fulfilled, (state, action) => {
             state.loading = false;
             regulationAdapter.setAll(state.entities, action.payload);
+        })
+        builder.addCase(fetchRegulationById.fulfilled, (state, action) => {
+            state.loading = false;
+            regulationAdapter.upsertOne(state.entities, action.payload);
         })
     }
 })

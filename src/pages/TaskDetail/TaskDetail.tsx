@@ -16,6 +16,7 @@ import TextArea from "antd/lib/input/TextArea";
 import {TaskConnectedItems} from "../../components/TaskConnectedItems/TaskConnectedItems";
 import {notifyError} from "../../util/NotificationUtil";
 import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
+import StringUtil from "../../util/StringUtil";
 
 const {Title, Text} = Typography;
 const { Dragger } = Upload;
@@ -40,7 +41,6 @@ export function TaskDetail(props: TaskDetailsProps) {
 
     function onLinkAdd(link: AddLink) {
         toggleModal();
-        console.log(link.href)
     }
 
     return (
@@ -58,7 +58,7 @@ export function TaskDetail(props: TaskDetailsProps) {
                 <Col xs={{span: 10, offset: 1}} sm={10} md={10} lg={{span: 10, offset: 1}}
                      xl={{span: 10, offset: 1}}>
                     <Text
-                        type={"secondary"}>{task?.description || "When an employee leaves the company, their authorizations are revoked in the company’s access provisioning software on the last day of their employment contract."}</Text>
+                        type={"secondary"}>{task?.description}</Text>
                 </Col>
                 <Col xs={{span: 24}} sm={{span: 6, offset: 6}} md={{span: 4, offset: 8}} lg={{span: 4, offset: 8}}
                      xl={{span: 3, offset: 10}}>
@@ -83,20 +83,26 @@ export function TaskDetail(props: TaskDetailsProps) {
                         <Col xs={24} sm={24} md={24} lg={24} xl={7}>
                             <Text type={'secondary'}>Due date</Text>
                         </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={7}>
+                            <Text type={'secondary'}>Overdue</Text>
+                        </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
                         <Col xs={{span: 24}} sm={{span: 24}} md={{span: 24}}
                              lg={{span: 17}} xl={{span: 2}}>
-                            <Text>{task?.state}</Text>
+                            <Text>{StringUtil.humanizeSnakeCase(task?.state || '')}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={24} xl={2}>
-                            <Text>{task?.assignee?.name != null ? '@' : ''}{task?.assignee?.name}</Text>
+                             <Text>{task?.assignee?.name != null ? '@' : ''}{task?.assignee?.name}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={17} xl={3}>
-                            <Text>{task?.kind}</Text>
+                            <Text>{StringUtil.humanizeSnakeCase(task?.kind || '')}</Text>
                         </Col>
                         <Col xs={24} sm={24} md={24} lg={24} xl={6}>
                             <Text>{date(task?.due_at).format(dateFormat)}</Text>
+                        </Col>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={6}>
+                            <Text>{task?.is_overdue ? "Overdue" : "Not overdue"}</Text>
                         </Col>
                     </Row>
                 </Col>

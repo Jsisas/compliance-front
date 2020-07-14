@@ -34,7 +34,11 @@ export default function RegulationsPage(props: RegulationPageProps) {
             dataIndex: "name",
             key: "id",
             render: (text: any, record: Regulation) => {
-                return <span className={themeStyles.textBold}>{record.title}</span>
+                return <Link
+                    to={`/regulations/${record.id}/requirements`}
+                    className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}>
+                    {record.title}
+                </Link>
             }
         });
         columns.push({
@@ -83,7 +87,7 @@ export default function RegulationsPage(props: RegulationPageProps) {
         <>
             <Row gutter={[16, 16]} justify={"space-between"}>
                 <Col xs={24} sm={16} md={10} lg={16} xl={16} xxl={16}>
-                    <Title>Regulations Page</Title>
+                    <Title>Regulations</Title>
                 </Col>
             </Row>
             <Row gutter={[16, 16]} justify={"space-between"}>

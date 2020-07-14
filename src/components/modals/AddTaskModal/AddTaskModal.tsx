@@ -19,9 +19,7 @@ import {
     Weekday
 } from "../../../redux/Task/TaskSlice";
 import {useDispatch} from "react-redux";
-import {Moment} from "moment";
 import {notifySucess} from "../../../util/NotificationUtil";
-import {v4} from "uuid";
 
 const {Title, Text} = Typography
 const {Option} = Select;
@@ -38,8 +36,6 @@ export function AddTaskModule(props: AddTaskProps) {
     const [taskRecurrence, setTaskRecurrence] = useState(TaskFrequencyTypeRecurrence.WEEKLY);
 
     function handleCreateNewTask(data: Task): void {
-        data.id = v4()
-        data.due_at = ((data.due_at as any) as Moment).toISOString();
         data.control = props.control || {} as Control;
         dispatch(createTask(data));
         notifySucess("Add task", "Adding a task was successful");

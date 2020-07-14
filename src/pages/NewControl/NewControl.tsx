@@ -1,5 +1,4 @@
 import {Col, Row, Typography} from "antd";
-import {Moment} from "moment";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
@@ -24,9 +23,7 @@ export function NewControlPage(props: NewControlProps) {
     const routeHistory = useHistory();
     const selectedRequirements = useSelector((state: RootState) => selectAllTmpRequirements(state));
 
-
     function handleCreateNewControl(data: Control): void {
-        data.startDate = new Date(((data.startDate as any) as Moment).toISOString());
         dispatch(createControl(data));
 
         if (selectedRequirements.length > 0) {

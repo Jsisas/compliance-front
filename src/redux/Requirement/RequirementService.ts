@@ -12,3 +12,11 @@ export const fetchAllRequirements = createAsyncThunk(
         return response.data.data
     }
 )
+
+export const fetchRequirementById = createAsyncThunk(
+    'requirements/fetchRequirementById',
+    async (requirementId: string) => {
+        const response: AxiosResponse<ApiWrapper<Requirement>> = await axios.get(`${API_URL}/requirements/` + requirementId)
+        return response.data.data
+    }
+)

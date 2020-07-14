@@ -7,8 +7,8 @@ import {CloseOutlined} from "@ant-design/icons/lib";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../redux/reducer";
 import {fetchAllControls} from "../../../redux/Control/ControlService";
-import {stringIncludes} from "../../../util/StringUtil";
 import modalStyles from "../modal.module.scss";
+import StringUtil from "../../../util/StringUtil";
 
 const {Title} = Typography
 const {Option} = Select;
@@ -28,7 +28,6 @@ interface ControlOption {
 export function SearchControlModal(props: SearchControlModal) {
     const allControls = useSelector((state: RootState) => selectAllControls(state))
     const [filteredControls, setFilteredControls] = useState<Control[]>([]);
-    const [selectedControl, setSelectedControl] = useState();
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -37,14 +36,13 @@ export function SearchControlModal(props: SearchControlModal) {
 
     function onSelect(controlOption: ControlOption) {
         const control = allControls.find(control => control.id === controlOption.key);
-        setSelectedControl(control);
         props.onSelect(control);
     }
 
     const handleSearch = (value: string) => {
-        setFilteredControls(allControls.filter(control => stringIncludes(control.title, value) || stringIncludes(control.description, value)))
+        setFilteredControls(allControls.filter(control =>
+            StringUtil.stringIncludes(control.title, value) || StringUtil.stringIncludes(control.description, value)))
     };
-
 
     const children = filteredControls.map((control: Control) => (
         <Option key={control.id} value={control.title}>
@@ -82,4 +80,4 @@ export function SearchControlModal(props: SearchControlModal) {
             </Modal>
         </>
     );
-};
+}

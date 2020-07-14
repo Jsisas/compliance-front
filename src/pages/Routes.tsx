@@ -4,6 +4,7 @@ import {NewControlPage} from "./NewControl/NewControl";
 import RegulationsPage from "./Regulations/RegulationsPage";
 import {ControlsPage} from "./Controls/ControlsPage";
 import {RequirementsPage} from "./Requirements/RequirementsPage";
+import {RequirementDetailsPage} from "./Requirements/RequirementDetailsPage";
 import {TasksPage} from "./Tasks/TasksPage";
 import {ControlsDetails} from "./ControlsDetails/ControlsDetails";
 import {NotFoundPage} from "./NotFound/NotFoundPage";
@@ -21,15 +22,19 @@ export function Routes(props: RoutesProps) {
     return (
         <Switch>
             {!AuthUtil.isCurrentUserAuthenticated() ?
-            <Redirect exact path="/" to='/login'/> :
-            <Redirect exact path="/" to='/regulations'/>
+                <Redirect exact path="/" to='/login'/> :
+                <Redirect exact path="/" to='/regulations'/>
             }
 
             <Route exact path="/login" component={LoginPage}/>
 
-            <PrivateRoute isAuthenticated={props.isAuthenticated} exact path={"/regulations"} component={RegulationsPage}/>
+            <PrivateRoute isAuthenticated={props.isAuthenticated} exact path={"/regulations"}
+                          component={RegulationsPage}/>
             <PrivateRoute isAuthenticated={props.isAuthenticated} exact path="/regulations/:id/requirements"
                           component={RequirementsPage}/>
+
+            <PrivateRoute isAuthenticated={props.isAuthenticated} exact path="/requirements/:id"
+                          component={RequirementDetailsPage}/>
 
             <PrivateRoute isAuthenticated={props.isAuthenticated} exact path="/controls" component={ControlsPage}/>
             <PrivateRoute isAuthenticated={props.isAuthenticated} exact path="/controls/new"

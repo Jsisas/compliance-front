@@ -2,8 +2,8 @@ import * as React from 'react';
 import {Col, Row, Typography} from "antd";
 import {Link} from "react-router-dom";
 import {Task} from "../../redux/Task/TaskSlice";
-import {shortenStringLength} from "../../util/StringUtil";
 import styles from './taskConnectedItems.module.scss';
+import StringUtil from "../../util/StringUtil";
 
 const {Text} = Typography;
 
@@ -29,7 +29,7 @@ export function TaskConnectedItems(props: TaskConnectedItemsProps) {
                 <Row gutter={[16, 16]}>
                     <Col xs={24}>
                         <Link key={props.task.control.id} to={`/controls/${props.task.control.id}`}>
-                            {shortenStringLength(props.task.control.title, 50)}
+                            {StringUtil.shortenStringLength(props.task.control.title, 50)}
                         </Link>
                     </Col>
                 </Row>

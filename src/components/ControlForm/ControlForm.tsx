@@ -1,30 +1,51 @@
 import * as React from 'react';
-import {Col, DatePicker, Form, Input, Radio, Row} from "antd";
+import {useEffect} from 'react';
+import {Col, DatePicker, Form, Radio, Row} from "antd";
 import {UserSearch} from "../AssigneeSearch/AssigneeSearch";
-import {Control, ControlCategory} from "../../redux/Control/ControlSlice";
+import {Control, ControlType, selectControlById} from "../../redux/Control/ControlSlice";
 import AlButton from "../_ui/AlButton/AlButton";
 import TextArea from "antd/lib/input/TextArea";
+import {useDispatch, useSelector} from 'react-redux';
+import {useParams} from 'react-router-dom';
+import {RootState} from "../../redux/reducer";
+import {fetchControlById, updateControl} from '../../redux/Control/ControlService';
+import {date} from "../../util/DateUtil";
 
 interface Props {
     onFinish: any;
-    control?: Control;
 }
 
 export function ControlForm(props: Props) {
 
-    const onFinish = (values: any) => props.onFinish(values as Control);
+    let {id} = useParams<{ id: string }>();
+    const control = useSelector((state: RootState) => selectControlById(state, id));
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchControlById(id));
+    }, [dispatch, id]);
+
+    const onFinish = (values: any) => {
+        values.id = id
+        dispatch(updateControl(values));
+        props.onFinish(values as Control);
+    }
 
     return (
         <>
-            <Form layout="vertical" onFinish={onFinish} initialValues={props.control}>
+            <Form layout="vertical" onFinish={onFinish} initialValues={control}>
                 <Form.Item
                     name="title"
                     rules={[
-                        {required: true, message: "Please input control title!"},
+                        {
+                            required: true,
+                            message: "Please input control title!",
+                        },
                     ]}
                 >
-                    <Input placeholder="Add title"/>
+                    <TextArea value={control?.title} placeholder="Add title"/>
                 </Form.Item>
+
                 <Form.Item
                     name="description"
                     rules={[
@@ -34,10 +55,10 @@ export function ControlForm(props: Props) {
                         },
                     ]}
                 >
-                    <TextArea placeholder="Add description"/>
+                    <TextArea value={control?.description} placeholder="Add description"/>
                 </Form.Item>
                 <Form.Item label="Add assignee" name="assignee">
-                    <UserSearch placeholder="Add assignees"/>
+                    <UserSearch selectedUser={control?.assignee} placeholder="Add assignees"/>
                 </Form.Item>
 
                 <Row gutter={[16, 16]} align={"middle"}>
@@ -49,12 +70,13 @@ export function ControlForm(props: Props) {
                     >
                         <Form.Item
                             label="Start date"
-                            name="startDate"
+                            name="begins_at"
                             rules={[
                                 {required: true, message: "Please add start date!"},
                             ]}
                         >
-                            <DatePicker/>
+                            {console.log(control)}
+                            <DatePicker defaultValue={date(control?.begins_at)}/>
                         </Form.Item>
                     </Col>
                     <Col
@@ -64,18 +86,18 @@ export function ControlForm(props: Props) {
                         xs={{span: 24}}
                     >
                         <Form.Item
-                            label="Category"
-                            name="category"
+                            label="Type"
+                            name="kind"
                             rules={[
-                                {required: true, message: "Please add start date!"},
+                                {required: true, message: "KinTyped is required!"},
                             ]}
                         >
-                            <Radio.Group>
-                                <Radio key={ControlCategory.POLICY} value={ControlCategory.POLICY}>
-                                    {ControlCategory.POLICY}
+                            <Radio.Group value={control?.kind}>
+                                <Radio name="kind" key={ControlType.POLICY} value={ControlType.POLICY}>
+                                    {ControlType.POLICY}
                                 </Radio>
-                                <Radio key={ControlCategory.PROCEDURE} value={ControlCategory.PROCEDURE}>
-                                    {ControlCategory.PROCEDURE}
+                                <Radio name="kind" key={ControlType.PROCESS} value={ControlType.PROCESS}>
+                                    {ControlType.PROCESS}
                                 </Radio>
                             </Radio.Group>
                         </Form.Item>

@@ -11,3 +11,11 @@ export const fetchAllRegulations = createAsyncThunk(
         return response.data.data;
     }
 )
+
+export const fetchRegulationById = createAsyncThunk(
+    'regulations/fetchRegulationById',
+    async (regulationId: string) => {
+        const response: AxiosResponse<ApiWrapper<Regulation>> = await axios.get(`${API_URL}/regulations/` + regulationId)
+        return response.data.data
+    }
+)

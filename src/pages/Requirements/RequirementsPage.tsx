@@ -9,7 +9,7 @@ import {Link, useParams} from "react-router-dom";
 import {Requirement, selectAllRequirements, updateRequirement,} from "../../redux/Requirement/RequirementSlice";
 import {DownOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {selectAllRegulations, selectRegulationById} from "../../redux/Regulation/RegulationSlice";
-import {fetchAllRegulations} from "../../redux/Regulation/RegulationService";
+import {fetchRegulationById} from "../../redux/Regulation/RegulationService";
 import AlButton from "../../components/_ui/AlButton/AlButton";
 import {fetchAllRequirements} from "../../redux/Requirement/RequirementService";
 import {SearchControlModal} from "../../components/modals/SearchControlModal/SearchControlModal";
@@ -47,9 +47,9 @@ export function RequirementsPage(props: any) {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchAllRegulations());
+        dispatch(fetchRegulationById(id));
         dispatch(fetchAllRequirements())
-    }, [dispatch]);
+    }, [dispatch, id]);
     let columns: ColumnProps<any>[] = [];
 
     function getFilteredRequirements(searchTerm: string) {
@@ -109,7 +109,7 @@ export function RequirementsPage(props: any) {
                 return record.controls?.map(control =>
                     <Tag
                         key={control.id}
-                        className={control.tasks?.some(x => new Date(x.due_at) < new Date()) ? themeStyles.errorTag : themeStyles.primaryTag}>
+                        className={control.tasks?.some(x => x.is_overdue) ? themeStyles.errorTag : themeStyles.primaryTag}>
                         {control.title}
                     </Tag>)
             }
@@ -130,8 +130,8 @@ export function RequirementsPage(props: any) {
         return requirements.filter(x => x.controls?.length < 1)
     }
 
-    function getRequirementsWithFailingControl(requirements: Requirement[]) {
-        return requirements.filter(x => x.controls?.some(y => y.tasks.some(u => new Date(u.due_at) < new Date())))
+    function getRequirementsWithFailingControl(requirements: Requirement[]) {        
+        return requirements.filter(x => x.statistics?.controls_failing > 0)
     }
 
     const allRegulationsDropDown = (
@@ -297,4 +297,4 @@ export function RequirementsPage(props: any) {
             </Row>
         </>
     );
-};
+}

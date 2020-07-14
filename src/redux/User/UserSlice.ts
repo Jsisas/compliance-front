@@ -3,27 +3,16 @@ import { createEntityAdapter, createSlice, EntityState, PayloadAction } from '@r
 import { RootState } from '../reducer';
 import { fetchAllUsers } from './UserService';
 
-export enum UserStatus {
-    NOT_IMPLEMENTED,
-    IMPLEMENTED
-}
-
-export enum UserCategory {
-    POLICY,
-    PROCEDURE
-}
-
 export interface User {
     id: string,
     email: string,
     name: string,
     picture: string,
-    username: string
 }
 
 const usersAdapter = createEntityAdapter<User>({
     selectId: user => user.id,
-    sortComparer: (a, b) => a.username.localeCompare(b.username)
+    sortComparer: (a, b) => a.name.localeCompare(b.name)
 });
 
 const userInitialState: EntityState<User> = usersAdapter.getInitialState();
