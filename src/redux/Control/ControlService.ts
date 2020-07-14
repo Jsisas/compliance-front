@@ -12,10 +12,23 @@ export const fetchAllControls = createAsyncThunk(
     }
 )
 
+export const updateControl = createAsyncThunk(
+    'controls/update',
+    async (control: Control) => {
+      try {
+        return await axios.patch(`${API_URL}/controls/` + control.id,{control})
+      } catch (err) {
+        
+        if (!err.response) {
+            throw err
+        }
+      }
+    }
+  )
+
 export const fetchControlById = createAsyncThunk(
-    'controls/fetchById',
+    'controls/fetchControlById',
     async (controlId: string) => {
-        const response: AxiosResponse<ApiWrapper<Control>> = await axios.get(`${API_URL}/controls/` + controlId)
-        return response.data.data
+        return await (await axios.get(`${API_URL}/controls/` + controlId)).data.data;        
     }
 )

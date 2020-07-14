@@ -11,6 +11,7 @@ import 'moment/locale/et';
 import {date, dateFormat} from "../../util/DateUtil";
 import {AddTaskModule} from "../../components/modals/AddTaskModal/AddTaskModal";
 import themeStyles from './../../theme.module.scss';
+import StringUtil from "../../util/StringUtil";
 
 const {Title} = Typography;
 
@@ -45,7 +46,7 @@ export function TasksPage(props: any) {
             dataIndex: "kind",
             key: "id",
             render: (text: any, record: Task) => {
-                return <span>{record.kind}</span>
+                return <span>{StringUtil.humanizeSnakeCase(record.kind)}</span>
             }
         });
         columns.push({
@@ -53,7 +54,7 @@ export function TasksPage(props: any) {
             dataIndex: "state",
             key: "id",
             render: (text: any, record: Task) => {
-                return <span>{record.state}</span>
+                return <span>{StringUtil.humanizeSnakeCase(record.state)}</span>
             }
         });
         columns.push({
@@ -64,6 +65,14 @@ export function TasksPage(props: any) {
                 return <span>{date(record.due_at).format(dateFormat)}</span>
             }
         });
+        columns.push({
+            title: "Overdue",
+            dataIndex: "is_overdue",
+            key: "id",
+            render: (text: any, record: Task) => {
+            return <span>{record?.is_overdue ? "Overdue" : "Not overdue"}</span>
+            }
+        });
     }
 
     return (
@@ -71,7 +80,7 @@ export function TasksPage(props: any) {
             <AddTaskModule isVisible={isAddTaskModalVisible} onCancel={toggleModal}/>
             <Row gutter={[16, 16]} justify={"space-between"}>
                 <Col xs={24} sm={16} md={10} lg={16} xl={16} xxl={16}>
-                    <Title>Tasks Page</Title>
+                    <Title>Tasks</Title>
                 </Col>
                 <Col xs={24} sm={7} md={5} lg={4} xl={3} xxl={2}>
                     <AlButton type='primary' style={{width: '100%'}} onClick={() => toggleModal()}>Add task</AlButton>

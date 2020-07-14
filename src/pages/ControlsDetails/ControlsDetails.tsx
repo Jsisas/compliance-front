@@ -4,14 +4,12 @@ import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/reducer";
 import {selectControlById} from "../../redux/Control/ControlSlice";
-import {fetchAllControls} from "../../redux/Control/ControlService";
+import {fetchControlById} from "../../redux/Control/ControlService";
 import {Col, Divider, Row, Table, Typography} from "antd";
 import {EditOutlined, EllipsisOutlined} from "@ant-design/icons/lib";
 import AlButton from "../../components/_ui/AlButton/AlButton";
-import {fetchAllTasks} from "../../redux/Task/TaskService";
 import {selectTaskByControlId, Task} from "../../redux/Task/TaskSlice";
 import {ColumnProps} from "antd/lib/table";
-import {User} from "../../redux/User/UserSlice";
 import styles from './controlDetails.module.scss'
 import themeStyle from '../../theme.module.scss';
 
@@ -19,6 +17,8 @@ import {AddTaskModule} from '../../components/modals/AddTaskModal/AddTaskModal';
 import {concatStyles} from "../../util/StyleUtil";
 import {ControlConnectedItems} from "../../components/ControlConnectedItems/ControlConnectedItems";
 import {AlBackArrow} from "../../components/_ui/AlBackArrow/AlBackArrow";
+import moment from 'moment';
+import StringUtil from "../../util/StringUtil";
 
 const {Title, Text} = Typography;
 
@@ -41,9 +41,9 @@ export function ControlsDetails(props: ControlsDetailsProps) {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(fetchAllControls());
-        dispatch(fetchAllTasks());
-    }, [dispatch]);
+        dispatch(fetchControlById(id));
+    }, [dispatch, id]);
+
     let columns: ColumnProps<any>[] = [];
 
     columns.push({
@@ -62,7 +62,7 @@ export function ControlsDetails(props: ControlsDetailsProps) {
         key: "id",
         render: (text: any, record: Task) => {
             return (
-                <Text>{record.assignee ? `@${record.assignee?.name}` : ""}</Text>
+                <Text>{record.assignee?.name}</Text>
             );
         }
     });
@@ -86,6 +86,7 @@ export function ControlsDetails(props: ControlsDetailsProps) {
             );
         }
     });
+
     return (
         <>
             <AddTaskModule control={control!} isVisible={isAddTaskModalVisible} onCancel={toggleModal}/>
@@ -101,7 +102,7 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                 <Col xs={{span: 23, offset: 1}} sm={{span: 16, offset: 1}} md={{span: 16, offset: 1}}
                      lg={{span: 16, offset: 1}} xl={{span: 15, offset: 1}}>
                     <Text
-                        type={"secondary"}>{control?.description || "When an employee leaves the company, their authorizations are revoked in the company’s access provisioning software on the last day of their employment contract."}</Text>
+                        type={"secondary"}>{control?.description}</Text>
                 </Col>
                 <Col xs={{span: 24}} sm={{span: 6, offset: 1}} md={{span: 4, offset: 3}} lg={{span: 4, offset: 3}}
                      xl={{span: 3, offset: 5}}>
@@ -112,36 +113,35 @@ export function ControlsDetails(props: ControlsDetailsProps) {
                     </Link>
                 </Col>
             </Row>
-            <Row gutter={[16, 16]} style={{height: '75px'}}>
+            <Row gutter={[16, 16]}>
                 <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
                      lg={{span: 17, offset: 1}} xl={{span: 17, offset: 1}}>
                     <Row gutter={[16, 16]}>
-                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={4}>
                             <Text type={'secondary'}>Status</Text>
                         </Col>
-                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={4}>
                             <Text type={'secondary'}>Start date</Text>
                         </Col>
-                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={4}>
                             <Text type={'secondary'}>Assignee</Text>
                         </Col>
-                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={4}>
                             <Text type={'secondary'}>Category</Text>
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]}>
-                        <Col xs={{span: 24, offset: 1}} sm={{span: 24, offset: 1}} md={{span: 24, offset: 1}}
-                             lg={{span: 17, offset: 1}} xl={{span: 2, offset: 1}}>
-                            <Text>{control?.state}</Text>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={4}>
+                            <Text>{StringUtil.humanizeSnakeCase(control?.state || '')}</Text>
                         </Col>
-                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
-                            <Text>{control?.startDate}</Text>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={4}>
+                            <Text>{moment(control?.begins_at).format('YYYY-MM-DD')}</Text>
                         </Col>
-                        <Col xs={24} sm={24} md={24} lg={24} xl={2}>
-                            <Text>{control?.assignees?.map((user: User) => <span>{user.name}</span>)}</Text>
+                        <Col xs={24} sm={24} md={24} lg={24} xl={4}>
+                            <Text>{control?.assignee.name}</Text>
                         </Col>
-                        <Col xs={24} sm={24} md={24} lg={17} xl={2}>
-                            <Text>{control?.kind}</Text>
+                        <Col xs={24} sm={24} md={24} lg={17} xl={4}>
+                            <Text>{StringUtil.humanizeSnakeCase(control?.kind || '')}</Text>
                         </Col>
                     </Row>
                 </Col>

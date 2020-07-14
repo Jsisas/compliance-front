@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Dropdown, Layout, Menu} from "antd";
 import {Link, useHistory} from 'react-router-dom'
-import {UserOutlined, VideoCameraOutlined} from "@ant-design/icons";
 import {Routes} from "../../pages/Routes";
 import {ReactComponent as Logo} from "./../../assets/logo/small_logo.svg";
 import styles from "./layout.module.scss";
@@ -64,25 +63,22 @@ export function PageLayout() {
                     <Link to="/regulations" onClick={() => setSelectedKey('/regulations')}><Logo/></Link>
                 </div>
                 <Menu
+                    className={styles.sideMenu}
                     mode="inline"
                     selectedKeys={[selectedKey]}
-                    className={styles.extraExtraLightGrey}
-
+                    
                 >
                     <Menu.Item key={"/regulations"} onClick={() => setSelectedKey('/regulations')}>
-                        <UserOutlined/>
                         <Link to="/regulations" className="nav-text">
                             Overview
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/controls" onClick={() => setSelectedKey('/controls')}>
-                        <VideoCameraOutlined/>
                         <Link to="/controls" className="nav-text">
                             Controls
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/tasks" onClick={() => setSelectedKey('/tasks')}>
-                        <VideoCameraOutlined/>
                         <Link to="/tasks" className="nav-text">
                             Tasks
                         </Link>

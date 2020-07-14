@@ -11,7 +11,9 @@ const { Option } = Select;
 export interface UserSearchProps {
     onChange?(selectedUsers: User[]): void;
     placeholder?: string;
+    selectedUser?: User
 }
+
 export function UserSearch(props: UserSearchProps) {
     const allUsers = useSelector((state: RootState) => selectAllUsers(state))
     const dispatch = useDispatch();
@@ -45,7 +47,6 @@ export function UserSearch(props: UserSearchProps) {
     return (
         <>
             <Select
-                mode="multiple"
                 placeholder={props.placeholder || "Search users"}
                 notFoundContent={false ? <Spin size="small" /> : null}
                 filterOption={false}

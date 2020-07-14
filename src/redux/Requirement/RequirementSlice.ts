@@ -1,13 +1,18 @@
 import {RootState} from '../reducer';
 import {createEntityAdapter, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
 import {Control} from "../Control/ControlSlice";
-import {fetchAllRequirements} from "./RequirementService";
+import {fetchAllRequirements, fetchRequirementById} from "./RequirementService";
 import {Regulation} from "../Regulation/RegulationSlice";
 
 export interface RequirementChapter {
     id: string,
     chapterNumber: string,
     name: string
+}
+
+export interface RequirementStatistics {
+    controls_total: number;
+    controls_failing: number;
 }
 
 export interface Requirement {
@@ -19,6 +24,7 @@ export interface Requirement {
     paragraph_number: string,
     regulations: Regulation[],
     controls: Control[],
+    statistics: RequirementStatistics
 }
 
 const requirementAdapter = createEntityAdapter<Requirement>({
@@ -60,6 +66,10 @@ const RequirementSlice = createSlice({
         builder.addCase(fetchAllRequirements.fulfilled, (state, action) => {
             state.loading = false;
             requirementAdapter.setAll(state.entities, action.payload);
+        })
+        builder.addCase(fetchRequirementById.fulfilled, (state, action) => {
+            state.loading = false;
+            requirementAdapter.upsertOne(state.entities, action.payload);
         })
     }
 })

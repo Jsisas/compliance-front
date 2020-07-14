@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {Col, Row, Typography} from "antd";
 import {Link} from "react-router-dom";
-import {shortenStringLength} from "../../util/StringUtil";
 import styles from './contorlConnectedItems.module.scss';
 import {Requirement} from "../../redux/Requirement/RequirementSlice";
+import StringUtil from "../../util/StringUtil";
 
 const {Text} = Typography;
 
@@ -32,7 +32,7 @@ export function ControlConnectedItems(props: TaskConnectedItemsProps) {
                                 props.requirements.map(requirement => {
                                     return (
                                         <Link key={requirement.id} to={`/requirements/${requirement.id}`}>
-                                            {shortenStringLength(requirement.title, 50)}
+                                            {StringUtil.shortenStringLength(requirement.title, 50)}
                                         </Link>
                                     )
                                 }) : <span>No connected requirements</span>

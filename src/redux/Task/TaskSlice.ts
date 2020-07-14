@@ -3,6 +3,7 @@ import {createEntityAdapter, createSelector, createSlice, EntityState, PayloadAc
 import {RootState} from "../reducer";
 import {fetchAllTasks} from "./TaskService";
 import {User} from "../User/UserSlice";
+import { Moment } from "moment";
 
 export enum Weekday {
     MONDAY,
@@ -101,16 +102,18 @@ export interface Comment {
 
 export interface Task {
     id: string,
-    title: string,
-    state: TaskType,
-    description: string,
+    due_at: Moment,
+    is_overdue: boolean,
     kind: TaskType,
+    state: TaskType,
+    title: string,
+    control: Control
+    description: string,
     frequency: WeeklyTaskFrequency | MonthlyTaskFrequency | QuarterlyTaskFrequency | AnnualTaskFrequency;
     assignee: User,
-    due_at: string,
     files: TaskFile[],
     comments: Comment[]
-    control: Control
+    
 }
 
 const tasksAdapter = createEntityAdapter<Task>({
