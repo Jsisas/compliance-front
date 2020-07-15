@@ -1,9 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {AxiosResponse} from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {Requirement} from "./RequirementSlice";
-import {API_URL} from "../../index";
 import {ApiWrapper} from "../store";
-import axios from 'axios';
+import {API_URL} from "../../App";
 
 export const fetchAllRequirements = createAsyncThunk(
     'requirements/fetchAllByRegulationId',

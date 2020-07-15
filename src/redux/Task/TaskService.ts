@@ -1,8 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios, {AxiosResponse} from "axios";
 import {ApiWrapper} from "../store";
-import {API_URL} from "../../index";
 import {Task} from "./TaskSlice";
+import {API_URL} from "../../App";
 
 export const fetchAllTasks = createAsyncThunk(
     'tasks/fetchAll',

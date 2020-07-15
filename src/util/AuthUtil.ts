@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
-import {API_URL} from "../index";
 import {notifySucess} from "./NotificationUtil";
+import {API_URL} from "../App";
 
 export interface AuthRequest {
     token: string;

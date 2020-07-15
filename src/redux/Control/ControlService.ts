@@ -1,8 +1,8 @@
 import {Control} from "./ControlSlice";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios, {AxiosResponse} from 'axios';
-import {API_URL} from "../../index";
 import {ApiWrapper} from "../store";
+import {API_URL} from "../../App";
 
 export const fetchAllControls = createAsyncThunk(
     'controls/fetchAll',

@@ -1,8 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit"
-import {API_URL} from "../../index";
 import {User} from "./UserSlice";
 import {ApiWrapper} from "../store";
 import axios, {AxiosResponse} from "axios";
+import {API_URL} from "../../App";
 
 export const fetchAllUsers = createAsyncThunk(
     'users/fetchAll',
