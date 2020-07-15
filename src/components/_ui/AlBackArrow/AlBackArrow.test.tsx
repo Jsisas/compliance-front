@@ -10,8 +10,8 @@ const props: AlBackArrowProps = {
 };
 
 describe('<AlBackArrow />', () => {
-	it('it renders an arrow', () => {
-		const arrow = shallow(<AlBackArrow history={props.history} />);
+	it('it renders an arrow with correct attributes', () => {
+		const arrow = shallow(<AlBackArrow history={props.history}/>);
 		const alButton = arrow.find('AlButton');
 
 		expect(alButton.length).toEqual(1);
