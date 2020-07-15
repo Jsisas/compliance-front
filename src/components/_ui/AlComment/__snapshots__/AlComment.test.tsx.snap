@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AlComment /> it renders a comment section 1`] = `ShallowWrapper {}`;
