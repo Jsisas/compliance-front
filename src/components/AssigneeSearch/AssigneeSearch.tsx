@@ -10,7 +10,6 @@ const {Option} = Select;
 
 export interface UserSearchProps {
 	onChange?(selectedUsers: User[]): void;
-
 	placeholder?: string;
 	selectedUser?: User
 }
