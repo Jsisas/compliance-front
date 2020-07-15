@@ -4,7 +4,7 @@ import AlButton from '../AlButton/AlButton';
 import styles from './albackarrow.module.scss';
 import * as H from 'history';
 
-interface AlBackArrowProps {
+export interface AlBackArrowProps {
 	history: H.History;
 }
 
