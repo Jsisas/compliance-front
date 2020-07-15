@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {Button as AntdButton} from 'antd';
+import {Button} from 'antd';
 import styles from './alButton.module.scss';
 import {CSSProperties} from 'styled-components';
 import {concatStyles} from '../../../util/StyleUtil';
@@ -40,7 +40,7 @@ export default function AlButton(props: ButtonProp): JSX.Element {
 	}
 
 	return (
-		<AntdButton
+		<Button
 			className={concatStyles(getButtonClassName(), (props.className || ''))}
 			type={getButtonType(props.type)}
 			style={props.style}
@@ -49,6 +49,6 @@ export default function AlButton(props: ButtonProp): JSX.Element {
 			disabled={props.disabled || false}
 		>
 			{props.children}
-		</AntdButton>
+		</Button>
 	);
 }

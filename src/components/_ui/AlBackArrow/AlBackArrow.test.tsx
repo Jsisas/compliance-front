@@ -11,13 +11,13 @@ const props: AlBackArrowProps = {
 
 describe('<AlBackArrow />', () => {
 	it('it renders an arrow with correct attributes', () => {
-		const arrow = shallow(<AlBackArrow history={props.history}/>);
-		const alButton = arrow.find('AlButton');
+		const wrapper = shallow(<AlBackArrow history={props.history}/>);
+		const alButton = wrapper.find('AlButton');
 
 		expect(alButton.length).toEqual(1);
 		expect(alButton.prop('type')).toEqual('link');
 		expect(alButton.prop('onClick')).toBeDefined();
 
-		expect(arrow.containsMatchingElement(<LeftOutlined className={styles.alBackArrow}/>)).toBeTruthy();
+		expect(wrapper.containsMatchingElement(<LeftOutlined className={styles.alBackArrow}/>)).toBe(true);
 	});
 });
