@@ -33,4 +33,32 @@ describe('<AlButton />', () => {
 		antdButton.simulate('click');
 		expect(onClickMock).toHaveBeenCalled();
 	});
+
+	it('link button attributes are correct', () => {
+		const wrapper = shallow(<AlButton type={'link'}/>);
+
+		wrapper.setProps({
+			type: 'link',
+		});
+
+		const antdButton = wrapper.find('Button');
+		expect(antdButton.prop('type')).toBe('link');
+		expect(antdButton.prop('className')?.trim()).toBe('');
+
+
+	});
+
+	it('secondary button attributes are correct', () => {
+		const wrapper = shallow(<AlButton type={'secondary'}/>);
+
+		wrapper.setProps({
+			type: 'secondary',
+		});
+
+		const antdButton = wrapper.find('Button');
+		expect(antdButton.prop('type')).toBe(undefined);
+		expect(antdButton.prop('className')?.trim()).toBe('secondary');
+
+
+	});
 });
