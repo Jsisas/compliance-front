@@ -1,17 +1,18 @@
 import React from 'react';
-import {Redirect, Route} from "react-router-dom";
+import {Redirect, Route, RouteComponentProps} from 'react-router-dom';
 
 interface PrivateRouteProps {
-    isAuthenticated: boolean;
-    component: any;
-    path: string;
-    exact?: boolean;
+	isAuthenticated: boolean;
+	component: (props: RouteComponentProps) => JSX.Element,
+	path: string;
+	exact?: boolean;
 }
-export function PrivateRoute(props: PrivateRouteProps) {
-    if(props.isAuthenticated){
-        return <Route exact={props.exact || false} path={props.path} component={props.component} />
-    }else{
-        return <Redirect to='/login' />
-    }
+
+export function PrivateRoute(props: PrivateRouteProps): JSX.Element {
+	if (props.isAuthenticated) {
+		return <Route exact={props.exact || false} path={props.path} component={props.component}/>;
+	} else {
+		return <Redirect to='/login'/>;
+	}
 
 }

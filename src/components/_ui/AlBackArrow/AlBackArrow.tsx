@@ -1,17 +1,19 @@
 import * as React from 'react';
-import {LeftOutlined} from "@ant-design/icons/lib";
-import AlButton from "../AlButton/AlButton";
+import {LeftOutlined} from '@ant-design/icons/lib';
+import AlButton from '../AlButton/AlButton';
+import styles from './albackarrow.module.scss';
+import * as H from 'history';
 
 interface AlBackArrowProps {
-    history: any;
+	history: H.History;
 }
 
-export function AlBackArrow(props: AlBackArrowProps) {
-    return (
-        <>
-            <AlButton type="link" onClick={() => props.history.goBack()}>
-                <LeftOutlined style={{fontSize: "24px", float: "right"}}/>
-            </AlButton>
-        </>
-    );
-};
+export function AlBackArrow(props: AlBackArrowProps): JSX.Element {
+	return (
+		<>
+			<AlButton type="link" onClick={() => props.history.goBack()}>
+				<LeftOutlined className={styles.alBackArrow}/>
+			</AlButton>
+		</>
+	);
+}

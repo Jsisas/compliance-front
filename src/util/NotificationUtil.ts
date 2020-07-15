@@ -1,17 +1,17 @@
-import { notification } from 'antd';
+import {notification} from 'antd';
 
-export function notifySucess(title: string, message: string) {
-    notification.success({
-        message: title,
-        description: message,
-        placement: "bottomRight"
-    });
+export function notifySuccess(title: string, message: string): void {
+	notification.success({
+		message: title,
+		description: message,
+		placement: 'bottomRight'
+	});
 }
 
-export function notifyError(title: string, message: string) {
-    notification.error({
-        message: title,
-        description: message,
-        placement: "bottomRight"
-    });
-};
+export function notifyError(title: string, message: string): void {
+	notification.error({
+		message: title,
+		description: message,
+		placement: 'bottomRight'
+	});
+}

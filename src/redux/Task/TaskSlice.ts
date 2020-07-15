@@ -1,18 +1,18 @@
-import {Control} from "../Control/ControlSlice";
-import {createEntityAdapter, createSelector, createSlice, EntityState, PayloadAction} from "@reduxjs/toolkit";
-import {RootState} from "../reducer";
-import {fetchAllTasks} from "./TaskService";
-import {User} from "../User/UserSlice";
-import { Moment } from "moment";
+import {Control} from '../Control/ControlSlice';
+import {createEntityAdapter, createSelector, createSlice, EntityState, PayloadAction} from '@reduxjs/toolkit';
+import {RootState} from '../reducer';
+import {fetchAllTasks} from './TaskService';
+import {User} from '../User/UserSlice';
+import {Moment} from 'moment';
 
 export enum Weekday {
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY,
-    SUNDAY
+	MONDAY,
+	TUESDAY,
+	WEDNESDAY,
+	THURSDAY,
+	FRIDAY,
+	SATURDAY,
+	SUNDAY
 }
 
 export enum Quarter {
@@ -38,9 +38,9 @@ export enum Month {
 }
 
 export enum TaskType {
-    MAINTENANCE = "Maintenance",
-    AUDIT = "Audit",
-    REVIEW = "Review"
+	MAINTENANCE = 'Maintenance',
+	AUDIT = 'Audit',
+	REVIEW = 'Review'
 }
 
 export enum TaskStatus{
@@ -56,15 +56,15 @@ export interface TaskFile {
 }
 
 export enum TaskFrequencyType {
-    ONE_TIME = "One-time task",
-    RECURRING = "Recurring task",
+	ONE_TIME = 'One-time task',
+	RECURRING = 'Recurring task',
 }
 
 export enum TaskFrequencyTypeRecurrence {
-    WEEKLY = "Weekly",
-    MONTHLY = "Monthly",
-    QUARTERLY = "Quarterly",
-    ANNUAL = "Annual",
+	WEEKLY = 'Weekly',
+	MONTHLY = 'Monthly',
+	QUARTERLY = 'Quarterly',
+	ANNUAL = 'Annual',
 }
 
 export interface WeeklyTaskFrequency {
@@ -117,46 +117,44 @@ export interface Task {
 }
 
 const tasksAdapter = createEntityAdapter<Task>({
-    selectId: task => task.id,
-    sortComparer: (a, b) => a.title.localeCompare(b.title)
+	selectId: task => task.id,
+	sortComparer: (a, b) => a.title.localeCompare(b.title)
 });
 
 const taskInitialState: EntityState<Task> = tasksAdapter.getInitialState();
-const taskSelectors = tasksAdapter.getSelectors((state: RootState) => state.task.entities)
+const taskSelectors = tasksAdapter.getSelectors((state: RootState) => state.task.entities);
 
 export const selectAllTasks = taskSelectors.selectAll;
 export const selectTaskById = taskSelectors.selectById;
-export const setTasks = (tasks: Task[], state: EntityState<Task>) => tasksAdapter.setAll(state, tasks);
-export const updateOneTask = (task: Task, state: EntityState<Task>) => tasksAdapter.updateOne(state, { id: task.id, changes: task });
-export const deleteOneTask = (taskId: string, state: EntityState<Task>) => tasksAdapter.removeOne(state, taskId);
-export const selectTaskByControlId = (state: any, controlId: string) => {
-    return createSelector(
-        [selectAllTasks],
-        (items: Task[]) => items.filter(task => (task.control.id || null) === controlId)
-    )(state)
+
+export function selectTaskByControlId(state: RootState, controlId: string): Task[] {
+	return createSelector(
+		[selectAllTasks],
+		(items: Task[]) => items.filter(task => (task.control.id || null) === controlId)
+	)(state);
 }
 
 const TaskSlice = createSlice({
-    name: 'task',
-    initialState: { entities: taskInitialState, loading: false },
-    reducers: {
-        createTask(state, { payload }: PayloadAction<Task>) {
-            tasksAdapter.addOne(state.entities, payload)
-        },
-        editTask(state, { payload }: PayloadAction<Task>) {
-            updateOneTask(payload, state.entities)
-        },
-        deleteTask(state, { payload }: PayloadAction<Task>) {
-            deleteOneTask(payload.id, state.entities)
-        },
-    },
-    extraReducers: builder => {
-        builder.addCase(fetchAllTasks.fulfilled, (state, action) => {
-            state.loading = false;
-            tasksAdapter.setAll(state.entities, action.payload);
-        })
-    }
-})
+	name: 'task',
+	initialState: {entities: taskInitialState, loading: false},
+	reducers: {
+		createTask(state, {payload}: PayloadAction<Task>) {
+			tasksAdapter.addOne(state.entities, payload);
+		},
+		editTask(state, {payload}: PayloadAction<Task>) {
+			tasksAdapter.updateOne(state.entities, {id: payload.id, changes: payload});
+		},
+		deleteTask(state, {payload}: PayloadAction<Task>) {
+			tasksAdapter.removeOne(state.entities, payload.id);
+		},
+	},
+	extraReducers: builder => {
+		builder.addCase(fetchAllTasks.fulfilled, (state, action) => {
+			state.loading = false;
+			tasksAdapter.setAll(state.entities, action.payload);
+		});
+	}
+});
 
-export const { createTask, editTask, deleteTask } = TaskSlice.actions
+export const {createTask, editTask, deleteTask} = TaskSlice.actions;
 export default TaskSlice.reducer;

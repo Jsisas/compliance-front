@@ -1,14 +1,14 @@
-import axios, {AxiosResponse} from "axios";
-import {notifySucess} from "./NotificationUtil";
-import {API_URL} from "../App";
+import axios, {AxiosResponse} from 'axios';
+import {notifySuccess} from './NotificationUtil';
+import {API_URL} from '../App';
 
 export interface AuthRequest {
-    token: string;
+	token: string;
 }
 
 export interface Authentication {
-    token: string;
-    user: AuthUser;
+	token: string;
+	user: AuthUser;
 }
 
 export interface AuthUser {
@@ -18,43 +18,39 @@ export interface AuthUser {
     username: string;
 }
 
-export interface ApiError {
-    error: string;
-}
-
 export class AuthUtil {
 
-    static authenticate(authRequest: AuthRequest): Promise<AxiosResponse> {
-        return axios.post(`${API_URL}/authorize`,
-            {
-                authorization: {
-                    token: authRequest.token
-                }
-            })
-    }
+	static authenticate(authRequest: AuthRequest): Promise<AxiosResponse> {
+		return axios.post(`${API_URL}/authorize`,
+			{
+				authorization: {
+					token: authRequest.token
+				}
+			});
+	}
 
-    static isCurrentUserAuthenticated():boolean {
-        const auth = AuthUtil.getUserAuth();
-        return !(auth == null || auth.token == null || auth.token.length < 1);
-    }
+	static isCurrentUserAuthenticated(): boolean {
+		const auth = AuthUtil.getUserAuth();
+		return !(auth == null || auth.token == null || auth.token.length < 1);
+	}
 
-    static logout(){
-        localStorage.removeItem("auth")
-        notifySucess("Log out", "Logging out was successful")
-    }
+	static logout(): void {
+		localStorage.removeItem('auth');
+		notifySuccess('Log out', 'Logging out was successful');
+	}
 
-    static setUserAuth(authUser: Authentication): void {
-        localStorage.setItem("auth", JSON.stringify(authUser))
-    }
+	static setUserAuth(authUser: Authentication): void {
+		localStorage.setItem('auth', JSON.stringify(authUser));
+	}
 
-    static getUserAuth(): Authentication | null {
-        const authentication = localStorage.getItem("auth");
+	static getUserAuth(): Authentication | null {
+		const authentication = localStorage.getItem('auth');
 
-        if (authentication != null) {
-            return JSON.parse(authentication)
-        } else {
-            return null;
-        }
-    }
+		if (authentication != null) {
+			return JSON.parse(authentication);
+		} else {
+			return null;
+		}
+	}
 
 }
