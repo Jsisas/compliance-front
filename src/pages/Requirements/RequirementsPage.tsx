@@ -18,7 +18,7 @@ import {notifyError} from '../../util/NotificationUtil';
 import produce, {Draft} from 'immer';
 import {setTmpRequirements} from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
 import {AlBackArrow} from '../../components/_ui/AlBackArrow/AlBackArrow';
-import {EntityId} from "@reduxjs/toolkit";
+import {EntityId} from '@reduxjs/toolkit';
 
 const {Title} = Typography;
 
