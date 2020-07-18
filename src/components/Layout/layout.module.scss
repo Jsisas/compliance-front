@@ -1,40 +1,40 @@
-@import "../../theme.module";
+@import '../../theme.module';
 
 .extraExtraLightGrey {
-  background: $extra-extra-light-grey;
-  max-width: 100%;
-  width: auto;
+	background: $extra-extra-light-grey;
+	max-width: 100%;
+	width: auto;
 }
 
 .white {
-  background: $white;
+	background: $white;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 64px;
 }
 
-.profile{
-  position: absolute;
-  bottom: 24px;
-  left: 8px;
+.profile {
+	position: fixed;
+	bottom: 16px;
+	left: 8px;
 
-  img{
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-  }
+	img {
+		width: 45px;
+		height: 45px;
+		border-radius: 50%;
+	}
 
-  a {
-    color: $text-color;
-    padding-left: 16px;
-  }
+	a {
+		color: $text-color;
+		padding-left: 16px;
+	}
 }
 
 .sideMenu {
-  @extend .extraExtraLightGrey;
-  margin-left: 48px;
+	@extend .extraExtraLightGrey;
+	margin-left: 48px;
 }
