@@ -11,6 +11,7 @@ import { UserSearch } from '../../components/AssigneeSearch/AssigneeSearch';
 import { fetchAllControls } from '../../redux/Control/ControlService';
 import {
 	Control,
+	ControlStatus,
 	ControlType,
 	selectAllControls,
 } from '../../redux/Control/ControlSlice';
@@ -21,8 +22,6 @@ import StringUtil from '../../util/StringUtil';
 import { concatStyles } from '../../util/StyleUtil';
 import themeStyles from './../../theme.module.scss';
 import style from './controlsPage.module.scss';
-import { title } from 'process';
-import { ControlStatus } from '../../redux/Control/ControlSlice';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -154,6 +153,10 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 										<Tag
 											key={task.id}
 											className={concatStyles(style.primaryTag, style.taskTag)}
+											onClick={(event: React.MouseEvent) => {
+												event.stopPropagation();
+												props.history.push('/tasks/' + task.id);
+											}}
 										>
 											{task.title}
 										</Tag>
@@ -249,7 +252,8 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 					<Table
 						onRow={(record: Control) => {
 							return {
-								onClick: () => {
+								onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+									event.stopPropagation();
 									props.history.push('/controls/' + record.id);
 								},
 							};
