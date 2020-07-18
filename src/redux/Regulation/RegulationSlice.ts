@@ -1,9 +1,9 @@
+import { createEntityAdapter, createSlice, EntityState } from '@reduxjs/toolkit';
+
 import { RootState } from '../reducer';
-import { createEntityAdapter, createSlice, EntityState, PayloadAction, createSelector } from '@reduxjs/toolkit';
-import { fetchAllRegulations, fetchRegulationById } from './RegulationService';
-import { Requirement, selectAllRequirements } from '../Requirement/RequirementSlice';
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllRequirements } from '../Requirement/RequirementService';
+import { Requirement } from '../Requirement/RequirementSlice';
+import { fetchAllRegulations, fetchRegulationById } from './RegulationService';
 
 export interface RegulationStatistics {
 	requirements_total: number;
