@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const {override, fixBabelImports, addLessLoader} = require('customize-cra');
+const { override, fixBabelImports, addLessLoader } = require('customize-cra');
 const path = require('path');
 
 module.exports = override(
@@ -9,9 +9,11 @@ module.exports = override(
 		style: true,
 	}),
 	addLessLoader({
-		javascriptEnabled: true,
-		modifyVars: {
-			hack: `true; @import "${path.resolve(__dirname, 'src/theme.less')}";`,
+		lessOptions: {
+			javascriptEnabled: true,
+			modifyVars: {
+				hack: `true; @import "${path.resolve(__dirname, 'src/theme.less')}";`,
+			},
 		},
 	})
 );

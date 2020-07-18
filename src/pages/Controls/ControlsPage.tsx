@@ -1,23 +1,23 @@
-import React, {useEffect, useState} from 'react';
-
-import {useDispatch, useSelector} from 'react-redux';
-import {UserSearch} from '../../components/AssigneeSearch/AssigneeSearch';
-import {Col, Input, Row, Table, Tag, Typography} from 'antd';
-import {RootState} from '../../redux/reducer';
-import {Control, selectAllControls} from '../../redux/Control/ControlSlice';
-import {fetchAllControls} from '../../redux/Control/ControlService';
-import {PlusOutlined, SearchOutlined} from '@ant-design/icons';
-import {ColumnProps} from 'antd/lib/table';
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserSearch } from '../../components/AssigneeSearch/AssigneeSearch';
+import { Col, Input, Row, Table, Tag, Typography } from 'antd';
+import { RootState } from '../../redux/reducer';
+import { Control, selectAllControls } from '../../redux/Control/ControlSlice';
+import { fetchAllControls } from '../../redux/Control/ControlService';
+import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
+import { ColumnProps } from 'antd/lib/table';
+import { Link } from 'react-router-dom';
 import AlButton from '../../components/_ui/AlButton/AlButton';
 import style from './controlsPage.module.scss';
-import {Task} from '../../redux/Task/TaskSlice';
+import { Task } from '../../redux/Task/TaskSlice';
 import themeStyles from './../../theme.module.scss';
-import {User} from '../../redux/User/UserSlice';
+import { User } from '../../redux/User/UserSlice';
 import StringUtil from '../../util/StringUtil';
 import * as H from 'history';
+import { concatStyles } from '../../util/StyleUtil';
 
-const {Title} = Typography;
+const { Title } = Typography;
 
 interface ControlsPageProps {
 	history: H.History;
@@ -34,11 +34,14 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 	const filteredControls = getFilteredControls(tableSearchText || '');
 
 	function getFilteredControls(searchTerm: string) {
-		const filteredControls = controls.filter(c =>
-			c.title.toLowerCase().includes(searchTerm.toLowerCase()));
+		const filteredControls = controls.filter((c) =>
+			c.title.toLowerCase().includes(searchTerm.toLowerCase())
+		);
 
 		if (selectedUser) {
-			return filteredControls.filter(c => c.assignee.name === selectedUser?.name);
+			return filteredControls.filter(
+				(c) => c.assignee.name === selectedUser?.name
+			);
 		} else {
 			return filteredControls;
 		}
@@ -62,7 +65,7 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Control) => {
 				return <span>{record.title}</span>;
-			}
+			},
 		});
 		columns.push({
 			title: 'Status',
@@ -70,7 +73,7 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Control) => {
 				return <span>{StringUtil.humanizeSnakeCase(record.state)}</span>;
-			}
+			},
 		});
 		columns.push({
 			title: 'Category',
@@ -78,7 +81,7 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Control) => {
 				return <span>{StringUtil.humanizeSnakeCase(record.kind)}</span>;
-			}
+			},
 		});
 		columns.push({
 			title: 'Owner',
@@ -86,7 +89,7 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Control) => {
 				return <span>{record.assignee?.name}</span>;
-			}
+			},
 		});
 		columns.push({
 			title: 'Tasks',
@@ -95,18 +98,21 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			render: (text: string, record: Control) => {
 				return (
 					<div className={style.addTaskButton}>
-						{record.tasks?.length < 1 ? 'No tasks' : record.tasks?.map((task: Task) => {
-							return (
-								<Tag
-									key={task.id}
-									className={style.primaryTag}>
-									{task.title}
-								</Tag>
-							);
-						})}
+						{record.tasks?.length < 1
+							? 'No tasks'
+							: record.tasks?.map((task: Task) => {
+									return (
+										<Tag
+											key={task.id}
+											className={concatStyles(style.primaryTag, style.taskTag)}
+										>
+											{task.title}
+										</Tag>
+									);
+							  })}
 					</div>
 				);
-			}
+			},
 		});
 		columns.push({
 			title: '',
@@ -114,11 +120,11 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Control) => {
 				return (
-					<AlButton type="primary" onClick={() => addTask(record, text)}>
-						<PlusOutlined/>
+					<AlButton type='primary' onClick={() => addTask(record, text)}>
+						<PlusOutlined />
 					</AlButton>
 				);
-			}
+			},
 		});
 	}
 
@@ -139,21 +145,19 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			<Row gutter={[16, 32]}>
 				<Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
 					<Input
-						placeholder="Search by title"
+						placeholder='Search by title'
 						onChange={(event) => {
 							setTableSearchText(event.target.value);
 						}}
-						suffix={
-							<SearchOutlined/>
-						}
+						suffix={<SearchOutlined />}
 					/>
 				</Col>
 				<Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
-					<UserSearch placeholder="Filter by owner" onChange={filterByUser}/>
+					<UserSearch placeholder='Filter by owner' onChange={filterByUser} />
 				</Col>
 				<Col xs={12} sm={12} md={6} lg={4} xl={3} xxl={2} offset={9}>
-					<Link to="/controls/new">
-						<AlButton type={'primary'} style={{width: '100%'}}>
+					<Link to='/controls/new'>
+						<AlButton type={'primary'} style={{ width: '100%' }}>
 							Add Control
 						</AlButton>
 					</Link>
@@ -171,11 +175,11 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 						}}
 						dataSource={filteredControls as never[]}
 						columns={columns}
-						rowKey="id"
-						scroll={controls.length < 1 ? {x: undefined} : {x: 340}}
+						rowKey='id'
+						scroll={controls.length < 1 ? { x: undefined } : { x: 340 }}
 						loading={isControlsLoading}
-						style={{width: '100%'}}
-						pagination={{hideOnSinglePage: true}}
+						style={{ width: '100%' }}
+						pagination={{ hideOnSinglePage: true }}
 						className={themeStyles.antTableMousePointer}
 					/>
 				</Col>
