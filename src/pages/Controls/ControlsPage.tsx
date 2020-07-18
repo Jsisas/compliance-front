@@ -22,6 +22,7 @@ import { concatStyles } from '../../util/StyleUtil';
 import themeStyles from './../../theme.module.scss';
 import style from './controlsPage.module.scss';
 import { title } from 'process';
+import { ControlStatus } from '../../redux/Control/ControlSlice';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -39,13 +40,15 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 	const [tableSearchText, setTableSearchText] = useState<string>();
 	const [selectedUser, setSelectedUser] = useState<User>();
 	const [selectedCategory, setSelectedCategory] = useState<ControlType>();
+	const [selectedStatus, setSelectedStatus] = useState<ControlStatus>();
 	const filteredControls = getFilteredControls();
 
 	function getFilteredControls() {
 		const newLocal = controls
 			.filter(titleFilter)
 			.filter(userFilter)
-			.filter(categoryFilter);
+			.filter(categoryFilter)
+			.filter(statusFilter);
 		console.log(newLocal);
 		return newLocal;
 	}
@@ -71,6 +74,14 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 	function categoryFilter(control: Control) {
 		if (selectedCategory) {
 			return control.kind === selectedCategory;
+		} else {
+			return true;
+		}
+	}
+
+	function statusFilter(control: Control) {
+		if (selectedStatus) {
+			return control.state === selectedStatus;
 		} else {
 			return true;
 		}
@@ -181,7 +192,7 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			</Row>
 
 			<Row gutter={[16, 32]}>
-				<Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
 					<Input
 						placeholder='Search by title'
 						onChange={(event) => {
@@ -190,11 +201,12 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 						suffix={<SearchOutlined />}
 					/>
 				</Col>
-				<Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
 					<UserSearch placeholder='Filter by owner' onChange={filterByUser} />
 				</Col>
-				<Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
 					<Select
+						style={{ width: '100%' }}
 						placeholder='Filter by category'
 						allowClear
 						onChange={(value: ControlType) => setSelectedCategory(value)}
@@ -208,7 +220,23 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 						})}
 					</Select>
 				</Col>
-				<Col xs={12} sm={12} md={6} lg={4} xl={3} xxl={2} offset={9}>
+				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
+					<Select
+						style={{ width: '100%' }}
+						placeholder='Filter by status'
+						allowClear
+						onChange={(value: ControlStatus) => setSelectedStatus(value)}
+					>
+						{Object.values(ControlStatus).map((status) => {
+							return (
+								<Option value={status} key={status}>
+									{StringUtil.humanizeSnakeCase(status)}
+								</Option>
+							);
+						})}
+					</Select>
+				</Col>
+				<Col xs={12} sm={12} md={6} lg={4} xl={3} xxl={2} offset={6}>
 					<Link to='/controls/new'>
 						<AlButton type={'primary'} style={{ width: '100%' }}>
 							Add Control
