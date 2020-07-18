@@ -2,10 +2,7 @@ import React, { useEffect } from 'react';
 import { Col, Row, Table, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducer';
-import {
-	Regulation,
-	selectAllRegulations,
-} from '../../redux/Regulation/RegulationSlice';
+import { Regulation, selectAllRegulations } from '../../redux/Regulation/RegulationSlice';
 import { ColumnProps } from 'antd/lib/table';
 import { fetchAllRegulations } from '../../redux/Regulation/RegulationService';
 import themeStyles from './../../theme.module.scss';
@@ -17,12 +14,8 @@ import { RegulationStatistics } from '../../redux/Regulation/RegulationSlice';
 const { Title } = Typography;
 
 export default function RegulationsPage(): JSX.Element {
-	const regulations = useSelector((state: RootState) =>
-		selectAllRegulations(state)
-	);
-	const isTableLoading = useSelector(
-		(state: RootState) => state.regulation.loading
-	);
+	const regulations = useSelector((state: RootState) => selectAllRegulations(state));
+	const isTableLoading = useSelector((state: RootState) => state.regulation.loading);
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -39,10 +32,7 @@ export default function RegulationsPage(): JSX.Element {
 				return (
 					<Link
 						to={`/regulations/${record.id}/requirements`}
-						className={concatStyles(
-							themeStyles.primaryTextColor,
-							themeStyles.textBold
-						)}
+						className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}
 					>
 						{record.title}
 					</Link>
@@ -59,8 +49,7 @@ export default function RegulationsPage(): JSX.Element {
 				return <span>{getRequirementsCovered(record.statistics)}%</span>;
 			},
 			sorter: (a: Regulation, b: Regulation) =>
-				getRequirementsCovered(a.statistics) -
-				getRequirementsCovered(b.statistics),
+				getRequirementsCovered(a.statistics) - getRequirementsCovered(b.statistics),
 			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
@@ -71,17 +60,13 @@ export default function RegulationsPage(): JSX.Element {
 				return (
 					<Link
 						to={`/regulations/${record.id}/requirements`}
-						className={concatStyles(
-							themeStyles.primaryTextColor,
-							themeStyles.textBold
-						)}
+						className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}
 					>
 						{record.statistics.requirements_total}
 					</Link>
 				);
 			},
-			sorter: (a: Regulation, b: Regulation) =>
-				a.statistics.requirements_total - b.statistics.requirements_total,
+			sorter: (a: Regulation, b: Regulation) => a.statistics.requirements_total - b.statistics.requirements_total,
 			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
@@ -90,19 +75,13 @@ export default function RegulationsPage(): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Regulation) => {
 				return (
-					<span
-						className={concatStyles(
-							themeStyles.primaryTextColor,
-							themeStyles.textBold
-						)}
-					>
+					<span className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}>
 						{record.statistics.requirements_without_control}
 					</span>
 				);
 			},
 			sorter: (a: Regulation, b: Regulation) =>
-				a.statistics.requirements_without_control -
-				b.statistics.requirements_without_control,
+				a.statistics.requirements_without_control - b.statistics.requirements_without_control,
 			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
@@ -112,28 +91,18 @@ export default function RegulationsPage(): JSX.Element {
 			render: (text: string, record: Regulation) => {
 				const failingCount = record.statistics.controls_failing;
 				return (
-					<span
-						className={
-							failingCount > 0
-								? themeStyles.errorTextColor
-								: themeStyles.successTextColor
-						}
-					>
-						{failingCount > 0 ? <WarningFilled /> : <CheckCircleOutlined />}{' '}
-						{failingCount}
+					<span className={failingCount > 0 ? themeStyles.errorTextColor : themeStyles.successTextColor}>
+						{failingCount > 0 ? <WarningFilled /> : <CheckCircleOutlined />} {failingCount}
 					</span>
 				);
 			},
-			sorter: (a: Regulation, b: Regulation) =>
-				a.statistics.controls_failing - b.statistics.controls_failing,
+			sorter: (a: Regulation, b: Regulation) => a.statistics.controls_failing - b.statistics.controls_failing,
 			sortDirections: ['descend', 'ascend'],
 		});
 	}
 
 	function getRequirementsCovered(statistics: RegulationStatistics): number {
-		return Math.round(
-			(statistics.controls_failing * 100) / statistics.requirements_total
-		);
+		return Math.round((statistics.controls_failing * 100) / statistics.requirements_total);
 	}
 
 	return (
