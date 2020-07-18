@@ -1,16 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import {
-	Col,
-	DatePicker,
-	Form,
-	Input,
-	Modal,
-	Radio,
-	Row,
-	Select,
-	Typography,
-} from 'antd';
+import { Col, DatePicker, Form, Input, Modal, Radio, Row, Select, Typography } from 'antd';
 import styles from './addTaskModal.module.scss';
 import modalStyles from '../modal.module.scss';
 import { Control } from '../../../redux/Control/ControlSlice';
@@ -43,12 +33,8 @@ interface AddTaskProps {
 
 export function AddTaskModule(props: AddTaskProps): JSX.Element {
 	const dispatch = useDispatch();
-	const [taskFrequency, setTaskFrequency] = useState(
-		TaskFrequencyType.ONE_TIME
-	);
-	const [taskRecurrence, setTaskRecurrence] = useState(
-		TaskFrequencyTypeRecurrence.WEEKLY
-	);
+	const [taskFrequency, setTaskFrequency] = useState(TaskFrequencyType.ONE_TIME);
+	const [taskRecurrence, setTaskRecurrence] = useState(TaskFrequencyTypeRecurrence.WEEKLY);
 
 	function handleCreateNewTask(data: Task): void {
 		data.control = props.control || ({} as Control);
@@ -76,9 +62,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 			>
 				<div style={{ padding: '12px 14px' }}>
 					<Title style={{ margin: 0 }}>Add task</Title>
-					{props.control != null && (
-						<Text type='secondary'>to {props.control.title}</Text>
-					)}
+					{props.control != null && <Text type='secondary'>to {props.control.title}</Text>}
 				</div>
 				<div className={styles.addTaskModalContent}>
 					<Row gutter={[16, 16]} align={'middle'}>
@@ -87,18 +71,13 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								<Form.Item
 									name='title'
 									label='Title'
-									rules={[
-										{ required: true, message: 'Please input control title' },
-									]}
+									rules={[{ required: true, message: 'Please input control title' }]}
 								>
 									<Input placeholder='Add title to the task' />
 								</Form.Item>
 								<Form.Item label='Type' name='type'>
 									<Radio.Group defaultValue={TaskType.MAINTENANCE}>
-										<Radio
-											key={TaskType.MAINTENANCE}
-											value={TaskType.MAINTENANCE}
-										>
+										<Radio key={TaskType.MAINTENANCE} value={TaskType.MAINTENANCE}>
 											{TaskType.MAINTENANCE}
 										</Radio>
 										<Radio key={TaskType.AUDIT} value={TaskType.AUDIT}>
@@ -137,12 +116,8 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 										defaultValue={taskFrequency}
 										onSelect={(value) => setTaskFrequency(value)}
 									>
-										<Option value={TaskFrequencyType.ONE_TIME}>
-											{TaskFrequencyType.ONE_TIME}
-										</Option>
-										<Option value={TaskFrequencyType.RECURRING}>
-											{TaskFrequencyType.RECURRING}
-										</Option>
+										<Option value={TaskFrequencyType.ONE_TIME}>{TaskFrequencyType.ONE_TIME}</Option>
+										<Option value={TaskFrequencyType.RECURRING}>{TaskFrequencyType.RECURRING}</Option>
 									</Select>
 								</Form.Item>
 								{taskFrequency === TaskFrequencyType.RECURRING && (
@@ -152,18 +127,12 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 											defaultValue={taskRecurrence}
 											onSelect={(value) => setTaskRecurrence(value)}
 										>
-											<Option value={TaskFrequencyTypeRecurrence.WEEKLY}>
-												{TaskFrequencyTypeRecurrence.WEEKLY}
-											</Option>
-											<Option value={TaskFrequencyTypeRecurrence.MONTHLY}>
-												{TaskFrequencyTypeRecurrence.MONTHLY}
-											</Option>
+											<Option value={TaskFrequencyTypeRecurrence.WEEKLY}>{TaskFrequencyTypeRecurrence.WEEKLY}</Option>
+											<Option value={TaskFrequencyTypeRecurrence.MONTHLY}>{TaskFrequencyTypeRecurrence.MONTHLY}</Option>
 											<Option value={TaskFrequencyTypeRecurrence.QUARTERLY}>
 												{TaskFrequencyTypeRecurrence.QUARTERLY}
 											</Option>
-											<Option value={TaskFrequencyTypeRecurrence.ANNUAL}>
-												{TaskFrequencyTypeRecurrence.ANNUAL}
-											</Option>
+											<Option value={TaskFrequencyTypeRecurrence.ANNUAL}>{TaskFrequencyTypeRecurrence.ANNUAL}</Option>
 										</Select>
 									</Form.Item>
 								)}
@@ -172,10 +141,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 									(taskRecurrence === TaskFrequencyTypeRecurrence.MONTHLY &&
 										taskFrequency === TaskFrequencyType.RECURRING)) && (
 									<Form.Item name='weekDay' label='Weekday'>
-										<Select
-											placeholder='Select task recurrence'
-											defaultValue={Weekday.MONDAY}
-										>
+										<Select placeholder='Select task recurrence' defaultValue={Weekday.MONDAY}>
 											<Option value={Weekday.MONDAY}>Monday</Option>
 											<Option value={Weekday.TUESDAY}>Tuesday</Option>
 											<Option value={Weekday.WEDNESDAY}>Wednesday</Option>
@@ -189,10 +155,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								{taskRecurrence === TaskFrequencyTypeRecurrence.MONTHLY &&
 									taskFrequency === TaskFrequencyType.RECURRING && (
 										<Form.Item name='week' label='Week'>
-											<Select
-												placeholder='Select week number'
-												defaultValue={Quarter.FIRST}
-											>
+											<Select placeholder='Select week number' defaultValue={Quarter.FIRST}>
 												<Option value={Quarter.FIRST}>First</Option>
 												<Option value={Quarter.SECOND}>Second</Option>
 												<Option value={Quarter.THIRD}>Third</Option>
@@ -203,10 +166,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								{taskRecurrence === TaskFrequencyTypeRecurrence.QUARTERLY &&
 									taskFrequency === TaskFrequencyType.RECURRING && (
 										<Form.Item name='quarter' label='Quarter'>
-											<Select
-												placeholder='Select task recurrence'
-												defaultValue={Quarter.FIRST}
-											>
+											<Select placeholder='Select task recurrence' defaultValue={Quarter.FIRST}>
 												<Option value={Quarter.FIRST}>First</Option>
 												<Option value={Quarter.SECOND}>Second</Option>
 												<Option value={Quarter.THIRD}>Third</Option>
@@ -217,10 +177,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								{taskRecurrence === TaskFrequencyTypeRecurrence.ANNUAL &&
 									taskFrequency === TaskFrequencyType.RECURRING && (
 										<Form.Item name='annual' label='Annual'>
-											<Select
-												placeholder='Select task recurrence'
-												defaultValue={Month.JANUARY}
-											>
+											<Select placeholder='Select task recurrence' defaultValue={Month.JANUARY}>
 												<Option value={Month.JANUARY}>January</Option>
 												<Option value={Month.FEBRUARY}>February</Option>
 												<Option value={Month.MARCH}>March</Option>
@@ -235,18 +192,10 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 											</Select>
 										</Form.Item>
 									)}
-								<Form.Item
-									label='Due date'
-									name='due_at'
-									rules={[{ required: true, message: 'Please add due date!' }]}
-								>
+								<Form.Item label='Due date' name='due_at' rules={[{ required: true, message: 'Please add due date!' }]}>
 									<DatePicker />
 								</Form.Item>
-								<AlButton
-									type='primary'
-									style={{ marginRight: '8px' }}
-									htmlType='submit'
-								>
+								<AlButton type='primary' style={{ marginRight: '8px' }} htmlType='submit'>
 									Add task
 								</AlButton>
 								<AlButton type='secondary' onClick={props.onCancel}>

@@ -7,10 +7,7 @@ import { notifySuccess } from '../../util/NotificationUtil';
 import { RootState } from '../../redux/reducer';
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import { ControlForm } from '../../components/ControlForm/ControlForm';
-import {
-	fetchControlById,
-	updateControl,
-} from '../../redux/Control/ControlService';
+import { fetchControlById, updateControl } from '../../redux/Control/ControlService';
 import { ControlConnectedItems } from '../../components/ControlConnectedItems/ControlConnectedItems';
 import * as H from 'history';
 
@@ -25,9 +22,7 @@ export function EditControlPage(props: NewControlProps): JSX.Element {
 
 	const dispatch = useDispatch();
 	const routeHistory = useHistory();
-	const control = useSelector((state: RootState) =>
-		selectControlById(state, id)
-	);
+	const control = useSelector((state: RootState) => selectControlById(state, id));
 
 	useEffect(() => {
 		dispatch(fetchControlById(id));

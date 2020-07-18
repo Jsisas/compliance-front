@@ -6,10 +6,7 @@ import { Control } from '../../redux/Control/ControlSlice';
 import { notifySuccess } from '../../util/NotificationUtil';
 import { RootState } from '../../redux/reducer';
 import { selectAllTmpRequirements } from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
-import {
-	Requirement,
-	updateRequirement,
-} from '../../redux/Requirement/RequirementSlice';
+import { Requirement, updateRequirement } from '../../redux/Requirement/RequirementSlice';
 import produce, { Draft } from 'immer';
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import { ControlForm } from '../../components/ControlForm/ControlForm';
@@ -26,21 +23,16 @@ interface NewControlProps {
 export function NewControlPage(props: NewControlProps): JSX.Element {
 	const dispatch = useDispatch();
 	const routeHistory = useHistory();
-	const selectedRequirements = useSelector((state: RootState) =>
-		selectAllTmpRequirements(state)
-	);
+	const selectedRequirements = useSelector((state: RootState) => selectAllTmpRequirements(state));
 
 	function handleCreateNewControl(data: Control): void {
 		dispatch(createControl(data));
 
 		if (selectedRequirements.length > 0) {
 			selectedRequirements.forEach((requirement) => {
-				const updatedRequirement = produce(
-					requirement,
-					(draft: Draft<Requirement>) => {
-						draft.controls.push(data);
-					}
-				);
+				const updatedRequirement = produce(requirement, (draft: Draft<Requirement>) => {
+					draft.controls.push(data);
+				});
 				dispatch(updateRequirement(updatedRequirement));
 			});
 		}

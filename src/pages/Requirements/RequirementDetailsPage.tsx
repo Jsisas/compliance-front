@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducer';
 import { EditOutlined, EllipsisOutlined } from '@ant-design/icons/lib';
 import { Link, RouteComponentProps, useParams } from 'react-router-dom';
-import {
-	Requirement,
-	selectRequirementById,
-} from '../../redux/Requirement/RequirementSlice';
+import { Requirement, selectRequirementById } from '../../redux/Requirement/RequirementSlice';
 import AlButton from '../../components/_ui/AlButton/AlButton';
 import { fetchRequirementById } from '../../redux/Requirement/RequirementService';
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
@@ -17,14 +14,10 @@ import { Control } from '../../redux/Control/ControlSlice';
 
 const { Title, Text } = Typography;
 
-export function RequirementDetailsPage(
-	props: RouteComponentProps
-): JSX.Element {
+export function RequirementDetailsPage(props: RouteComponentProps): JSX.Element {
 	const { id } = useParams<{ id: string }>();
 
-	const requirement = useSelector((state: RootState) =>
-		selectRequirementById(state, id)
-	);
+	const requirement = useSelector((state: RootState) => selectRequirementById(state, id));
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -100,30 +93,20 @@ export function RequirementDetailsPage(
 						<EllipsisOutlined />
 					</AlButton>
 					<Link to={`/requirements/edit/${requirement?.id}`}>
-						<AlButton
-							type={'secondary'}
-							style={{ marginRight: '8px', float: 'right' }}
-						>
+						<AlButton type={'secondary'} style={{ marginRight: '8px', float: 'right' }}>
 							<EditOutlined />
 						</AlButton>
 					</Link>
 				</Col>
 				<Text>
-					Tips about how to satisfy this requirement: : Create a document where
-					you define who in your organisation contributes to information
-					security operations. In case you are doing business with EU customers,
-					You will definitely need a DPO (Data Protection Officer). DPO is …
+					Tips about how to satisfy this requirement: : Create a document where you define who in your organisation
+					contributes to information security operations. In case you are doing business with EU customers, You will
+					definitely need a DPO (Data Protection Officer). DPO is …
 				</Text>
 			</Row>
 
 			<Row gutter={[16, 16]}>
-				<Col
-					xs={{ span: 24, offset: 1 }}
-					sm={24}
-					md={24}
-					lg={{ span: 17, offset: 1 }}
-					xl={{ span: 17, offset: 1 }}
-				>
+				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
 					<Title level={3} style={{ paddingBottom: 0, marginBottom: 0 }}>
 						Connected controls
 					</Title>
@@ -131,13 +114,7 @@ export function RequirementDetailsPage(
 			</Row>
 
 			<Row gutter={[16, 16]}>
-				<Col
-					xs={{ span: 24, offset: 1 }}
-					sm={24}
-					md={24}
-					lg={{ span: 17, offset: 1 }}
-					xl={{ span: 17, offset: 1 }}
-				>
+				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
 					<Table
 						dataSource={requirement?.controls as never}
 						columns={columns}
@@ -156,13 +133,7 @@ export function RequirementDetailsPage(
 			</Row>
 
 			<Row gutter={[16, 16]}>
-				<Col
-					xs={{ span: 24, offset: 1 }}
-					sm={24}
-					md={24}
-					lg={{ span: 17, offset: 1 }}
-					xl={{ span: 17, offset: 1 }}
-				>
+				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
 					<Row gutter={[16, 16]} align={'middle'}>
 						<Dropdown overlay={connectControlDropdown} trigger={['click']}>
 							<AlButton type='primary'>Connect control </AlButton>

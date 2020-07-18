@@ -1,6 +1,6 @@
-import axios, {AxiosResponse} from 'axios';
-import {notifySuccess} from './NotificationUtil';
-import {API_URL} from '../App';
+import axios, { AxiosResponse } from 'axios';
+import { notifySuccess } from './NotificationUtil';
+import { API_URL } from '../App';
 
 export interface AuthRequest {
 	token: string;
@@ -12,21 +12,19 @@ export interface Authentication {
 }
 
 export interface AuthUser {
-    id: string;
-    name: string;
-    picture: string;
-    username: string;
+	id: string;
+	name: string;
+	picture: string;
+	username: string;
 }
 
 export class AuthUtil {
-
 	static authenticate(authRequest: AuthRequest): Promise<AxiosResponse> {
-		return axios.post(`${API_URL}/authorize`,
-			{
-				authorization: {
-					token: authRequest.token
-				}
-			});
+		return axios.post(`${API_URL}/authorize`, {
+			authorization: {
+				token: authRequest.token,
+			},
+		});
 	}
 
 	static isCurrentUserAuthenticated(): boolean {
@@ -52,5 +50,4 @@ export class AuthUtil {
 			return null;
 		}
 	}
-
 }

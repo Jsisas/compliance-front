@@ -4,7 +4,7 @@ import regulationReducer from './Regulation/RegulationSlice';
 import requirementReducer from './Requirement/RequirementSlice';
 import tmpRequirementReducer from './Requirement/TmpRequirementSlice/TmpRequirementSlice';
 import taskReducer from './Task/TaskSlice';
-import {combineReducers} from '@reduxjs/toolkit';
+import { combineReducers } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
 	user: userReducer,

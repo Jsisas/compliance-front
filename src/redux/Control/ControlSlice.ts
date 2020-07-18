@@ -1,14 +1,6 @@
 import { RootState } from '../reducer';
-import {
-	createEntityAdapter,
-	createSlice,
-	EntityState,
-} from '@reduxjs/toolkit';
-import {
-	fetchAllControls,
-	fetchControlById,
-	createControl,
-} from './ControlService';
+import { createEntityAdapter, createSlice, EntityState } from '@reduxjs/toolkit';
+import { fetchAllControls, fetchControlById, createControl } from './ControlService';
 import { Task } from '../Task/TaskSlice';
 import { User } from '../User/UserSlice';
 import { Requirement } from '../Requirement/RequirementSlice';
@@ -44,9 +36,7 @@ const controlsAdapter = createEntityAdapter<Control>({
 });
 
 const controlInitialState: EntityState<Control> = controlsAdapter.getInitialState();
-const controlSelectors = controlsAdapter.getSelectors(
-	(state: RootState) => state.control.entities
-);
+const controlSelectors = controlsAdapter.getSelectors((state: RootState) => state.control.entities);
 
 export const selectAllControls = controlSelectors.selectAll;
 export const selectControlById = controlSelectors.selectById;

@@ -1,8 +1,8 @@
-import React, {ReactNode} from 'react';
-import {Button} from 'antd';
+import React, { ReactNode } from 'react';
+import { Button } from 'antd';
 import styles from './alButton.module.scss';
-import {CSSProperties} from 'styled-components';
-import {concatStyles} from '../../../util/StyleUtil';
+import { CSSProperties } from 'styled-components';
+import { concatStyles } from '../../../util/StyleUtil';
 
 export interface ButtonProp {
 	type: 'primary' | 'secondary' | 'link';
@@ -41,7 +41,7 @@ export default function AlButton(props: ButtonProp): JSX.Element {
 
 	return (
 		<Button
-			className={concatStyles(getButtonClassName(), (props.className || ''))}
+			className={concatStyles(getButtonClassName(), props.className || '')}
 			type={getButtonType(props.type)}
 			style={props.style}
 			onClick={onButtonClick}

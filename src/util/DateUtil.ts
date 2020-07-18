@@ -1,4 +1,4 @@
-import moment, {MomentInput} from 'moment';
+import moment, { MomentInput } from 'moment';
 import 'moment/locale/et';
 
 export const dateFormat = 'dddd, Do MMMM, YYYY';

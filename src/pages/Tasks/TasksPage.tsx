@@ -92,11 +92,7 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 					<Title>Tasks</Title>
 				</Col>
 				<Col xs={24} sm={7} md={5} lg={4} xl={3} xxl={2}>
-					<AlButton
-						type='primary'
-						style={{ width: '100%' }}
-						onClick={() => toggleModal()}
-					>
+					<AlButton type='primary' style={{ width: '100%' }} onClick={() => toggleModal()}>
 						Add task
 					</AlButton>
 				</Col>

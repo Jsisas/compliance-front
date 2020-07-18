@@ -24,16 +24,10 @@ const { Title, Text } = Typography;
 
 export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 	const { id } = useParams<{ id: string }>();
-	const control = useSelector((state: RootState) =>
-		selectControlById(state, id)
-	);
-	const tasks: Task[] = useSelector((state: RootState) =>
-		selectTaskByControlId(state, id)
-	);
+	const control = useSelector((state: RootState) => selectControlById(state, id));
+	const tasks: Task[] = useSelector((state: RootState) => selectTaskByControlId(state, id));
 	const [isAddTaskModalVisible, setAddTaskModalVisible] = useState(false);
-	const isTableLoading = useSelector(
-		(state: RootState) => state.control.loading
-	);
+	const isTableLoading = useSelector((state: RootState) => state.control.loading);
 
 	function toggleModal() {
 		setAddTaskModalVisible(!isAddTaskModalVisible);
@@ -58,11 +52,8 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 		title: 'Assignee',
 		dataIndex: 'assignee',
 		key: 'id',
-		render: (text: string, record: Task) => (
-			<Text>{record.assignee?.name}</Text>
-		),
-		sorter: (a: Task, b: Task) =>
-			(a.assignee.name?.length || 0) - (b.assignee.name?.length || 0),
+		render: (text: string, record: Task) => <Text>{record.assignee?.name}</Text>,
+		sorter: (a: Task, b: Task) => (a.assignee.name?.length || 0) - (b.assignee.name?.length || 0),
 		sortDirections: ['descend', 'ascend'],
 	});
 	columns.push({
@@ -85,11 +76,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 	if (!isTableLoading && control) {
 		return (
 			<>
-				<AddTaskModule
-					control={control}
-					isVisible={isAddTaskModalVisible}
-					onCancel={toggleModal}
-				/>
+				<AddTaskModule control={control} isVisible={isAddTaskModalVisible} onCancel={toggleModal} />
 				<Row gutter={[16, 16]} align={'middle'}>
 					<Col xs={1} xl={1}>
 						<AlBackArrow history={props.history} />
@@ -119,10 +106,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 							<EllipsisOutlined />
 						</AlButton>
 						<Link to={`/controls/edit/${control?.id}`}>
-							<AlButton
-								type={'secondary'}
-								style={{ marginRight: '8px', float: 'right' }}
-							>
+							<AlButton type={'secondary'} style={{ marginRight: '8px', float: 'right' }}>
 								<EditOutlined />
 							</AlButton>
 						</Link>
@@ -152,9 +136,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 						</Row>
 						<Row gutter={[16, 16]}>
 							<Col xs={24} sm={24} md={24} lg={24} xl={4}>
-								<Text>
-									{StringUtil.humanizeSnakeCase(control?.state || '')}
-								</Text>
+								<Text>{StringUtil.humanizeSnakeCase(control?.state || '')}</Text>
 							</Col>
 							<Col xs={24} sm={24} md={24} lg={24} xl={4}>
 								<Text>{moment(control?.begins_at).format('YYYY-MM-DD')}</Text>
@@ -178,13 +160,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 					</Col>
 				</Row>
 				<Row gutter={[16, 16]}>
-					<Col
-						xs={{ span: 24, offset: 1 }}
-						sm={24}
-						md={24}
-						lg={{ span: 17, offset: 1 }}
-						xl={{ span: 17, offset: 1 }}
-					>
+					<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
 						<Divider className={styles.divider} />
 						<Title level={3} style={{ paddingBottom: 0, marginBottom: 0 }}>
 							Tasks
@@ -192,13 +168,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 					</Col>
 				</Row>
 				<Row gutter={[16, 16]}>
-					<Col
-						xs={{ span: 24, offset: 1 }}
-						sm={24}
-						md={24}
-						lg={{ span: 17, offset: 1 }}
-						xl={{ span: 17, offset: 1 }}
-					>
+					<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
 						<Table
 							dataSource={tasks as never[]}
 							columns={columns}
@@ -206,10 +176,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 							scroll={tasks.length < 1 ? { x: undefined } : { x: 340 }}
 							loading={isTableLoading}
 							style={{ width: '100%' }}
-							className={concatStyles(
-								styles.tableHeader,
-								themeStyle.antTableMousePointer
-							)}
+							className={concatStyles(styles.tableHeader, themeStyle.antTableMousePointer)}
 							pagination={{ hideOnSinglePage: true }}
 							onRow={(record: Control) => {
 								return {
@@ -222,13 +189,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 					</Col>
 				</Row>
 				<Row gutter={[16, 16]}>
-					<Col
-						xs={{ span: 24, offset: 1 }}
-						sm={24}
-						md={24}
-						lg={{ span: 17, offset: 1 }}
-						xl={{ span: 17, offset: 1 }}
-					>
+					<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
 						<AlButton type='primary' onClick={toggleModal}>
 							Add task
 						</AlButton>

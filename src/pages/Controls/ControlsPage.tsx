@@ -9,12 +9,7 @@ import { Link } from 'react-router-dom';
 import AlButton from '../../components/_ui/AlButton/AlButton';
 import { UserSearch } from '../../components/AssigneeSearch/AssigneeSearch';
 import { fetchAllControls } from '../../redux/Control/ControlService';
-import {
-	Control,
-	ControlStatus,
-	ControlType,
-	selectAllControls,
-} from '../../redux/Control/ControlSlice';
+import { Control, ControlStatus, ControlType, selectAllControls } from '../../redux/Control/ControlSlice';
 import { RootState } from '../../redux/reducer';
 import { Task } from '../../redux/Task/TaskSlice';
 import { User } from '../../redux/User/UserSlice';
@@ -32,9 +27,7 @@ interface ControlsPageProps {
 
 export function ControlsPage(props: ControlsPageProps): JSX.Element {
 	const controls = useSelector((state: RootState) => selectAllControls(state));
-	const isControlsLoading = useSelector(
-		(state: RootState) => state.control.loading
-	);
+	const isControlsLoading = useSelector((state: RootState) => state.control.loading);
 
 	const [tableSearchText, setTableSearchText] = useState<string>();
 	const [selectedUser, setSelectedUser] = useState<User>();
@@ -43,20 +36,14 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 	const filteredControls = getFilteredControls();
 
 	function getFilteredControls() {
-		const newLocal = controls
-			.filter(titleFilter)
-			.filter(userFilter)
-			.filter(categoryFilter)
-			.filter(statusFilter);
+		const newLocal = controls.filter(titleFilter).filter(userFilter).filter(categoryFilter).filter(statusFilter);
 		console.log(newLocal);
 		return newLocal;
 	}
 
 	function titleFilter(control: Control) {
 		if (tableSearchText) {
-			return control.title
-				.toLowerCase()
-				.includes(tableSearchText.toLowerCase());
+			return control.title.toLowerCase().includes(tableSearchText.toLowerCase());
 		} else {
 			return true;
 		}
@@ -135,8 +122,7 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			render: (text: string, record: Control) => {
 				return <span>{record.assignee?.name}</span>;
 			},
-			sorter: (a: Control, b: Control) =>
-				(a.assignee.name?.length || 0) - (b.assignee.name?.length || 0),
+			sorter: (a: Control, b: Control) => (a.assignee.name?.length || 0) - (b.assignee.name?.length || 0),
 			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
