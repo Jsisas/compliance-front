@@ -1,10 +1,10 @@
-import { RootState } from '../reducer';
 import { createEntityAdapter, createSlice, EntityState } from '@reduxjs/toolkit';
-import { fetchAllControls, fetchControlById, createControl } from './ControlService';
+
+import { RootState } from '../reducer';
+import { Requirement } from '../Requirement/RequirementSlice';
 import { Task } from '../Task/TaskSlice';
 import { User } from '../User/UserSlice';
-import { Requirement } from '../Requirement/RequirementSlice';
-import { updateControl } from './ControlService';
+import { fetchAllControls, fetchControlById, upsertControl } from './ControlService';
 
 export enum ControlStatus {
 	NOT_IMPLEMENTED = 'not_implemented',
@@ -46,11 +46,7 @@ const ControlSlice = createSlice({
 	initialState: { entities: controlInitialState, loading: false },
 	reducers: {},
 	extraReducers: (builder) => {
-		builder.addCase(createControl.fulfilled, (state, action) => {
-			controlsAdapter.upsertOne(state.entities, action);
-			state.loading = false;
-		});
-		builder.addCase(updateControl.fulfilled, (state, action) => {
+		builder.addCase(upsertControl.fulfilled, (state, action) => {
 			controlsAdapter.upsertOne(state.entities, action);
 			state.loading = false;
 		});

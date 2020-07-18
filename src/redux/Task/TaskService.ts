@@ -10,7 +10,6 @@ export const fetchAllTasks = createAsyncThunk('tasks/fetchAll', async () => {
 });
 
 export const createTask = createAsyncThunk('tasks/create', async (task: Task) => {
-	console.log(task);
 	const response: AxiosResponse<ApiWrapper<Task>> = await axios.post(`${API_URL}/tasks`, {
 		task,
 	});

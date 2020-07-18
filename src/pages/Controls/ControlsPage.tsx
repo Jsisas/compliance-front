@@ -36,9 +36,7 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 	const filteredControls = getFilteredControls();
 
 	function getFilteredControls() {
-		const newLocal = controls.filter(titleFilter).filter(userFilter).filter(categoryFilter).filter(statusFilter);
-		console.log(newLocal);
-		return newLocal;
+		return controls.filter(titleFilter).filter(userFilter).filter(categoryFilter).filter(statusFilter);
 	}
 
 	function titleFilter(control: Control) {

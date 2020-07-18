@@ -9,18 +9,18 @@ export const fetchAllControls = createAsyncThunk('controls/fetchAll', async () =
 	return response.data.data;
 });
 
-export const createControl = createAsyncThunk('controls/create', async (control: Control) => {
-	const response: AxiosResponse<ApiWrapper<Control>> = await axios.post(`${API_URL}/controls/` + control.id, {
-		control,
-	});
-	return response.data.data;
-});
-
-export const updateControl = createAsyncThunk('controls/update', async (control: Control) => {
-	const response: AxiosResponse<ApiWrapper<Control>> = await axios.patch(`${API_URL}/controls/` + control.id, {
-		control,
-	});
-	return response.data.data;
+export const upsertControl = createAsyncThunk('controls/upsert', async (control: Control) => {
+	if (control.id) {
+		const response: AxiosResponse<ApiWrapper<Control>> = await axios.patch(`${API_URL}/controls/` + control.id, {
+			control,
+		});
+		return response.data.data;
+	} else {
+		const response: AxiosResponse<ApiWrapper<Control>> = await axios.post(`${API_URL}/controls`, {
+			control,
+		});
+		return response.data.data;
+	}
 });
 
 export const fetchControlById = createAsyncThunk('controls/fetchControlById', async (controlId: string) => {
