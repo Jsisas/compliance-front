@@ -134,6 +134,10 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 					<Tag
 						key={control.id}
 						className={control.tasks?.some((x) => x.is_overdue) ? themeStyles.errorTag : themeStyles.primaryTag}
+						onClick={(event: React.MouseEvent) => {
+							event.stopPropagation();
+							props.history.push('/controls/' + control.id);
+						}}
 					>
 						{control.title}
 					</Tag>
