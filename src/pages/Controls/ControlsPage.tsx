@@ -1,23 +1,30 @@
+import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
+import { Col, Input, Row, Select, Table, Tag, Typography } from 'antd';
+import { ColumnProps } from 'antd/lib/table';
+import * as H from 'history';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UserSearch } from '../../components/AssigneeSearch/AssigneeSearch';
-import { Col, Input, Row, Table, Tag, Typography } from 'antd';
-import { RootState } from '../../redux/reducer';
-import { Control, selectAllControls } from '../../redux/Control/ControlSlice';
-import { fetchAllControls } from '../../redux/Control/ControlService';
-import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
-import { ColumnProps } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
+
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import style from './controlsPage.module.scss';
+import { UserSearch } from '../../components/AssigneeSearch/AssigneeSearch';
+import { fetchAllControls } from '../../redux/Control/ControlService';
+import {
+	Control,
+	ControlType,
+	selectAllControls,
+} from '../../redux/Control/ControlSlice';
+import { RootState } from '../../redux/reducer';
 import { Task } from '../../redux/Task/TaskSlice';
-import themeStyles from './../../theme.module.scss';
 import { User } from '../../redux/User/UserSlice';
 import StringUtil from '../../util/StringUtil';
-import * as H from 'history';
 import { concatStyles } from '../../util/StyleUtil';
+import themeStyles from './../../theme.module.scss';
+import style from './controlsPage.module.scss';
+import { title } from 'process';
 
 const { Title } = Typography;
+const { Option } = Select;
 
 interface ControlsPageProps {
 	history: H.History;
@@ -31,19 +38,41 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 
 	const [tableSearchText, setTableSearchText] = useState<string>();
 	const [selectedUser, setSelectedUser] = useState<User>();
-	const filteredControls = getFilteredControls(tableSearchText || '');
+	const [selectedCategory, setSelectedCategory] = useState<ControlType>();
+	const filteredControls = getFilteredControls();
 
-	function getFilteredControls(searchTerm: string) {
-		const filteredControls = controls.filter((c) =>
-			c.title.toLowerCase().includes(searchTerm.toLowerCase())
-		);
+	function getFilteredControls() {
+		const newLocal = controls
+			.filter(titleFilter)
+			.filter(userFilter)
+			.filter(categoryFilter);
+		console.log(newLocal);
+		return newLocal;
+	}
 
-		if (selectedUser) {
-			return filteredControls.filter(
-				(c) => c.assignee.name === selectedUser?.name
-			);
+	function titleFilter(control: Control) {
+		if (tableSearchText) {
+			return control.title
+				.toLowerCase()
+				.includes(tableSearchText.toLowerCase());
 		} else {
-			return filteredControls;
+			return true;
+		}
+	}
+
+	function userFilter(control: Control) {
+		if (selectedUser) {
+			return control.assignee.name === selectedUser?.name;
+		} else {
+			return true;
+		}
+	}
+
+	function categoryFilter(control: Control) {
+		if (selectedCategory) {
+			return control.kind === selectedCategory;
+		} else {
+			return true;
 		}
 	}
 
@@ -163,6 +192,21 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 				</Col>
 				<Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
 					<UserSearch placeholder='Filter by owner' onChange={filterByUser} />
+				</Col>
+				<Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
+					<Select
+						placeholder='Filter by category'
+						allowClear
+						onChange={(value: ControlType) => setSelectedCategory(value)}
+					>
+						{Object.values(ControlType).map((type) => {
+							return (
+								<Option value={type} key={type}>
+									{StringUtil.humanizeSnakeCase(type)}
+								</Option>
+							);
+						})}
+					</Select>
 				</Col>
 				<Col xs={12} sm={12} md={6} lg={4} xl={3} xxl={2} offset={9}>
 					<Link to='/controls/new'>
