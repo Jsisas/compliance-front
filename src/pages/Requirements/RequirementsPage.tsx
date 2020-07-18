@@ -161,12 +161,12 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 		setSelectedRequirementIds(selectedRowKeysTmp);
 	};
 
-	function getStatisticsCountByRequirementFilter(requirementFilter: RequirementTableFilter) {
-		if (requirementFilter === RequirementTableFilter.ALL) {
+	function getStatisticsCountByRequirementFilter(filter: RequirementTableFilter) {
+		if (filter === RequirementTableFilter.ALL) {
 			return requirements.length;
-		} else if (requirementFilter === RequirementTableFilter.WITHOUT_CONTROl) {
+		} else if (filter === RequirementTableFilter.WITHOUT_CONTROl) {
 			return requirements.filter(isRequirementWithoutControl).length;
-		} else if (requirementFilter === RequirementTableFilter.WITH_FAILING_CONTROL) {
+		} else if (filter === RequirementTableFilter.WITH_FAILING_CONTROL) {
 			return requirements.filter(isRequirementWithFailingControl).length;
 		} else {
 			return 0;

@@ -35,7 +35,7 @@ export function SearchControlModal(props: SearchControlModal): JSX.Element {
 	}, [dispatch]);
 
 	function onSelect(controlOption: ControlOption) {
-		const control = allControls.find((control) => control.id === controlOption.key);
+		const control = allControls.find((tmpControl) => tmpControl.id === controlOption.key);
 		if (control) {
 			props.onSelect(control);
 		}

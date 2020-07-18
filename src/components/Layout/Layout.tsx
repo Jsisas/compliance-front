@@ -46,7 +46,7 @@ export function PageLayout(): JSX.Element {
 
 	return (
 		<Layout>
-			{!(history.location.pathname === '/login') && (
+			{history.location.pathname !== '/login' && (
 				<Sider
 					breakpoint='lg'
 					collapsedWidth='0'
