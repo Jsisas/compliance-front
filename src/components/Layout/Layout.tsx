@@ -20,7 +20,7 @@ export function PageLayout(): JSX.Element {
 	});
 
 	function backButtonListener() {
-		window.addEventListener('popstate', (e) => {
+		window.addEventListener('popstate', () => {
 			setSelectedKey(getSelectedKey());
 		});
 	}

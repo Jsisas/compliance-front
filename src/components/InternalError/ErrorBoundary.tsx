@@ -1,7 +1,8 @@
-import React, { ErrorInfo } from 'react';
 import { Result } from 'antd';
-import AlButton from '../_ui/AlButton/AlButton';
+import React from 'react';
 import { RouteComponentProps } from 'react-router';
+
+import AlButton from '../_ui/AlButton/AlButton';
 
 type state = { hasError: boolean };
 
@@ -18,14 +19,11 @@ class ErrorBoundary extends React.Component<any, state> {
 		this.props.history.goBack();
 	}
 
-	static getDerivedStateFromError(error: Error): HasError {
-		// Update state so the next render will show the fallback UI.
+	static getDerivedStateFromError(): HasError {
 		return { hasError: true };
 	}
 
-	componentDidCatch(error: Error, errorInfo: ErrorInfo): HasError {
-		// You can also log the error to an error reporting service
-		//logErrorToMyService(error, errorInfo);
+	componentDidCatch(): HasError {
 		return { hasError: true };
 	}
 

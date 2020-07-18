@@ -35,7 +35,7 @@ export function TaskDetail(props: RouteComponentProps): JSX.Element {
 		setAddLinkModalVisible(!isAddLinkModalVisible);
 	}
 
-	function onLinkAdd(link: AddLink) {
+	function onLinkAdd() {
 		toggleModal();
 	}
 
@@ -150,7 +150,7 @@ export function TaskDetail(props: RouteComponentProps): JSX.Element {
 							</Upload>
 							<Text>or</Text>
 							<AddLinkModal
-								onAdd={(link: AddLink) => onLinkAdd(link)}
+								onAdd={(link: AddLink) => onLinkAdd()}
 								isVisible={isAddLinkModalVisible}
 								onCancel={toggleModal}
 							/>
