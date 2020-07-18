@@ -1,9 +1,10 @@
-import { Control } from '../Control/ControlSlice';
-import { createEntityAdapter, createSelector, createSlice, EntityState, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../reducer';
-import { fetchAllTasks } from './TaskService';
-import { User } from '../User/UserSlice';
+import { createEntityAdapter, createSelector, createSlice, EntityState } from '@reduxjs/toolkit';
 import { Moment } from 'moment';
+
+import { Control } from '../Control/ControlSlice';
+import { RootState } from '../reducer';
+import { User } from '../User/UserSlice';
+import { createTask, fetchAllTasks, updateTask } from './TaskService';
 
 export enum Weekday {
 	MONDAY,
@@ -38,9 +39,9 @@ export enum Month {
 }
 
 export enum TaskType {
-	MAINTENANCE = 'Maintenance',
-	AUDIT = 'Audit',
-	REVIEW = 'Review',
+	MAINTENANCE = 'maintenance',
+	AUDIT = 'audit',
+	REVIEW = 'review',
 }
 
 export enum TaskStatus {
@@ -135,24 +136,20 @@ export function selectTaskByControlId(state: RootState, controlId: string): Task
 const TaskSlice = createSlice({
 	name: 'task',
 	initialState: { entities: taskInitialState, loading: false },
-	reducers: {
-		createTask(state, { payload }: PayloadAction<Task>) {
-			tasksAdapter.addOne(state.entities, payload);
-		},
-		editTask(state, { payload }: PayloadAction<Task>) {
-			tasksAdapter.updateOne(state.entities, { id: payload.id, changes: payload });
-		},
-		deleteTask(state, { payload }: PayloadAction<Task>) {
-			tasksAdapter.removeOne(state.entities, payload.id);
-		},
-	},
+	reducers: {},
 	extraReducers: (builder) => {
+		builder.addCase(createTask.fulfilled, (state, action) => {
+			tasksAdapter.upsertOne(state.entities, action);
+			state.loading = false;
+		});
+		builder.addCase(updateTask.fulfilled, (state, action) => {
+			tasksAdapter.upsertOne(state.entities, action);
+			state.loading = false;
+		});
 		builder.addCase(fetchAllTasks.fulfilled, (state, action) => {
 			state.loading = false;
 			tasksAdapter.setAll(state.entities, action.payload);
 		});
 	},
 });
-
-export const { createTask, editTask, deleteTask } = TaskSlice.actions;
 export default TaskSlice.reducer;

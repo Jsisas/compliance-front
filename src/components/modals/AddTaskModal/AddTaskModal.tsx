@@ -1,15 +1,14 @@
+import { CloseOutlined } from '@ant-design/icons/lib';
+import { Col, DatePicker, Form, Input, Modal, Radio, Row, Select, Typography } from 'antd';
+import { Store } from 'antd/lib/form/interface';
+import TextArea from 'antd/lib/input/TextArea';
 import * as React from 'react';
 import { useState } from 'react';
-import { Col, DatePicker, Form, Input, Modal, Radio, Row, Select, Typography } from 'antd';
-import styles from './addTaskModal.module.scss';
-import modalStyles from '../modal.module.scss';
+import { useDispatch } from 'react-redux';
+
 import { Control } from '../../../redux/Control/ControlSlice';
-import { CloseOutlined } from '@ant-design/icons/lib';
-import TextArea from 'antd/lib/input/TextArea';
-import { UserSearch } from '../../AssigneeSearch/AssigneeSearch';
-import AlButton from '../../_ui/AlButton/AlButton';
+import { createTask } from '../../../redux/Task/TaskService';
 import {
-	createTask,
 	Month,
 	Quarter,
 	Task,
@@ -18,9 +17,12 @@ import {
 	TaskType,
 	Weekday,
 } from '../../../redux/Task/TaskSlice';
-import { useDispatch } from 'react-redux';
 import { notifySuccess } from '../../../util/NotificationUtil';
-import { Store } from 'antd/lib/form/interface';
+import StringUtil from '../../../util/StringUtil';
+import AlButton from '../../_ui/AlButton/AlButton';
+import { UserSearch } from '../../AssigneeSearch/AssigneeSearch';
+import modalStyles from '../modal.module.scss';
+import styles from './addTaskModal.module.scss';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -46,7 +48,12 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 		}
 	}
 
-	const onFinish = (values: Store) => handleCreateNewTask(values as Task);
+	const onFinish = (values: Store) => {
+		if (!values.kind) {
+			values.kind = TaskType.MAINTENANCE;
+		}
+		handleCreateNewTask(values as Task);
+	};
 
 	return (
 		<>
@@ -75,17 +82,15 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								>
 									<Input placeholder='Add title to the task' />
 								</Form.Item>
-								<Form.Item label='Type' name='type'>
+								<Form.Item label='Type' name='kind'>
 									<Radio.Group defaultValue={TaskType.MAINTENANCE}>
-										<Radio key={TaskType.MAINTENANCE} value={TaskType.MAINTENANCE}>
-											{TaskType.MAINTENANCE}
-										</Radio>
-										<Radio key={TaskType.AUDIT} value={TaskType.AUDIT}>
-											{TaskType.AUDIT}
-										</Radio>
-										<Radio key={TaskType.REVIEW} value={TaskType.REVIEW}>
-											{TaskType.REVIEW}
-										</Radio>
+										{Object.values(TaskType).map((type: TaskType, index: number) => {
+											return (
+												<Radio value={type} key={type}>
+													{StringUtil.humanizeSnakeCase(type)}
+												</Radio>
+											);
+										})}
 									</Radio.Group>
 								</Form.Item>
 								<Form.Item
