@@ -1,27 +1,25 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
-import {Col, Row, Table, Typography} from 'antd';
+import { useEffect, useState } from 'react';
+import { Col, Row, Table, Typography } from 'antd';
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../redux/reducer';
-import {ColumnProps} from 'antd/lib/table';
-import {selectAllTasks, Task} from '../../redux/Task/TaskSlice';
-import {fetchAllTasks} from '../../redux/Task/TaskService';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducer';
+import { ColumnProps } from 'antd/lib/table';
+import { selectAllTasks, Task } from '../../redux/Task/TaskSlice';
+import { fetchAllTasks } from '../../redux/Task/TaskService';
 import 'moment/locale/et';
-import {date, dateFormat} from '../../util/DateUtil';
-import {AddTaskModule} from '../../components/modals/AddTaskModal/AddTaskModal';
+import { date, dateFormat } from '../../util/DateUtil';
+import { AddTaskModule } from '../../components/modals/AddTaskModal/AddTaskModal';
 import themeStyles from './../../theme.module.scss';
 import StringUtil from '../../util/StringUtil';
-import {RouteComponentProps} from 'react-router';
+import { RouteComponentProps } from 'react-router';
 
-const {Title} = Typography;
+const { Title } = Typography;
 
 export function TasksPage(props: RouteComponentProps): JSX.Element {
 	const tasks = useSelector((state: RootState) => selectAllTasks(state));
 	const [isAddTaskModalVisible, setAddTaskModalVisible] = useState(false);
-	const isTableLoading = useSelector(
-		(state: RootState) => state.task.loading
-	);
+	const isTableLoading = useSelector((state: RootState) => state.task.loading);
 
 	function toggleModal() {
 		setAddTaskModalVisible(!isAddTaskModalVisible);
@@ -40,7 +38,9 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Task) => {
 				return <span>{record.title}</span>;
-			}
+			},
+			sorter: (a: Task, b: Task) => a.title.length - b.title.length,
+			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
 			title: 'Kind',
@@ -48,7 +48,9 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Task) => {
 				return <span>{StringUtil.humanizeSnakeCase(record.kind)}</span>;
-			}
+			},
+			sorter: (a: Task, b: Task) => a.kind.length - b.kind.length,
+			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
 			title: 'State',
@@ -56,7 +58,9 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Task) => {
 				return <span>{StringUtil.humanizeSnakeCase(record.state)}</span>;
-			}
+			},
+			sorter: (a: Task, b: Task) => a.state.length - b.state.length,
+			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
 			title: 'Due date',
@@ -64,7 +68,9 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Task) => {
 				return <span>{date(record.due_at).format(dateFormat)}</span>;
-			}
+			},
+			sorter: (a: Task, b: Task) => a.due_at.valueOf() - b.due_at.valueOf(),
+			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
 			title: 'Overdue',
@@ -72,19 +78,27 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Task) => {
 				return <span>{record?.is_overdue ? 'Overdue' : 'Not overdue'}</span>;
-			}
+			},
+			sorter: (a: Task, b: Task) => Number(a.is_overdue) - Number(b.is_overdue),
+			sortDirections: ['descend', 'ascend'],
 		});
 	}
 
 	return (
 		<>
-			<AddTaskModule isVisible={isAddTaskModalVisible} onCancel={toggleModal}/>
+			<AddTaskModule isVisible={isAddTaskModalVisible} onCancel={toggleModal} />
 			<Row gutter={[16, 16]} justify={'space-between'}>
 				<Col xs={24} sm={16} md={10} lg={16} xl={16} xxl={16}>
 					<Title>Tasks</Title>
 				</Col>
 				<Col xs={24} sm={7} md={5} lg={4} xl={3} xxl={2}>
-					<AlButton type='primary' style={{width: '100%'}} onClick={() => toggleModal()}>Add task</AlButton>
+					<AlButton
+						type='primary'
+						style={{ width: '100%' }}
+						onClick={() => toggleModal()}
+					>
+						Add task
+					</AlButton>
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]} justify={'space-between'}>
@@ -99,12 +113,12 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 						}}
 						dataSource={tasks as never}
 						columns={columns}
-						rowKey="id"
-						scroll={tasks.length < 1 ? {x: undefined} : {x: 'auto'}}
+						rowKey='id'
+						scroll={tasks.length < 1 ? { x: undefined } : { x: 'auto' }}
 						loading={isTableLoading}
-						style={{width: '100%'}}
+						style={{ width: '100%' }}
 						className={themeStyles.antTableMousePointer}
-						pagination={{hideOnSinglePage: true}}
+						pagination={{ hideOnSinglePage: true }}
 					/>
 				</Col>
 			</Row>

@@ -16,7 +16,10 @@ export class StringUtil {
 
 	static shortenStringLength(str: string, length: number): string {
 		const trimmedString = str.substr(0, length);
-		return trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(' ')));
+		return trimmedString.substr(
+			0,
+			Math.min(trimmedString.length, trimmedString.lastIndexOf(' '))
+		);
 	}
 
 	static stringIncludes(string: string, includes: string): boolean {

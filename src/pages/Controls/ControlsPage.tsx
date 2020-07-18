@@ -66,6 +66,8 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			render: (text: string, record: Control) => {
 				return <span>{record.title}</span>;
 			},
+			sorter: (a: Control, b: Control) => a.title.length - b.title.length,
+			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
 			title: 'Status',
@@ -74,6 +76,8 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			render: (text: string, record: Control) => {
 				return <span>{StringUtil.humanizeSnakeCase(record.state)}</span>;
 			},
+			sorter: (a: Control, b: Control) => a.state.length - b.state.length,
+			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
 			title: 'Category',
@@ -82,6 +86,8 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			render: (text: string, record: Control) => {
 				return <span>{StringUtil.humanizeSnakeCase(record.kind)}</span>;
 			},
+			sorter: (a: Control, b: Control) => a.kind.length - b.kind.length,
+			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
 			title: 'Owner',
@@ -90,6 +96,9 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 			render: (text: string, record: Control) => {
 				return <span>{record.assignee?.name}</span>;
 			},
+			sorter: (a: Control, b: Control) =>
+				(a.assignee.name?.length || 0) - (b.assignee.name?.length || 0),
+			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({
 			title: 'Tasks',

@@ -25,6 +25,7 @@
 		"quotes": ["error", "single"],
 		"semi": ["error", "always"],
 		"prettier/prettier": "error",
-		"react/display-name": "off"
+		"react/display-name": "off",
+		"max-len": ["error", { "code": 120 }]
 	}
 }
