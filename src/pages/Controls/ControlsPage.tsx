@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { UserSearch } from '../../components/AssigneeSearch/AssigneeSearch';
+import { UserSearch } from '../../components/UserSearch/UserSearch';
 import { fetchAllControls } from '../../redux/Control/ControlService';
 import { Control, ControlStatus, ControlType, selectAllControls } from '../../redux/Control/ControlSlice';
 import { RootState } from '../../redux/reducer';

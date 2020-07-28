@@ -8,7 +8,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { UserSearch } from '../../components/AssigneeSearch/AssigneeSearch';
+import { UserSearch } from '../../components/UserSearch/UserSearch';
 import { ControlConnectedItems } from '../../components/ControlConnectedItems/ControlConnectedItems';
 import { fetchControlById, upsertControl } from '../../redux/Control/ControlService';
 import { Control, ControlType, selectControlById } from '../../redux/Control/ControlSlice';

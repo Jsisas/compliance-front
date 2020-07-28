@@ -15,12 +15,12 @@ import {
 	TaskFrequencyType,
 	TaskFrequencyTypeRecurrence,
 	TaskType,
-	Weekday,
+	Weekday
 } from '../../../redux/Task/TaskSlice';
 import { notifySuccess } from '../../../util/NotificationUtil';
 import StringUtil from '../../../util/StringUtil';
 import AlButton from '../../_ui/AlButton/AlButton';
-import { UserSearch } from '../../AssigneeSearch/AssigneeSearch';
+import { UserSearch } from '../../UserSearch/UserSearch';
 import modalStyles from '../modal.module.scss';
 import styles from './addTaskModal.module.scss';
 
