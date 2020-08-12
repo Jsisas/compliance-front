@@ -1,0 +1,14 @@
+@import '../../../theme.module';
+
+.resultBody{
+  margin-top: 24px;
+
+  div{
+    border-bottom: solid 1px $light-grey;
+
+    &:hover{
+      cursor: pointer;
+      background-color: darken($extra-light-grey, 1%);
+    }
+  }
+}

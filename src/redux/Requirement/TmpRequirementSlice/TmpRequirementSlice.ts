@@ -10,17 +10,17 @@ const tmpRequirementAdapter = createEntityAdapter<Requirement>({
 });
 
 const tmpRequirementInitialState: EntityState<Requirement> = tmpRequirementAdapter.getInitialState();
-const tmpRequirementSelector = tmpRequirementAdapter.getSelectors((state: RootState) => state.tmpRequirement.entities);
+const tmpRequirementSelector = tmpRequirementAdapter.getSelectors((state: RootState) => state.tmpRequirement);
 
 export const selectAllTmpRequirements = tmpRequirementSelector.selectAll;
 
 const RequirementTmpSlice = createSlice({
 	name: 'requirement',
-	initialState: { entities: tmpRequirementInitialState, loading: false },
+	initialState: { ...tmpRequirementInitialState, loading: false },
 	reducers: {
 		setTmpRequirements(state, { payload }: PayloadAction<Requirement[]>) {
-			tmpRequirementAdapter.removeAll(state.entities);
-			tmpRequirementAdapter.setAll(state.entities, payload);
+			tmpRequirementAdapter.removeAll(state);
+			tmpRequirementAdapter.setAll(state, payload);
 		},
 	},
 });

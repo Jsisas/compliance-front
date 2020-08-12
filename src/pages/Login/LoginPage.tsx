@@ -1,29 +1,33 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
 import { useHistory } from 'react-router-dom';
 import { Typography } from 'antd';
 import styles from './loginpage.module.scss';
 import { GoogleButton } from '../../components/_ui/GoogleButton/GoogleButton';
-import { Authentication, AuthUtil } from '../../util/AuthUtil';
-import { AxiosResponse } from 'axios';
-import { ApiWrapper } from '../../redux/store';
-import { notifyError, notifySuccess } from '../../util/NotificationUtil';
+import { useDispatch, useSelector } from 'react-redux';
+import { authenticate } from '../../redux/Auth/AuthService';
+import { RootState } from '../../redux/reducer';
 
 const { Title } = Typography;
 
 export function LoginPage(): JSX.Element {
+	const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 	const history = useHistory();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (isAuthenticated) {
+			history.push('/regulations');
+		}
+	}, [dispatch, isAuthenticated, history]);
+
+	const login = (token: string) => {
+		dispatch(authenticate(token));
+	};
 
 	const successGoogleLogin = (response: GoogleLoginResponse) => {
-		AuthUtil.authenticate({ token: response.tokenId })
-			.then((response: AxiosResponse<ApiWrapper<Authentication>>) => {
-				AuthUtil.setUserAuth(response.data.data);
-				notifySuccess('Log in', 'Logging in was successful');
-				history.push('/regulations');
-			})
-			.catch(() => {
-				notifyError('Log in', 'Logging in failed');
-			});
+		login(response.tokenId);
 	};
 
 	const failedGoogleLogin = (response: GoogleLoginResponseOffline) => {

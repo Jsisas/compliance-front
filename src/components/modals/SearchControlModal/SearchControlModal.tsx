@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { AutoComplete, Col, Modal, Row, Select, Typography } from 'antd';
+import { Col, Modal, Row, Typography } from 'antd';
 import styles from './searchControl.module.scss';
 import { Control, selectAllControls } from '../../../redux/Control/ControlSlice';
 import { CloseOutlined } from '@ant-design/icons/lib';
@@ -8,53 +8,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/reducer';
 import { fetchAllControls } from '../../../redux/Control/ControlService';
 import modalStyles from '../modal.module.scss';
-import StringUtil from '../../../util/StringUtil';
+import { SearchInput } from '../../_ui/SearchInput/SearchInput';
+import AlButton from '../../_ui/AlButton/AlButton';
 
 const { Title } = Typography;
-const { Option } = Select;
 
 interface SearchControlModal {
 	isVisible?: boolean;
-	onCancel?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-	onSelect: (control: Control) => void;
-}
-
-interface ControlOption {
-	key: string;
-	value: string;
-	children: string;
+	onCancel: () => void;
+	onAttach: (control: Control[]) => void;
 }
 
 export function SearchControlModal(props: SearchControlModal): JSX.Element {
 	const allControls = useSelector((state: RootState) => selectAllControls(state));
-	const [filteredControls, setFilteredControls] = useState<Control[]>([]);
+	const [selectedControls, setSelectedControl] = useState<Control[]>([]);
 
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchAllControls());
 	}, [dispatch]);
 
-	function onSelect(controlOption: ControlOption) {
-		const control = allControls.find((tmpControl) => tmpControl.id === controlOption.key);
-		if (control) {
-			props.onSelect(control);
-		}
+	function onControlSelect(controls: Control[]) {
+		setSelectedControl(controls);
 	}
-
-	const handleSearch = (value: string) => {
-		setFilteredControls(
-			allControls.filter(
-				(control) =>
-					StringUtil.stringIncludes(control.title, value) || StringUtil.stringIncludes(control.description, value)
-			)
-		);
-	};
-
-	const children = filteredControls.map((control: Control) => (
-		<Option key={control.id} value={control.title}>
-			{control.title}
-		</Option>
-	));
 
 	return (
 		<>
@@ -69,19 +45,32 @@ export function SearchControlModal(props: SearchControlModal): JSX.Element {
 				bodyStyle={{ padding: 0 }}
 			>
 				<div style={{ padding: '12px 14px' }}>
-					<Title style={{ margin: 0 }}>Search control</Title>
+					<Title style={{ margin: 0 }}>Attach existing control</Title>
 				</div>
 				<div className={styles.addTaskModalContent}>
 					<Row gutter={[16, 16]} align={'middle'}>
 						<Col xs={{ span: 24 }}>
-							<AutoComplete
-								style={{ width: '100%' }}
-								onSearch={handleSearch}
-								placeholder='Search for control'
-								onSelect={(title: string, controlOption: any) => onSelect(controlOption as ControlOption)}
+							<SearchInput
+								data={allControls}
+								displayKey={'title'}
+								idKey={'id'}
+								filterByKeys={['title']}
+								onSelect={(controls: Control[]) => onControlSelect(controls)}
+							/>
+						</Col>
+					</Row>
+					<Row gutter={[16, 16]} align={'middle'}>
+						<Col xs={{ span: 24 }}>
+							<AlButton
+								type={'primary'}
+								disabled={selectedControls.length < 1}
+								onClick={() => props.onAttach(selectedControls)}
 							>
-								{children}
-							</AutoComplete>
+								Attach control
+							</AlButton>
+							<AlButton type={'secondary'} onClick={() => props.onCancel()}>
+								Cancel
+							</AlButton>
 						</Col>
 					</Row>
 				</div>

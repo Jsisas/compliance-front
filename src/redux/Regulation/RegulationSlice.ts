@@ -28,25 +28,25 @@ const regulationAdapter = createEntityAdapter<Regulation>({
 });
 
 const regulationInitialState: EntityState<Regulation> = regulationAdapter.getInitialState();
-const regulationSelectors = regulationAdapter.getSelectors((state: RootState) => state.regulation.entities);
+const regulationSelectors = regulationAdapter.getSelectors((state: RootState) => state.regulation);
 
 export const selectAllRegulations = regulationSelectors.selectAll;
 export const selectRegulationById = regulationSelectors.selectById;
 
 const RegulationSlice = createSlice({
 	name: 'regulation',
-	initialState: { entities: regulationInitialState, loading: false },
+	initialState: { ...regulationInitialState, loading: false },
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(fetchAllRegulations.fulfilled, (state, action) => {
 			state.loading = false;
-			regulationAdapter.upsertMany(state.entities, action.payload);
+			regulationAdapter.upsertMany(state, action.payload);
 
 			fetchAllRequirements();
 		});
 		builder.addCase(fetchRegulationById.fulfilled, (state, action) => {
 			state.loading = false;
-			regulationAdapter.upsertOne(state.entities, action.payload);
+			regulationAdapter.upsertOne(state, action.payload);
 		});
 	},
 });

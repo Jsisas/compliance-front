@@ -1,8 +1,4 @@
 import axios from 'axios';
-import { createHashHistory } from 'history';
-import { AuthUtil } from './AuthUtil';
-
-const history = createHashHistory();
 
 axios.interceptors.response.use(
 	(response) => {
@@ -10,7 +6,8 @@ axios.interceptors.response.use(
 	},
 	(error) => {
 		if (error.status === 403) {
-			history.push('/login');
+			localStorage.removeItem('auth');
+			window.location.reload();
 		} else {
 			console.log(`${error.status} : ${error.statusText} => ${error.data}`);
 		}
@@ -20,9 +17,10 @@ axios.interceptors.response.use(
 
 axios.interceptors.request.use(
 	function (config) {
-		const token = AuthUtil.getUserAuth()?.token;
+		const authObj = localStorage.getItem('auth') || '{}';
+		const auth = JSON.parse(authObj);
 
-		if (token != null) {
+		if (auth.token != null) {
 			//Back end breaks if token is included
 			//config.headers.Authorization = `Bearer ${token}`;
 		}

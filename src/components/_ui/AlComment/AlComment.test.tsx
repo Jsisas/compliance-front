@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { AlComment } from './AlComment';
+import { render } from '@testing-library/react';
 
 describe('<AlComment />', () => {
 	it('it renders a comment section', () => {
-		const wrapper = shallow(<AlComment />);
+		const wrapper = render(<AlComment />);
 		expect(wrapper).toMatchSnapshot();
 	});
 });

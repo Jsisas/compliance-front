@@ -1,29 +1,34 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { GoogleButton } from './GoogleButton';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('<GoogleButton />', () => {
-	it('it renders a google button', () => {
-		const wrapper = shallow(<GoogleButton onClick={() => null} />);
+	it('it matches a snapshot', () => {
+		const wrapper = render(<GoogleButton onClick={() => null} />);
 		expect(wrapper).toMatchSnapshot();
 	});
 
-	it('attributes work as expected', () => {
+	it('when disabled is false then onClick should fire ', () => {
 		const onClickMock = jest.fn();
-		const wrapper = shallow(<GoogleButton onClick={() => null} />);
+		render(<GoogleButton onClick={onClickMock} disabled={false} />);
 
-		wrapper.setProps({
-			onClick: onClickMock,
-			disabled: true,
-		});
+		const inputButton = screen.getByText('Google');
 
-		wrapper.simulate('click');
+		fireEvent.click(inputButton);
+
+		expect(inputButton).toBeInTheDocument();
 		expect(onClickMock).toHaveBeenCalled();
-		expect(wrapper.prop('disabled')).toBe(true);
 	});
 
-	it('disabled defaults to false', () => {
-		const wrapper = shallow(<GoogleButton onClick={() => null} />);
-		expect(wrapper.prop('disabled')).toBe(false);
+	it('when disabled is true then onClick should not fire ', () => {
+		const onClickMock = jest.fn();
+		render(<GoogleButton onClick={onClickMock} disabled={true} />);
+
+		const inputButton = screen.getByText('Google');
+
+		fireEvent.click(inputButton);
+
+		expect(inputButton).toBeInTheDocument();
+		expect(onClickMock).not.toHaveBeenCalled();
 	});
 });

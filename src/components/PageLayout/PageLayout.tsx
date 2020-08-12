@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Dropdown, Layout, Menu } from 'antd';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Routes } from '../../pages/Routes';
 import { ReactComponent as Logo } from './../../assets/logo/small_logo.svg';
-import styles from './layout.module.scss';
-import { AuthUtil } from '../../util/AuthUtil';
+import styles from './PageLayout.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducer';
+import { clearAuth, getAuthentication } from '../../redux/Auth/AuthSlice';
+import { authenticate } from '../../redux/Auth/AuthService';
 
 const { Content, Sider } = Layout;
 
 export function PageLayout(): JSX.Element {
-	const history = useHistory();
 	const homePage = '/regulations';
-	const [selectedKey, setSelectedKey] = useState(history.location.pathname);
+	const [selectedKey, setSelectedKey] = useState(getSelectedKey());
 	const [isCollapsed, setCollapsed] = useState(false);
-	const authentication = AuthUtil.getUserAuth();
+	const authentication = useSelector((state: RootState) => getAuthentication(state));
+	const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+
+	const dispatch = useDispatch();
+	useEffect(() => {
+		if (!isAuthenticated && authentication && authentication.token) {
+			dispatch(authenticate(authentication.token));
+		}
+	}, [dispatch, isAuthenticated, authentication]);
 
 	useEffect(() => {
 		backButtonListener();
@@ -30,11 +40,10 @@ export function PageLayout(): JSX.Element {
 	}
 
 	function handleLogOut() {
-		AuthUtil.logout();
-		history.push('/login');
+		dispatch(clearAuth());
 	}
 
-	const connectControlDropdown = (
+	const profileOptions = (
 		<Menu>
 			<Menu.Item key='Settings'>Settings</Menu.Item>
 			<Menu.Item key='Account'>Account</Menu.Item>
@@ -46,7 +55,7 @@ export function PageLayout(): JSX.Element {
 
 	return (
 		<Layout>
-			{history.location.pathname !== '/login' && (
+			{isAuthenticated && (
 				<Sider
 					breakpoint='lg'
 					collapsedWidth='0'
@@ -77,9 +86,8 @@ export function PageLayout(): JSX.Element {
 							</Link>
 						</Menu.Item>
 					</Menu>
-					<p>{isCollapsed}</p>
 					<div className={styles.profile} style={{ display: isCollapsed ? 'none' : '', width: '175px' }}>
-						<Dropdown overlay={connectControlDropdown} trigger={['click']}>
+						<Dropdown overlay={profileOptions} trigger={['click']}>
 							<img src={authentication?.user.picture} alt='Avatar' />
 						</Dropdown>
 						<Link to={'/'}>{authentication?.user.name}</Link>
@@ -89,7 +97,7 @@ export function PageLayout(): JSX.Element {
 			<Layout style={{ background: '#fff', minWidth: '340px' }} className={styles.white}>
 				<Content className={styles.white}>
 					<div className='site-layout-background' style={{ padding: 24, minHeight: 360 }}>
-						<Routes isAuthenticated={authentication != null} />
+						<Routes />
 					</div>
 				</Content>
 			</Layout>

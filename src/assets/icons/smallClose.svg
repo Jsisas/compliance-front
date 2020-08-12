@@ -1,0 +1,9 @@
+<svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <circle cx='8' cy='8' r='8' fill='#DCDDDD' />
+    <path
+            fillRule='evenodd'
+            clipRule='evenodd'
+            d='M5.1716 3.75736L3.75738 5.17157L6.58581 8L3.75738 10.8284L5.1716 12.2426L8.00002 9.41421L10.8284 12.2426L12.2427 10.8284L9.41424 8L12.2427 5.17157L10.8284 3.75736L8.00002 6.58579L5.1716 3.75736Z'
+            fill='#878787'
+    />
+</svg>

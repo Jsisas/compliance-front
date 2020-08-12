@@ -4,9 +4,11 @@ import regulationReducer from './Regulation/RegulationSlice';
 import requirementReducer from './Requirement/RequirementSlice';
 import tmpRequirementReducer from './Requirement/TmpRequirementSlice/TmpRequirementSlice';
 import taskReducer from './Task/TaskSlice';
+import authReducer from './Auth/AuthSlice';
 import { combineReducers } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
+	auth: authReducer,
 	user: userReducer,
 	control: controlReducer,
 	regulation: regulationReducer,
