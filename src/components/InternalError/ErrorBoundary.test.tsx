@@ -21,12 +21,16 @@ describe('<ErrorBoundary />', () => {
 	});
 
 	describe('when error', () => {
+		console.error = jest.fn();
+
 		it('it can go back when error', () => {
 			deepRender(
 				<ErrorBoundary>
 					<TestComponent hasError={true} />
 				</ErrorBoundary>
 			);
+
+			console.error('test');
 
 			const mockBackButton = jest.fn();
 			const backButton = screen.getByText('Back Home');
@@ -41,6 +45,8 @@ describe('<ErrorBoundary />', () => {
 	describe('When no errors', () => {
 		it('it renders component correctly when no error', () => {
 			deepRender(<ErrorBoundary>{<TestComponent hasError={false} />}</ErrorBoundary>);
+
+			console.error('test2');
 
 			expect(screen.queryByText('Back Home')).not.toBeInTheDocument();
 			expect(screen.getByText('Test Component')).toBeInTheDocument();
