@@ -20,9 +20,10 @@ import {
 import { notifySuccess } from '../../../util/NotificationUtil';
 import StringUtil from '../../../util/StringUtil';
 import AlButton from '../../_ui/AlButton/AlButton';
-import { UserSearch } from '../../UserSearch/UserSearch';
+import { UserSearch } from '../../_ui/SearchSelect/UserSearch/UserSearch';
 import modalStyles from '../modal.module.scss';
 import styles from './addTaskModal.module.scss';
+import { User } from '../../../redux/User/UserSlice';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -35,11 +36,13 @@ interface AddTaskProps {
 
 export function AddTaskModule(props: AddTaskProps): JSX.Element {
 	const dispatch = useDispatch();
-	const [taskFrequency, setTaskFrequency] = useState(TaskFrequencyType.ONE_TIME);
-	const [taskRecurrence, setTaskRecurrence] = useState(TaskFrequencyTypeRecurrence.WEEKLY);
+	const [taskFrequency, setTaskFrequency] = useState<TaskFrequencyType>(TaskFrequencyType.ONE_TIME);
+	const [taskRecurrence, setTaskRecurrence] = useState<TaskFrequencyTypeRecurrence>(TaskFrequencyTypeRecurrence.WEEKLY);
+	const [selectedAssignee, setSelectedAssignee] = useState<User>();
 
 	function handleCreateNewTask(data: Task): void {
 		data.control = props.control || ({} as Control);
+		data.assignee = selectedAssignee || ({} as User);
 		dispatch(createTask(data));
 		notifySuccess('Add task', 'Adding a task was successful');
 
@@ -106,7 +109,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 									<TextArea placeholder='Add description to the task' />
 								</Form.Item>
 								<Form.Item label='Add assignee' name='assignee'>
-									<UserSearch placeholder='Add assignees' />
+									<UserSearch placeholder='Add assignees' onChange={(user: User) => setSelectedAssignee(user)} />
 								</Form.Item>
 								<Form.Item name='duration' label='Duration'>
 									<Select placeholder='Select task duration' defaultValue={15}>

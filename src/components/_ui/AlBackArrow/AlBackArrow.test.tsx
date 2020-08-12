@@ -1,23 +1,25 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import { AlBackArrow, AlBackArrowProps } from './AlBackArrow';
 import * as H from 'history';
-import { LeftOutlined } from '@ant-design/icons/lib';
-import styles from './albackarrow.module.scss';
+import { GoogleButton } from '../GoogleButton/GoogleButton';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 const props: AlBackArrowProps = {
 	history: {} as H.History,
 };
 
 describe('<AlBackArrow />', () => {
-	it('it renders an arrow with correct attributes', () => {
-		const wrapper = shallow(<AlBackArrow history={props.history} />);
-		const alButton = wrapper.find('AlButton');
+	it('it matches a snapshot', () => {
+		const button = render(<GoogleButton onClick={() => null} />);
+		expect(button).toMatchSnapshot();
+	});
 
-		expect(alButton.length).toEqual(1);
-		expect(alButton.prop('type')).toEqual('link');
-		expect(alButton.prop('onClick')).toBeDefined();
+	it('it should call history.goBack() on click', () => {
+		props.history.goBack = jest.fn();
+		render(<AlBackArrow history={props.history} />);
+		const leftArroww = screen.getByTestId('leftArrow');
 
-		expect(wrapper.containsMatchingElement(<LeftOutlined className={styles.alBackArrow} />)).toBe(true);
+		fireEvent.click(leftArroww);
+		expect(props.history.goBack).toBeCalled();
 	});
 });

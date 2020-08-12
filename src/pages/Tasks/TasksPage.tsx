@@ -69,7 +69,7 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 			render: (text: string, record: Task) => {
 				return <span>{date(record.due_at).format(dateFormat)}</span>;
 			},
-			sorter: (a: Task, b: Task) => a.due_at.valueOf() - b.due_at.valueOf(),
+			sorter: (a: Task, b: Task) => new Date(a.due_at).valueOf() - new Date(b.due_at).valueOf(),
 			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({

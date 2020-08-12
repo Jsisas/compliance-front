@@ -1,5 +1,4 @@
 import { createEntityAdapter, createSelector, createSlice, EntityState } from '@reduxjs/toolkit';
-import { Moment } from 'moment';
 
 import { Control } from '../Control/ControlSlice';
 import { RootState } from '../reducer';
@@ -45,9 +44,10 @@ export enum TaskType {
 }
 
 export enum TaskStatus {
-	FAILING,
-	WARNING,
-	OK,
+	NEW = 'new',
+	FAILING = 'failing',
+	WARNING = 'warning',
+	OK = 'ok',
 }
 
 export interface TaskFile {
@@ -103,10 +103,10 @@ export interface Comment {
 
 export interface Task {
 	id: string;
-	due_at: Moment;
+	due_at: string;
 	is_overdue: boolean;
 	kind: TaskType;
-	state: TaskType;
+	state: TaskStatus;
 	title: string;
 	control: Control;
 	description: string;
@@ -122,7 +122,7 @@ const tasksAdapter = createEntityAdapter<Task>({
 });
 
 const taskInitialState: EntityState<Task> = tasksAdapter.getInitialState();
-const taskSelectors = tasksAdapter.getSelectors((state: RootState) => state.task.entities);
+const taskSelectors = tasksAdapter.getSelectors((state: RootState) => state.task);
 
 export const selectAllTasks = taskSelectors.selectAll;
 export const selectTaskById = taskSelectors.selectById;
@@ -135,20 +135,20 @@ export function selectTaskByControlId(state: RootState, controlId: string): Task
 
 const TaskSlice = createSlice({
 	name: 'task',
-	initialState: { entities: taskInitialState, loading: false },
+	initialState: { ...taskInitialState, loading: false },
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(createTask.fulfilled, (state, action) => {
-			tasksAdapter.upsertOne(state.entities, action);
+			tasksAdapter.upsertOne(state, action);
 			state.loading = false;
 		});
 		builder.addCase(updateTask.fulfilled, (state, action) => {
-			tasksAdapter.upsertOne(state.entities, action);
+			tasksAdapter.upsertOne(state, action);
 			state.loading = false;
 		});
 		builder.addCase(fetchAllTasks.fulfilled, (state, action) => {
 			state.loading = false;
-			tasksAdapter.setAll(state.entities, action.payload);
+			tasksAdapter.setAll(state, action.payload);
 		});
 	},
 });

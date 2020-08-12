@@ -1,59 +1,50 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import AlButton from './AlButton';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('<AlButton />', () => {
-	it('it renders a button', () => {
-		const wrapper = shallow(<AlButton type={'primary'} />);
-		expect(wrapper.exists('Button')).toBe(true);
+	it('it matches a snapshot', () => {
+		const wrapper = render(<AlButton type={'primary'} />);
 		expect(wrapper).toMatchSnapshot();
 	});
 
-	it('primary button attributes are correct', () => {
+	it('it should not fire onClick when button is disabled', () => {
 		const onClickMock = jest.fn();
-		const wrapper = shallow(<AlButton type={'primary'} />);
+		render(
+			<AlButton
+				type={'primary'}
+				style={{ position: 'absolute' }}
+				onClick={onClickMock}
+				htmlType={'button'}
+				className={'test-class'}
+				disabled={true}
+			>
+				Test Button
+			</AlButton>
+		);
 
-		wrapper.setProps({
-			type: 'primary',
-			style: { position: 'absolute' },
-			onClick: onClickMock,
-			htmlType: 'button',
-			className: 'test-class',
-			disabled: true,
-		});
-
-		const antdButton = wrapper.find('Button');
-		expect(antdButton.prop('className')).toBe('primary test-class');
-		expect(antdButton.prop('type')).toBe('primary');
-		expect(antdButton.prop('style')).toStrictEqual({ position: 'absolute' });
-		expect(antdButton.prop('htmlType')).toBe('button');
-		expect(antdButton.prop('disabled')).toBe(true);
-
-		antdButton.simulate('click');
-		expect(onClickMock).toHaveBeenCalled();
+		const button = screen.getByText('Test Button');
+		fireEvent.click(button);
+		expect(onClickMock).not.toBeCalled();
 	});
 
-	it('link button attributes are correct', () => {
-		const wrapper = shallow(<AlButton type={'link'} />);
+	it('it should fire onClick when button is enabled', () => {
+		const onClickMock = jest.fn();
+		render(
+			<AlButton
+				type={'primary'}
+				style={{ position: 'absolute' }}
+				onClick={onClickMock}
+				htmlType={'button'}
+				className={'test-class'}
+				disabled={false}
+			>
+				Test Button
+			</AlButton>
+		);
 
-		wrapper.setProps({
-			type: 'link',
-		});
-
-		const antdButton = wrapper.find('Button');
-		expect(antdButton.prop('type')).toBe('link');
-		expect(antdButton.prop('className')?.trim()).toBe('');
-	});
-
-	it('secondary button attributes are correct', () => {
-		const wrapper = shallow(<AlButton type={'secondary'} />);
-
-		wrapper.setProps({
-			type: 'secondary',
-		});
-
-		const antdButton = wrapper.find('Button');
-		expect(antdButton.prop('type')).toBe(undefined);
-		expect(antdButton.prop('className')?.trim()).toBe('secondary');
+		const button = screen.getByText('Test Button');
+		fireEvent.click(button);
+		expect(onClickMock).toBeCalled();
 	});
 });

@@ -8,7 +8,7 @@ import { fetchControlById } from '../../redux/Control/ControlService';
 import { Col, Divider, Row, Table, Typography } from 'antd';
 import { EditOutlined, EllipsisOutlined } from '@ant-design/icons/lib';
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { selectTaskByControlId, Task } from '../../redux/Task/TaskSlice';
+import { Task } from '../../redux/Task/TaskSlice';
 import { ColumnProps } from 'antd/lib/table';
 import styles from './controlDetails.module.scss';
 import themeStyle from '../../theme.module.scss';
@@ -19,13 +19,13 @@ import { ControlConnectedItems } from '../../components/ControlConnectedItems/Co
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import moment from 'moment';
 import StringUtil from '../../util/StringUtil';
+import { fetchAllTasks } from '../../redux/Task/TaskService';
 
 const { Title, Text } = Typography;
 
 export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 	const { id } = useParams<{ id: string }>();
 	const control = useSelector((state: RootState) => selectControlById(state, id));
-	const tasks: Task[] = useSelector((state: RootState) => selectTaskByControlId(state, id));
 	const [isAddTaskModalVisible, setAddTaskModalVisible] = useState(false);
 	const isTableLoading = useSelector((state: RootState) => state.control.loading);
 
@@ -36,7 +36,8 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchControlById(id));
-	}, [dispatch, id]);
+		dispatch(fetchAllTasks());
+	}, [dispatch, id, isAddTaskModalVisible]);
 
 	const columns: ColumnProps<never>[] = [];
 
@@ -170,10 +171,10 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 				<Row gutter={[16, 16]}>
 					<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
 						<Table
-							dataSource={tasks as never[]}
+							dataSource={control.tasks as never}
 							columns={columns}
 							rowKey='id'
-							scroll={tasks.length < 1 ? { x: undefined } : { x: 340 }}
+							scroll={control.tasks.length < 1 ? { x: undefined } : { x: 340 }}
 							loading={isTableLoading}
 							style={{ width: '100%' }}
 							className={concatStyles(styles.tableHeader, themeStyle.antTableMousePointer)}

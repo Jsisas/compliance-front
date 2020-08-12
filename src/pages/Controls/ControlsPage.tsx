@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { UserSearch } from '../../components/UserSearch/UserSearch';
+import { UserSearch } from '../../components/_ui/SearchSelect/UserSearch/UserSearch';
 import { fetchAllControls } from '../../redux/Control/ControlService';
 import { Control, ControlStatus, ControlType, selectAllControls } from '../../redux/Control/ControlSlice';
 import { RootState } from '../../redux/reducer';
@@ -164,12 +164,6 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 		});
 	}
 
-	function filterByUser(users: User[]) {
-		if (users.length > 0) {
-			setSelectedUser(users[0]);
-		}
-	}
-
 	return (
 		<>
 			<Row gutter={[16, 16]}>
@@ -189,7 +183,11 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 					/>
 				</Col>
 				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-					<UserSearch placeholder='Filter by owner' onChange={filterByUser} />
+					<UserSearch
+						placeholder='Filter by owner'
+						onChange={(user) => setSelectedUser(user || undefined)}
+						allowClear={true}
+					/>
 				</Col>
 				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
 					<Select

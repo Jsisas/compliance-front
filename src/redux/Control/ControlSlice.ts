@@ -36,26 +36,26 @@ const controlsAdapter = createEntityAdapter<Control>({
 });
 
 const controlInitialState: EntityState<Control> = controlsAdapter.getInitialState();
-const controlSelectors = controlsAdapter.getSelectors((state: RootState) => state.control.entities);
+const controlSelectors = controlsAdapter.getSelectors((state: RootState) => state.control);
 
 export const selectAllControls = controlSelectors.selectAll;
 export const selectControlById = controlSelectors.selectById;
 
 const ControlSlice = createSlice({
 	name: 'control',
-	initialState: { entities: controlInitialState, loading: false },
+	initialState: { ...controlInitialState, loading: false },
 	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(upsertControl.fulfilled, (state, action) => {
-			controlsAdapter.upsertOne(state.entities, action);
+			controlsAdapter.upsertOne(state, action);
 			state.loading = false;
 		});
 		builder.addCase(fetchAllControls.fulfilled, (state, action) => {
-			controlsAdapter.setAll(state.entities, action);
+			controlsAdapter.setAll(state, action);
 			state.loading = false;
 		});
 		builder.addCase(fetchControlById.fulfilled, (state, action) => {
-			controlsAdapter.upsertOne(state.entities, action);
+			controlsAdapter.upsertOne(state, action);
 			state.loading = false;
 		});
 	},

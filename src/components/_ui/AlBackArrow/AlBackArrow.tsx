@@ -10,10 +10,8 @@ export interface AlBackArrowProps {
 
 export function AlBackArrow(props: AlBackArrowProps): JSX.Element {
 	return (
-		<>
-			<AlButton type='link' onClick={() => props.history.goBack()}>
-				<LeftOutlined className={styles.alBackArrow} />
-			</AlButton>
-		</>
+		<AlButton type='link' onClick={() => props.history.goBack()}>
+			<LeftOutlined className={styles.alBackArrow} data-testid='leftArrow' />
+		</AlButton>
 	);
 }

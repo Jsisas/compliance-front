@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it matches a snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="ant-col connectedItem ant-col-xs-24"
+      >
+        <div
+          class="ant-row"
+          style="margin: -8px -8px 8px -8px;"
+        >
+          <div
+            class="ant-col ant-col-xs-24"
+            style="padding: 8px 8px 8px 8px;"
+          >
+            <span
+              class="ant-typography"
+              style="font-weight: 600;"
+            >
+              Connected items
+            </span>
+          </div>
+        </div>
+        <div
+          class="ant-row"
+          style="margin-left: -8px; margin-right: -8px;"
+        >
+          <div
+            class="ant-col ant-col-xs-24"
+            style="padding-left: 8px; padding-right: 8px;"
+          >
+            <span
+              class="ant-typography ant-typography-secondary"
+            >
+              Control
+            </span>
+          </div>
+        </div>
+        <div
+          class="ant-row"
+          style="margin: -8px -8px 8px -8px;"
+        >
+          <div
+            class="ant-col ant-col-xs-24"
+            style="padding: 8px 8px 8px 8px;"
+          >
+            <a
+              href="/controls/495d2960-fd50-4756-a7d9-7a3b8a082552"
+            >
+              Definition of security roles and responsibilities
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="ant-col connectedItem ant-col-xs-24"
+    >
+      <div
+        class="ant-row"
+        style="margin: -8px -8px 8px -8px;"
+      >
+        <div
+          class="ant-col ant-col-xs-24"
+          style="padding: 8px 8px 8px 8px;"
+        >
+          <span
+            class="ant-typography"
+            style="font-weight: 600;"
+          >
+            Connected items
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-row"
+        style="margin-left: -8px; margin-right: -8px;"
+      >
+        <div
+          class="ant-col ant-col-xs-24"
+          style="padding-left: 8px; padding-right: 8px;"
+        >
+          <span
+            class="ant-typography ant-typography-secondary"
+          >
+            Control
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-row"
+        style="margin: -8px -8px 8px -8px;"
+      >
+        <div
+          class="ant-col ant-col-xs-24"
+          style="padding: 8px 8px 8px 8px;"
+        >
+          <a
+            href="/controls/495d2960-fd50-4756-a7d9-7a3b8a082552"
+          >
+            Definition of security roles and responsibilities
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

@@ -1,7 +1,7 @@
 import { RootState } from '../reducer';
-import { createEntityAdapter, createSlice, EntityState, PayloadAction } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice, EntityState } from '@reduxjs/toolkit';
 import { Control } from '../Control/ControlSlice';
-import { fetchAllRequirements, fetchRequirementById } from './RequirementService';
+import { fetchAllRequirements, fetchRequirementById, upsertRequirement } from './RequirementService';
 import { Regulation } from '../Regulation/RegulationSlice';
 
 export interface RequirementStatistics {
@@ -29,36 +29,29 @@ const requirementAdapter = createEntityAdapter<Requirement>({
 });
 
 const requirementInitialState: EntityState<Requirement> = requirementAdapter.getInitialState();
-const requirementSelector = requirementAdapter.getSelectors((state: RootState) => state.requirement.entities);
+const requirementSelector = requirementAdapter.getSelectors((state: RootState) => state.requirement);
 
 export const selectAllRequirements = requirementSelector.selectAll;
 export const selectRequirementById = requirementSelector.selectById;
 
 const RequirementSlice = createSlice({
 	name: 'requirement',
-	initialState: { entities: requirementInitialState, loading: false },
-	reducers: {
-		updateRequirement(state, { payload }: PayloadAction<Requirement>) {
-			requirementAdapter.updateOne(state.entities, {
-				id: payload.id,
-				changes: payload,
-			});
-		},
-		deleteRequirement(state, { payload }: PayloadAction<Requirement>) {
-			requirementAdapter.removeOne(state.entities, payload.id);
-		},
-	},
+	initialState: { ...requirementInitialState, loading: false },
+	reducers: {},
 	extraReducers: (builder) => {
+		builder.addCase(upsertRequirement.fulfilled, (state, action) => {
+			requirementAdapter.upsertOne(state, action);
+			state.loading = false;
+		});
 		builder.addCase(fetchAllRequirements.fulfilled, (state, action) => {
 			state.loading = false;
-			requirementAdapter.setAll(state.entities, action.payload);
+			requirementAdapter.upsertMany(state, action.payload);
 		});
 		builder.addCase(fetchRequirementById.fulfilled, (state, action) => {
 			state.loading = false;
-			requirementAdapter.upsertOne(state.entities, action.payload);
+			requirementAdapter.upsertOne(state, action.payload);
 		});
 	},
 });
 
-export const { updateRequirement, deleteRequirement } = RequirementSlice.actions;
 export default RequirementSlice.reducer;

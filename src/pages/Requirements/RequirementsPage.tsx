@@ -15,8 +15,8 @@ import { Control } from '../../redux/Control/ControlSlice';
 import { RootState } from '../../redux/reducer';
 import { fetchAllRegulations, fetchRegulationById } from '../../redux/Regulation/RegulationService';
 import { selectAllRegulations, selectRegulationById } from '../../redux/Regulation/RegulationSlice';
-import { fetchAllRequirements } from '../../redux/Requirement/RequirementService';
-import { Requirement, selectAllRequirements, updateRequirement } from '../../redux/Requirement/RequirementSlice';
+import { fetchAllRequirements, upsertRequirement } from '../../redux/Requirement/RequirementService';
+import { Requirement, selectAllRequirements } from '../../redux/Requirement/RequirementSlice';
 import { setTmpRequirements } from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
 import themeStyles from '../../theme.module.scss';
 import { notifyError } from '../../util/NotificationUtil';
@@ -214,17 +214,17 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 		</Menu>
 	);
 
-	function attachExistingControlToSelectedRequirements(control: Control) {
+	function attachExistingControlToSelectedRequirements(controls: Control[]) {
 		setTimeout(() => {
 			setSearchControlModalVisible(false);
 			selectedRequirementIds.forEach((requirementId) => {
 				const requirement = requirements.find((x) => x.id === requirementId);
 				const tmpRequirement = produce(requirement, (draft: Draft<Requirement>) => {
-					draft.controls.push(control);
+					draft.controls = draft.controls.concat(controls);
 				});
 
 				if (tmpRequirement) {
-					dispatch(updateRequirement(tmpRequirement));
+					dispatch(upsertRequirement(tmpRequirement));
 				}
 				setSelectedRequirementIds([]);
 			});
@@ -234,7 +234,7 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 	return (
 		<>
 			<SearchControlModal
-				onSelect={(control: Control) => attachExistingControlToSelectedRequirements(control)}
+				onAttach={(controls: Control[]) => attachExistingControlToSelectedRequirements(controls)}
 				isVisible={isSearchControlModalVisible}
 				onCancel={() => setSearchControlModalVisible(false)}
 			/>
