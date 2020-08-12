@@ -74,7 +74,6 @@ Object {
               <img
                 alt="Avatar"
                 class="ant-dropdown-trigger"
-                src=""
               />
               <a
                 href="/"
@@ -293,7 +292,6 @@ Object {
             <img
               alt="Avatar"
               class="ant-dropdown-trigger"
-              src=""
             />
             <a
               href="/"

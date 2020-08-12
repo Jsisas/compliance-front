@@ -1,8 +1,8 @@
 import React from 'react';
 import { ControlConnectedItems } from './ControlConnectedItems';
-import { testRequirements } from '../../util/test/data/TestRequirements';
 import { deepRender } from '../../util/test/TestUtil';
 import { screen } from '@testing-library/react';
+import { testRequirements } from '../../util/test/data/DataUtil';
 
 describe('<ControlConnectedItems />', () => {
 	it('it matches a snapshot', () => {

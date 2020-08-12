@@ -2,7 +2,7 @@ import { User } from '../../../../redux/User/UserSlice';
 import React from 'react';
 import { UserSearch } from './UserSearch';
 import { deepRender } from '../../../../util/test/TestUtil';
-import { testUsers } from '../../../../util/test/data/TestUsers';
+import { testUsers } from '../../../../util/test/data/DataUtil';
 
 describe('<UserSearch	 />', () => {
 	it('it matches a snapshot', () => {

@@ -41,7 +41,7 @@ export type RenderState = {
 	requirement?: Requirement[];
 	tmpRequirement?: Requirement[];
 	task?: Task[];
-	auth: Authentication[];
+	auth?: Authentication[];
 };
 
 function mockRouting(element: JSX.Element, initialRoute: string): [JSX.Element, MemoryHistory] {

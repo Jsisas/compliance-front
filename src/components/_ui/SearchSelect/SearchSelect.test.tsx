@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { SearchSelect } from './SearchSelect';
 import { User } from '../../../redux/User/UserSlice';
-import { testUsers } from '../../../util/test/data/TestUsers';
+import { testUsers } from '../../../util/test/data/DataUtil';
 
 describe('<SearchSelect />', () => {
 	it('it matches a snapshot', () => {

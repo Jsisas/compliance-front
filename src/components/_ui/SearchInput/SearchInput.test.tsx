@@ -1,7 +1,8 @@
 import React from 'react';
 import { SearchInput } from './SearchInput';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { testUsers } from '../../../util/test/data/TestUsers';
+import { User } from '../../../redux/User/UserSlice';
+import { testUsers } from '../../../util/test/data/DataUtil';
 
 describe('<SearchInputP />', () => {
 	it('it matches a snapshot', () => {
@@ -36,7 +37,7 @@ describe('<SearchInputP />', () => {
 
 		fireEvent.change(input, { target: { value: 'gmail' } });
 		expect(results.children.length).toBe(
-			testUsers.filter((user) => user.email.includes('gmail') || user.name.includes('gmail')).length
+			testUsers.filter((user: User) => user.email.includes('gmail') || user.name.includes('gmail')).length
 		);
 
 		fireEvent.change(input, { target: { value: 'Joosep' } });

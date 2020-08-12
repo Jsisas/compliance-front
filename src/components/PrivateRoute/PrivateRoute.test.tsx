@@ -2,7 +2,7 @@ import { deepRender } from '../../util/test/TestUtil';
 import React from 'react';
 import { PrivateRoute } from './PrivateRoute';
 import { screen } from '@testing-library/react';
-import { testUsers } from '../../util/test/data/TestUsers';
+import { testUsers } from '../../util/test/data/DataUtil';
 
 const initialAuthentication = { token: 'asd', user: testUsers[0] };
 

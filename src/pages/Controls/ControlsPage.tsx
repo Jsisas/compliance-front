@@ -1,10 +1,9 @@
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { Col, Input, Row, Select, Table, Tag, Typography } from 'antd';
 import { ColumnProps } from 'antd/lib/table';
-import * as H from 'history';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import AlButton from '../../components/_ui/AlButton/AlButton';
 import { UserSearch } from '../../components/_ui/SearchSelect/UserSearch/UserSearch';
@@ -21,11 +20,8 @@ import style from './controlsPage.module.scss';
 const { Title } = Typography;
 const { Option } = Select;
 
-interface ControlsPageProps {
-	history: H.History;
-}
-
-export function ControlsPage(props: ControlsPageProps): JSX.Element {
+export function ControlsPage(): JSX.Element {
+	const history = useHistory();
 	const controls = useSelector((state: RootState) => selectAllControls(state));
 	const isControlsLoading = useSelector((state: RootState) => state.control.loading);
 
@@ -139,7 +135,7 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 											className={concatStyles(style.primaryTag, style.taskTag)}
 											onClick={(event: React.MouseEvent) => {
 												event.stopPropagation();
-												props.history.push('/tasks/' + task.id);
+												history.push('/tasks/' + task.id);
 											}}
 										>
 											{task.title}
@@ -236,7 +232,7 @@ export function ControlsPage(props: ControlsPageProps): JSX.Element {
 							return {
 								onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
 									event.stopPropagation();
-									props.history.push('/controls/' + record.id);
+									history.push('/controls/' + record.id);
 								},
 							};
 						}}

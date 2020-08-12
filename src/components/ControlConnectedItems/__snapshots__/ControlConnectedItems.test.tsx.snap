@@ -36,7 +36,7 @@ Object {
               class="ant-typography ant-typography-secondary"
             >
               Requirements (
-              4
+              114
               )
             </span>
           </div>
@@ -73,6 +73,666 @@ Object {
               style="display: block;"
             >
               Review of Information Security Policy
+            </a>
+            <a
+              href="/requirements/a923f456-a0ea-4a9e-85af-be197357755d"
+              style="display: block;"
+            >
+              Information security roles and responsabilities
+            </a>
+            <a
+              href="/requirements/b610f96e-9070-43eb-8508-51e1dda1d95d"
+              style="display: block;"
+            >
+              Segregation of duties
+            </a>
+            <a
+              href="/requirements/64650405-ee3d-4710-8406-d4befd715fb0"
+              style="display: block;"
+            >
+              Contact with authorities
+            </a>
+            <a
+              href="/requirements/d34996cf-396a-4468-8439-d6c5ab29bb93"
+              style="display: block;"
+            >
+              Contact with special interest groups
+            </a>
+            <a
+              href="/requirements/efc27d80-078f-47bc-af72-451d910e951d"
+              style="display: block;"
+            >
+              Information Security in project management
+            </a>
+            <a
+              href="/requirements/a1f405f4-8c0d-4c9a-8da6-30c310663f1b"
+              style="display: block;"
+            >
+              Mobile device policy
+            </a>
+            <a
+              href="/requirements/b0110f2d-cd8a-4f7a-8edb-25515f55f30f"
+              style="display: block;"
+            >
+              Teleworking
+            </a>
+            <a
+              href="/requirements/df722016-4899-4f53-936f-5c691882fb8c"
+              style="display: block;"
+            >
+              Screening
+            </a>
+            <a
+              href="/requirements/07f67a72-1653-4b3f-89b7-34f200efbdf9"
+              style="display: block;"
+            >
+              Terms and conditions of employment
+            </a>
+            <a
+              href="/requirements/5567e081-a4ba-491c-834d-f2d7c47d5a1d"
+              style="display: block;"
+            >
+              Management Responsibility
+            </a>
+            <a
+              href="/requirements/c9713682-880b-46dc-9d52-602c7c5ddbfa"
+              style="display: block;"
+            >
+              Information security awareness, education and training
+            </a>
+            <a
+              href="/requirements/b921d5bd-7eb7-4ce6-a419-9c0538f56ded"
+              style="display: block;"
+            >
+              Disciplinary process
+            </a>
+            <a
+              href="/requirements/696d67aa-dfc6-41cd-ab51-bf37f85e5352"
+              style="display: block;"
+            >
+              Termination or change of employment responsibility
+            </a>
+            <a
+              href="/requirements/3668b83b-0fe5-488f-b80f-be23be171cd4"
+              style="display: block;"
+            >
+              Inventory of assets
+            </a>
+            <a
+              href="/requirements/56e02af3-d254-4f05-afef-607795d70cac"
+              style="display: block;"
+            >
+              Ownership of assets
+            </a>
+            <a
+              href="/requirements/06047340-7cae-4e78-9fb7-9114264afca5"
+              style="display: block;"
+            >
+              Acceptable use of assets
+            </a>
+            <a
+              href="/requirements/bad3c4fe-8e4b-4928-bb85-ed6d0d1cda0b"
+              style="display: block;"
+            >
+              Return of assets
+            </a>
+            <a
+              href="/requirements/4c6c379e-5165-4be7-a557-701a333f5293"
+              style="display: block;"
+            >
+              Labelling of information
+            </a>
+            <a
+              href="/requirements/6279467d-99c1-454c-88df-1ccb470b43bd"
+              style="display: block;"
+            >
+              Handling of assets
+            </a>
+            <a
+              href="/requirements/ad0669ef-343b-4809-88aa-d7161a353ac0"
+              style="display: block;"
+            >
+              Management of removable media
+            </a>
+            <a
+              href="/requirements/1a04eee2-0460-426f-ab50-68cc7e2e7f4d"
+              style="display: block;"
+            >
+              Disposal of Media
+            </a>
+            <a
+              href="/requirements/4adcf867-9e38-486a-bbcf-a5274ab94233"
+              style="display: block;"
+            >
+              Physical media in transit
+            </a>
+            <a
+              href="/requirements/bcf399af-351f-4e0d-a135-9b70f798ac0b"
+              style="display: block;"
+            >
+              Access control policy
+            </a>
+            <a
+              href="/requirements/a0534a6b-8eac-436f-a19f-1fcbc335a32c"
+              style="display: block;"
+            >
+              Access to networks and network services
+            </a>
+            <a
+              href="/requirements/a554a044-12c2-4b67-8da2-7cfc2c453e17"
+              style="display: block;"
+            >
+              User Registration and de-registration
+            </a>
+            <a
+              href="/requirements/ae4817a7-a052-4db2-b1e7-8860869bcd5b"
+              style="display: block;"
+            >
+              User access provisioning
+            </a>
+            <a
+              href="/requirements/4e2cc7d4-84bb-414b-a663-f1c67433f8c2"
+              style="display: block;"
+            >
+              Management of priviledged access rights
+            </a>
+            <a
+              href="/requirements/1c64275e-c29f-48cf-98ab-8ce9de0749ca"
+              style="display: block;"
+            >
+              Management of secret-authentication information of users
+            </a>
+            <a
+              href="/requirements/a84d45d8-88fd-4cc4-b6c9-e5ca49214670"
+              style="display: block;"
+            >
+              Review of user access rights
+            </a>
+            <a
+              href="/requirements/1f4bef68-cda8-4c61-a47c-65b095a9d89a"
+              style="display: block;"
+            >
+              Removal or adjustment of access rights
+            </a>
+            <a
+              href="/requirements/7ce5ce3f-3241-4315-9170-dda6baf77e9f"
+              style="display: block;"
+            >
+              Use of secret authentication information
+            </a>
+            <a
+              href="/requirements/98ec60a9-0264-4286-9cfd-29cfdb59708b"
+              style="display: block;"
+            >
+              Information Access restriction
+            </a>
+            <a
+              href="/requirements/ec78c30b-a55e-42fd-82d5-d6ed50b9257e"
+              style="display: block;"
+            >
+              Secure log-on procedures
+            </a>
+            <a
+              href="/requirements/cf62b8f7-4fae-4eba-a124-8ca6a4ed885a"
+              style="display: block;"
+            >
+              Password Management System
+            </a>
+            <a
+              href="/requirements/0bd6e1e9-86a0-4f97-b319-298fb5d737ec"
+              style="display: block;"
+            >
+              Use of privileged utility programs
+            </a>
+            <a
+              href="/requirements/e62a0277-db56-4258-aa4d-6c06385a14f0"
+              style="display: block;"
+            >
+              Access control to program source code
+            </a>
+            <a
+              href="/requirements/06bede80-5334-4ae0-a9a1-4c0614e3a30b"
+              style="display: block;"
+            >
+              Policy on the use of cryptographic controls
+            </a>
+            <a
+              href="/requirements/5cc9de9a-0929-4a5c-9d37-22854d25f35f"
+              style="display: block;"
+            >
+              Key management
+            </a>
+            <a
+              href="/requirements/b46ef8e3-94ec-496c-845e-b14f79fb35f2"
+              style="display: block;"
+            >
+              Physical Security Perimeter
+            </a>
+            <a
+              href="/requirements/5b9b07ef-c425-4c48-8089-0111da0a4252"
+              style="display: block;"
+            >
+              Physical entry Controls
+            </a>
+            <a
+              href="/requirements/60a73575-8e4d-4487-9f50-cbcae42f3b35"
+              style="display: block;"
+            >
+              Securing offices, rooms and faciliites
+            </a>
+            <a
+              href="/requirements/3ec7e7d8-c0e4-4a38-8eab-2fcce8c33a16"
+              style="display: block;"
+            >
+              Protecting against external and enviromental threats
+            </a>
+            <a
+              href="/requirements/9724e4dc-f6de-4c41-9b1d-05bb9cc82f28"
+              style="display: block;"
+            >
+              Working in secure areas
+            </a>
+            <a
+              href="/requirements/2bd265bc-c4c9-41c0-b459-7b8c02f691e3"
+              style="display: block;"
+            >
+              Delivery and loading areas
+            </a>
+            <a
+              href="/requirements/e2465d6c-42f2-49d7-a2ba-a38b66dd68af"
+              style="display: block;"
+            >
+              Equipment sitting and protection
+            </a>
+            <a
+              href="/requirements/c3f95c63-5a03-4c35-86fc-e55146e4578a"
+              style="display: block;"
+            >
+              Supporting utilities
+            </a>
+            <a
+              href="/requirements/6f9e7b30-e662-44c7-a915-0b6eb043a89e"
+              style="display: block;"
+            >
+              Cabling Security
+            </a>
+            <a
+              href="/requirements/604c5b89-a292-4166-9b40-853a0da6d12b"
+              style="display: block;"
+            >
+              Removal of assets
+            </a>
+            <a
+              href="/requirements/c442fab4-fd85-4ea8-8571-4d253758b4a1"
+              style="display: block;"
+            >
+              Security of equipment and assets off-premises
+            </a>
+            <a
+              href="/requirements/dc039312-2d93-4b14-9d24-8c4a2bae1fdc"
+              style="display: block;"
+            >
+              Secure disposal or re-use of equipment
+            </a>
+            <a
+              href="/requirements/0ec579d9-fc5f-48b8-889c-1a09e353ca9d"
+              style="display: block;"
+            >
+              Unattended user equipment
+            </a>
+            <a
+              href="/requirements/1b5037fb-ea19-4549-bf83-b917356bfb0b"
+              style="display: block;"
+            >
+              Clear Desk and Clear Screen Policy
+            </a>
+            <a
+              href="/requirements/4410c766-ca64-4cb1-aa99-e2dce411bd79"
+              style="display: block;"
+            >
+              Documented operating procedures
+            </a>
+            <a
+              href="/requirements/a5f450e6-7f23-4b68-8092-3c47d4e2a807"
+              style="display: block;"
+            >
+              Change Management
+            </a>
+            <a
+              href="/requirements/5974c73b-2cb7-4eb2-8dd7-426df6c46541"
+              style="display: block;"
+            >
+              Capacity Management
+            </a>
+            <a
+              href="/requirements/52df0230-0181-4ae5-8a50-6b76afb0b309"
+              style="display: block;"
+            >
+              Separation of development and Operations facilities
+            </a>
+            <a
+              href="/requirements/40ca4e0a-048c-47f3-8ccd-711cc93a6064"
+              style="display: block;"
+            >
+              Control against mal-ware
+            </a>
+            <a
+              href="/requirements/fde7f0fa-9d11-4e94-be27-666596c4cba0"
+              style="display: block;"
+            >
+              Information backup
+            </a>
+            <a
+              href="/requirements/ceb4fe5f-f142-41f9-8eae-eac145c710ae"
+              style="display: block;"
+            >
+              Event Logging
+            </a>
+            <a
+              href="/requirements/963651ba-f066-4801-96a1-3c71ad8b0499"
+              style="display: block;"
+            >
+              Protection of log information
+            </a>
+            <a
+              href="/requirements/e2d01ee9-4fc2-46ea-a5bb-0ec60b71059d"
+              style="display: block;"
+            >
+              Admistrator and operator logs
+            </a>
+            <a
+              href="/requirements/bd5b23e5-422c-4ea6-bb3d-f8f2c1ccf998"
+              style="display: block;"
+            >
+              Clock synchronization
+            </a>
+            <a
+              href="/requirements/cbeef3d5-a0ce-4cb7-b4ba-ba0c750a0fde"
+              style="display: block;"
+            >
+              Installation of software on operational systems
+            </a>
+            <a
+              href="/requirements/e522609e-ae7d-4026-bfb6-fcd832eb7152"
+              style="display: block;"
+            >
+              Management of technical vulnerabilities
+            </a>
+            <a
+              href="/requirements/6269c97f-e451-4d35-9c5a-5b6b3feeca66"
+              style="display: block;"
+            >
+              Restriction on software installation
+            </a>
+            <a
+              href="/requirements/366aba61-b875-4f9f-b8f4-a7baec626c7a"
+              style="display: block;"
+            >
+              Information system audit controls
+            </a>
+            <a
+              href="/requirements/423eb769-5279-42bd-b310-056108321a62"
+              style="display: block;"
+            >
+              Network Controls
+            </a>
+            <a
+              href="/requirements/3d869bb8-8632-4b21-9fc3-8d350e127908"
+              style="display: block;"
+            >
+              Security of network services
+            </a>
+            <a
+              href="/requirements/85958f20-fcd5-489e-adb8-483d39667d28"
+              style="display: block;"
+            >
+              Segregation in networks
+            </a>
+            <a
+              href="/requirements/73f40235-7489-4d47-ac4b-4c15456713f6"
+              style="display: block;"
+            >
+              Information transfer policies and procedures
+            </a>
+            <a
+              href="/requirements/a1fd7833-9549-4054-95b6-e7f1fdb1b4b5"
+              style="display: block;"
+            >
+              Agreements on information transfer
+            </a>
+            <a
+              href="/requirements/4a6cee05-7f77-48ee-806f-4a79101f2b8e"
+              style="display: block;"
+            >
+              Electronic Messaging
+            </a>
+            <a
+              href="/requirements/f185695a-34a5-4f4f-ac4e-85a223ca1376"
+              style="display: block;"
+            >
+              Confidentiality or non-disclosure-agreements
+            </a>
+            <a
+              href="/requirements/418ba7a5-03a1-4781-a8a2-e4e6ec34b177"
+              style="display: block;"
+            >
+              Information security requirements analysis and specification
+            </a>
+            <a
+              href="/requirements/5f941292-7682-4850-9dfa-25cfa77925cf"
+              style="display: block;"
+            >
+              Securing application services on public networks
+            </a>
+            <a
+              href="/requirements/f838edb0-3310-4640-af55-2757410e6861"
+              style="display: block;"
+            >
+              Protecting application services transactions
+            </a>
+            <a
+              href="/requirements/4650e27f-ef91-4b49-ab12-51de3dd78089"
+              style="display: block;"
+            >
+              Secure development policy
+            </a>
+            <a
+              href="/requirements/1165130e-837a-433a-b556-69c770986797"
+              style="display: block;"
+            >
+              Change Control Procedures
+            </a>
+            <a
+              href="/requirements/928f00c6-48e7-4d83-951f-6c8d5b1db55e"
+              style="display: block;"
+            >
+              Technical review of applications after Operating system changes
+            </a>
+            <a
+              href="/requirements/c9da224e-5ab1-49d5-bd27-e70f49f756ed"
+              style="display: block;"
+            >
+              Restrictions on changes to software packages
+            </a>
+            <a
+              href="/requirements/fa71e14f-e261-4465-a250-caea00eb8bd6"
+              style="display: block;"
+            >
+              Secure System engineering process
+            </a>
+            <a
+              href="/requirements/ba1dceaa-b7c0-4a30-b0c8-a77f11e44b77"
+              style="display: block;"
+            >
+              Secure development enviroment
+            </a>
+            <a
+              href="/requirements/45a197a2-9eaf-4721-b4f7-9491b32aae4e"
+              style="display: block;"
+            >
+              Outsourced development
+            </a>
+            <a
+              href="/requirements/70e136bb-d278-4a5c-bc97-dd2b4e5b2964"
+              style="display: block;"
+            >
+              System security testing
+            </a>
+            <a
+              href="/requirements/4d6bb943-592e-45b6-8e5b-ff2edb73e00e"
+              style="display: block;"
+            >
+              System acceptance testing
+            </a>
+            <a
+              href="/requirements/8c91135a-ecbf-4f80-afa6-816ba99db039"
+              style="display: block;"
+            >
+              Protection of test data
+            </a>
+            <a
+              href="/requirements/667019d5-3181-4195-93d5-07e34eeb0e7a"
+              style="display: block;"
+            >
+              Information Security policy for supplier relationships
+            </a>
+            <a
+              href="/requirements/32867d98-dcbb-46eb-ad41-1c4b691151fc"
+              style="display: block;"
+            >
+              Addressing security within supplier agreements
+            </a>
+            <a
+              href="/requirements/5500d1ec-2a06-4fc5-84f8-36bd9754b7fc"
+              style="display: block;"
+            >
+              Information and communication technology supply chain
+            </a>
+            <a
+              href="/requirements/2628ba08-850c-44a6-b85e-6be1f085915e"
+              style="display: block;"
+            >
+              Monitoring and review of third party services
+            </a>
+            <a
+              href="/requirements/3edc223c-9a2d-4dc5-b318-382b0b82f8a9"
+              style="display: block;"
+            >
+              Manage changes to the third party services
+            </a>
+            <a
+              href="/requirements/d305bf4b-d9ed-4a5a-b12d-7c222b2cef55"
+              style="display: block;"
+            >
+              Responsibilities and Procedures
+            </a>
+            <a
+              href="/requirements/e4069918-84e9-4217-b6a5-2321f32fd3ff"
+              style="display: block;"
+            >
+              Reporting Information security events
+            </a>
+            <a
+              href="/requirements/b4516cc7-12bd-4dea-a44f-a5e4aa03b9b8"
+              style="display: block;"
+            >
+              Reporting security weaknesses
+            </a>
+            <a
+              href="/requirements/afda7e0f-9fa3-48cf-b99f-41908a5c240a"
+              style="display: block;"
+            >
+              Assesment of and decision on information security events
+            </a>
+            <a
+              href="/requirements/1bf13466-506a-4fac-a794-02dab4353b4f"
+              style="display: block;"
+            >
+              Response to information security incidents
+            </a>
+            <a
+              href="/requirements/6f8a2003-f02d-4486-bab3-b79d460abeb4"
+              style="display: block;"
+            >
+              Learning from Information security incidents
+            </a>
+            <a
+              href="/requirements/7b03e002-8640-4584-a215-b891f768e038"
+              style="display: block;"
+            >
+              Collection of evidence
+            </a>
+            <a
+              href="/requirements/b97c5ec6-a6a5-4450-9f48-62303bf49389"
+              style="display: block;"
+            >
+              Planning information security continuity
+            </a>
+            <a
+              href="/requirements/e18af679-e974-4e12-8470-d59977e36462"
+              style="display: block;"
+            >
+              Implementing information security continuity
+            </a>
+            <a
+              href="/requirements/922209a1-3bc9-4df7-904e-df5e4419831c"
+              style="display: block;"
+            >
+              Verify, review and evaluate information security continuity
+            </a>
+            <a
+              href="/requirements/d518cdce-eabe-44bb-8ccc-799b32f9ab85"
+              style="display: block;"
+            >
+              Availability of information security processing facilities
+            </a>
+            <a
+              href="/requirements/0db09e15-805f-40a7-a047-e20a0a5654ca"
+              style="display: block;"
+            >
+              Identification of applicable legislations
+            </a>
+            <a
+              href="/requirements/fcaffca0-00c1-4350-9fde-e276a24635bb"
+              style="display: block;"
+            >
+              Intellectual Property Rights ( IPR)
+            </a>
+            <a
+              href="/requirements/1e78c5c8-058f-4fb5-90ef-20f09b25c178"
+              style="display: block;"
+            >
+              Protection of organizational records
+            </a>
+            <a
+              href="/requirements/cf627ba0-85c1-457e-bb1c-20137c184cb1"
+              style="display: block;"
+            >
+              Privacy and protection of personally identificable information
+            </a>
+            <a
+              href="/requirements/5c62d861-64a5-4553-afd9-c6c9006ca434"
+              style="display: block;"
+            >
+              Regulation of cryptographic controls
+            </a>
+            <a
+              href="/requirements/0c24db9e-f34d-431f-9312-4f0241f07850"
+              style="display: block;"
+            >
+              Independent review of Information Security
+            </a>
+            <a
+              href="/requirements/34fc602a-db1e-4722-bc2f-5e5140f51764"
+              style="display: block;"
+            >
+              Compliance with security policies and standards
+            </a>
+            <a
+              href="/requirements/36b5b631-902a-431b-93b1-7074c9feba03"
+              style="display: block;"
+            >
+              Technical compliance review
             </a>
           </div>
         </div>
@@ -111,7 +771,7 @@ Object {
             class="ant-typography ant-typography-secondary"
           >
             Requirements (
-            4
+            114
             )
           </span>
         </div>
@@ -148,6 +808,666 @@ Object {
             style="display: block;"
           >
             Review of Information Security Policy
+          </a>
+          <a
+            href="/requirements/a923f456-a0ea-4a9e-85af-be197357755d"
+            style="display: block;"
+          >
+            Information security roles and responsabilities
+          </a>
+          <a
+            href="/requirements/b610f96e-9070-43eb-8508-51e1dda1d95d"
+            style="display: block;"
+          >
+            Segregation of duties
+          </a>
+          <a
+            href="/requirements/64650405-ee3d-4710-8406-d4befd715fb0"
+            style="display: block;"
+          >
+            Contact with authorities
+          </a>
+          <a
+            href="/requirements/d34996cf-396a-4468-8439-d6c5ab29bb93"
+            style="display: block;"
+          >
+            Contact with special interest groups
+          </a>
+          <a
+            href="/requirements/efc27d80-078f-47bc-af72-451d910e951d"
+            style="display: block;"
+          >
+            Information Security in project management
+          </a>
+          <a
+            href="/requirements/a1f405f4-8c0d-4c9a-8da6-30c310663f1b"
+            style="display: block;"
+          >
+            Mobile device policy
+          </a>
+          <a
+            href="/requirements/b0110f2d-cd8a-4f7a-8edb-25515f55f30f"
+            style="display: block;"
+          >
+            Teleworking
+          </a>
+          <a
+            href="/requirements/df722016-4899-4f53-936f-5c691882fb8c"
+            style="display: block;"
+          >
+            Screening
+          </a>
+          <a
+            href="/requirements/07f67a72-1653-4b3f-89b7-34f200efbdf9"
+            style="display: block;"
+          >
+            Terms and conditions of employment
+          </a>
+          <a
+            href="/requirements/5567e081-a4ba-491c-834d-f2d7c47d5a1d"
+            style="display: block;"
+          >
+            Management Responsibility
+          </a>
+          <a
+            href="/requirements/c9713682-880b-46dc-9d52-602c7c5ddbfa"
+            style="display: block;"
+          >
+            Information security awareness, education and training
+          </a>
+          <a
+            href="/requirements/b921d5bd-7eb7-4ce6-a419-9c0538f56ded"
+            style="display: block;"
+          >
+            Disciplinary process
+          </a>
+          <a
+            href="/requirements/696d67aa-dfc6-41cd-ab51-bf37f85e5352"
+            style="display: block;"
+          >
+            Termination or change of employment responsibility
+          </a>
+          <a
+            href="/requirements/3668b83b-0fe5-488f-b80f-be23be171cd4"
+            style="display: block;"
+          >
+            Inventory of assets
+          </a>
+          <a
+            href="/requirements/56e02af3-d254-4f05-afef-607795d70cac"
+            style="display: block;"
+          >
+            Ownership of assets
+          </a>
+          <a
+            href="/requirements/06047340-7cae-4e78-9fb7-9114264afca5"
+            style="display: block;"
+          >
+            Acceptable use of assets
+          </a>
+          <a
+            href="/requirements/bad3c4fe-8e4b-4928-bb85-ed6d0d1cda0b"
+            style="display: block;"
+          >
+            Return of assets
+          </a>
+          <a
+            href="/requirements/4c6c379e-5165-4be7-a557-701a333f5293"
+            style="display: block;"
+          >
+            Labelling of information
+          </a>
+          <a
+            href="/requirements/6279467d-99c1-454c-88df-1ccb470b43bd"
+            style="display: block;"
+          >
+            Handling of assets
+          </a>
+          <a
+            href="/requirements/ad0669ef-343b-4809-88aa-d7161a353ac0"
+            style="display: block;"
+          >
+            Management of removable media
+          </a>
+          <a
+            href="/requirements/1a04eee2-0460-426f-ab50-68cc7e2e7f4d"
+            style="display: block;"
+          >
+            Disposal of Media
+          </a>
+          <a
+            href="/requirements/4adcf867-9e38-486a-bbcf-a5274ab94233"
+            style="display: block;"
+          >
+            Physical media in transit
+          </a>
+          <a
+            href="/requirements/bcf399af-351f-4e0d-a135-9b70f798ac0b"
+            style="display: block;"
+          >
+            Access control policy
+          </a>
+          <a
+            href="/requirements/a0534a6b-8eac-436f-a19f-1fcbc335a32c"
+            style="display: block;"
+          >
+            Access to networks and network services
+          </a>
+          <a
+            href="/requirements/a554a044-12c2-4b67-8da2-7cfc2c453e17"
+            style="display: block;"
+          >
+            User Registration and de-registration
+          </a>
+          <a
+            href="/requirements/ae4817a7-a052-4db2-b1e7-8860869bcd5b"
+            style="display: block;"
+          >
+            User access provisioning
+          </a>
+          <a
+            href="/requirements/4e2cc7d4-84bb-414b-a663-f1c67433f8c2"
+            style="display: block;"
+          >
+            Management of priviledged access rights
+          </a>
+          <a
+            href="/requirements/1c64275e-c29f-48cf-98ab-8ce9de0749ca"
+            style="display: block;"
+          >
+            Management of secret-authentication information of users
+          </a>
+          <a
+            href="/requirements/a84d45d8-88fd-4cc4-b6c9-e5ca49214670"
+            style="display: block;"
+          >
+            Review of user access rights
+          </a>
+          <a
+            href="/requirements/1f4bef68-cda8-4c61-a47c-65b095a9d89a"
+            style="display: block;"
+          >
+            Removal or adjustment of access rights
+          </a>
+          <a
+            href="/requirements/7ce5ce3f-3241-4315-9170-dda6baf77e9f"
+            style="display: block;"
+          >
+            Use of secret authentication information
+          </a>
+          <a
+            href="/requirements/98ec60a9-0264-4286-9cfd-29cfdb59708b"
+            style="display: block;"
+          >
+            Information Access restriction
+          </a>
+          <a
+            href="/requirements/ec78c30b-a55e-42fd-82d5-d6ed50b9257e"
+            style="display: block;"
+          >
+            Secure log-on procedures
+          </a>
+          <a
+            href="/requirements/cf62b8f7-4fae-4eba-a124-8ca6a4ed885a"
+            style="display: block;"
+          >
+            Password Management System
+          </a>
+          <a
+            href="/requirements/0bd6e1e9-86a0-4f97-b319-298fb5d737ec"
+            style="display: block;"
+          >
+            Use of privileged utility programs
+          </a>
+          <a
+            href="/requirements/e62a0277-db56-4258-aa4d-6c06385a14f0"
+            style="display: block;"
+          >
+            Access control to program source code
+          </a>
+          <a
+            href="/requirements/06bede80-5334-4ae0-a9a1-4c0614e3a30b"
+            style="display: block;"
+          >
+            Policy on the use of cryptographic controls
+          </a>
+          <a
+            href="/requirements/5cc9de9a-0929-4a5c-9d37-22854d25f35f"
+            style="display: block;"
+          >
+            Key management
+          </a>
+          <a
+            href="/requirements/b46ef8e3-94ec-496c-845e-b14f79fb35f2"
+            style="display: block;"
+          >
+            Physical Security Perimeter
+          </a>
+          <a
+            href="/requirements/5b9b07ef-c425-4c48-8089-0111da0a4252"
+            style="display: block;"
+          >
+            Physical entry Controls
+          </a>
+          <a
+            href="/requirements/60a73575-8e4d-4487-9f50-cbcae42f3b35"
+            style="display: block;"
+          >
+            Securing offices, rooms and faciliites
+          </a>
+          <a
+            href="/requirements/3ec7e7d8-c0e4-4a38-8eab-2fcce8c33a16"
+            style="display: block;"
+          >
+            Protecting against external and enviromental threats
+          </a>
+          <a
+            href="/requirements/9724e4dc-f6de-4c41-9b1d-05bb9cc82f28"
+            style="display: block;"
+          >
+            Working in secure areas
+          </a>
+          <a
+            href="/requirements/2bd265bc-c4c9-41c0-b459-7b8c02f691e3"
+            style="display: block;"
+          >
+            Delivery and loading areas
+          </a>
+          <a
+            href="/requirements/e2465d6c-42f2-49d7-a2ba-a38b66dd68af"
+            style="display: block;"
+          >
+            Equipment sitting and protection
+          </a>
+          <a
+            href="/requirements/c3f95c63-5a03-4c35-86fc-e55146e4578a"
+            style="display: block;"
+          >
+            Supporting utilities
+          </a>
+          <a
+            href="/requirements/6f9e7b30-e662-44c7-a915-0b6eb043a89e"
+            style="display: block;"
+          >
+            Cabling Security
+          </a>
+          <a
+            href="/requirements/604c5b89-a292-4166-9b40-853a0da6d12b"
+            style="display: block;"
+          >
+            Removal of assets
+          </a>
+          <a
+            href="/requirements/c442fab4-fd85-4ea8-8571-4d253758b4a1"
+            style="display: block;"
+          >
+            Security of equipment and assets off-premises
+          </a>
+          <a
+            href="/requirements/dc039312-2d93-4b14-9d24-8c4a2bae1fdc"
+            style="display: block;"
+          >
+            Secure disposal or re-use of equipment
+          </a>
+          <a
+            href="/requirements/0ec579d9-fc5f-48b8-889c-1a09e353ca9d"
+            style="display: block;"
+          >
+            Unattended user equipment
+          </a>
+          <a
+            href="/requirements/1b5037fb-ea19-4549-bf83-b917356bfb0b"
+            style="display: block;"
+          >
+            Clear Desk and Clear Screen Policy
+          </a>
+          <a
+            href="/requirements/4410c766-ca64-4cb1-aa99-e2dce411bd79"
+            style="display: block;"
+          >
+            Documented operating procedures
+          </a>
+          <a
+            href="/requirements/a5f450e6-7f23-4b68-8092-3c47d4e2a807"
+            style="display: block;"
+          >
+            Change Management
+          </a>
+          <a
+            href="/requirements/5974c73b-2cb7-4eb2-8dd7-426df6c46541"
+            style="display: block;"
+          >
+            Capacity Management
+          </a>
+          <a
+            href="/requirements/52df0230-0181-4ae5-8a50-6b76afb0b309"
+            style="display: block;"
+          >
+            Separation of development and Operations facilities
+          </a>
+          <a
+            href="/requirements/40ca4e0a-048c-47f3-8ccd-711cc93a6064"
+            style="display: block;"
+          >
+            Control against mal-ware
+          </a>
+          <a
+            href="/requirements/fde7f0fa-9d11-4e94-be27-666596c4cba0"
+            style="display: block;"
+          >
+            Information backup
+          </a>
+          <a
+            href="/requirements/ceb4fe5f-f142-41f9-8eae-eac145c710ae"
+            style="display: block;"
+          >
+            Event Logging
+          </a>
+          <a
+            href="/requirements/963651ba-f066-4801-96a1-3c71ad8b0499"
+            style="display: block;"
+          >
+            Protection of log information
+          </a>
+          <a
+            href="/requirements/e2d01ee9-4fc2-46ea-a5bb-0ec60b71059d"
+            style="display: block;"
+          >
+            Admistrator and operator logs
+          </a>
+          <a
+            href="/requirements/bd5b23e5-422c-4ea6-bb3d-f8f2c1ccf998"
+            style="display: block;"
+          >
+            Clock synchronization
+          </a>
+          <a
+            href="/requirements/cbeef3d5-a0ce-4cb7-b4ba-ba0c750a0fde"
+            style="display: block;"
+          >
+            Installation of software on operational systems
+          </a>
+          <a
+            href="/requirements/e522609e-ae7d-4026-bfb6-fcd832eb7152"
+            style="display: block;"
+          >
+            Management of technical vulnerabilities
+          </a>
+          <a
+            href="/requirements/6269c97f-e451-4d35-9c5a-5b6b3feeca66"
+            style="display: block;"
+          >
+            Restriction on software installation
+          </a>
+          <a
+            href="/requirements/366aba61-b875-4f9f-b8f4-a7baec626c7a"
+            style="display: block;"
+          >
+            Information system audit controls
+          </a>
+          <a
+            href="/requirements/423eb769-5279-42bd-b310-056108321a62"
+            style="display: block;"
+          >
+            Network Controls
+          </a>
+          <a
+            href="/requirements/3d869bb8-8632-4b21-9fc3-8d350e127908"
+            style="display: block;"
+          >
+            Security of network services
+          </a>
+          <a
+            href="/requirements/85958f20-fcd5-489e-adb8-483d39667d28"
+            style="display: block;"
+          >
+            Segregation in networks
+          </a>
+          <a
+            href="/requirements/73f40235-7489-4d47-ac4b-4c15456713f6"
+            style="display: block;"
+          >
+            Information transfer policies and procedures
+          </a>
+          <a
+            href="/requirements/a1fd7833-9549-4054-95b6-e7f1fdb1b4b5"
+            style="display: block;"
+          >
+            Agreements on information transfer
+          </a>
+          <a
+            href="/requirements/4a6cee05-7f77-48ee-806f-4a79101f2b8e"
+            style="display: block;"
+          >
+            Electronic Messaging
+          </a>
+          <a
+            href="/requirements/f185695a-34a5-4f4f-ac4e-85a223ca1376"
+            style="display: block;"
+          >
+            Confidentiality or non-disclosure-agreements
+          </a>
+          <a
+            href="/requirements/418ba7a5-03a1-4781-a8a2-e4e6ec34b177"
+            style="display: block;"
+          >
+            Information security requirements analysis and specification
+          </a>
+          <a
+            href="/requirements/5f941292-7682-4850-9dfa-25cfa77925cf"
+            style="display: block;"
+          >
+            Securing application services on public networks
+          </a>
+          <a
+            href="/requirements/f838edb0-3310-4640-af55-2757410e6861"
+            style="display: block;"
+          >
+            Protecting application services transactions
+          </a>
+          <a
+            href="/requirements/4650e27f-ef91-4b49-ab12-51de3dd78089"
+            style="display: block;"
+          >
+            Secure development policy
+          </a>
+          <a
+            href="/requirements/1165130e-837a-433a-b556-69c770986797"
+            style="display: block;"
+          >
+            Change Control Procedures
+          </a>
+          <a
+            href="/requirements/928f00c6-48e7-4d83-951f-6c8d5b1db55e"
+            style="display: block;"
+          >
+            Technical review of applications after Operating system changes
+          </a>
+          <a
+            href="/requirements/c9da224e-5ab1-49d5-bd27-e70f49f756ed"
+            style="display: block;"
+          >
+            Restrictions on changes to software packages
+          </a>
+          <a
+            href="/requirements/fa71e14f-e261-4465-a250-caea00eb8bd6"
+            style="display: block;"
+          >
+            Secure System engineering process
+          </a>
+          <a
+            href="/requirements/ba1dceaa-b7c0-4a30-b0c8-a77f11e44b77"
+            style="display: block;"
+          >
+            Secure development enviroment
+          </a>
+          <a
+            href="/requirements/45a197a2-9eaf-4721-b4f7-9491b32aae4e"
+            style="display: block;"
+          >
+            Outsourced development
+          </a>
+          <a
+            href="/requirements/70e136bb-d278-4a5c-bc97-dd2b4e5b2964"
+            style="display: block;"
+          >
+            System security testing
+          </a>
+          <a
+            href="/requirements/4d6bb943-592e-45b6-8e5b-ff2edb73e00e"
+            style="display: block;"
+          >
+            System acceptance testing
+          </a>
+          <a
+            href="/requirements/8c91135a-ecbf-4f80-afa6-816ba99db039"
+            style="display: block;"
+          >
+            Protection of test data
+          </a>
+          <a
+            href="/requirements/667019d5-3181-4195-93d5-07e34eeb0e7a"
+            style="display: block;"
+          >
+            Information Security policy for supplier relationships
+          </a>
+          <a
+            href="/requirements/32867d98-dcbb-46eb-ad41-1c4b691151fc"
+            style="display: block;"
+          >
+            Addressing security within supplier agreements
+          </a>
+          <a
+            href="/requirements/5500d1ec-2a06-4fc5-84f8-36bd9754b7fc"
+            style="display: block;"
+          >
+            Information and communication technology supply chain
+          </a>
+          <a
+            href="/requirements/2628ba08-850c-44a6-b85e-6be1f085915e"
+            style="display: block;"
+          >
+            Monitoring and review of third party services
+          </a>
+          <a
+            href="/requirements/3edc223c-9a2d-4dc5-b318-382b0b82f8a9"
+            style="display: block;"
+          >
+            Manage changes to the third party services
+          </a>
+          <a
+            href="/requirements/d305bf4b-d9ed-4a5a-b12d-7c222b2cef55"
+            style="display: block;"
+          >
+            Responsibilities and Procedures
+          </a>
+          <a
+            href="/requirements/e4069918-84e9-4217-b6a5-2321f32fd3ff"
+            style="display: block;"
+          >
+            Reporting Information security events
+          </a>
+          <a
+            href="/requirements/b4516cc7-12bd-4dea-a44f-a5e4aa03b9b8"
+            style="display: block;"
+          >
+            Reporting security weaknesses
+          </a>
+          <a
+            href="/requirements/afda7e0f-9fa3-48cf-b99f-41908a5c240a"
+            style="display: block;"
+          >
+            Assesment of and decision on information security events
+          </a>
+          <a
+            href="/requirements/1bf13466-506a-4fac-a794-02dab4353b4f"
+            style="display: block;"
+          >
+            Response to information security incidents
+          </a>
+          <a
+            href="/requirements/6f8a2003-f02d-4486-bab3-b79d460abeb4"
+            style="display: block;"
+          >
+            Learning from Information security incidents
+          </a>
+          <a
+            href="/requirements/7b03e002-8640-4584-a215-b891f768e038"
+            style="display: block;"
+          >
+            Collection of evidence
+          </a>
+          <a
+            href="/requirements/b97c5ec6-a6a5-4450-9f48-62303bf49389"
+            style="display: block;"
+          >
+            Planning information security continuity
+          </a>
+          <a
+            href="/requirements/e18af679-e974-4e12-8470-d59977e36462"
+            style="display: block;"
+          >
+            Implementing information security continuity
+          </a>
+          <a
+            href="/requirements/922209a1-3bc9-4df7-904e-df5e4419831c"
+            style="display: block;"
+          >
+            Verify, review and evaluate information security continuity
+          </a>
+          <a
+            href="/requirements/d518cdce-eabe-44bb-8ccc-799b32f9ab85"
+            style="display: block;"
+          >
+            Availability of information security processing facilities
+          </a>
+          <a
+            href="/requirements/0db09e15-805f-40a7-a047-e20a0a5654ca"
+            style="display: block;"
+          >
+            Identification of applicable legislations
+          </a>
+          <a
+            href="/requirements/fcaffca0-00c1-4350-9fde-e276a24635bb"
+            style="display: block;"
+          >
+            Intellectual Property Rights ( IPR)
+          </a>
+          <a
+            href="/requirements/1e78c5c8-058f-4fb5-90ef-20f09b25c178"
+            style="display: block;"
+          >
+            Protection of organizational records
+          </a>
+          <a
+            href="/requirements/cf627ba0-85c1-457e-bb1c-20137c184cb1"
+            style="display: block;"
+          >
+            Privacy and protection of personally identificable information
+          </a>
+          <a
+            href="/requirements/5c62d861-64a5-4553-afd9-c6c9006ca434"
+            style="display: block;"
+          >
+            Regulation of cryptographic controls
+          </a>
+          <a
+            href="/requirements/0c24db9e-f34d-431f-9312-4f0241f07850"
+            style="display: block;"
+          >
+            Independent review of Information Security
+          </a>
+          <a
+            href="/requirements/34fc602a-db1e-4722-bc2f-5e5140f51764"
+            style="display: block;"
+          >
+            Compliance with security policies and standards
+          </a>
+          <a
+            href="/requirements/36b5b631-902a-431b-93b1-7074c9feba03"
+            style="display: block;"
+          >
+            Technical compliance review
           </a>
         </div>
       </div>

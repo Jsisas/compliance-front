@@ -1,8 +1,8 @@
 import { deepRender } from '../../util/test/TestUtil';
 import { screen } from '@testing-library/react';
 import React from 'react';
-import { testUsers } from '../../util/test/data/TestUsers';
 import { PageLayout } from './PageLayout';
+import { testUsers } from '../../util/test/data/DataUtil';
 
 const initialAuthentication = { token: 'asd', user: testUsers[0] };
 
