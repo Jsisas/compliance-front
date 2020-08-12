@@ -29,7 +29,11 @@ export function ControlsPage(): JSX.Element {
 	const [selectedUser, setSelectedUser] = useState<User>();
 	const [selectedCategory, setSelectedCategory] = useState<ControlType>();
 	const [selectedStatus, setSelectedStatus] = useState<ControlStatus>();
-	const filteredControls = getFilteredControls();
+	const [filteredControls, setFilteredControls] = useState<Control[]>(getFilteredControls());
+
+	useEffect(() => {
+		setFilteredControls(getFilteredControls());
+	}, [tableSearchText, selectedUser, selectedCategory, selectedStatus]);
 
 	function getFilteredControls() {
 		return controls.filter(titleFilter).filter(userFilter).filter(categoryFilter).filter(statusFilter);
