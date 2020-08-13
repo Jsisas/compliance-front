@@ -1,7 +1,7 @@
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { Col, Input, Row, Select, Table, Tag, Typography } from 'antd';
 import { ColumnProps } from 'antd/lib/table';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -29,47 +29,59 @@ export function ControlsPage(): JSX.Element {
 	const [selectedUser, setSelectedUser] = useState<User>();
 	const [selectedCategory, setSelectedCategory] = useState<ControlType>();
 	const [selectedStatus, setSelectedStatus] = useState<ControlStatus>();
-	const [filteredControls, setFilteredControls] = useState<Control[]>(getFilteredControls());
+	const [filteredControls, setFilteredControls] = useState<Control[]>();
+
+	const titleFilter = useCallback(
+		(control: Control) => {
+			if (tableSearchText) {
+				return control.title.toLowerCase().includes(tableSearchText.toLowerCase());
+			} else {
+				return true;
+			}
+		},
+		[tableSearchText]
+	);
+
+	const userFilter = useCallback(
+		(control: Control) => {
+			if (selectedUser) {
+				return control.assignee.name === selectedUser?.name;
+			} else {
+				return true;
+			}
+		},
+		[selectedUser]
+	);
+
+	const categoryFilter = useCallback(
+		(control: Control) => {
+			if (selectedCategory) {
+				return control.kind === selectedCategory;
+			} else {
+				return true;
+			}
+		},
+		[selectedCategory]
+	);
+
+	const statusFilter = useCallback(
+		(control: Control) => {
+			if (selectedStatus) {
+				return control.state === selectedStatus;
+			} else {
+				return true;
+			}
+		},
+		[selectedStatus]
+	);
+
+	const getFilteredControls = useCallback(() => {
+		setFilteredControls(controls.filter(titleFilter).filter(userFilter).filter(categoryFilter).filter(statusFilter));
+	}, [controls, titleFilter, userFilter, categoryFilter, statusFilter]);
 
 	useEffect(() => {
-		setFilteredControls(getFilteredControls());
-	}, [tableSearchText, selectedUser, selectedCategory, selectedStatus]);
-
-	function getFilteredControls() {
-		return controls.filter(titleFilter).filter(userFilter).filter(categoryFilter).filter(statusFilter);
-	}
-
-	function titleFilter(control: Control) {
-		if (tableSearchText) {
-			return control.title.toLowerCase().includes(tableSearchText.toLowerCase());
-		} else {
-			return true;
-		}
-	}
-
-	function userFilter(control: Control) {
-		if (selectedUser) {
-			return control.assignee.name === selectedUser?.name;
-		} else {
-			return true;
-		}
-	}
-
-	function categoryFilter(control: Control) {
-		if (selectedCategory) {
-			return control.kind === selectedCategory;
-		} else {
-			return true;
-		}
-	}
-
-	function statusFilter(control: Control) {
-		if (selectedStatus) {
-			return control.state === selectedStatus;
-		} else {
-			return true;
-		}
-	}
+		getFilteredControls();
+	}, [tableSearchText, selectedUser, selectedCategory, selectedStatus, getFilteredControls]);
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -248,6 +260,7 @@ export function ControlsPage(): JSX.Element {
 						style={{ width: '100%' }}
 						pagination={{ hideOnSinglePage: true }}
 						className={themeStyles.antTableMousePointer}
+						data-testid={'controls-table'}
 					/>
 				</Col>
 			</Row>
