@@ -38,10 +38,15 @@ export function AddLinkModal(props: AddLinkProps): JSX.Element {
 								<Form.Item name='href' label='Link' rules={[{ required: true, message: 'Please add link' }]}>
 									<Input placeholder='Add link' />
 								</Form.Item>
-								<AlButton type='primary' style={{ marginRight: '8px' }} htmlType='submit'>
+								<AlButton type='primary' style={{ marginRight: '8px' }} htmlType='submit' onClick={event => event.stopPropagation()}>
 									Add link
 								</AlButton>
-								<AlButton type='secondary' onClick={props.onCancel}>
+								<AlButton type='secondary' onClick={(event) => {
+									event.stopPropagation();
+									if(props.onCancel){
+										props.onCancel();
+									}
+								}}>
 									Cancel
 								</AlButton>
 							</Form>

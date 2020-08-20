@@ -1,49 +1,41 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { RouteComponentProps, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducer';
-import { Col, Row, Typography, Upload } from 'antd';
-import { EditOutlined, EllipsisOutlined, InboxOutlined } from '@ant-design/icons/lib';
+import { Col, Row, Typography } from 'antd';
+import { EditOutlined, EllipsisOutlined } from '@ant-design/icons/lib';
 import AlButton from '../../components/_ui/AlButton/AlButton';
 import { fetchAllTasks } from '../../redux/Task/TaskService';
 import { selectTaskById } from '../../redux/Task/TaskSlice';
 import styles from './taskDetails.module.scss';
 import { date, dateFormat } from '../../util/DateUtil';
-import { AddLink, AddLinkModal } from '../../components/modals/AddLinkModal/AddLinkModal';
 import { AlComment } from '../../components/_ui/AlComment/AlComment';
 import TextArea from 'antd/lib/input/TextArea';
 import { TaskConnectedItems } from '../../components/TaskConnectedItems/TaskConnectedItems';
 import { notifyError } from '../../util/NotificationUtil';
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import StringUtil from '../../util/StringUtil';
+import { AlUpload } from '../../components/_ui/AlUpload/AlUpload';
 
 const { Title, Text } = Typography;
-const { Dragger } = Upload;
 
-export function TaskDetail(props: RouteComponentProps): JSX.Element {
+export function TaskDetail(): JSX.Element {
 	const { id } = useParams<{ id: string }>();
 	const task = useSelector((state: RootState) => selectTaskById(state, id));
-	const [isAddLinkModalVisible, setAddLinkModalVisible] = useState(false);
+
+	const history = useHistory();
 
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchAllTasks());
 	}, [dispatch]);
 
-	function toggleModal() {
-		setAddLinkModalVisible(!isAddLinkModalVisible);
-	}
-
-	function onLinkAdd() {
-		toggleModal();
-	}
-
 	return (
 		<>
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={1} xl={1}>
-					<AlBackArrow history={props.history} />
+					<AlBackArrow history={history} />
 				</Col>
 				<Col xs={{ span: 10 }} sm={10} md={10} lg={{ span: 10 }} xl={{ span: 10 }}>
 					<Title style={{ marginBottom: 0 }}>{task?.title}</Title>
@@ -135,34 +127,8 @@ export function TaskDetail(props: RouteComponentProps): JSX.Element {
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]}>
-				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 10, offset: 1 }}>
-					<Dragger {...props} openFileDialogOnClick={false}>
-						<p className='ant-upload-drag-icon'>
-							<InboxOutlined />
-						</p>
-						<p className='ant-upload-text'>Drag and drop evidence</p>
-						<p className='ant-upload-hint'>CSV, PDF, XLSX</p>
-						<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-							<Upload {...props}>
-								<AlButton type='link' className={styles.buttonPadding}>
-									Open from computer
-								</AlButton>
-							</Upload>
-							<Text>or</Text>
-							<AddLinkModal
-								onAdd={(link: AddLink) => onLinkAdd()}
-								isVisible={isAddLinkModalVisible}
-								onCancel={toggleModal}
-							/>
-							<AlButton
-								type='link'
-								className={styles.buttonPadding}
-								onClick={() => setAddLinkModalVisible(!isAddLinkModalVisible)}
-							>
-								add link
-							</AlButton>
-						</div>
-					</Dragger>
+				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 10, offset: 1 }} style={{height: '100%'}}>
+					<AlUpload />
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]}>
