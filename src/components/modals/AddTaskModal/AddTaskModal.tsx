@@ -20,7 +20,7 @@ import {
 import { notifySuccess } from '../../../util/NotificationUtil';
 import StringUtil from '../../../util/StringUtil';
 import AlButton from '../../_ui/AlButton/AlButton';
-import { UserSearch } from '../../_ui/SearchSelect/UserSearch/UserSearch';
+import { UserSearchSingle } from '../../_ui/SearchSelect/UserSearch/single/UserSearchSingle';
 import modalStyles from '../modal.module.scss';
 import styles from './addTaskModal.module.scss';
 import { User } from '../../../redux/User/UserSlice';
@@ -109,7 +109,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 									<TextArea placeholder='Add description to the task' />
 								</Form.Item>
 								<Form.Item label='Add assignee' name='assignee'>
-									<UserSearch placeholder='Add assignees' onChange={(user: User) => setSelectedAssignee(user)} />
+									<UserSearchSingle placeholder='Add assignees' onChange={(user: User) => setSelectedAssignee(user)} />
 								</Form.Item>
 								<Form.Item name='duration' label='Duration'>
 									<Select placeholder='Select task duration' defaultValue={15}>

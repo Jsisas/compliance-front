@@ -13,7 +13,7 @@ export type SearchProps<T> = {
 	displayKey: keyof T;
 };
 
-export function SearchSelect<T>(props: SearchProps<T>): JSX.Element {
+export function SearchSelectSingle<T>(props: SearchProps<T>): JSX.Element {
 	const [selectedData, setSelectedData] = useState<T | undefined>(props.selectedData);
 
 	const triggerOnChange = useCallback(() => {

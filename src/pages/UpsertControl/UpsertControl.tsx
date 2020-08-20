@@ -8,7 +8,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { UserSearch } from '../../components/_ui/SearchSelect/UserSearch/UserSearch';
+import { UserSearchSingle } from '../../components/_ui/SearchSelect/UserSearch/single/UserSearchSingle';
 import { ControlConnectedItems } from '../../components/ControlConnectedItems/ControlConnectedItems';
 import { fetchControlById, upsertControl } from '../../redux/Control/ControlService';
 import { Control, ControlType, selectControlById } from '../../redux/Control/ControlSlice';
@@ -94,7 +94,7 @@ export function UpsertControlPage(props: NewControlProps): JSX.Element {
 							<TextArea placeholder='Add description' />
 						</Form.Item>
 						<Form.Item label='Add assignee' name='assignee' initialValue={control?.assignee}>
-							<UserSearch
+							<UserSearchSingle
 								selectedUsers={control ? control.assignee : undefined}
 								placeholder='Add assignees'
 								onChange={(user: User) => setAssignee(user)}

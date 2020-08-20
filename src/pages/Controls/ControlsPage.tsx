@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { UserSearch } from '../../components/_ui/SearchSelect/UserSearch/UserSearch';
+import { UserSearchSingle } from '../../components/_ui/SearchSelect/UserSearch/single/UserSearchSingle';
 import { fetchAllControls } from '../../redux/Control/ControlService';
 import { Control, ControlStatus, ControlType, selectAllControls } from '../../redux/Control/ControlSlice';
 import { RootState } from '../../redux/reducer';
@@ -16,6 +16,7 @@ import StringUtil from '../../util/StringUtil';
 import { concatStyles } from '../../util/StyleUtil';
 import themeStyles from './../../theme.module.scss';
 import style from './controlsPage.module.scss';
+import { UserSearchMultiple } from '../../components/_ui/SearchSelect/UserSearch/multiple/UserSearchMultiple';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -26,7 +27,7 @@ export function ControlsPage(): JSX.Element {
 	const isControlsLoading = useSelector((state: RootState) => state.control.loading);
 
 	const [tableSearchText, setTableSearchText] = useState<string>();
-	const [selectedUser, setSelectedUser] = useState<User>();
+	const [selectedUsers, setSelectedUsers] = useState<User[]>();
 	const [selectedCategory, setSelectedCategory] = useState<ControlType>();
 	const [selectedStatus, setSelectedStatus] = useState<ControlStatus>();
 	const [filteredControls, setFilteredControls] = useState<Control[]>();
@@ -44,13 +45,13 @@ export function ControlsPage(): JSX.Element {
 
 	const userFilter = useCallback(
 		(control: Control) => {
-			if (selectedUser) {
-				return control.assignee.name === selectedUser?.name;
+			if (selectedUsers && selectedUsers.length > 0) {
+				return selectedUsers.map(usr => usr.name).includes(control.assignee.name);
 			} else {
 				return true;
 			}
 		},
-		[selectedUser]
+		[selectedUsers]
 	);
 
 	const categoryFilter = useCallback(
@@ -81,7 +82,7 @@ export function ControlsPage(): JSX.Element {
 
 	useEffect(() => {
 		getFilteredControls();
-	}, [tableSearchText, selectedUser, selectedCategory, selectedStatus, getFilteredControls]);
+	}, [tableSearchText, selectedUsers, selectedCategory, selectedStatus, getFilteredControls]);
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -195,9 +196,9 @@ export function ControlsPage(): JSX.Element {
 					/>
 				</Col>
 				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
-					<UserSearch
+					<UserSearchMultiple
 						placeholder='Filter by owner'
-						onChange={(user) => setSelectedUser(user || undefined)}
+						onChange={(users) => setSelectedUsers(users)}
 						allowClear={true}
 					/>
 				</Col>

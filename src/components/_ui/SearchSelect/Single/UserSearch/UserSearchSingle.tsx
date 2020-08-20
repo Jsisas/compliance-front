@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/reducer';
-import { selectAllUsers, User } from '../../../../redux/User/UserSlice';
-import { fetchAllUsers } from '../../../../redux/User/UserService';
-import { SearchSelect } from '../SearchSelect';
+import { RootState } from '../../../../../redux/reducer';
+import { selectAllUsers, User } from '../../../../../redux/User/UserSlice';
+import { fetchAllUsers } from '../../../../../redux/User/UserService';
+import { SearchSelectSingle } from '../SearchSelectSingle';
 
-export interface UserSearchProps {
+export interface UserSearchSingleProps {
 	onChange(selectedUsers: User): void;
 	allowClear?: boolean;
 	placeholder?: string;
 	selectedUsers?: User;
 }
 
-export function UserSearch(props: UserSearchProps): JSX.Element {
+export function UserSearchSingle(props: UserSearchSingleProps): JSX.Element {
 	const allUsers = useSelector((state: RootState) => selectAllUsers(state));
 	const dispatch = useDispatch();
 
@@ -22,7 +22,8 @@ export function UserSearch(props: UserSearchProps): JSX.Element {
 
 	return (
 		<>
-			<SearchSelect
+			{}
+			<SearchSelectSingle
 				data={allUsers}
 				displayKey={'name'}
 				valueKey={'id'}

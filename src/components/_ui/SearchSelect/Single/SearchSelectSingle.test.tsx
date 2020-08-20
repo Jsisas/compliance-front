@@ -1,14 +1,14 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { SearchSelect } from './SearchSelect';
-import { User } from '../../../redux/User/UserSlice';
-import { testUsers } from '../../../util/test/data/DataUtil';
+import { SearchSelectSingle } from './SearchSelectSingle';
+import { User } from '../../../../redux/User/UserSlice';
+import { testUsers } from '../../../../util/test/data/DataUtil';
 
-describe('<SearchSelect />', () => {
+describe('<SearchSelectSingle />', () => {
 	it('it matches a snapshot', () => {
 		const mockOnChange = jest.fn();
 		const selectElement = render(
-			<SearchSelect
+			<SearchSelectSingle
 				data={testUsers}
 				displayKey={'name'}
 				valueKey={'id'}
@@ -23,7 +23,7 @@ describe('<SearchSelect />', () => {
 	it('it can select single element', () => {
 		const mockOnChange = jest.fn();
 		render(
-			<SearchSelect
+			<SearchSelectSingle
 				data={testUsers}
 				displayKey={'name'}
 				valueKey={'id'}
@@ -52,7 +52,7 @@ describe('<SearchSelect />', () => {
 			const mockOnChange = jest.fn();
 			const selectedData = testUsers[0];
 			render(
-				<SearchSelect
+				<SearchSelectSingle
 					data={testUsers}
 					displayKey={'name'}
 					valueKey={'id'}
@@ -89,7 +89,7 @@ describe('<SearchSelect />', () => {
 		it('it can not clear', () => {
 			const mockOnChange = jest.fn();
 			render(
-				<SearchSelect
+				<SearchSelectSingle
 					data={testUsers}
 					displayKey={'name'}
 					valueKey={'id'}
