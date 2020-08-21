@@ -11,6 +11,7 @@ import {
 	WeeklyTaskFrequency,
 } from './TaskSlice';
 import { API_URL } from '../../environment';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface UpsertTask {
 	id: string;
@@ -39,7 +40,7 @@ export const createTask = createAsyncThunk('tasks/create', async (task: Task) =>
 		kind: task.kind,
 		state: task.state,
 		title: task.title,
-		control_id: task.control.id,
+		control_id: uuidv4(),
 		description: task.description,
 		frequency: task.frequency,
 		assignee_id: task.assignee.id,

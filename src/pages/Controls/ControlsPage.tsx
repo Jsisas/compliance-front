@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { UserSearchSingle } from '../../components/_ui/SearchSelect/UserSearch/single/UserSearchSingle';
 import { fetchAllControls } from '../../redux/Control/ControlService';
 import { Control, ControlStatus, ControlType, selectAllControls } from '../../redux/Control/ControlSlice';
 import { RootState } from '../../redux/reducer';
@@ -16,7 +15,7 @@ import StringUtil from '../../util/StringUtil';
 import { concatStyles } from '../../util/StyleUtil';
 import themeStyles from './../../theme.module.scss';
 import style from './controlsPage.module.scss';
-import { UserSearchMultiple } from '../../components/_ui/SearchSelect/UserSearch/multiple/UserSearchMultiple';
+import { UserSearchMultiple } from '../../components/_ui/SearchSelect/Multiple/UserSearch/UserSearchMultiple';
 
 const { Title } = Typography;
 const { Option } = Select;

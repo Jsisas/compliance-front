@@ -1,4 +1,4 @@
-import { Col, DatePicker, Form, Radio, Row, Typography } from 'antd';
+import { Col, DatePicker, Form, Input, Radio, Row, Typography } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 import TextArea from 'antd/lib/input/TextArea';
 import * as H from 'history';
@@ -8,7 +8,6 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { UserSearchSingle } from '../../components/_ui/SearchSelect/UserSearch/single/UserSearchSingle';
 import { ControlConnectedItems } from '../../components/ControlConnectedItems/ControlConnectedItems';
 import { fetchControlById, upsertControl } from '../../redux/Control/ControlService';
 import { Control, ControlType, selectControlById } from '../../redux/Control/ControlSlice';
@@ -17,6 +16,8 @@ import { date } from '../../util/DateUtil';
 import { notifySuccess } from '../../util/NotificationUtil';
 import { User } from '../../redux/User/UserSlice';
 import { selectAllTmpRequirements } from '../../redux/Requirement/TmpRequirementSlice/TmpRequirementSlice';
+import { UserSearchSingle } from '../../components/_ui/SearchSelect/Single/UserSearch/UserSearchSingle';
+import ReactQuill from 'react-quill';
 
 const { Title } = Typography;
 
@@ -33,6 +34,9 @@ export function UpsertControlPage(props: NewControlProps): JSX.Element {
 	const requirementsToAttach = useSelector((state: RootState) => selectAllTmpRequirements(state));
 	const [assignee, setAssignee] = useState<User>(control?.assignee || ({} as User));
 
+	const [description, setDescription] = useState<string>(control?.description || '');
+
+
 	useEffect(() => {
 		if (id) {
 			dispatch(fetchControlById(id));
@@ -45,6 +49,8 @@ export function UpsertControlPage(props: NewControlProps): JSX.Element {
 		controlData.requirements = (control?.requirements || []).concat(requirementsToAttach);
 		controlData.assignee = assignee;
 
+		console.log(data);
+		console.log(controlData);
 		dispatch(upsertControl(controlData));
 		notifySuccess('Add Control', 'Adding a control was successful!');
 
@@ -55,11 +61,18 @@ export function UpsertControlPage(props: NewControlProps): JSX.Element {
 		}
 	}
 
+	const [form] = Form.useForm();
+	React.useEffect(() => {
+		form.setFieldsValue({
+			description: description
+		});
+	}, [description]);
+
 	return (
 		<>
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={2} xl={1}>
-					<AlBackArrow history={props.history} />
+					<AlBackArrow history={props.history}/>
 				</Col>
 				<Col xs={20} xl={20}>
 					<Title style={{ marginBottom: 0 }}>{control ? 'Edit control' : 'Add new control'}</Title>
@@ -67,18 +80,18 @@ export function UpsertControlPage(props: NewControlProps): JSX.Element {
 			</Row>
 			<Row gutter={[16, 16]} align={'top'} justify={'space-between'}>
 				<Col xs={2} xl={{ span: 10, offset: 1 }}>
-					<Form layout='vertical' onFinish={onFinish}>
+					<Form layout='vertical' onFinish={onFinish} form={form}>
 						<Form.Item
 							name='title'
 							rules={[
 								{
 									required: true,
-									message: 'Please input control title!',
-								},
+									message: 'Please input control title!'
+								}
 							]}
 							initialValue={control?.title}
 						>
-							<TextArea placeholder='Add title' />
+							<TextArea placeholder='Add title'/>
 						</Form.Item>
 
 						<Form.Item
@@ -86,12 +99,12 @@ export function UpsertControlPage(props: NewControlProps): JSX.Element {
 							rules={[
 								{
 									required: true,
-									message: 'Please input control description!',
-								},
+									message: 'Please input control description!'
+								}
 							]}
-							initialValue={control?.description}
+							initialValue={control?.description || ''}
 						>
-							<TextArea placeholder='Add description' />
+							<ReactQuill theme="snow" value={control?.description || ''} onChange={(val) => setDescription(val)}/>
 						</Form.Item>
 						<Form.Item label='Add assignee' name='assignee' initialValue={control?.assignee}>
 							<UserSearchSingle
@@ -109,7 +122,7 @@ export function UpsertControlPage(props: NewControlProps): JSX.Element {
 									rules={[{ required: true, message: 'Please add start date!' }]}
 									initialValue={date(control?.begins_at)}
 								>
-									<DatePicker />
+									<DatePicker/>
 								</Form.Item>
 							</Col>
 							<Col lg={{ span: 16 }} md={{ span: 16 }} sm={{ span: 16 }} xs={{ span: 24 }}>
@@ -145,7 +158,7 @@ export function UpsertControlPage(props: NewControlProps): JSX.Element {
 					xl={{ span: 5, offset: 1 }}
 				>
 					{(control || requirementsToAttach) && (
-						<ControlConnectedItems requirements={(control?.requirements || []).concat(requirementsToAttach)} />
+						<ControlConnectedItems requirements={(control?.requirements || []).concat(requirementsToAttach)}/>
 					)}
 				</Col>
 			</Row>

@@ -20,7 +20,6 @@ import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import moment from 'moment';
 import StringUtil from '../../util/StringUtil';
 import { fetchAllTasks } from '../../redux/Task/TaskService';
-
 const { Title, Text } = Typography;
 
 export function ControlsDetails(props: RouteComponentProps): JSX.Element {
@@ -94,7 +93,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 						lg={{ span: 16, offset: 1 }}
 						xl={{ span: 15, offset: 1 }}
 					>
-						<Text type={'secondary'}>{control?.description}</Text>
+						<div dangerouslySetInnerHTML={{ __html: control?.description }} />
 					</Col>
 					<Col
 						xs={{ span: 24 }}

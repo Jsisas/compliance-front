@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/reducer';
 import { selectAllUsers, User } from '../../../../../redux/User/UserSlice';
 import { fetchAllUsers } from '../../../../../redux/User/UserService';
-import { SearchSelectSingle } from '../../SearchSelectSingle';
 import { SearchSelectMultiple } from '../SearchSelectMultiple';
 
 export interface UserSearchMultipleProps {

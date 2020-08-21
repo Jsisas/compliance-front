@@ -20,10 +20,11 @@ import {
 import { notifySuccess } from '../../../util/NotificationUtil';
 import StringUtil from '../../../util/StringUtil';
 import AlButton from '../../_ui/AlButton/AlButton';
-import { UserSearchSingle } from '../../_ui/SearchSelect/UserSearch/single/UserSearchSingle';
 import modalStyles from '../modal.module.scss';
 import styles from './addTaskModal.module.scss';
 import { User } from '../../../redux/User/UserSlice';
+import { UserSearchSingle } from '../../_ui/SearchSelect/Single/UserSearch/UserSearchSingle';
+import ReactQuill from 'react-quill';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -39,6 +40,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 	const [taskFrequency, setTaskFrequency] = useState<TaskFrequencyType>(TaskFrequencyType.ONE_TIME);
 	const [taskRecurrence, setTaskRecurrence] = useState<TaskFrequencyTypeRecurrence>(TaskFrequencyTypeRecurrence.WEEKLY);
 	const [selectedAssignee, setSelectedAssignee] = useState<User>();
+	const [description, setDescription] = useState<string>('');
 
 	function handleCreateNewTask(data: Task): void {
 		data.control = props.control || ({} as Control);
@@ -57,6 +59,13 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 		}
 		handleCreateNewTask(values as Task);
 	};
+
+	const [form] = Form.useForm();
+	React.useEffect(() => {
+		form.setFieldsValue({
+			description: description
+		});
+	}, [description]);
 
 	return (
 		<>
@@ -77,7 +86,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 				<div className={styles.addTaskModalContent}>
 					<Row gutter={[16, 16]} align={'middle'}>
 						<Col xs={{ span: 24 }} className={styles.inputFullWidth}>
-							<Form layout='vertical' onFinish={onFinish}>
+							<Form layout='vertical' onFinish={onFinish} form={form}>
 								<Form.Item
 									name='title'
 									label='Title'
@@ -106,7 +115,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 										},
 									]}
 								>
-									<TextArea placeholder='Add description to the task' />
+									<ReactQuill theme="snow" value={''} onChange={(val) => setDescription(val)} style={{backgroundColor: '#fff'}}/>
 								</Form.Item>
 								<Form.Item label='Add assignee' name='assignee'>
 									<UserSearchSingle placeholder='Add assignees' onChange={(user: User) => setSelectedAssignee(user)} />
