@@ -13,6 +13,7 @@ interface AddLinkProps {
 }
 
 export interface AddLink {
+	name: string;
 	href: string;
 }
 
@@ -35,6 +36,9 @@ export function AddLinkModal(props: AddLinkProps): JSX.Element {
 					<Row gutter={[16, 16]} align={'middle'}>
 						<Col xs={{ span: 24 }}>
 							<Form layout='vertical' onFinish={onFinish}>
+								<Form.Item name='name' label='Name' rules={[{ required: true, message: 'Please add a name' }]}>
+									<Input placeholder='Add name' />
+								</Form.Item>
 								<Form.Item name='href' label='Link' rules={[{ required: true, message: 'Please add link' }]}>
 									<Input placeholder='Add link' />
 								</Form.Item>

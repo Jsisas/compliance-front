@@ -16,7 +16,7 @@ import { TaskConnectedItems } from '../../components/TaskConnectedItems/TaskConn
 import { notifyError } from '../../util/NotificationUtil';
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import StringUtil from '../../util/StringUtil';
-import { AlUpload } from '../../components/_ui/AlUpload/AlUpload';
+import { AlFile, AlUpload } from '../../components/_ui/AlUpload/AlUpload';
 
 const { Title, Text } = Typography;
 
@@ -126,7 +126,7 @@ export function TaskDetail(): JSX.Element {
 			</Row>
 			<Row gutter={[16, 16]}>
 				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 10, offset: 1 }} style={{height: '100%'}}>
-					<AlUpload />
+					<AlUpload onChange={(file: AlFile[]) => console.log(file)}/>
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]}>
