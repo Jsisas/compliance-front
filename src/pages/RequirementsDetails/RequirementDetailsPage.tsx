@@ -62,7 +62,7 @@ export function RequirementDetailsPage(props: RouteComponentProps): JSX.Element 
 		<>
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={1} xl={1}>
-					<AlBackArrow history={props.history} />
+					<AlBackArrow />
 				</Col>
 				<Col xs={22} xl={23}>
 					<Title style={{ marginBottom: 0 }}>

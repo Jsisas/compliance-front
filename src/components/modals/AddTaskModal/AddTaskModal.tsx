@@ -1,7 +1,6 @@
 import { CloseOutlined } from '@ant-design/icons/lib';
 import { Col, DatePicker, Form, Input, Modal, Radio, Row, Select, Typography } from 'antd';
 import { Store } from 'antd/lib/form/interface';
-import TextArea from 'antd/lib/input/TextArea';
 import * as React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -65,7 +64,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 		form.setFieldsValue({
 			description: description
 		});
-	}, [description]);
+	}, [description, form]);
 
 	return (
 		<>

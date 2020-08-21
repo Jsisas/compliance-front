@@ -1,7 +1,6 @@
-import { Col, DatePicker, Form, Input, Radio, Row, Typography } from 'antd';
+import { Col, DatePicker, Form, Radio, Row, Typography } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 import TextArea from 'antd/lib/input/TextArea';
-import * as H from 'history';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -21,11 +20,7 @@ import ReactQuill from 'react-quill';
 
 const { Title } = Typography;
 
-interface NewControlProps {
-	history: H.History;
-}
-
-export function UpsertControlPage(props: NewControlProps): JSX.Element {
+export function UpsertControlPage(): JSX.Element {
 	const { id } = useParams<{ id: string }>();
 
 	const dispatch = useDispatch();
@@ -66,13 +61,13 @@ export function UpsertControlPage(props: NewControlProps): JSX.Element {
 		form.setFieldsValue({
 			description: description
 		});
-	}, [description]);
+	}, [description, form]);
 
 	return (
 		<>
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={2} xl={1}>
-					<AlBackArrow history={props.history}/>
+					<AlBackArrow />
 				</Col>
 				<Col xs={20} xl={20}>
 					<Title style={{ marginBottom: 0 }}>{control ? 'Edit control' : 'Add new control'}</Title>

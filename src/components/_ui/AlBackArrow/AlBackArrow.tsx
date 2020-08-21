@@ -2,15 +2,13 @@ import * as React from 'react';
 import { LeftOutlined } from '@ant-design/icons/lib';
 import AlButton from '../AlButton/AlButton';
 import styles from './albackarrow.module.scss';
-import * as H from 'history';
+import { useHistory } from 'react-router';
 
-export interface AlBackArrowProps {
-	history: H.History;
-}
+export function AlBackArrow(): JSX.Element {
+	const history = useHistory();
 
-export function AlBackArrow(props: AlBackArrowProps): JSX.Element {
 	return (
-		<AlButton type='link' onClick={() => props.history.goBack()}>
+		<AlButton type='link' onClick={() => history.goBack()}>
 			<LeftOutlined className={styles.alBackArrow} data-testid='leftArrow' />
 		</AlButton>
 	);

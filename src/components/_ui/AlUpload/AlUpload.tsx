@@ -4,9 +4,9 @@ import { InboxOutlined } from '@ant-design/icons/lib';
 import AlButton from '../AlButton/AlButton';
 import { AddLink, AddLinkModal } from '../../modals/AddLinkModal/AddLinkModal';
 import { Typography, Upload } from 'antd';
-import styles from './alUpload.module.scss'
+import styles from './alUpload.module.scss';
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 const { Dragger } = Upload;
 
 export function AlUpload(): JSX.Element {

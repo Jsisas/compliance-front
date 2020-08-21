@@ -20,6 +20,7 @@ import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import moment from 'moment';
 import StringUtil from '../../util/StringUtil';
 import { fetchAllTasks } from '../../redux/Task/TaskService';
+
 const { Title, Text } = Typography;
 
 export function ControlsDetails(props: RouteComponentProps): JSX.Element {
@@ -79,7 +80,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 				<AddTaskModule control={control} isVisible={isAddTaskModalVisible} onCancel={toggleModal} />
 				<Row gutter={[16, 16]} align={'middle'}>
 					<Col xs={1} xl={1}>
-						<AlBackArrow history={props.history} />
+						<AlBackArrow />
 					</Col>
 					<Col xs={22} xl={23}>
 						<Title style={{ marginBottom: 0 }}>{control?.title}</Title>

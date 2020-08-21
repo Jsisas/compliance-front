@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducer';
 import { Col, Row, Typography } from 'antd';
@@ -24,8 +24,6 @@ export function TaskDetail(): JSX.Element {
 	const { id } = useParams<{ id: string }>();
 	const task = useSelector((state: RootState) => selectTaskById(state, id));
 
-	const history = useHistory();
-
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchAllTasks());
@@ -35,7 +33,7 @@ export function TaskDetail(): JSX.Element {
 		<>
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={1} xl={1}>
-					<AlBackArrow history={history} />
+					<AlBackArrow />
 				</Col>
 				<Col xs={{ span: 10 }} sm={10} md={10} lg={{ span: 10 }} xl={{ span: 10 }}>
 					<Title style={{ marginBottom: 0 }}>{task?.title}</Title>
