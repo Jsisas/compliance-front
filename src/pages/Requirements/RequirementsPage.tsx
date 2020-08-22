@@ -25,17 +25,21 @@ import StringUtil from '../../util/StringUtil';
 const { Title } = Typography;
 const { Option } = Select;
 
-export enum RequirementTableFilter {
+export enum RequirementFilter {
 	ALL = 'All requirements',
 	WITHOUT_CONTROl = 'Requirements without control',
 	WITH_FAILING_CONTROL = 'Requirements with failing controls',
 }
 
-export function RequirementsPage(props: RouteComponentProps): JSX.Element {
+export interface RequirementsPageLocation {
+	filter?: RequirementFilter
+}
+
+export function RequirementsPage(props: RouteComponentProps<any, any, RequirementsPageLocation | any>): JSX.Element {
 	const { id } = useParams<{ id: string }>();
 
 	const [tableSearchText, setTableSearchText] = useState<string>();
-	const [requirementFilter, setRequirementFilter] = useState<RequirementTableFilter>(RequirementTableFilter.ALL);
+	const [requirementFilter, setRequirementFilter] = useState<RequirementFilter>(props.location.state && props.location.state.filter ? props.location.state.filter : RequirementFilter.ALL);
 
 	const [isSearchControlModalVisible, setSearchControlModalVisible] = useState(false);
 
@@ -80,11 +84,11 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 
 	function filterByRequirementSelection(requirement: Requirement) {
 		if (requirementFilter) {
-			if (requirementFilter === RequirementTableFilter.ALL) {
+			if (requirementFilter === RequirementFilter.ALL) {
 				return true;
-			} else if (requirementFilter === RequirementTableFilter.WITH_FAILING_CONTROL) {
+			} else if (requirementFilter === RequirementFilter.WITH_FAILING_CONTROL) {
 				return isRequirementWithFailingControl(requirement);
-			} else if (requirementFilter === RequirementTableFilter.WITHOUT_CONTROl) {
+			} else if (requirementFilter === RequirementFilter.WITHOUT_CONTROl) {
 				return isRequirementWithoutControl(requirement);
 			}
 		} else {
@@ -99,7 +103,7 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 			key: 'title',
 			render: (text: string, record: Requirement) => {
 				return <span className={themeStyles.textBold}>{record.title}</span>;
-			},
+			}
 		});
 		columns.push({
 			title: 'Regulation',
@@ -107,7 +111,7 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 			key: 'Regulation',
 			render: () => {
 				return <span>{selectedRegulation?.title}</span>;
-			},
+			}
 		});
 		columns.push({
 			title: 'chapter_name',
@@ -115,7 +119,7 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 			key: 'chapter_name',
 			render: (text: string, record: Requirement) => {
 				return <span>{record.chapter_name}</span>;
-			},
+			}
 		});
 		columns.push({
 			title: 'Chapter reference',
@@ -123,7 +127,7 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 			key: 'Chapter reference',
 			render: (text: string, record: Requirement) => {
 				return <span>{record.chapter_number}</span>;
-			},
+			}
 		});
 		columns.push({
 			title: 'Controls',
@@ -142,7 +146,7 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 						{control.title}
 					</Tag>
 				));
-			},
+			}
 		});
 	}
 
@@ -161,12 +165,12 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 		setSelectedRequirementIds(selectedRowKeysTmp);
 	};
 
-	function getStatisticsCountByRequirementFilter(filter: RequirementTableFilter) {
-		if (filter === RequirementTableFilter.ALL) {
+	function getStatisticsCountByRequirementFilter(filter: RequirementFilter) {
+		if (filter === RequirementFilter.ALL) {
 			return requirements.length;
-		} else if (filter === RequirementTableFilter.WITHOUT_CONTROl) {
+		} else if (filter === RequirementFilter.WITHOUT_CONTROl) {
 			return requirements.filter(isRequirementWithoutControl).length;
-		} else if (filter === RequirementTableFilter.WITH_FAILING_CONTROL) {
+		} else if (filter === RequirementFilter.WITH_FAILING_CONTROL) {
 			return requirements.filter(isRequirementWithFailingControl).length;
 		} else {
 			return 0;
@@ -240,7 +244,7 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 			/>
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={2} xl={1}>
-					<AlBackArrow />
+					<AlBackArrow/>
 				</Col>
 				<Col xs={8} xl={8}>
 					<Title style={{ marginBottom: 0 }}>Requirements</Title>
@@ -258,7 +262,7 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 						onChange={(event) => {
 							setTableSearchText(event.target.value);
 						}}
-						suffix={<SearchOutlined />}
+						suffix={<SearchOutlined/>}
 					/>
 				</Col>
 				<Col xs={{ span: 6, offset: 1 }} sm={3} md={2} xl={2}>
@@ -280,9 +284,9 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 					<Select
 						defaultValue={requirementFilter}
 						style={{ width: '100%' }}
-						onChange={(value: RequirementTableFilter) => setRequirementFilter(value)}
+						onChange={(value: RequirementFilter) => setRequirementFilter(value)}
 					>
-						{Object.values(RequirementTableFilter).map((filter) => {
+						{Object.values(RequirementFilter).map((filter) => {
 							return (
 								<Option value={filter} key={filter}>
 									{StringUtil.humanizeSnakeCase(filter)}({getStatisticsCountByRequirementFilter(filter)})
@@ -304,7 +308,7 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 					{selectedRequirementIds.length > 0 && (
 						<Dropdown overlay={connectControlDropdown} trigger={['click']}>
 							<AlButton type='primary' style={{ width: '100%' }}>
-								Connect control <DownOutlined style={{ fontSize: '14px' }} />
+								Connect control <DownOutlined style={{ fontSize: '14px' }}/>
 							</AlButton>
 						</Dropdown>
 					)}
@@ -329,12 +333,12 @@ export function RequirementsPage(props: RouteComponentProps): JSX.Element {
 					<Table
 						rowSelection={{
 							selectedRowKeys: selectedRequirementIds,
-							onChange: (selectedRows: EntityId[]) => setSelectedRequirementIds(selectedRows as string[]),
+							onChange: (selectedRows: EntityId[]) => setSelectedRequirementIds(selectedRows as string[])
 						}}
 						onRow={(record) => ({
 							onClick: () => {
 								selectRow(record);
-							},
+							}
 						})}
 						scroll={regulations.length < 1 ? { x: undefined } : { x: 'auto' }}
 						dataSource={filteredRequirements as never}

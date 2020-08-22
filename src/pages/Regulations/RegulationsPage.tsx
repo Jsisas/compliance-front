@@ -10,6 +10,7 @@ import { CheckCircleOutlined, WarningFilled } from '@ant-design/icons/lib';
 import { concatStyles } from '../../util/StyleUtil';
 import { Link } from 'react-router-dom';
 import { RegulationStatistics } from '../../redux/Regulation/RegulationSlice';
+import { RequirementFilter } from '../Requirements/RequirementsPage';
 
 const { Title } = Typography;
 
@@ -59,7 +60,7 @@ export default function RegulationsPage(): JSX.Element {
 			render: (text: string, record: Regulation) => {
 				return (
 					<Link
-						to={`/regulations/${record.id}/requirements`}
+						to={{ pathname: `/regulations/${record.id}/requirements`, state: {filter: RequirementFilter.ALL} }}
 						className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}
 					>
 						{record.statistics.requirements_total}
@@ -75,9 +76,12 @@ export default function RegulationsPage(): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Regulation) => {
 				return (
-					<span className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}>
+					<Link
+						to={{ pathname: `/regulations/${record.id}/requirements`, state: {filter: RequirementFilter.WITHOUT_CONTROl} }}
+						className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}
+					>
 						{record.statistics.requirements_without_control}
-					</span>
+					</Link>
 				);
 			},
 			sorter: (a: Regulation, b: Regulation) =>
@@ -91,9 +95,12 @@ export default function RegulationsPage(): JSX.Element {
 			render: (text: string, record: Regulation) => {
 				const failingCount = record.statistics.controls_failing;
 				return (
-					<span className={failingCount > 0 ? themeStyles.errorTextColor : themeStyles.successTextColor}>
+					<Link
+						to={{ pathname: `/regulations/${record.id}/requirements`, state: {filter: RequirementFilter.WITH_FAILING_CONTROL} }}
+						className={failingCount > 0 ? themeStyles.errorTextColor : themeStyles.successTextColor}
+					>
 						{failingCount > 0 ? <WarningFilled /> : <CheckCircleOutlined />} {failingCount}
-					</span>
+					</Link>
 				);
 			},
 			sorter: (a: Regulation, b: Regulation) => a.statistics.controls_failing - b.statistics.controls_failing,
