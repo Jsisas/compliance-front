@@ -7,12 +7,12 @@ import React from 'react';
 
 export function App(): JSX.Element {
 	return (
-		<ErrorBoundary>
-			<ReduxProvider store={configureStore}>
-				<Router>
-					<PageLayout />
-				</Router>
-			</ReduxProvider>
-		</ErrorBoundary>
+		<ReduxProvider store={configureStore}>
+			<Router>
+				<ErrorBoundary>
+					<PageLayout/>
+				</ErrorBoundary>
+			</Router>
+		</ReduxProvider>
 	);
 }

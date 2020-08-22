@@ -88,9 +88,9 @@ export function PageLayout(): JSX.Element {
 					</Menu>
 					<div className={styles.profile} style={{ display: isCollapsed ? 'none' : '', width: '175px' }}>
 						<Dropdown overlay={profileOptions} trigger={['click']}>
-							<img src={authentication?.user.picture} alt='Avatar' />
+							<img src={authentication.user.picture} alt='Avatar' />
 						</Dropdown>
-						<Link to={'/'}>{authentication?.user.name}</Link>
+						<Link to={'/'}>{authentication.user.name}</Link>
 					</div>
 				</Sider>
 			)}

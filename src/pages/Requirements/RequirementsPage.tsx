@@ -21,6 +21,7 @@ import { setTmpRequirements } from '../../redux/Requirement/TmpRequirementSlice/
 import themeStyles from '../../theme.module.scss';
 import { notifyError } from '../../util/NotificationUtil';
 import StringUtil from '../../util/StringUtil';
+import { ApiException } from '../../components/Exceptions/ApiException';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -68,7 +69,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 
 	function filterByRegulation(requirement: Requirement) {
 		if (selectedRegulation) {
-			return requirement.regulations.some((regulation) => selectedRegulation?.id === regulation.id);
+			return requirement.regulations.some((regulation) => selectedRegulation.id === regulation.id);
 		} else {
 			return true;
 		}
@@ -110,7 +111,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 			dataIndex: 'regulation',
 			key: 'Regulation',
 			render: () => {
-				return <span>{selectedRegulation?.title}</span>;
+				return <span>{selectedRegulation.title}</span>;
 			}
 		});
 		columns.push({
@@ -134,7 +135,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 			dataIndex: 'Controls',
 			key: 'Controls',
 			render: (text: string, record: Requirement) => {
-				return record.controls?.map((control) => (
+				return record.controls.map((control) => (
 					<Tag
 						key={control.id}
 						className={control.tasks?.some((x) => x.is_overdue) ? themeStyles.errorTag : themeStyles.primaryTag}
@@ -178,11 +179,11 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 	}
 
 	function isRequirementWithoutControl(requirement: Requirement) {
-		return requirement.statistics?.controls_total < 1;
+		return requirement.statistics.controls_total < 1;
 	}
 
 	function isRequirementWithFailingControl(requirement: Requirement) {
-		return requirement.statistics?.controls_failing > 0;
+		return requirement.statistics.controls_failing > 0;
 	}
 
 	function onAttachControlClick() {
@@ -235,6 +236,10 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 		}, 300);
 	}
 
+	if(!selectedRegulation){
+		throw new ApiException(404)
+	}
+
 	return (
 		<>
 			<SearchControlModal
@@ -267,7 +272,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 				</Col>
 				<Col xs={{ span: 6, offset: 1 }} sm={3} md={2} xl={2}>
 					<Select
-						value={selectedRegulation?.id}
+						value={selectedRegulation.id}
 						style={{ width: '100%' }}
 						onChange={(value: string) => selectRegulation(value)}
 					>

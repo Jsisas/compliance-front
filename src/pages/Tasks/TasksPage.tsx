@@ -77,7 +77,7 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 			dataIndex: 'is_overdue',
 			key: 'id',
 			render: (text: string, record: Task) => {
-				return <span>{record?.is_overdue ? 'Overdue' : 'Not overdue'}</span>;
+				return <span>{record.is_overdue ? 'Overdue' : 'Not overdue'}</span>;
 			},
 			sorter: (a: Task, b: Task) => Number(a.is_overdue) - Number(b.is_overdue),
 			sortDirections: ['descend', 'ascend'],
