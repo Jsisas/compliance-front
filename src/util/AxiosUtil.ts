@@ -5,18 +5,18 @@ axios.interceptors.response.use(
 		return Promise.resolve(response);
 	},
 	(error) => {
-		if (error.status === 403) {
+		if (error.response.status === 403) {
 			localStorage.removeItem('auth');
 			window.location.reload();
 		} else {
-			console.log(`${error.status} : ${error.statusText} => ${error.data}`);
+			console.log(`${error.response.status} : ${error.response.statusText} => ${error.response.data.message || error.response.data}`);
 		}
 		return Promise.reject(error);
 	}
 );
 
 axios.interceptors.request.use(
-	function (config) {
+	function(config) {
 		const authObj = localStorage.getItem('auth') || '{}';
 		const auth = JSON.parse(authObj);
 
@@ -27,7 +27,7 @@ axios.interceptors.request.use(
 
 		return config;
 	},
-	function (err) {
+	function(err) {
 		return Promise.reject(err);
 	}
 );

@@ -109,7 +109,7 @@ export default function RegulationsPage(): JSX.Element {
 	}
 
 	function getRequirementsCovered(statistics: RegulationStatistics): number {
-		return Math.round((statistics.controls_failing * 100) / statistics.requirements_total);
+		return Math.round((statistics.controls_failing * 100) / statistics.requirements_total) | 100;
 	}
 
 	return (
