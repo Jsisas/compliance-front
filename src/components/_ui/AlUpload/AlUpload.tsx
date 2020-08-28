@@ -7,6 +7,7 @@ import { Typography, Upload } from 'antd';
 import styles from './alUpload.module.scss';
 import { UploadFile } from 'antd/es/upload/interface';
 import {v4} from 'uuid';
+import { Base64Util } from '../../../util/Base64Util';
 
 const { Text } = Typography;
 const { Dragger } = Upload;
@@ -76,7 +77,7 @@ export function AlUpload(props: AlUploadProps): JSX.Element {
 					last_modified: new Date(file.lastModified || new Date()).toISOString(),
 					type: file.type,
 					attachment_type: AttachmentType.FILE,
-					content_base64: btoa(e.target.result as string)
+					content_base64: Base64Util.utf8_to_b64(e.target.result as any)
 				};
 				setAttachments([...attachments, alFile]);
 				notifySuccess('File added', 'File was attached successfully');
