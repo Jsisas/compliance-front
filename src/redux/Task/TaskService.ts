@@ -12,6 +12,7 @@ import {
 } from './TaskSlice';
 import { API_URL } from '../../environment';
 import { v4 as uuidv4 } from 'uuid';
+import { Requirement } from '../Requirement/RequirementSlice';
 
 export interface UpsertTask {
 	id: string;
@@ -30,6 +31,16 @@ export const fetchAllTasks = createAsyncThunk('tasks/fetchAll', async () => {
 	const response: AxiosResponse<ApiWrapper<Task[]>> = await axios.get(`${API_URL}/tasks`);
 	return response.data.data;
 });
+
+export const fetchTaskById = createAsyncThunk(
+	'requirements/fetchTaskById',
+	async (taskId: string) => {
+		const response: AxiosResponse<ApiWrapper<Task>> = await axios.get(
+			`${API_URL}/tasks/` + taskId
+		);
+		return response.data.data;
+	}
+);
 
 export const createTask = createAsyncThunk('tasks/create', async (task: Task) => {
 	console.log(task);

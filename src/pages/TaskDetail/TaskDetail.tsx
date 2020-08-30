@@ -6,7 +6,7 @@ import { RootState } from '../../redux/reducer';
 import { Col, Row, Typography } from 'antd';
 import { EditOutlined, EllipsisOutlined } from '@ant-design/icons/lib';
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { fetchAllTasks } from '../../redux/Task/TaskService';
+import { fetchAllTasks, fetchTaskById } from '../../redux/Task/TaskService';
 import { selectTaskById } from '../../redux/Task/TaskSlice';
 import styles from './taskDetails.module.scss';
 import { date, dateFormat } from '../../util/DateUtil';
@@ -27,8 +27,8 @@ export function TaskDetail(): JSX.Element {
 
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(fetchAllTasks());
-	}, [dispatch]);
+		dispatch(fetchTaskById(id));
+	}, [dispatch, id]);
 
 	if (!task) {
 		throw new ApiException(404);
