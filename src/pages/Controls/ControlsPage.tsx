@@ -185,7 +185,7 @@ export function ControlsPage(): JSX.Element {
 			</Row>
 
 			<Row gutter={[16, 32]}>
-				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
+				<Col xs={6} sm={6} md={6} lg={4} xl={4} xxl={4}>
 					<Input
 						placeholder='Search by title'
 						onChange={(event) => {
@@ -194,14 +194,14 @@ export function ControlsPage(): JSX.Element {
 						suffix={<SearchOutlined />}
 					/>
 				</Col>
-				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
+				<Col xs={6} sm={6} md={6} lg={4} xl={4} xxl={4}>
 					<UserSearchMultiple
 						placeholder='Filter by owner'
 						onChange={(users) => setSelectedUsers(users)}
 						allowClear={true}
 					/>
 				</Col>
-				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
+				<Col xs={6} sm={6} md={6} lg={4} xl={4} xxl={4}>
 					<Select
 						style={{ width: '100%' }}
 						placeholder='Filter by category'
@@ -217,7 +217,7 @@ export function ControlsPage(): JSX.Element {
 						})}
 					</Select>
 				</Col>
-				<Col xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}>
+				<Col xs={6} sm={6} md={6} lg={4} xl={4} xxl={4}>
 					<Select
 						style={{ width: '100%' }}
 						placeholder='Filter by status'
@@ -233,7 +233,14 @@ export function ControlsPage(): JSX.Element {
 						})}
 					</Select>
 				</Col>
-				<Col xs={12} sm={12} md={6} lg={4} xl={3} xxl={2} offset={6}>
+				<Col
+					xs={{ span: 24, offset: 0 }}
+					sm={{ span: 24, offset: 0 }}
+					md={{ span: 24, offset: 0 }}
+					lg={{ span: 3, offset: 5 }}
+					xl={{ span: 3, offset: 5 }}
+					xxl={{ span: 3, offset: 5 }}
+				>
 					<Link to='/controls/new'>
 						<AlButton type={'primary'} style={{ width: '100%' }}>
 							Add Control

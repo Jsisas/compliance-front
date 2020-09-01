@@ -25,7 +25,7 @@ Object {
         style="margin: -16px -8px 16px -8px;"
       >
         <div
-          class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
+          class="ant-col ant-col-xs-6 ant-col-sm-6 ant-col-md-6 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
           style="padding: 16px 8px 16px 8px;"
         >
           <span
@@ -64,7 +64,7 @@ Object {
           </span>
         </div>
         <div
-          class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
+          class="ant-col ant-col-xs-6 ant-col-sm-6 ant-col-md-6 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
           style="padding: 16px 8px 16px 8px;"
         >
           <div
@@ -111,7 +111,7 @@ Object {
           </div>
         </div>
         <div
-          class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
+          class="ant-col ant-col-xs-6 ant-col-sm-6 ant-col-md-6 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
           style="padding: 16px 8px 16px 8px;"
         >
           <div
@@ -176,7 +176,7 @@ Object {
           </div>
         </div>
         <div
-          class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
+          class="ant-col ant-col-xs-6 ant-col-sm-6 ant-col-md-6 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
           style="padding: 16px 8px 16px 8px;"
         >
           <div
@@ -241,7 +241,7 @@ Object {
           </div>
         </div>
         <div
-          class="ant-col ant-col-offset-6 ant-col-xs-12 ant-col-sm-12 ant-col-md-6 ant-col-lg-4 ant-col-xl-3 ant-col-xxl-2"
+          class="ant-col ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-24 ant-col-sm-offset-0 ant-col-md-24 ant-col-md-offset-0 ant-col-lg-3 ant-col-lg-offset-5 ant-col-xl-3 ant-col-xl-offset-5 ant-col-xxl-3 ant-col-xxl-offset-5"
           style="padding: 16px 8px 16px 8px;"
         >
           <a
@@ -1678,7 +1678,7 @@ Object {
       style="margin: -16px -8px 16px -8px;"
     >
       <div
-        class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
+        class="ant-col ant-col-xs-6 ant-col-sm-6 ant-col-md-6 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
         style="padding: 16px 8px 16px 8px;"
       >
         <span
@@ -1717,7 +1717,7 @@ Object {
         </span>
       </div>
       <div
-        class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
+        class="ant-col ant-col-xs-6 ant-col-sm-6 ant-col-md-6 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
         style="padding: 16px 8px 16px 8px;"
       >
         <div
@@ -1764,7 +1764,7 @@ Object {
         </div>
       </div>
       <div
-        class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
+        class="ant-col ant-col-xs-6 ant-col-sm-6 ant-col-md-6 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
         style="padding: 16px 8px 16px 8px;"
       >
         <div
@@ -1829,7 +1829,7 @@ Object {
         </div>
       </div>
       <div
-        class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-4 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
+        class="ant-col ant-col-xs-6 ant-col-sm-6 ant-col-md-6 ant-col-lg-4 ant-col-xl-4 ant-col-xxl-4"
         style="padding: 16px 8px 16px 8px;"
       >
         <div
@@ -1894,7 +1894,7 @@ Object {
         </div>
       </div>
       <div
-        class="ant-col ant-col-offset-6 ant-col-xs-12 ant-col-sm-12 ant-col-md-6 ant-col-lg-4 ant-col-xl-3 ant-col-xxl-2"
+        class="ant-col ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-24 ant-col-sm-offset-0 ant-col-md-24 ant-col-md-offset-0 ant-col-lg-3 ant-col-lg-offset-5 ant-col-xl-3 ant-col-xl-offset-5 ant-col-xxl-3 ant-col-xxl-offset-5"
         style="padding: 16px 8px 16px 8px;"
       >
         <a

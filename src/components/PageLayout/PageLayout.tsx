@@ -54,7 +54,7 @@ export function PageLayout(): JSX.Element {
 	);
 
 	return (
-		<Layout>
+		<Layout data-testid={'page-layout'}>
 			{isAuthenticated && (
 				<Sider
 					breakpoint='lg'
