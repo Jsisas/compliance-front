@@ -14,7 +14,7 @@ import {
 	TaskFrequencyType,
 	TaskFrequencyTypeRecurrence,
 	TaskType,
-	Weekday
+	Weekday,
 } from '../../../redux/Task/TaskSlice';
 import { notifySuccess } from '../../../util/NotificationUtil';
 import StringUtil from '../../../util/StringUtil';
@@ -62,7 +62,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 	const [form] = Form.useForm();
 	React.useEffect(() => {
 		form.setFieldsValue({
-			description: description
+			description: description,
 		});
 	}, [description, form]);
 
@@ -95,7 +95,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								</Form.Item>
 								<Form.Item label='Type' name='kind'>
 									<Radio.Group defaultValue={TaskType.MAINTENANCE}>
-										{Object.values(TaskType).map((type: TaskType, index: number) => {
+										{Object.values(TaskType).map((type: TaskType) => {
 											return (
 												<Radio value={type} key={type}>
 													{StringUtil.humanizeSnakeCase(type)}
@@ -114,7 +114,12 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 										},
 									]}
 								>
-									<ReactQuill theme="snow" value={''} onChange={(val) => setDescription(val)} style={{backgroundColor: '#fff'}}/>
+									<ReactQuill
+										theme='snow'
+										value={''}
+										onChange={(val) => setDescription(val)}
+										style={{ backgroundColor: '#fff' }}
+									/>
 								</Form.Item>
 								<Form.Item label='Add assignee' name='assignee'>
 									<UserSearchSingle placeholder='Add assignees' onChange={(user: User) => setSelectedAssignee(user)} />

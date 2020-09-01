@@ -10,7 +10,7 @@ export function App(): JSX.Element {
 		<Router>
 			<ErrorBoundary>
 				<ReduxProvider store={configureStore}>
-					<PageLayout/>
+					<PageLayout />
 				</ReduxProvider>
 			</ErrorBoundary>
 		</Router>

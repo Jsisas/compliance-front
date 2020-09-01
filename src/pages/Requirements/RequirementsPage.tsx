@@ -21,7 +21,6 @@ import { setTmpRequirements } from '../../redux/Requirement/TmpRequirementSlice/
 import themeStyles from '../../theme.module.scss';
 import { notifyError } from '../../util/NotificationUtil';
 import StringUtil from '../../util/StringUtil';
-import { ApiException } from '../../components/Exceptions/ApiException';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -33,14 +32,16 @@ export enum RequirementFilter {
 }
 
 export interface RequirementsPageLocation {
-	filter?: RequirementFilter
+	filter?: RequirementFilter;
 }
 
 export function RequirementsPage(props: RouteComponentProps<any, any, RequirementsPageLocation | any>): JSX.Element {
 	const { id } = useParams<{ id: string }>();
 
 	const [tableSearchText, setTableSearchText] = useState<string>();
-	const [requirementFilter, setRequirementFilter] = useState<RequirementFilter>(props.location.state && props.location.state.filter ? props.location.state.filter : RequirementFilter.ALL);
+	const [requirementFilter, setRequirementFilter] = useState<RequirementFilter>(
+		props.location.state && props.location.state.filter ? props.location.state.filter : RequirementFilter.ALL
+	);
 
 	const [isSearchControlModalVisible, setSearchControlModalVisible] = useState(false);
 
@@ -104,7 +105,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 			key: 'title',
 			render: (text: string, record: Requirement) => {
 				return <span className={themeStyles.textBold}>{record.title}</span>;
-			}
+			},
 		});
 		columns.push({
 			title: 'Regulation',
@@ -112,7 +113,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 			key: 'Regulation',
 			render: () => {
 				return <span>{selectedRegulation.title}</span>;
-			}
+			},
 		});
 		columns.push({
 			title: 'chapter_name',
@@ -120,7 +121,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 			key: 'chapter_name',
 			render: (text: string, record: Requirement) => {
 				return <span>{record.chapter_name}</span>;
-			}
+			},
 		});
 		columns.push({
 			title: 'Chapter reference',
@@ -128,7 +129,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 			key: 'Chapter reference',
 			render: (text: string, record: Requirement) => {
 				return <span>{record.chapter_number}</span>;
-			}
+			},
 		});
 		columns.push({
 			title: 'Controls',
@@ -147,7 +148,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 						{control.title}
 					</Tag>
 				));
-			}
+			},
 		});
 	}
 
@@ -236,10 +237,6 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 		}, 300);
 	}
 
-	if(!selectedRegulation){
-		throw new ApiException(404)
-	}
-
 	return (
 		<>
 			<SearchControlModal
@@ -249,7 +246,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 			/>
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={2} xl={1}>
-					<AlBackArrow/>
+					<AlBackArrow />
 				</Col>
 				<Col xs={8} xl={8}>
 					<Title style={{ marginBottom: 0 }}>Requirements</Title>
@@ -267,12 +264,12 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 						onChange={(event) => {
 							setTableSearchText(event.target.value);
 						}}
-						suffix={<SearchOutlined/>}
+						suffix={<SearchOutlined />}
 					/>
 				</Col>
 				<Col xs={{ span: 6, offset: 1 }} sm={3} md={2} xl={2}>
 					<Select
-						value={selectedRegulation.id}
+						value={selectedRegulation?.id}
 						style={{ width: '100%' }}
 						onChange={(value: string) => selectRegulation(value)}
 					>
@@ -313,7 +310,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 					{selectedRequirementIds.length > 0 && (
 						<Dropdown overlay={connectControlDropdown} trigger={['click']}>
 							<AlButton type='primary' style={{ width: '100%' }}>
-								Connect control <DownOutlined style={{ fontSize: '14px' }}/>
+								Connect control <DownOutlined style={{ fontSize: '14px' }} />
 							</AlButton>
 						</Dropdown>
 					)}
@@ -338,12 +335,12 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 					<Table
 						rowSelection={{
 							selectedRowKeys: selectedRequirementIds,
-							onChange: (selectedRows: EntityId[]) => setSelectedRequirementIds(selectedRows as string[])
+							onChange: (selectedRows: EntityId[]) => setSelectedRequirementIds(selectedRows as string[]),
 						}}
 						onRow={(record) => ({
 							onClick: () => {
 								selectRow(record);
-							}
+							},
 						})}
 						scroll={regulations.length < 1 ? { x: undefined } : { x: 'auto' }}
 						dataSource={filteredRequirements as never}

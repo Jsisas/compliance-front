@@ -60,7 +60,7 @@ export default function RegulationsPage(): JSX.Element {
 			render: (text: string, record: Regulation) => {
 				return (
 					<Link
-						to={{ pathname: `/regulations/${record.id}/requirements`, state: {filter: RequirementFilter.ALL} }}
+						to={{ pathname: `/regulations/${record.id}/requirements`, state: { filter: RequirementFilter.ALL } }}
 						className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}
 					>
 						{record.statistics.requirements_total}
@@ -77,7 +77,10 @@ export default function RegulationsPage(): JSX.Element {
 			render: (text: string, record: Regulation) => {
 				return (
 					<Link
-						to={{ pathname: `/regulations/${record.id}/requirements`, state: {filter: RequirementFilter.WITHOUT_CONTROl} }}
+						to={{
+							pathname: `/regulations/${record.id}/requirements`,
+							state: { filter: RequirementFilter.WITHOUT_CONTROl },
+						}}
 						className={concatStyles(themeStyles.primaryTextColor, themeStyles.textBold)}
 					>
 						{record.statistics.requirements_without_control}
@@ -96,7 +99,10 @@ export default function RegulationsPage(): JSX.Element {
 				const failingCount = record.statistics.controls_failing;
 				return (
 					<Link
-						to={{ pathname: `/regulations/${record.id}/requirements`, state: {filter: RequirementFilter.WITH_FAILING_CONTROL} }}
+						to={{
+							pathname: `/regulations/${record.id}/requirements`,
+							state: { filter: RequirementFilter.WITH_FAILING_CONTROL },
+						}}
 						className={failingCount > 0 ? themeStyles.errorTextColor : themeStyles.successTextColor}
 					>
 						{failingCount > 0 ? <WarningFilled /> : <CheckCircleOutlined />} {failingCount}

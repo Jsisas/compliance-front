@@ -20,7 +20,6 @@ import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import moment from 'moment';
 import StringUtil from '../../util/StringUtil';
 import { fetchAllTasks } from '../../redux/Task/TaskService';
-import { ApiException } from '../../components/Exceptions/ApiException';
 
 const { Title, Text } = Typography;
 
@@ -47,7 +46,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 		key: 'id',
 		render: (text: string, record: Task) => <Text>{record.title}</Text>,
 		sorter: (a: Task, b: Task) => a.title.length - b.title.length,
-		sortDirections: ['descend', 'ascend']
+		sortDirections: ['descend', 'ascend'],
 	});
 	columns.push({
 		title: 'Assignee',
@@ -55,7 +54,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 		key: 'id',
 		render: (text: string, record: Task) => <Text>{record.assignee?.name}</Text>,
 		sorter: (a: Task, b: Task) => (a.assignee.name.length || 0) - (b.assignee.name.length || 0),
-		sortDirections: ['descend', 'ascend']
+		sortDirections: ['descend', 'ascend'],
 	});
 	columns.push({
 		title: 'Type',
@@ -63,7 +62,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 		key: 'id',
 		render: (text: string, record: Task) => <Text>{record.kind}</Text>,
 		sorter: (a: Task, b: Task) => a.kind.length - b.kind.length,
-		sortDirections: ['descend', 'ascend']
+		sortDirections: ['descend', 'ascend'],
 	});
 	columns.push({
 		title: 'Status',
@@ -71,22 +70,18 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 		key: 'id',
 		render: (text: string, record: Task) => <Text>{record.state}</Text>,
 		sorter: (a: Task, b: Task) => a.state.length - b.state.length,
-		sortDirections: ['descend', 'ascend']
+		sortDirections: ['descend', 'ascend'],
 	});
-
-	if (!control) {
-		throw new ApiException(404);
-	}
 
 	return (
 		<>
-			<AddTaskModule control={control} isVisible={isAddTaskModalVisible} onCancel={toggleModal}/>
+			<AddTaskModule control={control} isVisible={isAddTaskModalVisible} onCancel={toggleModal} />
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={1} xl={1}>
-					<AlBackArrow/>
+					<AlBackArrow />
 				</Col>
 				<Col xs={22} xl={23}>
-					<Title style={{ marginBottom: 0 }}>{control.title}</Title>
+					<Title style={{ marginBottom: 0 }}>{control?.title}</Title>
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]} align={'bottom'}>
@@ -97,7 +92,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 					lg={{ span: 16, offset: 1 }}
 					xl={{ span: 15, offset: 1 }}
 				>
-					<div dangerouslySetInnerHTML={{ __html: control.description }}/>
+					<div dangerouslySetInnerHTML={{ __html: control?.description || '' }} />
 				</Col>
 				<Col
 					xs={{ span: 24 }}
@@ -107,11 +102,11 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 					xl={{ span: 3, offset: 5 }}
 				>
 					<AlButton type={'secondary'} style={{ float: 'right' }}>
-						<EllipsisOutlined/>
+						<EllipsisOutlined />
 					</AlButton>
-					<Link to={`/controls/edit/${control.id}`}>
+					<Link to={`/controls/edit/${control?.id}`}>
 						<AlButton type={'secondary'} style={{ marginRight: '8px', float: 'right' }}>
-							<EditOutlined/>
+							<EditOutlined />
 						</AlButton>
 					</Link>
 				</Col>
@@ -140,16 +135,16 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 					</Row>
 					<Row gutter={[16, 16]}>
 						<Col xs={24} sm={24} md={24} lg={24} xl={4}>
-							<Text>{StringUtil.humanizeSnakeCase(control.state || '')}</Text>
+							<Text>{StringUtil.humanizeSnakeCase(control?.state || '')}</Text>
 						</Col>
 						<Col xs={24} sm={24} md={24} lg={24} xl={4}>
-							<Text>{moment(control.begins_at).format('YYYY-MM-DD')}</Text>
+							<Text>{moment(control?.begins_at).format('YYYY-MM-DD')}</Text>
 						</Col>
 						<Col xs={24} sm={24} md={24} lg={24} xl={4}>
-							<Text>{control.assignee.name}</Text>
+							<Text>{control?.assignee.name}</Text>
 						</Col>
 						<Col xs={24} sm={24} md={24} lg={17} xl={4}>
-							<Text>{StringUtil.humanizeSnakeCase(control.kind || '')}</Text>
+							<Text>{StringUtil.humanizeSnakeCase(control?.kind || '')}</Text>
 						</Col>
 					</Row>
 				</Col>
@@ -160,12 +155,12 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 					lg={{ span: 5, offset: 1 }}
 					xl={{ span: 5, offset: 1 }}
 				>
-					<ControlConnectedItems requirements={control.requirements}/>
+					<ControlConnectedItems requirements={control?.requirements} />
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]}>
 				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
-					<Divider className={styles.divider}/>
+					<Divider className={styles.divider} />
 					<Title level={3} style={{ paddingBottom: 0, marginBottom: 0 }}>
 						Tasks
 					</Title>
@@ -174,10 +169,10 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 			<Row gutter={[16, 16]}>
 				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
 					<Table
-						dataSource={control.tasks as never}
+						dataSource={control?.tasks as never}
 						columns={columns}
 						rowKey='id'
-						scroll={control.tasks.length < 1 ? { x: undefined } : { x: 340 }}
+						scroll={(control?.tasks || []).length < 1 ? { x: undefined } : { x: 340 }}
 						style={{ width: '100%' }}
 						className={concatStyles(styles.tableHeader, themeStyle.antTableMousePointer)}
 						pagination={{ hideOnSinglePage: true }}
@@ -185,7 +180,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 							return {
 								onClick: () => {
 									props.history.push('/tasks/' + record.id);
-								}
+								},
 							};
 						}}
 					/>

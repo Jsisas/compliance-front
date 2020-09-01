@@ -1,4 +1,3 @@
-
 import { Select } from 'antd';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -36,8 +35,6 @@ export function SearchSelectMultiple<T>(props: SearchProps<T>): JSX.Element {
 	}
 
 	function onChange(value: string) {
-
-
 		if (value.length > 0) {
 			const data = props.data.filter((tmpData: T) => value.includes(getObjValue(tmpData)));
 			setSelectedData(data);
@@ -49,7 +46,7 @@ export function SearchSelectMultiple<T>(props: SearchProps<T>): JSX.Element {
 
 	return (
 		<Select
-			mode={"multiple"}
+			mode={'multiple'}
 			allowClear={props.allowClear}
 			placeholder={props.placeholder || 'Search users'}
 			filterOption={false}

@@ -6,7 +6,7 @@ import { AddLink, AddLinkModal } from '../../modals/AddLinkModal/AddLinkModal';
 import { Typography, Upload } from 'antd';
 import styles from './alUpload.module.scss';
 import { UploadFile } from 'antd/es/upload/interface';
-import {v4} from 'uuid';
+import { v4 } from 'uuid';
 import { Base64Util } from '../../../util/Base64Util';
 
 const { Text } = Typography;
@@ -14,17 +14,17 @@ const { Dragger } = Upload;
 
 export enum AttachmentType {
 	FILE = 'file',
-	LINK = 'link'
+	LINK = 'link',
 }
 
 export interface AlFile {
-	uid: string,
-	name: string,
-	size: number,
-	last_modified: string,
+	uid: string;
+	name: string;
+	size: number;
+	last_modified: string;
 	type: string;
 	attachment_type: AttachmentType;
-	content_base64: string
+	content_base64: string;
 }
 
 export interface AlUploadProps {
@@ -45,7 +45,9 @@ export function AlUpload(props: AlUploadProps): JSX.Element {
 		openFileDialogOnClick: true,
 		fileList: attachments,
 		onRemove: (file: UploadFile<AlFile>) => removeFile(file as AlFile),
-		beforeUpload: (file: any) => {return addFile(file);}
+		beforeUpload: (file: any) => {
+			return addFile(file);
+		},
 	};
 
 	function toggleModal() {
@@ -60,15 +62,15 @@ export function AlUpload(props: AlUploadProps): JSX.Element {
 			last_modified: new Date().toISOString(),
 			type: '',
 			attachment_type: AttachmentType.LINK,
-			content_base64: btoa(link.href)
+			content_base64: btoa(link.href),
 		};
-		setAttachments([...attachments, alFile])
+		setAttachments([...attachments, alFile]);
 		toggleModal();
 	}
 
 	function addFile(file: any) {
 		const reader = new FileReader();
-		reader.onload = e => {
+		reader.onload = (e) => {
 			if (e && e.target && e.target.result) {
 				const alFile: AlFile = {
 					uid: v4(),
@@ -77,7 +79,7 @@ export function AlUpload(props: AlUploadProps): JSX.Element {
 					last_modified: new Date(file.lastModified || new Date()).toISOString(),
 					type: file.type,
 					attachment_type: AttachmentType.FILE,
-					content_base64: Base64Util.utf8_to_b64(e.target.result as any)
+					content_base64: Base64Util.utf8_to_b64(e.target.result as any),
 				};
 				setAttachments([...attachments, alFile]);
 				notifySuccess('File added', 'File was attached successfully');
@@ -89,38 +91,40 @@ export function AlUpload(props: AlUploadProps): JSX.Element {
 		return false;
 	}
 
-	function removeFile(file: AlFile){
-		setAttachments(attachments.filter(addedFile => addedFile.uid !== file.uid))
+	function removeFile(file: AlFile) {
+		setAttachments(attachments.filter((addedFile) => addedFile.uid !== file.uid));
 	}
 
-	return <>
-		<AddLinkModal
-			onAdd={(link: AddLink) => onLinkAdd(link)}
-			isVisible={isAddLinkModalVisible}
-			onCancel={toggleModal}
-		/>
-		<Dragger {...uploadProps}>
-			<p className='ant-upload-drag-icon'>
-				<InboxOutlined/>
-			</p>
-			<p className='ant-upload-text'>Drag and drop evidence</p>
-			<p className='ant-upload-hint'>CSV, PDF, XLSX</p>
-			<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-				<AlButton type='link' className={styles.buttonPadding}>
-					Open from computer
-				</AlButton>
-				<Text>or</Text>
-				<AlButton
-					type='link'
-					className={styles.buttonPadding}
-					onClick={(event) => {
-						event.stopPropagation();
-						setAddLinkModalVisible(!isAddLinkModalVisible);
-					}}
-				>
-					add link
-				</AlButton>
-			</div>
-		</Dragger>
-	</>;
+	return (
+		<>
+			<AddLinkModal
+				onAdd={(link: AddLink) => onLinkAdd(link)}
+				isVisible={isAddLinkModalVisible}
+				onCancel={toggleModal}
+			/>
+			<Dragger {...uploadProps}>
+				<p className='ant-upload-drag-icon'>
+					<InboxOutlined />
+				</p>
+				<p className='ant-upload-text'>Drag and drop evidence</p>
+				<p className='ant-upload-hint'>CSV, PDF, XLSX</p>
+				<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+					<AlButton type='link' className={styles.buttonPadding}>
+						Open from computer
+					</AlButton>
+					<Text>or</Text>
+					<AlButton
+						type='link'
+						className={styles.buttonPadding}
+						onClick={(event) => {
+							event.stopPropagation();
+							setAddLinkModalVisible(!isAddLinkModalVisible);
+						}}
+					>
+						add link
+					</AlButton>
+				</div>
+			</Dragger>
+		</>
+	);
 }

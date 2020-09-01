@@ -9,7 +9,11 @@ describe('<UserSearchSingle	 />', () => {
 		const mockOnChange = jest.fn();
 
 		const [history, element] = deepRender(
-			<UserSearchSingle allowClear={true} placeholder={'Test placeholder'} onChange={(user: User) => mockOnChange(user)} />,
+			<UserSearchSingle
+				allowClear={true}
+				placeholder={'Test placeholder'}
+				onChange={(user: User) => mockOnChange(user)}
+			/>,
 			{ user: testUsers }
 		);
 

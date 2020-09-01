@@ -56,6 +56,7 @@ export function SearchControlModal(props: SearchControlModal): JSX.Element {
 								idKey={'id'}
 								filterByKeys={['title']}
 								onSelect={(controls: Control[]) => onControlSelect(controls)}
+								data-cy='search-control-modal-input'
 							/>
 						</Col>
 					</Row>

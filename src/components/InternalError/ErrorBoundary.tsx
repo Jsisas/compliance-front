@@ -7,7 +7,7 @@ import { ApiException } from '../Exceptions/ApiException';
 
 type state = { code: number };
 
-type HasError = {code: number };
+type HasError = { code: number };
 
 class ErrorBoundary extends React.Component<any, state> {
 	constructor(props: RouteComponentProps) {
@@ -26,18 +26,18 @@ class ErrorBoundary extends React.Component<any, state> {
 	}
 
 	static getDerivedStateFromError(error: ApiException): HasError {
-		return { code: Number(error.message)};
+		return { code: Number(error.message) };
 	}
 
 	componentDidCatch(error: Error, errorInfo: ErrorInfo): HasError {
-		console.log(error)
+		console.log(error);
 
 		return { code: Number(error.message) };
 	}
 
 	render(): React.ReactNode {
 		if (this.state.code !== 200) {
-			if(this.state.code === 404){
+			if (this.state.code === 404) {
 				return (
 					<Result
 						status='404'
@@ -57,7 +57,7 @@ class ErrorBoundary extends React.Component<any, state> {
 						title='500'
 						subTitle='Sorry, something went wrong.'
 						extra={
-							<AlButton type='primary' onClick={() =>  this.goHome()}>
+							<AlButton type='primary' onClick={() => this.goHome()}>
 								Back Home
 							</AlButton>
 						}
@@ -70,4 +70,4 @@ class ErrorBoundary extends React.Component<any, state> {
 	}
 }
 
-export default withRouter(ErrorBoundary as any	);
+export default withRouter(ErrorBoundary as any);

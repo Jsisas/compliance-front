@@ -45,7 +45,7 @@ export function ControlsPage(): JSX.Element {
 	const userFilter = useCallback(
 		(control: Control) => {
 			if (selectedUsers && selectedUsers.length > 0) {
-				return selectedUsers.map(usr => usr.name).includes(control.assignee.name);
+				return selectedUsers.map((usr) => usr.name).includes(control.assignee.name);
 			} else {
 				return true;
 			}

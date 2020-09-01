@@ -9,14 +9,18 @@ axios.interceptors.response.use(
 			localStorage.removeItem('auth');
 			window.location.reload();
 		} else {
-			console.log(`${error.response.status} : ${error.response.statusText} => ${error.response.data.message || error.response.data}`);
+			console.log(
+				`${error.response.status} : ${error.response.statusText} => ${
+					error.response.data.message || error.response.data
+				}`
+			);
 		}
 		return Promise.reject(error);
 	}
 );
 
 axios.interceptors.request.use(
-	function(config) {
+	function (config) {
 		const authObj = localStorage.getItem('auth') || '{}';
 		const auth = JSON.parse(authObj);
 
@@ -27,7 +31,7 @@ axios.interceptors.request.use(
 
 		return config;
 	},
-	function(err) {
+	function (err) {
 		return Promise.reject(err);
 	}
 );
