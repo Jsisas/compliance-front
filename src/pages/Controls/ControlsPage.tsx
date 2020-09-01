@@ -132,7 +132,7 @@ export function ControlsPage(): JSX.Element {
 			render: (text: string, record: Control) => {
 				return <span>{record.assignee.name}</span>;
 			},
-			sorter: (a: Control, b: Control) => (a.assignee.name.length || 0) - (b.assignee.name?.length || 0),
+			sorter: (a: Control, b: Control) => (a.assignee.name?.length || 0) - (b.assignee.name?.length || 0),
 			sortDirections: ['descend', 'ascend'],
 		});
 		columns.push({

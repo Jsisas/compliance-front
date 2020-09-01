@@ -15,12 +15,17 @@ export type SearchProps<T> = {
 
 export function SearchSelectMultiple<T>(props: SearchProps<T>): JSX.Element {
 	const [selectedData, setSelectedData] = useState<T[]>(props.selectedData || []);
+	const [filteredData, setFilteredData] = useState<T[]>(props.data);
 
 	const triggerOnChange = useCallback(() => {
 		if (props.onChange && selectedData) {
 			props.onChange(selectedData);
 		}
 	}, [selectedData, props]);
+
+	useEffect(() => {
+		setFilteredData(props.data);
+	}, [props]);
 
 	useEffect(() => {
 		triggerOnChange();
@@ -44,6 +49,20 @@ export function SearchSelectMultiple<T>(props: SearchProps<T>): JSX.Element {
 		triggerOnChange();
 	}
 
+	function onSearch(input: string) {
+		if (!input || input.length < 1) {
+			setFilteredData(props.data);
+		} else {
+			setFilteredData(props.data.filter((obj) => getDisplayText(obj).toLowerCase().includes(input.toLowerCase())));
+		}
+	}
+
+	const results = filteredData.map((data: T) => (
+			<Option key={getObjValue(data)} value={getObjValue(data)}>
+				{getDisplayText(data)}
+			</Option>
+		));
+
 	return (
 		<Select
 			mode={'multiple'}
@@ -51,15 +70,12 @@ export function SearchSelectMultiple<T>(props: SearchProps<T>): JSX.Element {
 			placeholder={props.placeholder || 'Search users'}
 			filterOption={false}
 			style={{ width: '100%' }}
-			onChange={(value) => onChange(value)}
+			onSearch={onSearch}
+			onChange={onChange}
 			data-testid={'select'}
 			defaultValue={selectedData[0] ? getObjValue(selectedData[0]) : undefined}
 		>
-			{props.data.map((data: T) => (
-				<Option key={getObjValue(data)} value={getObjValue(data)}>
-					{getDisplayText(data)}
-				</Option>
-			))}
+			{results}
 		</Select>
-	);
+	)
 }
