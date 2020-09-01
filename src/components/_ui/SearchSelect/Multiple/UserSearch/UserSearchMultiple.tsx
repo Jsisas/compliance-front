@@ -32,7 +32,6 @@ export function UserSearchMultiple(props: UserSearchMultipleProps): JSX.Element 
 				selectedData={props.selectedUsers}
 				onChange={(user: User[]) => (props.onChange ? props.onChange(user) : undefined)}
 				data-testid={'userSearch'}
-
 			/>
 		</>
 	);

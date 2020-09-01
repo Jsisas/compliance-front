@@ -31,7 +31,6 @@ export function UpsertControlPage(): JSX.Element {
 
 	const [description, setDescription] = useState<string>(control?.description || '');
 
-
 	useEffect(() => {
 		if (id) {
 			dispatch(fetchControlById(id));
@@ -59,7 +58,7 @@ export function UpsertControlPage(): JSX.Element {
 	const [form] = Form.useForm();
 	React.useEffect(() => {
 		form.setFieldsValue({
-			description: description
+			description: description,
 		});
 	}, [description, form]);
 
@@ -81,12 +80,12 @@ export function UpsertControlPage(): JSX.Element {
 							rules={[
 								{
 									required: true,
-									message: 'Please input control title!'
-								}
+									message: 'Please input control title!',
+								},
 							]}
 							initialValue={control?.title}
 						>
-							<TextArea placeholder='Add title'/>
+							<TextArea placeholder='Add title' />
 						</Form.Item>
 
 						<Form.Item
@@ -94,12 +93,12 @@ export function UpsertControlPage(): JSX.Element {
 							rules={[
 								{
 									required: true,
-									message: 'Please input control description!'
-								}
+									message: 'Please input control description!',
+								},
 							]}
 							initialValue={control?.description || ''}
 						>
-							<ReactQuill theme="snow" value={control?.description || ''} onChange={(val) => setDescription(val)}/>
+							<ReactQuill theme='snow' value={control?.description || ''} onChange={(val) => setDescription(val)} />
 						</Form.Item>
 						<Form.Item label='Add assignee' name='assignee' initialValue={control?.assignee}>
 							<UserSearchSingle
@@ -117,7 +116,7 @@ export function UpsertControlPage(): JSX.Element {
 									rules={[{ required: true, message: 'Please add start date!' }]}
 									initialValue={date(control?.begins_at)}
 								>
-									<DatePicker/>
+									<DatePicker />
 								</Form.Item>
 							</Col>
 							<Col lg={{ span: 16 }} md={{ span: 16 }} sm={{ span: 16 }} xs={{ span: 24 }}>
@@ -153,7 +152,7 @@ export function UpsertControlPage(): JSX.Element {
 					xl={{ span: 5, offset: 1 }}
 				>
 					{(control || requirementsToAttach) && (
-						<ControlConnectedItems requirements={(control?.requirements || []).concat(requirementsToAttach)}/>
+						<ControlConnectedItems requirements={(control?.requirements || []).concat(requirementsToAttach)} />
 					)}
 				</Col>
 			</Row>

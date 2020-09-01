@@ -6,7 +6,7 @@ import { RootState } from '../../redux/reducer';
 import { Col, Row, Typography } from 'antd';
 import { EditOutlined, EllipsisOutlined } from '@ant-design/icons/lib';
 import AlButton from '../../components/_ui/AlButton/AlButton';
-import { fetchAllTasks, fetchTaskById } from '../../redux/Task/TaskService';
+import { fetchTaskById } from '../../redux/Task/TaskService';
 import { selectTaskById } from '../../redux/Task/TaskSlice';
 import styles from './taskDetails.module.scss';
 import { date, dateFormat } from '../../util/DateUtil';
@@ -17,7 +17,6 @@ import { notifyError } from '../../util/NotificationUtil';
 import { AlBackArrow } from '../../components/_ui/AlBackArrow/AlBackArrow';
 import StringUtil from '../../util/StringUtil';
 import { AlFile, AlUpload } from '../../components/_ui/AlUpload/AlUpload';
-import { ApiException } from '../../components/Exceptions/ApiException';
 
 const { Title, Text } = Typography;
 
@@ -30,23 +29,19 @@ export function TaskDetail(): JSX.Element {
 		dispatch(fetchTaskById(id));
 	}, [dispatch, id]);
 
-	if (!task) {
-		throw new ApiException(404);
-	}
-
 	return (
 		<>
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={1} xl={1}>
-					<AlBackArrow/>
+					<AlBackArrow />
 				</Col>
 				<Col xs={{ span: 10 }} sm={10} md={10} lg={{ span: 10 }} xl={{ span: 10 }}>
-					<Title style={{ marginBottom: 0 }}>{task.title}</Title>
+					<Title style={{ marginBottom: 0 }}>{task?.title}</Title>
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]} align={'bottom'}>
 				<Col xs={{ span: 10, offset: 1 }} sm={10} md={10} lg={{ span: 10, offset: 1 }} xl={{ span: 10, offset: 1 }}>
-					<Text type={'secondary'}>{task.description}</Text>
+					<Text type={'secondary'}>{task?.description}</Text>
 				</Col>
 				<Col
 					xs={{ span: 24 }}
@@ -56,10 +51,10 @@ export function TaskDetail(): JSX.Element {
 					xl={{ span: 3, offset: 10 }}
 				>
 					<AlButton type={'secondary'} style={{ float: 'right' }}>
-						<EllipsisOutlined/>
+						<EllipsisOutlined />
 					</AlButton>
 					<AlButton type={'secondary'} style={{ marginRight: '8px', float: 'right' }}>
-						<EditOutlined/>
+						<EditOutlined />
 					</AlButton>
 				</Col>
 			</Row>
@@ -90,22 +85,22 @@ export function TaskDetail(): JSX.Element {
 					</Row>
 					<Row gutter={[16, 16]}>
 						<Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 17 }} xl={{ span: 2 }}>
-							<Text>{StringUtil.humanizeSnakeCase(task.state || '')}</Text>
+							<Text>{StringUtil.humanizeSnakeCase(task?.state || '')}</Text>
 						</Col>
 						<Col xs={24} sm={24} md={24} lg={24} xl={2}>
 							<Text>
-								{task.assignee.name != null ? '@' : ''}
-								{task.assignee.name}
+								{task?.assignee.name != null ? '@' : ''}
+								{task?.assignee.name}
 							</Text>
 						</Col>
 						<Col xs={24} sm={24} md={24} lg={17} xl={3}>
-							<Text>{StringUtil.humanizeSnakeCase(task.kind || '')}</Text>
+							<Text>{StringUtil.humanizeSnakeCase(task?.kind || '')}</Text>
 						</Col>
 						<Col xs={24} sm={24} md={24} lg={24} xl={6}>
-							<Text>{date(task.due_at).format(dateFormat)}</Text>
+							<Text>{date(task?.due_at).format(dateFormat)}</Text>
 						</Col>
 						<Col xs={24} sm={24} md={24} lg={24} xl={6}>
-							<Text>{task.is_overdue ? 'Overdue' : 'Not overdue'}</Text>
+							<Text>{task?.is_overdue ? 'Overdue' : 'Not overdue'}</Text>
 						</Col>
 					</Row>
 				</Col>
@@ -116,7 +111,7 @@ export function TaskDetail(): JSX.Element {
 					lg={{ span: 5, offset: 1 }}
 					xl={{ span: 5, offset: 1 }}
 				>
-					<TaskConnectedItems task={task}/>
+					<TaskConnectedItems task={task} />
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]}>
@@ -126,19 +121,25 @@ export function TaskDetail(): JSX.Element {
 			</Row>
 			<Row gutter={[16, 16]}>
 				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 17, offset: 1 }}>
-					<Text>{task.description}</Text>
+					<Text>{task?.description}</Text>
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]}>
-				<Col xs={{ span: 24, offset: 1 }} sm={24} md={24} lg={{ span: 17, offset: 1 }} xl={{ span: 10, offset: 1 }}
-						 style={{ height: '100%' }}>
-					<AlUpload onChange={(file: AlFile[]) => console.log(file)}/>
+				<Col
+					xs={{ span: 24, offset: 1 }}
+					sm={24}
+					md={24}
+					lg={{ span: 17, offset: 1 }}
+					xl={{ span: 10, offset: 1 }}
+					style={{ height: '100%' }}
+				>
+					<AlUpload onChange={(file: AlFile[]) => console.log(file)} />
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]}>
 				<Col xs={{ span: 10, offset: 1 }} sm={10} md={10} lg={{ span: 10, offset: 1 }} xl={{ span: 10, offset: 1 }}>
 					<Text>Comment</Text>
-					<TextArea placeholder='Add comment'/>
+					<TextArea placeholder='Add comment' />
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]}>
@@ -151,7 +152,7 @@ export function TaskDetail(): JSX.Element {
 			<Row gutter={[16, 16]}>
 				<Col xs={{ span: 10, offset: 1 }} sm={10} md={10} lg={{ span: 10, offset: 1 }} xl={{ span: 10, offset: 1 }}>
 					<AlComment>
-						<AlComment/>
+						<AlComment />
 					</AlComment>
 				</Col>
 			</Row>

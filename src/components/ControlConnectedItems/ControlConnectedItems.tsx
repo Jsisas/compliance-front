@@ -7,7 +7,7 @@ import { Requirement } from '../../redux/Requirement/RequirementSlice';
 const { Text } = Typography;
 
 interface TaskConnectedItemsProps {
-	requirements: Requirement[];
+	requirements?: Requirement[];
 }
 
 export function ControlConnectedItems(props: TaskConnectedItemsProps): JSX.Element {
@@ -21,13 +21,13 @@ export function ControlConnectedItems(props: TaskConnectedItemsProps): JSX.Eleme
 				</Row>
 				<Row gutter={[16, 0]}>
 					<Col xs={24}>
-						<Text type={'secondary'}>Requirements ({props.requirements.length})</Text>
+						<Text type={'secondary'}>Requirements ({props.requirements?.length})</Text>
 					</Col>
 				</Row>
 				<Row gutter={[16, 16]}>
 					<Col xs={24} data-testid={'list'}>
-						{props.requirements.length > 0 ? (
-							props.requirements.map((requirement) => {
+						{(props.requirements || []).length > 0 ? (
+							props.requirements?.map((requirement) => {
 								return (
 									<Link key={requirement.id} to={`/requirements/${requirement.id}`} style={{ display: 'block' }}>
 										{requirement.title}

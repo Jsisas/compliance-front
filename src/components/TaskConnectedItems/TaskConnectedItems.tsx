@@ -8,7 +8,7 @@ import StringUtil from '../../util/StringUtil';
 const { Text } = Typography;
 
 interface TaskConnectedItemsProps {
-	task: Task;
+	task?: Task;
 }
 
 export function TaskConnectedItems(props: TaskConnectedItemsProps): JSX.Element {
@@ -27,8 +27,8 @@ export function TaskConnectedItems(props: TaskConnectedItemsProps): JSX.Element 
 				</Row>
 				<Row gutter={[16, 16]}>
 					<Col xs={24}>
-						<Link key={props.task.control.id} to={`/controls/${props.task.control.id}`}>
-							{StringUtil.shortenStringLength(props.task.control.title, 50)}
+						<Link key={props.task?.control.id} to={`/controls/${props.task?.control.id}`}>
+							{StringUtil.shortenStringLength(props.task?.control.title || '', 50)}
 						</Link>
 					</Col>
 				</Row>

@@ -43,7 +43,7 @@ const AuthSlice = createSlice({
 			localStorage.setItem('auth', JSON.stringify(action.payload));
 			notifySuccess('Log in', 'Logging in was successful');
 		});
-		builder.addCase(authenticate.rejected, (state, action) => {
+		builder.addCase(authenticate.rejected, () => {
 			clearAuth();
 			notifyError('Log in', 'Logging in failed');
 		});
