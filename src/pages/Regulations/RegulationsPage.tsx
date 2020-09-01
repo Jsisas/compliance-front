@@ -122,7 +122,7 @@ export default function RegulationsPage(): JSX.Element {
 		<>
 			<Row gutter={[16, 16]} justify={'space-between'}>
 				<Col xs={24} sm={16} md={10} lg={16} xl={16} xxl={16}>
-					<Title>Regulations</Title>
+					<Title>Overview</Title>
 				</Col>
 			</Row>
 			<Row gutter={[16, 16]} justify={'space-between'}>
