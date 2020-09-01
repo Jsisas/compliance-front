@@ -8,6 +8,9 @@ describe('When visiting controls page', () => {
 		cy.get('.ant-menu-root').within(() => {
 			cy.contains('Controls').parent().click().should('have.class', 'ant-menu-item-selected').click();
 		});
+
+		cy.server()
+		cy.route('POST', '/api/v1/controls').as('create-control')
 	});
 
 	describe('can filter', () => {
@@ -99,6 +102,7 @@ describe('When visiting controls page', () => {
 		});
 
 		cy.contains('Submit').click();
+		cy.wait('@create-control').should('have.property', 'status', 200)
 		searchByText('cypress-title-' + randomString);
 	});
 });

@@ -24,6 +24,7 @@ import styles from './addTaskModal.module.scss';
 import { User } from '../../../redux/User/UserSlice';
 import { UserSearchSingle } from '../../_ui/SearchSelect/Single/UserSearch/UserSearchSingle';
 import ReactQuill from 'react-quill';
+import moment from 'moment';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -131,7 +132,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 										<Option value={60}>1 hour</Option>
 									</Select>
 								</Form.Item>
-								<Form.Item name='frequency' label='Frequency'>
+								<Form.Item name='frequency' label='Frequency' initialValue={taskFrequency}>
 									<Select
 										placeholder='Select task frequency'
 										defaultValue={taskFrequency}
@@ -213,7 +214,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 											</Select>
 										</Form.Item>
 									)}
-								<Form.Item label='Due date' name='due_at' rules={[{ required: true, message: 'Please add due date!' }]}>
+								<Form.Item label='Due date' name='due_at' rules={[{ required: true, message: 'Please add due date!' }]} initialValue={moment()}>
 									<DatePicker />
 								</Form.Item>
 								<AlButton type='primary' style={{ marginRight: '8px' }} htmlType='submit'>

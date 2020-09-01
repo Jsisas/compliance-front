@@ -37,7 +37,6 @@ export const fetchTaskById = createAsyncThunk('requirements/fetchTaskById', asyn
 });
 
 export const createTask = createAsyncThunk('tasks/create', async (task: Task) => {
-	console.log(task);
 	const upsertData: UpsertTask = {
 		id: task.id,
 		due_at: task.due_at,
