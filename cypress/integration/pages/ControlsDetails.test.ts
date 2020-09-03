@@ -1,5 +1,4 @@
-import { Simulate } from 'react-dom/test-utils';
-import input = Simulate.input;
+import { ControlRequestMethod, ControlTestUtil } from '../util/ControlTestUtil';
 
 describe('When visiting controls page', () => {
 	before(() => {
@@ -14,12 +13,11 @@ describe('When visiting controls page', () => {
 
 		cy.get('table tr:nth-child(2)').click();
 		cy.url().should('include', '/controls/');
-
-		cy.server();
-		cy.route('POST', '/api/v1/controls').as('create-control');
 	});
 
 	it('it is true', () => {
-		expect(true).to.be.true;
+		cy.get('a > .ant-btn').click();
+		const cypressString = ControlTestUtil.fillControlUpsertForm(ControlRequestMethod.PATCH);
+		cy.contains(cypressString);
 	});
 });

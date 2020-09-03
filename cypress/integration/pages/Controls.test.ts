@@ -1,5 +1,4 @@
-import { Simulate } from 'react-dom/test-utils';
-import input = Simulate.input;
+import { ControlRequestMethod, ControlTestUtil } from '../util/ControlTestUtil';
 
 describe('When visiting controls page', () => {
 	before(() => {
@@ -26,7 +25,7 @@ describe('When visiting controls page', () => {
 				.invoke('text')
 				.then((text) => {
 					const searchTerm = text.substr(0, 3).toLowerCase();
-					searchByText(searchTerm);
+					ControlTestUtil.searchControlTableByText(searchTerm);
 				});
 		});
 
@@ -40,7 +39,7 @@ describe('When visiting controls page', () => {
 				.then((ownerName) => {
 					cy.contains(textInputSelector).click();
 					cy.get('.ant-select-dropdown').within((ele) => {
-						cy.contains(ownerName).click({force: true});
+						cy.contains(ownerName).click({ force: true });
 					});
 
 					cy.get('tbody > tr > td:nth-child(4) > span').each((span: HTMLSpanElement[]) => {
@@ -60,7 +59,7 @@ describe('When visiting controls page', () => {
 				.then((categoryName) => {
 					cy.contains(textInputSelector).prev().click();
 					cy.get('.ant-select-dropdown').within((ele) => {
-						cy.contains(categoryName).click({force: true});
+						cy.contains(categoryName).click({ force: true });
 					});
 
 					cy.get('tbody > tr > td:nth-child(3) > span').each((span: HTMLSpanElement[]) => {
@@ -81,7 +80,7 @@ describe('When visiting controls page', () => {
 				.then((statusName) => {
 					cy.contains(textInputSelector).prev().click();
 					cy.get('.ant-select-dropdown').within((ele) => {
-						cy.contains(statusName).click({force: true});
+						cy.contains(statusName).click({ force: true });
 					});
 
 					cy.get('tbody > tr > td:nth-child(2) > span').each((span: HTMLSpanElement[]) => {
@@ -95,29 +94,6 @@ describe('When visiting controls page', () => {
 
 	it('it can add new control', () => {
 		cy.contains('Add Control').click();
-		const randomString = Math.random()
-			.toString(36)
-			.substring(0, 8)
-			.replace(/[^\w\s]/gi, '');
-		cy.get('#title').type('cypress-title-' + randomString);
-		cy.get('.ql-editor').type('cypress-body-'.concat(randomString));
-		cy.contains('Add assignees').prev().click();
-
-		cy.get('.ant-select-dropdown').within((ele) => {
-			cy.contains('Joosep Sisas').click();
-		});
-
-		cy.contains('Submit').click();
-		cy.wait('@create-control').should('have.property', 'status', 200);
-		searchByText('cypress-title-' + randomString);
+		const cypressString = ControlTestUtil.fillControlUpsertForm(ControlRequestMethod.POST);
 	});
 });
-
-function searchByText(searchTerm: string) {
-	const textInputSelector = '.ant-input';
-	cy.get(textInputSelector).type(searchTerm);
-	cy.get('tbody > tr > td:nth-child(1) > span').each((span: HTMLSpanElement[]) => {
-		expect(span[0].textContent?.toLowerCase()).to.contain(searchTerm);
-	});
-	cy.get(textInputSelector).clear();
-}
