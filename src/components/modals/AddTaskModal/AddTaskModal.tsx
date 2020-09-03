@@ -214,7 +214,12 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 											</Select>
 										</Form.Item>
 									)}
-								<Form.Item label='Due date' name='due_at' rules={[{ required: true, message: 'Please add due date!' }]} initialValue={moment()}>
+								<Form.Item
+									label='Due date'
+									name='due_at'
+									rules={[{ required: true, message: 'Please add due date!' }]}
+									initialValue={moment()}
+								>
 									<DatePicker />
 								</Form.Item>
 								<AlButton type='primary' style={{ marginRight: '8px' }} htmlType='submit'>

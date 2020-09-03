@@ -40,7 +40,7 @@ describe('When visiting controls page', () => {
 				.then((ownerName) => {
 					cy.contains(textInputSelector).click();
 					cy.get('.ant-select-dropdown').within((ele) => {
-						cy.contains(ownerName).click();
+						cy.contains(ownerName).click({force: true});
 					});
 
 					cy.get('tbody > tr > td:nth-child(4) > span').each((span: HTMLSpanElement[]) => {
@@ -53,18 +53,18 @@ describe('When visiting controls page', () => {
 
 		it('by category', () => {
 			const textInputSelector = 'Filter by category';
-			const firstRowOwner = 'tr.ant-table-row:nth-child(2) > td:nth-child(3) > span:nth-child(1)';
+			const firstRowCategory = 'tr.ant-table-row:nth-child(2) > td:nth-child(3) > span:nth-child(1)';
 
-			cy.get(firstRowOwner)
+			cy.get(firstRowCategory)
 				.invoke('text')
-				.then((ownerName) => {
+				.then((categoryName) => {
 					cy.contains(textInputSelector).prev().click();
 					cy.get('.ant-select-dropdown').within((ele) => {
-						cy.contains(ownerName).click();
+						cy.contains(categoryName).click({force: true});
 					});
 
 					cy.get('tbody > tr > td:nth-child(3) > span').each((span: HTMLSpanElement[]) => {
-						expect(span[0].textContent?.toLowerCase()).to.contain(ownerName.toLowerCase());
+						expect(span[0].textContent?.toLowerCase()).to.contain(categoryName.toLowerCase());
 					});
 				});
 			cy.get('.ant-select-clear > .anticon').click();
@@ -74,18 +74,18 @@ describe('When visiting controls page', () => {
 		it('by status', () => {
 			const textInputSelector = 'Filter by status';
 			cy.contains('Status').click();
-			const firstRowOwner = 'tr.ant-table-row:nth-child(2) > td:nth-child(2) > span:nth-child(1)';
+			const firstRowStatus = 'tr.ant-table-row:nth-child(2) > td:nth-child(2) > span:nth-child(1)';
 
-			cy.get(firstRowOwner)
+			cy.get(firstRowStatus)
 				.invoke('text')
-				.then((ownerName) => {
+				.then((statusName) => {
 					cy.contains(textInputSelector).prev().click();
 					cy.get('.ant-select-dropdown').within((ele) => {
-						cy.contains(ownerName).click();
+						cy.contains(statusName).click({force: true});
 					});
 
 					cy.get('tbody > tr > td:nth-child(2) > span').each((span: HTMLSpanElement[]) => {
-						expect(span[0].textContent?.toLowerCase()).to.contain(ownerName.toLowerCase());
+						expect(span[0].textContent?.toLowerCase()).to.contain(statusName.toLowerCase());
 					});
 				});
 			cy.get('.ant-select-clear > .anticon').click();

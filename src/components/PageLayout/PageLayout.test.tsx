@@ -30,8 +30,10 @@ describe('<PageLayout />', () => {
 
 	it('it highlights correct menu item on load', () => {
 		deepRender(<PageLayout />, { auth: [initialAuthentication] });
-		const overviewMenuItem = screen.getByText('Overview');
-		expect(overviewMenuItem.parentElement).toHaveClass('ant-menu-item-selected');
+		const layout = screen.getByTestId('page-layout');
+		const overviewMenuItem = layout.getElementsByClassName('ant-menu-item-selected').item(0);
+		expect(overviewMenuItem).toBeInTheDocument();
+		expect(overviewMenuItem).toHaveTextContent('Overview');
 	});
 
 	it('it highlights correct menu item on click', () => {

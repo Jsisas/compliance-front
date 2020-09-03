@@ -58,10 +58,10 @@ export function SearchSelectMultiple<T>(props: SearchProps<T>): JSX.Element {
 	}
 
 	const results = filteredData.map((data: T) => (
-			<Option key={getObjValue(data)} value={getObjValue(data)}>
-				{getDisplayText(data)}
-			</Option>
-		));
+		<Option key={getObjValue(data)} value={getObjValue(data)}>
+			{getDisplayText(data)}
+		</Option>
+	));
 
 	return (
 		<Select
@@ -77,5 +77,5 @@ export function SearchSelectMultiple<T>(props: SearchProps<T>): JSX.Element {
 		>
 			{results}
 		</Select>
-	)
+	);
 }

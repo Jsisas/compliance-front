@@ -7,6 +7,7 @@ Object {
     <div>
       <section
         class="ant-layout ant-layout-has-sider"
+        data-testid="page-layout"
       >
         <aside
           class="extraExtraLightGrey ant-layout-sider ant-layout-sider-light"
@@ -105,7 +106,7 @@ Object {
                   <h1
                     class="ant-typography"
                   >
-                    Regulations
+                    Overview
                   </h1>
                 </div>
               </div>
@@ -225,6 +226,7 @@ Object {
   "container": <div>
     <section
       class="ant-layout ant-layout-has-sider"
+      data-testid="page-layout"
     >
       <aside
         class="extraExtraLightGrey ant-layout-sider ant-layout-sider-light"
@@ -323,7 +325,7 @@ Object {
                 <h1
                   class="ant-typography"
                 >
-                  Regulations
+                  Overview
                 </h1>
               </div>
             </div>
