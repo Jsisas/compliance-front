@@ -1,4 +1,4 @@
-import { ControlRequestMethod, ControlTestUtil } from '../util/ControlTestUtil';
+import { RequestMethod, ControlTestUtil } from '../util/ControlTestUtil';
 
 describe('When visiting controls page', () => {
 	before(() => {
@@ -94,6 +94,6 @@ describe('When visiting controls page', () => {
 
 	it('it can add new control', () => {
 		cy.contains('Add Control').click();
-		const cypressString = ControlTestUtil.fillControlUpsertForm(ControlRequestMethod.POST);
+		const cypressString = ControlTestUtil.fillControlUpsertForm(RequestMethod.POST);
 	});
 });

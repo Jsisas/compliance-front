@@ -1,12 +1,12 @@
-export enum ControlRequestMethod {
+export enum RequestMethod {
 	PATCH = 'PATCH',
 	POST = 'POSt',
 }
 
 export class ControlTestUtil {
-	static fillControlUpsertForm(method: ControlRequestMethod): string {
+	static fillControlUpsertForm(method: RequestMethod): string {
 		cy.server();
-		if (method == ControlRequestMethod.PATCH) {
+		if (method == RequestMethod.PATCH) {
 			cy.route(method, '/api/v1/controls/*').as('upsert-control');
 		} else {
 			cy.route(method, '/api/v1/controls').as('upsert-control');
