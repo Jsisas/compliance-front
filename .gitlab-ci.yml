@@ -4,10 +4,9 @@ stages:
   - install
   - build
   - quality
-  - deploy
-  - audit
 
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
     - .yarn
@@ -23,22 +22,11 @@ install:
     - yarn install
   script:
     - yarn build
-  artifacts:
-    name: "artifacts"
-    untracked: true
-    expire_in: 60 mins
-    paths:
-      - .yarn/
-      - node_modules/
 
 build:
   stage: build
   script:
-    - CI=false yarn build
-  artifacts:
-    paths:
-      - build
-    expire_in: 60 mins
+    - yarn build
   dependencies:
     - install
 
@@ -63,11 +51,7 @@ test:e2e:
   dependencies:
     - install
     - build
+  coverage: /Statements\s+:\s(\d+.?\d+)%/
   script:
     - yarn serve -s build -l 3000 & yarn wait-on http://localhost:3000
     - yarn cypress run --record --key 8526982a-d856-47f8-a6a8-e005048b9fc3 --group gitlab-ci
-  artifacts:
-    paths:
-      - cypress/screenshots
-      - cypress/videos
-    expire_in: 1 day
