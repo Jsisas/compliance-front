@@ -78,6 +78,7 @@
 		"eslint-plugin-prettier": "^3.1.4",
 		"eslint-plugin-react": "^7.20.3",
 		"jest-environment-jsdom-sixteen": "^1.0.3",
+		"netlify-cli": "^2.61.0",
 		"prettier": "^2.0.5",
 		"redux-mock-store": "^1.5.4",
 		"serve": "^11.3.2",
