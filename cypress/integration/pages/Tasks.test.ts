@@ -1,5 +1,5 @@
-import { TaskTestUtil } from '../util/TaskTestUtil';
-import { RequestMethod } from '../util/ControlTestUtil';
+import { TaskTestUtil } from '../../util/TaskTestUtil';
+import { RequestMethod } from '../../util/ControlTestUtil';
 
 describe('When visiting controls page', () => {
 	before(() => {

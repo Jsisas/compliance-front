@@ -1,4 +1,4 @@
-import { RequestMethod, ControlTestUtil } from '../util/ControlTestUtil';
+import { RequestMethod, ControlTestUtil } from '../../util/ControlTestUtil';
 
 describe('When visiting controls page', () => {
 	before(() => {
