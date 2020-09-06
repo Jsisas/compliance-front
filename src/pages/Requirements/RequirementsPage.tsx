@@ -4,7 +4,7 @@ import { Col, Dropdown, Input, Menu, Row, Select, Table, Tag, Typography } from 
 import { ColumnProps } from 'antd/lib/table';
 import produce, { Draft } from 'immer';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, RouteComponentProps, useParams } from 'react-router-dom';
 
@@ -52,7 +52,7 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 	const requirements = useSelector((state: RootState) => selectAllRequirements(state));
 
 	const [selectedRequirementIds, setSelectedRequirementIds] = useState<string[]>([]);
-	const filteredRequirements = getFilteredRequirements();
+	const [filteredRequirements, setFilteredRequirements] = useState<Requirement[]>([]);
 
 	const isTableLoading = useSelector((state: RootState) => state.regulation.loading);
 
@@ -64,39 +64,52 @@ export function RequirementsPage(props: RouteComponentProps<any, any, Requiremen
 	}, [dispatch, id]);
 	const columns: ColumnProps<never>[] = [];
 
-	function getFilteredRequirements() {
-		return requirements.filter(filterByRegulation).filter(filterBySearchTerm).filter(filterByRequirementSelection);
-	}
-
-	function filterByRegulation(requirement: Requirement) {
-		if (selectedRegulation) {
-			return requirement.regulations.some((regulation) => selectedRegulation.id === regulation.id);
-		} else {
-			return true;
-		}
-	}
-
-	function filterBySearchTerm(requirement: Requirement) {
-		if (tableSearchText) {
-			return requirement.title.toLowerCase().includes(tableSearchText.toLowerCase());
-		} else {
-			return true;
-		}
-	}
-
-	function filterByRequirementSelection(requirement: Requirement) {
-		if (requirementFilter) {
-			if (requirementFilter === RequirementFilter.ALL) {
+	const filterByRequirementSelection = useCallback(
+		(requirement: Requirement) => {
+			if (requirementFilter) {
+				if (requirementFilter === RequirementFilter.ALL) {
+					return true;
+				} else if (requirementFilter === RequirementFilter.WITH_FAILING_CONTROL) {
+					return isRequirementWithFailingControl(requirement);
+				} else if (requirementFilter === RequirementFilter.WITHOUT_CONTROl) {
+					return isRequirementWithoutControl(requirement);
+				}
+			} else {
 				return true;
-			} else if (requirementFilter === RequirementFilter.WITH_FAILING_CONTROL) {
-				return isRequirementWithFailingControl(requirement);
-			} else if (requirementFilter === RequirementFilter.WITHOUT_CONTROl) {
-				return isRequirementWithoutControl(requirement);
 			}
-		} else {
-			return true;
-		}
-	}
+		},
+		[requirementFilter]
+	);
+
+	const filterBySearchTerm = useCallback(
+		(requirement: Requirement) => {
+			if (tableSearchText) {
+				return requirement.title.toLowerCase().includes(tableSearchText.toLowerCase());
+			} else {
+				return true;
+			}
+		},
+		[tableSearchText]
+	);
+
+	const filterByRegulation = useCallback(
+		(requirement: Requirement) => {
+			if (selectedRegulation) {
+				return requirement.regulations.some((regulation) => selectedRegulation.id === regulation.id);
+			} else {
+				return true;
+			}
+		},
+		[selectedRegulation]
+	);
+
+	const getFilteredRequirements = useCallback(() => {
+		return requirements.filter(filterByRegulation).filter(filterBySearchTerm).filter(filterByRequirementSelection);
+	}, [requirements, filterByRegulation, filterBySearchTerm, filterByRequirementSelection]);
+
+	useEffect(() => {
+		setFilteredRequirements(getFilteredRequirements());
+	}, [getFilteredRequirements]);
 
 	if (selectedRegulation !== undefined && selectedRegulation.requirements.length > 0) {
 		columns.push({
