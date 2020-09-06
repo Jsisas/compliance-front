@@ -5,6 +5,7 @@ import requirementReducer from './Requirement/RequirementSlice';
 import tmpRequirementReducer from './Requirement/TmpRequirementSlice/TmpRequirementSlice';
 import taskReducer from './Task/TaskSlice';
 import authReducer from './Auth/AuthSlice';
+import errorReducer from './Error/ErrorSlice';
 import { combineReducers } from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
 	requirement: requirementReducer,
 	tmpRequirement: tmpRequirementReducer,
 	task: taskReducer,
+	error: errorReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

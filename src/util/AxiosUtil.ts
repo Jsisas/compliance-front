@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { Error, setError } from '../redux/Error/ErrorSlice';
+import store from '../redux/store';
 
 axios.interceptors.response.use(
 	(response) => {
@@ -8,13 +10,14 @@ axios.interceptors.response.use(
 		if (error.response.status === 403) {
 			localStorage.removeItem('auth');
 			window.location.reload();
-		} else {
-			console.log(
-				`${error.response.status} : ${error.response.statusText} => ${
-					error.response.data.message || error.response.data
-				}`
-			);
 		}
+
+		const errorObj: Error = {
+			code: error.response.data.error.status,
+			name: error.response.data.error.code,
+			message: error.response.data.error.message,
+		};
+		store.dispatch(setError(errorObj));
 		return Promise.reject(error);
 	}
 );

@@ -3,7 +3,7 @@ import { createEntityAdapter, createSelector, createSlice, EntityState } from '@
 import { Control } from '../Control/ControlSlice';
 import { RootState } from '../reducer';
 import { User } from '../User/UserSlice';
-import { upsertTask, fetchAllTasks, fetchTaskById } from './TaskService';
+import { fetchAllTasks, fetchTaskById, upsertTask } from './TaskService';
 
 export enum Weekday {
 	MONDAY,

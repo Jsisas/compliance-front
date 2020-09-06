@@ -30,12 +30,12 @@ export const fetchAllTasks = createAsyncThunk('tasks/fetchAll', async () => {
 	return response.data.data;
 });
 
-export const fetchTaskById = createAsyncThunk('requirements/fetchTaskById', async (taskId: string) => {
-	const response: AxiosResponse<ApiWrapper<Task>> = await axios.get(`${API_URL}/tasks/` + taskId);
+export const fetchTaskById = createAsyncThunk('requirements/fetchTaskById', async (taskId: string, thunkApi) => {
+	const response = await axios.get(`${API_URL}/tasks/` + taskId);
 	return response.data.data;
 });
 
-export const upsertTask = createAsyncThunk('tasks/upsert', async (task: Task) => {
+export const upsertTask = createAsyncThunk('tasks/upsert', async (task: Task, thunkApi) => {
 	const upsertData: UpsertTask = {
 		id: task.id,
 		due_at: task.due_at,
@@ -50,9 +50,7 @@ export const upsertTask = createAsyncThunk('tasks/upsert', async (task: Task) =>
 	};
 
 	if (upsertData.id) {
-		const response: AxiosResponse<ApiWrapper<Task>> = await axios.patch(`${API_URL}/tasks/` + upsertData.id, {
-			task,
-		});
+		const response: AxiosResponse<ApiWrapper<Task>> = await axios.patch(`${API_URL}/tasks/` + upsertData.id, { task });
 		return response.data.data;
 	} else {
 		const response: AxiosResponse<ApiWrapper<Task>> = await axios.post(`${API_URL}/tasks`, {
