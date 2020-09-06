@@ -27,7 +27,9 @@ export function SearchInput<T>(props: SearchInput<T>): JSX.Element {
 	}
 
 	function filterObj(obj: T, value: string) {
-		const matchedKeys = props.filterByKeys.filter((key) => getObjKeyValue(obj, key).includes(value));
+		const matchedKeys = props.filterByKeys.filter((key) =>
+			getObjKeyValue(obj, key).toLowerCase().includes(value.toLowerCase())
+		);
 		return matchedKeys.length > 0;
 	}
 
