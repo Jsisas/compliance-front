@@ -3,7 +3,6 @@ import React, { ErrorInfo } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import AlButton from '../_ui/AlButton/AlButton';
-import { ApiException } from '../Exceptions/ApiException';
 
 type state = { code: number };
 
@@ -25,7 +24,7 @@ class ErrorBoundary extends React.Component<any, state> {
 		this.props.history.goBack();
 	}
 
-	static getDerivedStateFromError(error: ApiException): HasError {
+	static getDerivedStateFromError(error: any): HasError {
 		return { code: Number(error.message) };
 	}
 
