@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Control } from '../../../redux/Control/ControlSlice';
-import { createTask } from '../../../redux/Task/TaskService';
+import { upsertTask } from '../../../redux/Task/TaskService';
 import {
 	Month,
 	Quarter,
@@ -32,7 +32,7 @@ const { Option } = Select;
 interface AddTaskProps {
 	control?: Control;
 	isVisible?: boolean;
-	onCancel?: () => void;
+	onClose?: () => void;
 }
 
 export function AddTaskModule(props: AddTaskProps): JSX.Element {
@@ -45,11 +45,11 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 	function handleCreateNewTask(data: Task): void {
 		data.control = props.control || ({} as Control);
 		data.assignee = selectedAssignee || ({} as User);
-		dispatch(createTask(data));
+		dispatch(upsertTask(data));
 		notifySuccess('Add task', 'Adding a task was successful');
 
-		if (props.onCancel) {
-			props.onCancel();
+		if (props.onClose) {
+			props.onClose();
 		}
 	}
 
@@ -74,7 +74,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 				width={540}
 				visible={props.isVisible}
 				maskClosable={true}
-				onCancel={props.onCancel}
+				onCancel={props.onClose}
 				footer={null}
 				closeIcon={<CloseOutlined className={styles.modalCloseButton} />}
 				bodyStyle={{ padding: 0 }}
@@ -94,8 +94,8 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								>
 									<Input placeholder='Add title to the task' />
 								</Form.Item>
-								<Form.Item label='Type' name='kind'>
-									<Radio.Group defaultValue={TaskType.MAINTENANCE}>
+								<Form.Item label='Type' name='kind' initialValue={TaskType.MAINTENANCE}>
+									<Radio.Group>
 										{Object.values(TaskType).map((type: TaskType) => {
 											return (
 												<Radio value={type} key={type}>
@@ -125,8 +125,8 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								<Form.Item label='Add assignee' name='assignee'>
 									<UserSearchSingle placeholder='Add assignees' onChange={(user: User) => setSelectedAssignee(user)} />
 								</Form.Item>
-								<Form.Item name='duration' label='Duration'>
-									<Select placeholder='Select task duration' defaultValue={15}>
+								<Form.Item name='duration' label='Duration' initialValue={15}>
+									<Select placeholder='Select task duration'>
 										<Option value={15}>15 minutes</Option>
 										<Option value={30}>30 minutes</Option>
 										<Option value={60}>1 hour</Option>
@@ -135,19 +135,17 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								<Form.Item name='frequency' label='Frequency' initialValue={taskFrequency}>
 									<Select
 										placeholder='Select task frequency'
-										defaultValue={taskFrequency}
-										onSelect={(value) => setTaskFrequency(value)}
+										onSelect={(value) => setTaskFrequency(value as TaskFrequencyType)}
 									>
 										<Option value={TaskFrequencyType.ONE_TIME}>{TaskFrequencyType.ONE_TIME}</Option>
 										<Option value={TaskFrequencyType.RECURRING}>{TaskFrequencyType.RECURRING}</Option>
 									</Select>
 								</Form.Item>
 								{taskFrequency === TaskFrequencyType.RECURRING && (
-									<Form.Item name='recurrence' label='Recurrence'>
+									<Form.Item name='recurrence' label='Recurrence' initialValue={taskRecurrence}>
 										<Select
 											placeholder='Select task recurrence'
-											defaultValue={taskRecurrence}
-											onSelect={(value) => setTaskRecurrence(value)}
+											onSelect={(value) => setTaskRecurrence(value as TaskFrequencyTypeRecurrence)}
 										>
 											<Option value={TaskFrequencyTypeRecurrence.WEEKLY}>{TaskFrequencyTypeRecurrence.WEEKLY}</Option>
 											<Option value={TaskFrequencyTypeRecurrence.MONTHLY}>{TaskFrequencyTypeRecurrence.MONTHLY}</Option>
@@ -162,8 +160,8 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 									taskFrequency === TaskFrequencyType.RECURRING) ||
 									(taskRecurrence === TaskFrequencyTypeRecurrence.MONTHLY &&
 										taskFrequency === TaskFrequencyType.RECURRING)) && (
-									<Form.Item name='weekDay' label='Weekday'>
-										<Select placeholder='Select task recurrence' defaultValue={Weekday.MONDAY}>
+									<Form.Item name='weekDay' label='Weekday' initialValue={Weekday.MONDAY}>
+										<Select placeholder='Select task recurrence'>
 											<Option value={Weekday.MONDAY}>Monday</Option>
 											<Option value={Weekday.TUESDAY}>Tuesday</Option>
 											<Option value={Weekday.WEDNESDAY}>Wednesday</Option>
@@ -176,8 +174,8 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								)}
 								{taskRecurrence === TaskFrequencyTypeRecurrence.MONTHLY &&
 									taskFrequency === TaskFrequencyType.RECURRING && (
-										<Form.Item name='week' label='Week'>
-											<Select placeholder='Select week number' defaultValue={Quarter.FIRST}>
+										<Form.Item name='week' label='Week' initialValue={Quarter.FIRST}>
+											<Select placeholder='Select week number'>
 												<Option value={Quarter.FIRST}>First</Option>
 												<Option value={Quarter.SECOND}>Second</Option>
 												<Option value={Quarter.THIRD}>Third</Option>
@@ -187,8 +185,8 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 									)}
 								{taskRecurrence === TaskFrequencyTypeRecurrence.QUARTERLY &&
 									taskFrequency === TaskFrequencyType.RECURRING && (
-										<Form.Item name='quarter' label='Quarter'>
-											<Select placeholder='Select task recurrence' defaultValue={Quarter.FIRST}>
+										<Form.Item name='quarter' label='Quarter' initialValue={Quarter.FIRST}>
+											<Select placeholder='Select task recurrence'>
 												<Option value={Quarter.FIRST}>First</Option>
 												<Option value={Quarter.SECOND}>Second</Option>
 												<Option value={Quarter.THIRD}>Third</Option>
@@ -198,8 +196,8 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 									)}
 								{taskRecurrence === TaskFrequencyTypeRecurrence.ANNUAL &&
 									taskFrequency === TaskFrequencyType.RECURRING && (
-										<Form.Item name='annual' label='Annual'>
-											<Select placeholder='Select task recurrence' defaultValue={Month.JANUARY}>
+										<Form.Item name='annual' label='Annual' initialValue={Month.JANUARY}>
+											<Select placeholder='Select task recurrence'>
 												<Option value={Month.JANUARY}>January</Option>
 												<Option value={Month.FEBRUARY}>February</Option>
 												<Option value={Month.MARCH}>March</Option>
@@ -225,7 +223,7 @@ export function AddTaskModule(props: AddTaskProps): JSX.Element {
 								<AlButton type='primary' style={{ marginRight: '8px' }} htmlType='submit'>
 									Add task
 								</AlButton>
-								<AlButton type='secondary' onClick={props.onCancel}>
+								<AlButton type='secondary' onClick={props.onClose}>
 									Cancel
 								</AlButton>
 							</Form>

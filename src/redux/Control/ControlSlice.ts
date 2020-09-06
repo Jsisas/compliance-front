@@ -5,6 +5,7 @@ import { Requirement } from '../Requirement/RequirementSlice';
 import { Task } from '../Task/TaskSlice';
 import { User } from '../User/UserSlice';
 import { fetchAllControls, fetchControlById, upsertControl } from './ControlService';
+import { upsertTask } from '../Task/TaskService';
 
 export enum ControlStatus {
 	NOT_IMPLEMENTED = 'not_implemented',
@@ -56,6 +57,21 @@ const ControlSlice = createSlice({
 		});
 		builder.addCase(fetchControlById.fulfilled, (state, action) => {
 			controlsAdapter.upsertOne(state, action);
+			state.loading = false;
+		});
+		builder.addCase(upsertTask.fulfilled, (state, action) => {
+			if (action.payload.control.id) {
+				const control: Control | undefined = controlsAdapter
+					.getSelectors()
+					.selectById(state, action.payload.control.id);
+				const task: Task = action.payload;
+
+				if (control) {
+					delete task.control;
+					control.tasks.push(action.payload);
+					controlsAdapter.upsertOne(state, control);
+				}
+			}
 			state.loading = false;
 		});
 	},

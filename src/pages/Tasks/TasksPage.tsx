@@ -86,7 +86,7 @@ export function TasksPage(props: RouteComponentProps): JSX.Element {
 
 	return (
 		<>
-			<AddTaskModule isVisible={isAddTaskModalVisible} onCancel={toggleModal} />
+			<AddTaskModule isVisible={isAddTaskModalVisible} onClose={toggleModal} />
 			<Row gutter={[16, 16]} justify={'space-between'}>
 				<Col xs={24} sm={16} md={10} lg={16} xl={16} xxl={16}>
 					<Title>Tasks</Title>
