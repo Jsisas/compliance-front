@@ -13,7 +13,7 @@ describe('When visiting requirements page', () => {
 
 	beforeEach(() => {
 		cy.server();
-		cy.route('PATCH', '/api/v1/requirements').as('update-requirement');
+		cy.route('PATCH', '/api/v1/requirements/*').as('update-requirement');
 		cy.route('POST', '/api/v1/controls').as('create-control');
 	});
 
@@ -46,12 +46,16 @@ describe('When visiting requirements page', () => {
 			'.ant-table-selection > label:nth-child(1) > span:nth-child(1) > input:nth-child(1)';
 		cy.get(allSelectCheckboxSelector).check();
 		cy.get('.ant-checkbox-input').parent().should('have.class', 'ant-checkbox ant-checkbox-checked');
-		cy.contains('10 selected');
+		cy.contains(' selected')
+			.invoke('text')
+			.then((text) => {
+				const selectedNumber = Number(text.split(' ')[0]);
+				expect(selectedNumber).to.be.at.most(10);
+			});
 		cy.get(allSelectCheckboxSelector).uncheck();
 	});
 
-	//TODO Requirements does not have PATCH method
-	it.skip('it can add existing control', () => {
+	it('it can add existing control', () => {
 		const firstRowCheckbox =
 			'tr.ant-table-row:nth-child(2) > td:nth-child(1) > label:nth-child(1) > span:nth-child(1) > input:nth-child(1)';
 		const searchControlModalInputSelector = '.ant-modal-body input';
@@ -60,17 +64,18 @@ describe('When visiting requirements page', () => {
 
 		cy.contains('Connect control').parent().click();
 		cy.contains('Attach existing control').click();
-		cy.get(searchControlModalInputSelector).type('Pri');
+		cy.get(searchControlModalInputSelector).type('cypress');
+
+		cy.get('[data-testid=results] > div:nth-child(1) > span:nth-child(1)').first().click();
 
 		cy.get('[data-testid=results] > div:nth-child(1) > span:nth-child(1)')
 			.first()
-			.then((ele) => {
-				const clickedControlTitle = ele.text();
-				ele.trigger('mousedown');
-				cy.contains('Attach control').parent().click();
+			.invoke('text')
+			.then((text) => {
+				cy.contains('Attach control').click();
 				cy.get('.ant-modal-close-x').click();
-				cy.wait('@update-requirement').should('have.property', 'status', 201);
-				cy.get('tr.ant-table-row:nth-child(2) > td:nth-child(6)').contains(clickedControlTitle);
+				cy.wait('@update-requirement').should('have.property', 'status', 200);
+				cy.get('tr.ant-table-row:nth-child(2) > td:nth-child(6)').contains(text);
 			});
 	});
 

@@ -11,7 +11,6 @@ import {
 	WeeklyTaskFrequency,
 } from './TaskSlice';
 import { API_URL } from '../../environment';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface UpsertTask {
 	id: string;
@@ -20,7 +19,7 @@ export interface UpsertTask {
 	kind: TaskType;
 	state: TaskStatus;
 	title: string;
-	control_id: string;
+	control_id: string | null;
 	description: string;
 	frequency: WeeklyTaskFrequency | MonthlyTaskFrequency | QuarterlyTaskFrequency | AnnualTaskFrequency;
 	assignee_id: string;
@@ -36,7 +35,7 @@ export const fetchTaskById = createAsyncThunk('requirements/fetchTaskById', asyn
 	return response.data.data;
 });
 
-export const createTask = createAsyncThunk('tasks/create', async (task: Task) => {
+export const upsertTask = createAsyncThunk('tasks/upsert', async (task: Task) => {
 	const upsertData: UpsertTask = {
 		id: task.id,
 		due_at: task.due_at,
@@ -44,21 +43,21 @@ export const createTask = createAsyncThunk('tasks/create', async (task: Task) =>
 		kind: task.kind,
 		state: task.state,
 		title: task.title,
-		control_id: uuidv4(),
+		control_id: task.control.id || null,
 		description: task.description,
 		frequency: task.frequency,
 		assignee_id: task.assignee.id,
 	};
 
-	const response: AxiosResponse<ApiWrapper<Task>> = await axios.post(`${API_URL}/tasks`, {
-		task: upsertData,
-	});
-	return response.data.data;
-});
-
-export const updateTask = createAsyncThunk('tasks/update', async (task: Task) => {
-	const response: AxiosResponse<ApiWrapper<Task>> = await axios.patch(`${API_URL}/tasks/` + task.id, {
-		task,
-	});
-	return response.data.data;
+	if (upsertData.id) {
+		const response: AxiosResponse<ApiWrapper<Task>> = await axios.patch(`${API_URL}/tasks/` + upsertData.id, {
+			task,
+		});
+		return response.data.data;
+	} else {
+		const response: AxiosResponse<ApiWrapper<Task>> = await axios.post(`${API_URL}/tasks`, {
+			task: upsertData,
+		});
+		return response.data.data;
+	}
 });

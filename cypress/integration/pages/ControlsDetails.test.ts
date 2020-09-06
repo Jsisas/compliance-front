@@ -1,4 +1,4 @@
-import { RequestMethod } from '../../util/ControlTestUtil';
+import { ControlTestUtil, RequestMethod } from '../../util/ControlTestUtil';
 import { TaskTestUtil } from '../../util/TaskTestUtil';
 
 describe('When visiting controls page', () => {
@@ -16,18 +16,17 @@ describe('When visiting controls page', () => {
 		cy.url().should('include', '/controls/');
 	});
 
-	// it('it can edit control', () => {
-	// 	cy.get('a > .ant-btn').click();
-	// 	const cypressString = ControlTestUtil.fillControlUpsertForm(RequestMethod.PATCH);
-	// 	cy.contains(cypressString);
-	// });
+	it('it can edit control', () => {
+		cy.get('a > .ant-btn').click();
+		const cypressString = ControlTestUtil.fillControlUpsertForm(RequestMethod.PATCH);
+		cy.contains(cypressString);
+	});
 
 	it('it can add task to control', () => {
 		cy.contains('Add task').click();
 		const taskName = TaskTestUtil.fillTaskUpsertForm(RequestMethod.POST);
-		//TODO Wont attach tasks immediatly to control
 		cy.get('table').within(() => {
-			//cy.contains(taskName);
+			cy.contains(taskName);
 		});
 	});
 });

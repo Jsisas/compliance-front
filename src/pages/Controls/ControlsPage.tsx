@@ -16,6 +16,7 @@ import { concatStyles } from '../../util/StyleUtil';
 import themeStyles from './../../theme.module.scss';
 import style from './controlsPage.module.scss';
 import { UserSearchMultiple } from '../../components/_ui/SearchSelect/Multiple/UserSearch/UserSearchMultiple';
+import { AddTaskModule } from '../../components/modals/AddTaskModal/AddTaskModal';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -30,6 +31,13 @@ export function ControlsPage(): JSX.Element {
 	const [selectedCategory, setSelectedCategory] = useState<ControlType>();
 	const [selectedStatus, setSelectedStatus] = useState<ControlStatus>();
 	const [filteredControls, setFilteredControls] = useState<Control[]>();
+
+	const [isAddTaskModalVisible, setAddTaskModalVisible] = useState(false);
+	const [addTaskControl, setAddTaskControl] = useState<Control>();
+
+	function toggleModal() {
+		setAddTaskModalVisible(!isAddTaskModalVisible);
+	}
 
 	const titleFilter = useCallback(
 		(control: Control) => {
@@ -76,12 +84,12 @@ export function ControlsPage(): JSX.Element {
 	);
 
 	const getFilteredControls = useCallback(() => {
-		setFilteredControls(controls.filter(titleFilter).filter(userFilter).filter(categoryFilter).filter(statusFilter));
+		return controls.filter(titleFilter).filter(userFilter).filter(categoryFilter).filter(statusFilter);
 	}, [controls, titleFilter, userFilter, categoryFilter, statusFilter]);
 
 	useEffect(() => {
-		getFilteredControls();
-	}, [tableSearchText, selectedUsers, selectedCategory, selectedStatus, getFilteredControls]);
+		setFilteredControls(getFilteredControls());
+	}, [controls, tableSearchText, selectedUsers, selectedCategory, selectedStatus, getFilteredControls]);
 
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -89,9 +97,9 @@ export function ControlsPage(): JSX.Element {
 	}, [dispatch]);
 	const columns: ColumnProps<never>[] = [];
 
-	function addTask(record: Control, text: string) {
-		console.log(record);
-		console.log(text);
+	function addTask(record: Control) {
+		setAddTaskControl(record);
+		toggleModal();
 	}
 
 	if (controls.length > 0) {
@@ -168,7 +176,7 @@ export function ControlsPage(): JSX.Element {
 			key: 'id',
 			render: (text: string, record: Control) => {
 				return (
-					<AlButton type='primary' onClick={() => addTask(record, text)}>
+					<AlButton type='primary' onClick={() => addTask(record)} stopPropagation={true}>
 						<PlusOutlined />
 					</AlButton>
 				);
@@ -178,6 +186,7 @@ export function ControlsPage(): JSX.Element {
 
 	return (
 		<>
+			<AddTaskModule control={addTaskControl} isVisible={isAddTaskModalVisible} onClose={toggleModal} />
 			<Row gutter={[16, 16]}>
 				<Col xs={24} lg={24}>
 					<Title>Controls</Title>

@@ -75,7 +75,7 @@ export function ControlsDetails(props: RouteComponentProps): JSX.Element {
 
 	return (
 		<>
-			<AddTaskModule control={control} isVisible={isAddTaskModalVisible} onCancel={toggleModal} />
+			<AddTaskModule control={control} isVisible={isAddTaskModalVisible} onClose={toggleModal} />
 			<Row gutter={[16, 16]} align={'middle'}>
 				<Col xs={1} xl={1}>
 					<AlBackArrow />
