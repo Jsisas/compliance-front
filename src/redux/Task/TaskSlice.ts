@@ -3,7 +3,7 @@ import { createEntityAdapter, createSelector, createSlice, EntityState } from '@
 import { Control } from '../Control/ControlSlice';
 import { RootState } from '../reducer';
 import { User } from '../User/UserSlice';
-import { upsertTask, fetchAllTasks } from './TaskService';
+import { upsertTask, fetchAllTasks, fetchTaskById } from './TaskService';
 
 export enum Weekday {
 	MONDAY,
@@ -145,6 +145,10 @@ const TaskSlice = createSlice({
 		builder.addCase(fetchAllTasks.fulfilled, (state, action) => {
 			state.loading = false;
 			tasksAdapter.setAll(state, action.payload);
+		});
+		builder.addCase(fetchTaskById.fulfilled, (state, action) => {
+			tasksAdapter.upsertOne(state, action);
+			state.loading = false;
 		});
 	},
 });
