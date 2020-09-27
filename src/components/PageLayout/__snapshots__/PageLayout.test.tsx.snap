@@ -10,7 +10,7 @@ Object {
         data-testid="page-layout"
       >
         <aside
-          class="extraExtraLightGrey ant-layout-sider ant-layout-sider-light"
+          class="ant-layout-sider ant-layout-sider-light extraExtraLightGrey"
           style="min-height: 100vh; flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;"
         >
           <div
@@ -28,7 +28,7 @@ Object {
               </a>
             </div>
             <ul
-              class="ant-menu sideMenu ant-menu-light ant-menu-root ant-menu-inline"
+              class="ant-menu ant-menu-light sideMenu ant-menu-root ant-menu-inline"
               role="menu"
             >
               <li
@@ -229,7 +229,7 @@ Object {
       data-testid="page-layout"
     >
       <aside
-        class="extraExtraLightGrey ant-layout-sider ant-layout-sider-light"
+        class="ant-layout-sider ant-layout-sider-light extraExtraLightGrey"
         style="min-height: 100vh; flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;"
       >
         <div
@@ -247,7 +247,7 @@ Object {
             </a>
           </div>
           <ul
-            class="ant-menu sideMenu ant-menu-light ant-menu-root ant-menu-inline"
+            class="ant-menu ant-menu-light sideMenu ant-menu-root ant-menu-inline"
             role="menu"
           >
             <li

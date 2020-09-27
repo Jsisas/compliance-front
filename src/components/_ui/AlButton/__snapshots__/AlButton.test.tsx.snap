@@ -6,14 +6,14 @@ Object {
   "baseElement": <body>
     <div>
       <button
-        class="ant-btn primary  ant-btn-primary"
+        class="ant-btn ant-btn-primary primary "
         type="button"
       />
     </div>
   </body>,
   "container": <div>
     <button
-      class="ant-btn primary  ant-btn-primary"
+      class="ant-btn ant-btn-primary primary "
       type="button"
     />
   </div>,

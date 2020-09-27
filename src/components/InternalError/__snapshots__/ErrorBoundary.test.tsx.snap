@@ -371,7 +371,7 @@ Object {
           class="ant-result-extra"
         >
           <button
-            class="ant-btn primary  ant-btn-primary"
+            class="ant-btn ant-btn-primary primary "
             type="button"
           >
             <span>
@@ -749,7 +749,7 @@ Object {
         class="ant-result-extra"
       >
         <button
-          class="ant-btn primary  ant-btn-primary"
+          class="ant-btn ant-btn-primary primary "
           type="button"
         >
           <span>

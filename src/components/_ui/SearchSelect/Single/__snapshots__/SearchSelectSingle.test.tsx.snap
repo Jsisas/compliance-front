@@ -28,6 +28,7 @@ Object {
               readonly=""
               role="combobox"
               style="opacity: 0;"
+              type="search"
               unselectable="on"
               value=""
             />
@@ -92,6 +93,7 @@ Object {
             readonly=""
             role="combobox"
             style="opacity: 0;"
+            type="search"
             unselectable="on"
             value=""
           />

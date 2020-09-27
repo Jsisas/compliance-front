@@ -91,6 +91,7 @@ Object {
                   readonly=""
                   role="combobox"
                   style="opacity: 0;"
+                  type="search"
                   unselectable="on"
                   value=""
                 />
@@ -136,6 +137,7 @@ Object {
                   readonly=""
                   role="combobox"
                   style="opacity: 0;"
+                  type="search"
                   unselectable="on"
                   value=""
                 />
@@ -201,6 +203,7 @@ Object {
                   readonly=""
                   role="combobox"
                   style="opacity: 0;"
+                  type="search"
                   unselectable="on"
                   value=""
                 />
@@ -248,7 +251,7 @@ Object {
             href="/controls/new"
           >
             <button
-              class="ant-btn primary  ant-btn-primary"
+              class="ant-btn ant-btn-primary primary "
               style="width: 100%;"
               type="button"
             >
@@ -566,22 +569,58 @@ Object {
                           >
                             <td
                               style="padding: 0px; border: 0px; height: 0px;"
-                            />
+                            >
+                              <div
+                                style="height: 0px; overflow: hidden;"
+                              >
+                                 
+                              </div>
+                            </td>
                             <td
                               style="padding: 0px; border: 0px; height: 0px;"
-                            />
+                            >
+                              <div
+                                style="height: 0px; overflow: hidden;"
+                              >
+                                 
+                              </div>
+                            </td>
                             <td
                               style="padding: 0px; border: 0px; height: 0px;"
-                            />
+                            >
+                              <div
+                                style="height: 0px; overflow: hidden;"
+                              >
+                                 
+                              </div>
+                            </td>
                             <td
                               style="padding: 0px; border: 0px; height: 0px;"
-                            />
+                            >
+                              <div
+                                style="height: 0px; overflow: hidden;"
+                              >
+                                 
+                              </div>
+                            </td>
                             <td
                               style="padding: 0px; border: 0px; height: 0px;"
-                            />
+                            >
+                              <div
+                                style="height: 0px; overflow: hidden;"
+                              >
+                                 
+                              </div>
+                            </td>
                             <td
                               style="padding: 0px; border: 0px; height: 0px;"
-                            />
+                            >
+                              <div
+                                style="height: 0px; overflow: hidden;"
+                              >
+                                 
+                              </div>
+                            </td>
                           </tr>
                           <tr
                             class="ant-table-row ant-table-row-level-0"
@@ -700,7 +739,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -775,7 +814,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -852,7 +891,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -925,7 +964,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -998,7 +1037,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -1073,7 +1112,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -1148,7 +1187,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -1223,7 +1262,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -1298,7 +1337,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -1373,7 +1412,7 @@ Object {
                               class="ant-table-cell"
                             >
                               <button
-                                class="ant-btn primary  ant-btn-primary"
+                                class="ant-btn ant-btn-primary primary "
                                 type="button"
                               >
                                 <span
@@ -1609,6 +1648,7 @@ Object {
                             readonly=""
                             role="combobox"
                             style="opacity: 0;"
+                            type="search"
                             unselectable="on"
                             value=""
                           />
@@ -1744,6 +1784,7 @@ Object {
                 readonly=""
                 role="combobox"
                 style="opacity: 0;"
+                type="search"
                 unselectable="on"
                 value=""
               />
@@ -1789,6 +1830,7 @@ Object {
                 readonly=""
                 role="combobox"
                 style="opacity: 0;"
+                type="search"
                 unselectable="on"
                 value=""
               />
@@ -1854,6 +1896,7 @@ Object {
                 readonly=""
                 role="combobox"
                 style="opacity: 0;"
+                type="search"
                 unselectable="on"
                 value=""
               />
@@ -1901,7 +1944,7 @@ Object {
           href="/controls/new"
         >
           <button
-            class="ant-btn primary  ant-btn-primary"
+            class="ant-btn ant-btn-primary primary "
             style="width: 100%;"
             type="button"
           >
@@ -2219,22 +2262,58 @@ Object {
                         >
                           <td
                             style="padding: 0px; border: 0px; height: 0px;"
-                          />
+                          >
+                            <div
+                              style="height: 0px; overflow: hidden;"
+                            >
+                               
+                            </div>
+                          </td>
                           <td
                             style="padding: 0px; border: 0px; height: 0px;"
-                          />
+                          >
+                            <div
+                              style="height: 0px; overflow: hidden;"
+                            >
+                               
+                            </div>
+                          </td>
                           <td
                             style="padding: 0px; border: 0px; height: 0px;"
-                          />
+                          >
+                            <div
+                              style="height: 0px; overflow: hidden;"
+                            >
+                               
+                            </div>
+                          </td>
                           <td
                             style="padding: 0px; border: 0px; height: 0px;"
-                          />
+                          >
+                            <div
+                              style="height: 0px; overflow: hidden;"
+                            >
+                               
+                            </div>
+                          </td>
                           <td
                             style="padding: 0px; border: 0px; height: 0px;"
-                          />
+                          >
+                            <div
+                              style="height: 0px; overflow: hidden;"
+                            >
+                               
+                            </div>
+                          </td>
                           <td
                             style="padding: 0px; border: 0px; height: 0px;"
-                          />
+                          >
+                            <div
+                              style="height: 0px; overflow: hidden;"
+                            >
+                               
+                            </div>
+                          </td>
                         </tr>
                         <tr
                           class="ant-table-row ant-table-row-level-0"
@@ -2353,7 +2432,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -2428,7 +2507,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -2505,7 +2584,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -2578,7 +2657,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -2651,7 +2730,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -2726,7 +2805,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -2801,7 +2880,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -2876,7 +2955,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -2951,7 +3030,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -3026,7 +3105,7 @@ Object {
                             class="ant-table-cell"
                           >
                             <button
-                              class="ant-btn primary  ant-btn-primary"
+                              class="ant-btn ant-btn-primary primary "
                               type="button"
                             >
                               <span
@@ -3262,6 +3341,7 @@ Object {
                           readonly=""
                           role="combobox"
                           style="opacity: 0;"
+                          type="search"
                           unselectable="on"
                           value=""
                         />
