@@ -1,22 +1,25 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:alpine'
-        }
+  agent {
+    docker {
+      image 'node:alpine'
     }
-    environment {
-        CI = 'true'
+
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh 'yarn install'
+      }
     }
-    stages {
-        stage('Build') {
-            steps {
-              sh 'npm install'
-            }
-        }
-        stage('Test') {
-            steps {
-              sh 'npm test'
-            }
-        }
+
+    stage('Test') {
+      steps {
+        sh 'yarn test'
+      }
     }
+
+  }
+  environment {
+    CI = 'true'
+  }
 }
