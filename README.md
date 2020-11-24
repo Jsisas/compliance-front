@@ -1,3 +1,10 @@
+# Alfred front-end
+This project was made regarding ajujaht startup "Alfred". 
+
+## Description
+Alfred is a tool to manage the company's data protection program. Information security processes are complex and time-consuming, and audits are a headache for professionals whose relationship with everyday work is difficult to grasp. Verification of compliance remains the responsibility of the individual, although it is the responsibility of each employee to ensure safety. Alfred is a tool that combines regulatory requirements with security measures, risks, and data assets, and helps you plan your day-to-day operations so that the information you need for an audit is created as a by-product of your work. With Alfred, you know exactly what's done, what's not done, and who should do what next. Alfred is backed by a 7-member team with years of experience in data protection, B2B software development, and product design.
+
+# Setup
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
